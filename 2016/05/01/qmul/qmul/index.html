@@ -3,17 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 杂 | yusijia&#39;s blog</title>
+  <title>qmul | yusijia&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yusijia's blog">
-<meta property="og:url" content="http://yoursite.com/tags/杂/index.html">
+  <meta name="description" content="快速乘
+快速幂顾名思义，就是快速算某个数的多少次幂。其时间复杂度为 O(logN)， 与朴素的O(N)相比效率有了极大的提高。可以将其扩展出快速乘
+
+123456789101112long long qmul(long long a, long long b, long long mod)&amp;#123;    long long ans = 0;    while(b)&amp;#123;        i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="qmul">
+<meta property="og:url" content="http://yoursite.com/2016/05/01/qmul/qmul/index.html">
 <meta property="og:site_name" content="yusijia's blog">
-<meta property="og:description">
+<meta property="og:description" content="快速乘
+快速幂顾名思义，就是快速算某个数的多少次幂。其时间复杂度为 O(logN)， 与朴素的O(N)相比效率有了极大的提高。可以将其扩展出快速乘
+
+123456789101112long long qmul(long long a, long long b, long long mod)&amp;#123;    long long ans = 0;    while(b)&amp;#123;        i">
+<meta property="og:updated_time" content="2016-05-01T00:06:24.439Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yusijia's blog">
-<meta name="twitter:description">
+<meta name="twitter:title" content="qmul">
+<meta name="twitter:description" content="快速乘
+快速幂顾名思义，就是快速算某个数的多少次幂。其时间复杂度为 O(logN)， 与朴素的O(N)相比效率有了极大的提高。可以将其扩展出快速乘
+
+123456789101112long long qmul(long long a, long long b, long long mod)&amp;#123;    long long ans = 0;    while(b)&amp;#123;        i">
   
     <link rel="alternate" href="/atom.xml" title="yusijia&#39;s blog" type="application/atom+xml">
   
@@ -62,39 +72,65 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/04/30/markdown/markdown/" class="archive-article-date">
-  <time datetime="2016-04-30T12:29:46.000Z" itemprop="datePublished">Apr 30</time>
+        <section id="main"><article id="post-qmul/qmul" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/01/qmul/qmul/" class="article-date">
+  <time datetime="2016-05-01T00:04:20.000Z" itemprop="datePublished">2016-05-01</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/30/markdown/markdown/">初识markdown</a>
+    <h1 class="article-title" itemprop="name">
+      qmul
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="快速乘"><a href="#快速乘" class="headerlink" title="快速乘"></a>快速乘</h2><ul>
+<li>快速幂顾名思义，就是快速算某个数的多少次幂。其时间复杂度为 O(logN)， 与朴素的O(N)相比效率有了极大的提高。可以将其扩展出快速乘</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">qmul</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a, <span class="keyword">long</span> <span class="keyword">long</span> b, <span class="keyword">long</span> <span class="keyword">long</span> mod)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(b)&#123;</span><br><span class="line">        <span class="keyword">if</span>(b &amp; <span class="number">1</span>)</span><br><span class="line">            ans = (ans + a) % mod;</span><br><span class="line">        a = (a &lt;&lt; <span class="number">1</span>) % mod;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/01/qmul/qmul/" data-id="cinnwgfpj0006dcdgmamdxbnv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/qmul-快速乘/">qmul(快速乘)</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/01/qmul/hdu5666/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          hdu5666
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/01/qpow/timu-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">timu 1</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
