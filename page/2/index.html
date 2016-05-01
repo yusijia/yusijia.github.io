@@ -64,6 +64,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-permutation/permutation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/01/permutation/permutation/" class="article-date">
+  <time datetime="2016-05-01T06:16:59.000Z" itemprop="datePublished">2016-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/01/permutation/permutation/">未去重全排列实现原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://a.hiphotos.baidu.com/image/pic/item/838ba61ea8d3fd1f39eea3b1374e251f94ca5f51.jpg" alt="全排列"></p>
+<h2 id="未去重全排列"><a href="#未去重全排列" class="headerlink" title="未去重全排列"></a>未去重全排列</h2><ul>
+<li>//补:N个元素（不同的）的全排列总数为n！个。<br>如果有相同的元素就把那个元素个数的阶乘给除掉，具体看hdu5651</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//未去重全排列</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> m_begin, <span class="keyword">int</span> m_end)</span><span class="comment">//m_begin表示当前选到第几个了,m_end表示总共多少个数</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(m_begin + <span class="number">1</span> == m_end)&#123;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; m_end; i++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>, a[i]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        return ;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;                              <span class="comment">//这里是i &lt; m_end,所以数组要从0开始</span></span><br><span class="line">        <span class="keyword">for</span>(i = m_begin; i &lt; m_end; i++)<span class="comment">//for循环遍历该排列中第一个位置的所有可能情况</span></span><br><span class="line">        &#123;</span><br><span class="line">            swap(a[i], a[m_begin]);     <span class="comment">//第一次交换是和自己交换</span></span><br><span class="line">            func(a, m_begin + <span class="number">1</span>, m_end);<span class="comment">//注意：第二个参数是m_begin递归求后面的全排列</span></span><br><span class="line">            swap(a[i], a[m_begin]);     <span class="comment">//复原</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    func(a, <span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串版本</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">char</span> a[], <span class="keyword">int</span> m_begin, <span class="keyword">int</span> m_end)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(m_begin + <span class="number">1</span> == m_end)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s"</span>, a);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">        return ;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(i = m_begin; i &lt; m_end; i++)    <span class="comment">//for循环遍历该排列中第一个位置的所有可能情况</span></span><br><span class="line">        &#123;</span><br><span class="line">            swap(a[i], a[m_begin]);         <span class="comment">//第一次交换是和自己交换</span></span><br><span class="line">            func(a, m_begin + <span class="number">1</span>, m_end);    <span class="comment">//递归求后面的全排列</span></span><br><span class="line">            swap(a[i], a[m_begin]);         <span class="comment">//复原</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> a[] = <span class="string">"1234"</span>;</span><br><span class="line">    func(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a) / <span class="keyword">sizeof</span>(a[<span class="number">0</span>]) - <span class="number">1</span>);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/01/permutation/permutation/" data-id="cinopwod90012nsdg7d7cf9qb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mark/timu-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/01/mark/timu-3/" class="article-date">
@@ -95,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/mark/timu-3/" data-id="cinopm124000l8sdgbo2m3ol8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/mark/timu-3/" data-id="cinopwocd000jnsdg518164hx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li></ul>
@@ -138,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/mark/timu-2/" data-id="cinopm124000h8sdgpj538i6i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/mark/timu-2/" data-id="cinopwoby000fnsdgfy05j9yj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li></ul>
@@ -177,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/mark/timu-1/" data-id="cinopm11o000d8sdgraqm31l7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/mark/timu-1/" data-id="cinopwocd000hnsdgtp7dqkig" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li></ul>
@@ -219,7 +261,7 @@ CCCD
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/mark/mark/" data-id="cinopm124000f8sdgjcxfp88t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/mark/mark/" data-id="cinopwoby000dnsdgno5m34cr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li></ul>
@@ -264,7 +306,7 @@ CCCD
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/Pretreatment/hanoi-2/" data-id="cinopm11900088sdgb8k48pz7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/Pretreatment/hanoi-2/" data-id="cinopwobi0008nsdg8zkbc6pc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li></ul>
@@ -314,7 +356,7 @@ CCCD
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/math/timu/" data-id="cinopm124000j8sdgwo8grce3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/math/timu/" data-id="cinopwocd000tnsdgo8p5venh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li></ul>
@@ -356,7 +398,7 @@ CCCD
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/math/prime-number/" data-id="cinopm124000p8sdgpaqxay1d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/math/prime-number/" data-id="cinopwocd000pnsdgek12h8yc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li></ul>
@@ -400,7 +442,7 @@ CCCD
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/binary search/binary-search-3/" data-id="cinopm11900068sdguffno45t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/binary search/binary-search-3/" data-id="cinopwobi0009nsdg8oq2i2he" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li></ul>
@@ -438,46 +480,7 @@ CCCD
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/binary search/binary-search-2/" data-id="cinopm11o000c8sdga5f1pq3l" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-binary search/binary-search" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/01/binary search/binary-search/" class="article-date">
-  <time datetime="2016-05-01T03:55:02.000Z" itemprop="datePublished">2016-05-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/01/binary search/binary-search/">二分查找(有序，离散)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p><img src="http://d.hiphotos.baidu.com/image/pic/item/5ab5c9ea15ce36d396cdb9bb3df33a87e850b16b.jpg" alt="二分查找"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;limits.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">finds</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> k)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = n - <span class="number">1</span>, x = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l &lt;= r)&#123;</span><br><span class="line">        x = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(a[x] &lt; k)</span><br><span class="line">            l = x + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(a[x] &gt; k)</span><br><span class="line">            r = x - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">break</span>;                  <span class="comment">//if(a[m]==k)，相等的时候</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= r)                      <span class="comment">//在r&gt;=l时跳出来的//正常情况k属于a数组</span></span><br><span class="line">        return x + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        return <span class="number">-1</span>;                  <span class="comment">//r&lt;l时  //不正常情况：k不属于a数组</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">int</span> m, t;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) != EOF)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);         <span class="comment">//数据是离散,有序的点，不是连续的一条线</span></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">        <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, finds(a, m));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/binary search/binary-search/" data-id="cinopm11o00098sdg3oazlbup" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/01/binary search/binary-search-2/" data-id="cinopwobi0006nsdgetzzz28d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li></ul>
@@ -537,6 +540,10 @@ CCCD
       <ul>
         
           <li>
+            <a href="/2016/05/01/markdown/markdown/">markdown</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/01/List/doubly-linked-list/">doubly linked list</a>
           </li>
         
@@ -550,10 +557,6 @@ CCCD
         
           <li>
             <a href="/2016/05/01/ruler/hdu-5672/">hdu 5672</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/01/ruler/ruler/">ruler</a>
           </li>
         
       </ul>

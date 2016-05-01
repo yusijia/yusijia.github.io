@@ -64,6 +64,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-qsort/plus-The-application-of-qsort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/30/qsort/plus-The-application-of-qsort/" class="article-date">
+  <time datetime="2016-04-30T15:17:35.000Z" itemprop="datePublished">2016-04-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/30/qsort/plus-The-application-of-qsort/">(plus)The application of qsort</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="此文是对上篇文章的一点补充"><a href="#此文是对上篇文章的一点补充" class="headerlink" title="此文是对上篇文章的一点补充"></a>此文是对上篇文章的一点补充</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> node&#123;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">10</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Node&#123;</span><br><span class="line">    <span class="keyword">double</span> data;</span><br><span class="line">    <span class="keyword">int</span> other;</span><br><span class="line">&#125;s[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> str&#123;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line">&#125;<span class="built_in">string</span>[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpstruct2</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return (*(struct Node *)a).data &gt; (*(struct Node *)b).data ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">&#125;  <span class="comment">//return ((struct Node *)a)-&gt;date &gt; ((struct Node *)b)-&gt;date ? 1 : -1;</span></span><br><span class="line">   <span class="comment">//这样也行， 那两对括号一定要加上</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//对结构体二级排序</span></span><br><span class="line"><span class="comment">//先对年龄排序，年龄相同再按姓名排序。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpstruct1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">//先作下指针转换，再按要求比较</span></span><br><span class="line">    <span class="keyword">struct</span> node *pnode1 = (struct node *)a;</span><br><span class="line">    <span class="keyword">struct</span> node *pnode2 = (struct node *)b;</span><br><span class="line">    <span class="keyword">if</span>(pnode1-&gt;age != pnode2-&gt;age)</span><br><span class="line">        return pnode1-&gt;age - pnode2-&gt;age;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        return <span class="built_in">strcmp</span>(pnode1-&gt;name, pnode2-&gt;name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对字符串进行排序</span></span><br><span class="line"><span class="comment">//按照结构体中字符串str的字典顺序排序</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cmpstr</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return <span class="built_in">strcmp</span>((*(struct str *)a)-&gt;str, (*(struct str *)b)-&gt;str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/04/30/qsort/plus-The-application-of-qsort/" data-id="cinopwodo001dnsdgnhgn2x7t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="w-qsort/The-application-of-qsort-in-C" class="article article-type-w" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/30/qsort/The-application-of-qsort-in-C/" class="article-date">
@@ -95,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/30/qsort/The-application-of-qsort-in-C/" data-id="cinopm13f001d8sdgfqo1gora" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/04/30/qsort/The-application-of-qsort-in-C/" data-id="cinopwod9001ansdgfd4o2fsf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li></ul>
@@ -136,84 +174,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/30/qsort/qsort/" data-id="cinopm13f001g8sdgvduuks4b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/04/30/qsort/qsort/" data-id="cinopwodo001hnsdgcevssrt3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-markdown/markdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/30/markdown/markdown/" class="article-date">
-  <time datetime="2016-04-30T12:29:46.000Z" itemprop="datePublished">2016-04-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/30/markdown/markdown/">初识markdown</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="http://www.jianshu.com/p/1e402922ee32/" target="_blank" rel="external">这里</a></p>
-<h2 id="初识markdown"><a href="#初识markdown" class="headerlink" title="初识markdown"></a>初识markdown</h2><ul>
-<li>原来还有个这么好玩的东西：</li>
-</ul>
-<ul>
-<li>markdown是一个轻量级的标记语言</li>
-<li>一般就用那么几个功能</li>
-</ul>
-<blockquote>
-<p>这是引用内容<br>多行的话用两个空格结尾</p>
-</blockquote>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><ol>
-<li>123</li>
-<li>123</li>
-<li>123</li>
-</ol>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
-<li>hello</li>
-<li>world</li>
-<li>！</li>
-</ul>
-<h3 id="插入链接"><a href="#插入链接" class="headerlink" title="插入链接"></a>插入链接</h3><p><a href="https://www.baidu.com/" target="_blank" rel="external">baidu</a></p>
-<p><img src="http://b.hiphotos.baidu.com/image/pic/item/c2cec3fdfc0392451ffa29858094a4c27c1e25e9.jpg" alt="图片"></p>
-<h3 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h3><p><img src="https://www.baidu.com/img/bd_logo1.png" alt="baidu"></p>
-<p><strong>两个星星包围的是粗体字</strong></p>
-<p><em>一个星星包围的是斜体字</em></p>
-<h3 id="这是写代码用的，不过自带的风格好难看"><a href="#这是写代码用的，不过自带的风格好难看" class="headerlink" title="这是写代码用的，不过自带的风格好难看"></a>这是写代码用的，不过自带的风格好难看</h3><p><code>#include &lt;iostream&gt;</code></p>
-<hr>
-<p>上面这个是分割线</p>
-<hr>
-<h3 id="这是c-风格的代码高亮"><a href="#这是c-风格的代码高亮" class="headerlink" title="这是c++风格的代码高亮"></a>这是c++风格的代码高亮</h3><figure class="highlight c++"><figcaption><span>MyfirstCpp</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a, b;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; a + b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="http://g.hiphotos.baidu.com/image/pic/item/cefc1e178a82b901b4b308b9748da9773912ef1b.jpg" alt="图片"></p>
-<h3 id="补："><a href="#补：" class="headerlink" title="补："></a>补：</h3><ul>
-<li>我用的markdown编译器是markdownPad2</li>
-</ul>
-<p><img src="http://a.hiphotos.baidu.com/image/pic/item/a9d3fd1f4134970a8057dba592cad1c8a7865d10.jpg" alt="图片"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/30/markdown/markdown/" data-id="cinopm124000n8sdgldlqpiac" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
 
     </footer>
   </div>
@@ -270,6 +234,10 @@
       <ul>
         
           <li>
+            <a href="/2016/05/01/markdown/markdown/">markdown</a>
+          </li>
+        
+          <li>
             <a href="/2016/05/01/List/doubly-linked-list/">doubly linked list</a>
           </li>
         
@@ -283,10 +251,6 @@
         
           <li>
             <a href="/2016/05/01/ruler/hdu-5672/">hdu 5672</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/01/ruler/ruler/">ruler</a>
           </li>
         
       </ul>
