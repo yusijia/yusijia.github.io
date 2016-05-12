@@ -3,18 +3,38 @@
 <head>
   <meta charset="utf-8">
   
-  <title>查表思想 | yusijia&#39;s blog</title>
+  <title>hdu 5641 | yusijia&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="介绍 例如： 输入一组字符串a.  A对应T，B对应K，C对应E，D对应F…（无规律）          0,1,2,3…将暗文a字符串翻译成明文b字符串，可以开字符串数组table=”T,K,E,F…”a[i]-‘A’  的范围是0到25.（26个大写英文字母，又因为是从0开始的，所以是25）查表：  b[i]=table[a[i]-‘A’];">
+  <meta name="description" content="Hint对于第一组数据，1 到 3 跳过了路径上的点 2，所以不合法。
+对于第二组数据，1 到 3 时点 2 已经被经过了，所以合法。
+对于第三组数据,8→1→6→7 路径均没有中间点，所以合法。
+
+直接模拟
+
+1234567891011121314151617181920212223242526272829303132#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查表思想">
-<meta property="og:url" content="http://yoursite.com/2016/05/01/mark/timu-1/index.html">
+<meta property="og:title" content="hdu 5641">
+<meta property="og:url" content="http://yoursite.com/2016/05/12/水题/hdu-5641/index.html">
 <meta property="og:site_name" content="yusijia's blog">
-<meta property="og:description" content="介绍 例如： 输入一组字符串a.  A对应T，B对应K，C对应E，D对应F…（无规律）          0,1,2,3…将暗文a字符串翻译成明文b字符串，可以开字符串数组table=”T,K,E,F…”a[i]-‘A’  的范围是0到25.（26个大写英文字母，又因为是从0开始的，所以是25）查表：  b[i]=table[a[i]-‘A’];">
-<meta property="og:updated_time" content="2016-05-01T05:49:59.079Z">
+<meta property="og:description" content="Hint对于第一组数据，1 到 3 跳过了路径上的点 2，所以不合法。
+对于第二组数据，1 到 3 时点 2 已经被经过了，所以合法。
+对于第三组数据,8→1→6→7 路径均没有中间点，所以合法。
+
+直接模拟
+
+1234567891011121314151617181920212223242526272829303132#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cs">
+<meta property="og:image" content="http://i3.buimg.com/c44866afaba70503.png">
+<meta property="og:updated_time" content="2016-05-12T10:22:14.120Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="查表思想">
-<meta name="twitter:description" content="介绍 例如： 输入一组字符串a.  A对应T，B对应K，C对应E，D对应F…（无规律）          0,1,2,3…将暗文a字符串翻译成明文b字符串，可以开字符串数组table=”T,K,E,F…”a[i]-‘A’  的范围是0到25.（26个大写英文字母，又因为是从0开始的，所以是25）查表：  b[i]=table[a[i]-‘A’];">
+<meta name="twitter:title" content="hdu 5641">
+<meta name="twitter:description" content="Hint对于第一组数据，1 到 3 跳过了路径上的点 2，所以不合法。
+对于第二组数据，1 到 3 时点 2 已经被经过了，所以合法。
+对于第三组数据,8→1→6→7 路径均没有中间点，所以合法。
+
+直接模拟
+
+1234567891011121314151617181920212223242526272829303132#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cs">
+<meta name="twitter:image" content="http://i3.buimg.com/c44866afaba70503.png">
   
     <link rel="alternate" href="/atom.xml" title="yusijia&#39;s blog" type="application/atom+xml">
   
@@ -63,10 +83,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-mark/timu-1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-水题/hdu-5641" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/01/mark/timu-1/" class="article-date">
-  <time datetime="2016-05-01T05:25:08.000Z" itemprop="datePublished">2016-05-01</time>
+    <a href="/2016/05/12/水题/hdu-5641/" class="article-date">
+  <time datetime="2016-05-12T10:14:36.000Z" itemprop="datePublished">2016-05-12</time>
 </a>
     
   </div>
@@ -77,7 +97,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      查表思想
+      hdu 5641
     </h1>
   
 
@@ -85,15 +105,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p> 例如： 输入一组字符串a.<br>  A对应T，B对应K，C对应E，D对应F…（无规律）          0,1,2,3…<br>将暗文a字符串翻译成明文b字符串，可以开字符串数组table=”T,K,E,F…”<br>a[i]-‘A’  的范围是0到25.（26个大写英文字母，又因为是从0开始的，所以是25）<br>查表：  b[i]=table[a[i]-‘A’];</p>
-
+        <p><img src="http://i3.buimg.com/c44866afaba70503.png" alt="tu"></p>
+<p>Hint<br>对于第一组数据，1 到 3 跳过了路径上的点 2，所以不合法。</p>
+<p>对于第二组数据，1 到 3 时点 2 已经被经过了，所以合法。</p>
+<p>对于第三组数据,8→1→6→7 路径均没有中间点，所以合法。</p>
+<ul>
+<li>直接模拟</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">bool</span> mp[<span class="number">10</span>][<span class="number">10</span>] = &#123;<span class="literal">false</span>&#125;, mk[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, k;<span class="comment">//下面这个预处理代表这几个键之间有键值，例如mp[1][3],要想13合法，就必须键值访问过mk[(a[i - 1] + a[i]) &gt;&gt; 1] == 1</span></span><br><span class="line">    mp[<span class="number">1</span>][<span class="number">3</span>] = mp[<span class="number">3</span>][<span class="number">1</span>] = mp[<span class="number">1</span>][<span class="number">7</span>] = mp[<span class="number">7</span>][<span class="number">1</span>] = mp[<span class="number">1</span>][<span class="number">9</span>] = mp[<span class="number">9</span>][<span class="number">1</span>] = mp[<span class="number">2</span>][<span class="number">8</span>] = mp[<span class="number">8</span>][<span class="number">2</span>] =</span><br><span class="line">    mp[<span class="number">3</span>][<span class="number">7</span>] = mp[<span class="number">7</span>][<span class="number">3</span>] = mp[<span class="number">3</span>][<span class="number">9</span>] = mp[<span class="number">9</span>][<span class="number">3</span>] = mp[<span class="number">4</span>][<span class="number">6</span>] = mp[<span class="number">6</span>][<span class="number">4</span>] = mp[<span class="number">7</span>][<span class="number">9</span>] = mp[<span class="number">9</span>][<span class="number">7</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(mk, <span class="literal">false</span>, <span class="keyword">sizeof</span>(mk));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;k, a);       <span class="comment">//吃回车，用到了a数组的第一个元素</span></span><br><span class="line">        <span class="keyword">if</span> (k &lt; <span class="number">4</span> || a[<span class="number">0</span>] &lt; <span class="number">1</span> || a[<span class="number">0</span>] &gt; <span class="number">9</span>)</span><br><span class="line">            mk[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            mk[a[<span class="number">0</span>]] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, a + i);<span class="comment">//第一个数是合法的且在[1,9]中且没访问过,且(a[i-1]和a[i]之间没有键值或有键值且访问过)</span></span><br><span class="line">            <span class="keyword">if</span> (!mk[<span class="number">0</span>] &amp;&amp; a[i] &gt; <span class="number">0</span> &amp;&amp; a[i] &lt;= <span class="number">9</span> &amp;&amp; !mk[a[i]] &amp;&amp; (!mp[a[i - <span class="number">1</span>]][a[i]] || mk[(a[i - <span class="number">1</span>] + a[i]) &gt;&gt; <span class="number">1</span>]))</span><br><span class="line">                mk[a[i]] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                mk[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(mk[<span class="number">0</span>] ? <span class="string">"invalid"</span> : <span class="string">"valid"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/01/mark/timu-1/" data-id="cio47awl00043m4dgsr3gdhdr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/水题/hdu-5641/" data-id="cio47awpf007zm4dguvgysvvp" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模拟/">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
 
     </footer>
   </div>
@@ -101,19 +127,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/05/01/mark/timu-2/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          hdu 1048
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/05/01/mark/mark/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/05/12/水题/ZOJ-3878/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">timu 1</div>
+      <div class="article-nav-title">ZOJ 3878</div>
     </a>
   
 </nav>
