@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -64,9 +64,228 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Override-and-Overload" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-copy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/18/Override-and-Overload/" class="article-date">
+    <a href="/2016/05/19/copy/" class="article-date">
+  <time datetime="2016-05-19T14:58:22.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/copy/">浅拷贝和深拷贝</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://blog.csdn.net/tounaobun/article/details/8491392" target="_blank" rel="external">http://blog.csdn.net/tounaobun/article/details/8491392</a></p>
+<p>假如说你想复制一个简单变量。很简单：</p>
+<ol>
+<li>int apples = 5; </li>
+<li>int pears = apples; </li>
+<li>不仅仅是int类型，其它七种原始数据类型(boolean,char,byte,short,float,double.long)同样适用于该类情况。<br>但是如果你复制的是一个对象，情况就有些复杂了。<br>假设说我是一个beginner，我会这样写：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123; </span><br><span class="line"><span class="number">2</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">3</span>.	 </span><br><span class="line"><span class="number">4</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">5</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">6</span>.	    &#125; </span><br><span class="line"><span class="number">7</span>.	 </span><br><span class="line"><span class="number">8</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">9</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">10</span>.	    &#125; </span><br><span class="line"><span class="number">11</span>.	     </span><br><span class="line"><span class="number">12</span>.	&#125; </span><br><span class="line"><span class="number">13</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">14</span>.	     </span><br><span class="line"><span class="number">15</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">16</span>.	         </span><br><span class="line"><span class="number">17</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">18</span>.	        stu1.setNumber(<span class="number">12345</span>); </span><br><span class="line"><span class="number">19</span>.	        Student stu2 = stu1; </span><br><span class="line"><span class="number">20</span>.	         </span><br><span class="line"><span class="number">21</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">22</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line"><span class="number">23</span>.	    &#125; </span><br><span class="line"><span class="number">24</span>.	&#125; </span><br><span class="line">打印结果：</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span>.	学生<span class="number">1</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">2</span>.	学生<span class="number">2</span>:<span class="number">12345</span></span><br></pre></td></tr></table></figure>
+<p>这里我们自定义了一个学生类，该类只有一个number字段。<br>我们新建了一个学生实例，然后将该值赋值给stu2实例。(Student stu2 = stu1;)<br>再看看打印结果，作为一个新手，拍了拍胸腹，对象复制不过如此，<br>难道真的是这样吗？</p>
+<p>我们试着改变stu2实例的number字段，再打印结果看看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	stu2.setNumber(<span class="number">54321</span>); </span><br><span class="line"><span class="number">2</span>.	 </span><br><span class="line"><span class="number">3</span>.	System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">4</span>.	System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line">打印结果:</span><br><span class="line"><span class="number">1</span>.	学生<span class="number">1</span>:<span class="number">54321</span> </span><br><span class="line"><span class="number">2</span>.	学生<span class="number">2</span>:<span class="number">54321</span></span><br></pre></td></tr></table></figure>
+<p>这就怪了，为什么改变学生2的学号，学生1的学号也发生了变化呢？<br>原因出在(stu2 = stu1) 这一句。该语句的作用是将stu1的引用赋值给stu2，<br>这样，stu1和stu2指向内存堆中同一个对象。<br>那么，怎样才能达到复制一个对象呢？<br>是否记得万类之王Object。它有11个方法，有两个protected的方法，其中一个为clone方法。<br>该方法的签名是：<br>protected native Object clone() throws CloneNotSupportedException;<br>因为每个类直接或间接的父类都是Object，因此它们都含有clone()方法，但是因为该方法是protected，所以都不能在类外进行访问。<br>要想对一个对象进行复制，就需要对clone方法覆盖。</p>
+<h2 id="一般步骤是（浅复制）："><a href="#一般步骤是（浅复制）：" class="headerlink" title="一般步骤是（浅复制）："></a>一般步骤是（浅复制）：</h2><ol>
+<li><p><strong>被复制的类需要实现Clonenable接口（不实现的话在调用clone方法会抛出CloneNotSupportedException异常) 该接口为标记接口(不含任何方法)</strong></p>
+</li>
+<li><p>覆盖clone()方法，访问修饰符设为public。方法中调用super.clone()方法得到需要的复制对象，（native为本地方法)<br>下面对上面那个方法进行改造：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123; </span><br><span class="line"><span class="number">2</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">3</span>.	 </span><br><span class="line"><span class="number">4</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">5</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">6</span>.	    &#125; </span><br><span class="line"><span class="number">7</span>.	 </span><br><span class="line"><span class="number">8</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">9</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">10</span>.	    &#125; </span><br><span class="line"><span class="number">11</span>.	     </span><br><span class="line"><span class="number">12</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">13</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">14</span>.	        Student stu = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">15</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">16</span>.	            stu = (Student)<span class="keyword">super</span>.clone(); </span><br><span class="line"><span class="number">17</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">18</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">19</span>.	        &#125; </span><br><span class="line"><span class="number">20</span>.	        <span class="keyword">return</span> stu; </span><br><span class="line"><span class="number">21</span>.	    &#125; </span><br><span class="line"><span class="number">22</span>.	&#125; </span><br><span class="line"><span class="number">23</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">24</span>.	     </span><br><span class="line"><span class="number">25</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">26</span>.	         </span><br><span class="line"><span class="number">27</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">28</span>.	        stu1.setNumber(<span class="number">12345</span>); </span><br><span class="line"><span class="number">29</span>.	        Student stu2 = (Student)stu1.clone(); </span><br><span class="line"><span class="number">30</span>.	         </span><br><span class="line"><span class="number">31</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">32</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line"><span class="number">33</span>.	         </span><br><span class="line"><span class="number">34</span>.	        stu2.setNumber(<span class="number">54321</span>); </span><br><span class="line"><span class="number">35</span>.	     </span><br><span class="line"><span class="number">36</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">37</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line"><span class="number">38</span>.	    &#125; </span><br><span class="line"><span class="number">39</span>.	&#125; </span><br><span class="line"><span class="number">40</span>.	学生<span class="number">1</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">41</span>.	学生<span class="number">2</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">42</span>.	学生<span class="number">1</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">43</span>.	学生<span class="number">2</span>:<span class="number">54321</span></span><br></pre></td></tr></table></figure>
+<p>上面的复制被称为浅复制(Shallow Copy)，还有一种稍微复杂的深度复制(deep copy)：<br>我们在学生类里再加一个Address类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Address</span>  </span>&#123; </span><br><span class="line"><span class="number">2</span>.	    <span class="keyword">private</span> String add; </span><br><span class="line"><span class="number">3</span>.	 </span><br><span class="line"><span class="number">4</span>.	    <span class="function"><span class="keyword">public</span> String <span class="title">getAdd</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">5</span>.	        <span class="keyword">return</span> add; </span><br><span class="line"><span class="number">6</span>.	    &#125; </span><br><span class="line"><span class="number">7</span>.	 </span><br><span class="line"><span class="number">8</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdd</span><span class="params">(String add)</span> </span>&#123; </span><br><span class="line"><span class="number">9</span>.	        <span class="keyword">this</span>.add = add; </span><br><span class="line"><span class="number">10</span>.	    &#125; </span><br><span class="line"><span class="number">11</span>.	     </span><br><span class="line"><span class="number">12</span>.	&#125; </span><br><span class="line"><span class="number">13</span>.	 </span><br><span class="line"><span class="number">14</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123; </span><br><span class="line"><span class="number">15</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">16</span>.	 </span><br><span class="line"><span class="number">17</span>.	    <span class="keyword">private</span> Address addr; </span><br><span class="line"><span class="number">18</span>.	     </span><br><span class="line"><span class="number">19</span>.	    <span class="function"><span class="keyword">public</span> Address <span class="title">getAddr</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">20</span>.	        <span class="keyword">return</span> addr; </span><br><span class="line"><span class="number">21</span>.	    &#125; </span><br><span class="line"><span class="number">22</span>.	 </span><br><span class="line"><span class="number">23</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAddr</span><span class="params">(Address addr)</span> </span>&#123; </span><br><span class="line"><span class="number">24</span>.	        <span class="keyword">this</span>.addr = addr; </span><br><span class="line"><span class="number">25</span>.	    &#125; </span><br><span class="line"><span class="number">26</span>.	 </span><br><span class="line"><span class="number">27</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">28</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">29</span>.	    &#125; </span><br><span class="line"><span class="number">30</span>.	 </span><br><span class="line"><span class="number">31</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">32</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">33</span>.	    &#125; </span><br><span class="line"><span class="number">34</span>.	     </span><br><span class="line"><span class="number">35</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">36</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">37</span>.	        Student stu = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">38</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">39</span>.	            stu = (Student)<span class="keyword">super</span>.clone(); </span><br><span class="line"><span class="number">40</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">41</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">42</span>.	        &#125; </span><br><span class="line"><span class="number">43</span>.	        <span class="keyword">return</span> stu; </span><br><span class="line"><span class="number">44</span>.	    &#125; </span><br><span class="line"><span class="number">45</span>.	&#125; </span><br><span class="line"><span class="number">46</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">47</span>.	     </span><br><span class="line"><span class="number">48</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">49</span>.	         </span><br><span class="line"><span class="number">50</span>.	        Address addr = <span class="keyword">new</span> Address(); </span><br><span class="line"><span class="number">51</span>.	        addr.setAdd(<span class="string">"杭州市"</span>); </span><br><span class="line"><span class="number">52</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">53</span>.	        stu1.setNumber(<span class="number">123</span>); </span><br><span class="line"><span class="number">54</span>.	        stu1.setAddr(addr); </span><br><span class="line"><span class="number">55</span>.	         </span><br><span class="line"><span class="number">56</span>.	        Student stu2 = (Student)stu1.clone(); </span><br><span class="line"><span class="number">57</span>.	         </span><br><span class="line"><span class="number">58</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">59</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">60</span>.	    &#125; </span><br><span class="line"><span class="number">61</span>.	&#125; </span><br><span class="line"><span class="number">62</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">63</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市</span><br></pre></td></tr></table></figure>
+<p>乍一看没什么问题，真的是这样吗？</p>
+<p>我们在main方法中试着改变addr实例的地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	addr.setAdd(<span class="string">"西湖区"</span>); </span><br><span class="line"><span class="number">2</span>.	 </span><br><span class="line"><span class="number">3</span>.	System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">4</span>.	System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">5</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">6</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">7</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:西湖区 </span><br><span class="line"><span class="number">8</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:西湖区</span><br></pre></td></tr></table></figure>
+<p>这就奇怪了，怎么两个学生的地址都改变了？<br>原因是浅复制只是复制了addr变量的引用，并没有真正的开辟另一块空间，将值复制后再将引用返回给新对象。<br>所以，为了达到真正的复制对象，而不是纯粹引用复制。我们需要将Address类可复制化，并且修改clone方法，完整代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="keyword">package</span> abc; </span><br><span class="line"><span class="number">2</span>.	 </span><br><span class="line"><span class="number">3</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Address</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123; </span><br><span class="line"><span class="number">4</span>.	    <span class="keyword">private</span> String add; </span><br><span class="line"><span class="number">5</span>.	 </span><br><span class="line"><span class="number">6</span>.	    <span class="function"><span class="keyword">public</span> String <span class="title">getAdd</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">7</span>.	        <span class="keyword">return</span> add; </span><br><span class="line"><span class="number">8</span>.	    &#125; </span><br><span class="line"><span class="number">9</span>.	 </span><br><span class="line"><span class="number">10</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdd</span><span class="params">(String add)</span> </span>&#123; </span><br><span class="line"><span class="number">11</span>.	        <span class="keyword">this</span>.add = add; </span><br><span class="line"><span class="number">12</span>.	    &#125; </span><br><span class="line"><span class="number">13</span>.	     </span><br><span class="line"><span class="number">14</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">15</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">16</span>.	        Address addr = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">17</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">18</span>.	            addr = (Address)<span class="keyword">super</span>.clone(); </span><br><span class="line"><span class="number">19</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">20</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">21</span>.	        &#125; </span><br><span class="line"><span class="number">22</span>.	        <span class="keyword">return</span> addr; </span><br><span class="line"><span class="number">23</span>.	    &#125; </span><br><span class="line"><span class="number">24</span>.	&#125; </span><br><span class="line"><span class="number">25</span>.	 </span><br><span class="line"><span class="number">26</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123; </span><br><span class="line"><span class="number">27</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">28</span>.	 </span><br><span class="line"><span class="number">29</span>.	    <span class="keyword">private</span> Address addr; </span><br><span class="line"><span class="number">30</span>.	     </span><br><span class="line"><span class="number">31</span>.	    <span class="function"><span class="keyword">public</span> Address <span class="title">getAddr</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">32</span>.	        <span class="keyword">return</span> addr; </span><br><span class="line"><span class="number">33</span>.	    &#125; </span><br><span class="line"><span class="number">34</span>.	 </span><br><span class="line"><span class="number">35</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAddr</span><span class="params">(Address addr)</span> </span>&#123; </span><br><span class="line"><span class="number">36</span>.	        <span class="keyword">this</span>.addr = addr; </span><br><span class="line"><span class="number">37</span>.	    &#125; </span><br><span class="line"><span class="number">38</span>.	 </span><br><span class="line"><span class="number">39</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">40</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">41</span>.	    &#125; </span><br><span class="line"><span class="number">42</span>.	 </span><br><span class="line"><span class="number">43</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">44</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">45</span>.	    &#125; </span><br><span class="line"><span class="number">46</span>.	     </span><br><span class="line"><span class="number">47</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">48</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">49</span>.	        Student stu = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">50</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">51</span>.	            stu = (Student)<span class="keyword">super</span>.clone();   <span class="comment">//浅复制  </span></span><br><span class="line"><span class="number">52</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">53</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">54</span>.	        &#125; </span><br><span class="line"><span class="number">55</span>.	        stu.addr = (Address)addr.clone();   <span class="comment">//深度复制  </span></span><br><span class="line"><span class="number">56</span>.	        <span class="keyword">return</span> stu; </span><br><span class="line"><span class="number">57</span>.	    &#125; </span><br><span class="line"><span class="number">58</span>.	&#125; </span><br><span class="line"><span class="number">59</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">60</span>.	     </span><br><span class="line"><span class="number">61</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">62</span>.	         </span><br><span class="line"><span class="number">63</span>.	        Address addr = <span class="keyword">new</span> Address(); </span><br><span class="line"><span class="number">64</span>.	        addr.setAdd(<span class="string">"杭州市"</span>); </span><br><span class="line"><span class="number">65</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">66</span>.	        stu1.setNumber(<span class="number">123</span>); </span><br><span class="line"><span class="number">67</span>.	        stu1.setAddr(addr); </span><br><span class="line"><span class="number">68</span>.	         </span><br><span class="line"><span class="number">69</span>.	        Student stu2 = (Student)stu1.clone(); </span><br><span class="line"><span class="number">70</span>.	         </span><br><span class="line"><span class="number">71</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">72</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">73</span>.	         </span><br><span class="line"><span class="number">74</span>.	        addr.setAdd(<span class="string">"西湖区"</span>); </span><br><span class="line"><span class="number">75</span>.	         </span><br><span class="line"><span class="number">76</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">77</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">78</span>.	    &#125; </span><br><span class="line"><span class="number">79</span>.	&#125; </span><br><span class="line"><span class="number">80</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">81</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">82</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:西湖区 </span><br><span class="line"><span class="number">83</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市</span><br></pre></td></tr></table></figure>
+<p>这样结果就符合我们的想法了。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li>浅拷贝是指在拷贝对象时，对于基本数据类型的变量会重新复制一份，而对于引用类型的变量只是对引用进行拷贝，没有对引用指向的对象进行拷贝。</li>
+<li>而深拷贝是指在拷贝对象时，同时会对引用指向的对象进行拷贝。<br>区别就在于是否对  对象中的引用变量所指向的对象进行拷贝。</li>
+</ul>
+<h2 id="但还有个问题："><a href="#但还有个问题：" class="headerlink" title="但还有个问题："></a>但还有个问题：</h2><p>　　要是类0里有类1，类1里面又有类2 .，类2里又有类3，如此类推。。这里的深层复制就显然会很麻烦，还有没有别的方法？    </p>
+<h2 id="答："><a href="#答：" class="headerlink" title="答："></a>答：</h2><p>　　有一个很简单的方法，就是先把对象序列化，然后再反序列化成对象，该对象保证每个引用都是崭新的。（如果类里有单例需要特殊处理）。<br>详细看： <a href="http://blog.csdn.net/wangloveall/article/details/7992448" target="_blank" rel="external">http://blog.csdn.net/wangloveall/article/details/7992448</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/19/copy/" data-id="cioefljep0006usdgowf59z2g" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RTTI-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/RTTI-2/" class="article-date">
+  <time datetime="2016-05-19T14:50:09.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/RTTI-2/">RTTI总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://blog.csdn.net/linzhengqun/article/details/6284929" target="_blank" rel="external">http://blog.csdn.net/linzhengqun/article/details/6284929</a></p>
+<ol>
+<li><p>每个类都有一个Class对象，当我们在运行期第一次生成类的实例时，JVM就加载这个类的Class对象，然后用这个Class对象来创建类实例；Class类似于Delphi中的引用类TClass，用于保存类的运行时信息。</p>
+</li>
+<li><p>Class的static方法forName()用于查找某个类的Class对象，如果forName找不到你要的类的Class对象，会抛出ClassNotFoundException异常：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;  </span><br><span class="line">&#125;  </span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;              </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            Class&lt;?&gt; cls = Class.forName(<span class="string">"A"</span>);  </span><br><span class="line">            System.out.println(cls.getName());  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 查找类的Class对象的另一个方法是直接调用类.class，这会在编译期就检查是否正确，因此不需要捕获异常：</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;  </span><br><span class="line">&#125;  </span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;              </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// 类有class关键字  </span></span><br><span class="line">        Class&lt;A&gt; acls = A.class;  </span><br><span class="line">        System.out.println(acls.getName());  </span><br><span class="line">        <span class="comment">// 普通类型也有  </span></span><br><span class="line">        Class&lt;Integer&gt; icls = <span class="keyword">int</span>.class;  </span><br><span class="line">        System.out.println(icls.getName());  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="number">4</span>.  判断两个对象是否属于同一个类，可以通过比较他们的<span class="class"><span class="keyword">class</span>的方式，通过对象的<span class="title">getClass</span>()方法可以得<span class="title">Class</span>对象：</span><br><span class="line"></span><br><span class="line">```<span class="title">java</span></span><br><span class="line"><span class="title">class</span> <span class="title">A</span></span>&#123;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;              </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        A a = <span class="keyword">new</span> B();  </span><br><span class="line">        B b = <span class="keyword">new</span> B();  </span><br><span class="line">        <span class="comment">// a和b都B的实例，所以为true  </span></span><br><span class="line">        <span class="keyword">if</span> (a.getClass() == b.getClass())  </span><br><span class="line">            System.out.print(<span class="string">"yes"</span>);  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            System.out.print(<span class="string">"no"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>要判断对象是否是某个类或某个类的派生类的实例(考虑了继承)，可以通过两个方法：1是使用instanceof关键字，2是使用Class.isInstance方法：</li>
+</ol>
+<pre><code class="java"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>{  
+}  
+<span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>{  
+}  
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{              
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{  
+        A a = <span class="keyword">new</span> B();  
+        B b = <span class="keyword">new</span> B();  
+        <span class="comment">// 使用instanceof关键字，a是否A或其子类的对象  </span>
+        <span class="keyword">if</span> (a <span class="keyword">instanceof</span> A)  
+            System.out.println(<span class="string">"Yes"</span>);  
+        <span class="comment">// 使用instanceof关键字，b是否B或其子类的对象  </span>
+        <span class="keyword">if</span> (b <span class="keyword">instanceof</span> B)  
+            System.out.println(<span class="string">"Yes"</span>);  
+        <span class="comment">// 使用isInstance方法  </span>
+        <span class="keyword">if</span> (A.class.isInstance(a))  
+            System.out.println(<span class="string">"Yes"</span>);  
+        <span class="keyword">if</span> (B.class.isInstance(a))  
+            System.out.println(<span class="string">"Yes"</span>);  
+    }  
+}
+</code></pre>
+<ol>
+<li>Class.NewInstance可以创建一个类实例，该类必须有默认构造函数，否则会抛出InstantiationException异常：</li>
+</ol>
+<pre><code class="java"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>{  
+}  
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{              
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{  
+        <span class="keyword">try</span> {  
+            A a = A.class.newInstance();  
+        } <span class="keyword">catch</span> (InstantiationException e) {  
+            e.printStackTrace();  
+        } <span class="keyword">catch</span> (IllegalAccessException e) {  
+            e.printStackTrace();  
+        }  
+    }  
+}
+</code></pre>
+<ol>
+<li>Class还提供了一些更强大的方法，可以得到类的更多信息，比如：getSuperclass: 取得父类的Class对象；getInterfaces: 取得实现的接口数组；还有其他很多方法，详见JavaDoc。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/19/RTTI-2/" data-id="cioefljdt0000usdgq7k5tibv" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RTTI-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/RTTI-1/" class="article-date">
+  <time datetime="2016-05-19T14:40:48.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/RTTI-1/">初识RTTI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>RTTI（Run-Time Type Identification，通过运行时类型识别）的含义就是在运行时识别一个对象的类型，其对应的类是Class对象，每个java里面的类都对应一个Class对象(在编写并且编译后)，这个对象被保存在这个类的同名class文件里。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Birth</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">man</span></span>&#123;</span><br><span class="line">	man()&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Human</span> <span class="keyword">extends</span> <span class="title">man</span></span>&#123;</span><br><span class="line">	Human()&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Woman</span> <span class="keyword">extends</span> <span class="title">man</span> <span class="keyword">implements</span> <span class="title">Birth</span></span>&#123;</span><br><span class="line">	Woman()&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getBirth</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"getBirth!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">lianxix</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Human human = <span class="keyword">new</span> Human();</span><br><span class="line">		Class c1 = human.getClass();</span><br><span class="line">		System.out.println(c1.getName());</span><br><span class="line">		System.out.println(<span class="string">"------------"</span>);</span><br><span class="line">		</span><br><span class="line">		Class c2 = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			c2 = Class.forName(<span class="string">"lianxi.Woman"</span>);<span class="comment">//forName()方法中的字符串要使用全限定名（包括包名）</span></span><br><span class="line">		&#125;<span class="keyword">catch</span>(ClassNotFoundException e)&#123;</span><br><span class="line">			System.out.println(<span class="string">"Not found class of Human"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(c2);</span><br><span class="line">		System.out.println(<span class="string">"------------"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">for</span>(Class face : c2.getInterfaces())<span class="comment">//Class.getInterfaces()方法返回的是Class对象，他们表示在Class对象中所包含的接口</span></span><br><span class="line">			System.out.println(face);</span><br><span class="line">		System.out.println(<span class="string">"------------"</span>);</span><br><span class="line">		</span><br><span class="line">		Class up = c2.getSuperclass();</span><br><span class="line">		Object obj = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			obj = up.newInstance();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InstantiationException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="comment">//使用newInstance()来创建的类，必须带有默认的构造器</span></span><br><span class="line">		System.out.println(obj.getClass());</span><br><span class="line">		System.out.println(<span class="string">"------------"</span>);</span><br><span class="line">		</span><br><span class="line">		Class c3 = Woman.class;</span><br><span class="line">		System.out.println(c3);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">lianxi.Human</span><br><span class="line">------------</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">lianxi</span>.<span class="title">Woman</span></span><br><span class="line">------------</span><br><span class="line"><span class="title">interface</span> <span class="title">lianxi</span>.<span class="title">Birth</span></span><br><span class="line">------------</span><br><span class="line"><span class="title">class</span> <span class="title">lianxi</span>.<span class="title">man</span></span><br><span class="line">------------</span><br><span class="line"><span class="title">class</span> <span class="title">lianxi</span>.<span class="title">Woman</span></span></span><br></pre></td></tr></table></figure>
+<p>　　当我们调用对象的getClass()方法时，就得到对应Class对象的引用。<br>除了getClass()方法外，我们还有其他方式调用Class类的对象。</p>
+<ul>
+<li>forName()方法接收一个字符串作为参数，该字符串是类的名字。这将返回相应的Class类对象。</li>
+<li>Woman.class方法是直接调用类的class成员。这将返回相应的Class类对象。</li>
+</ul>
+<h2 id="类的字面常量："><a href="#类的字面常量：" class="headerlink" title="类的字面常量："></a>类的字面常量：</h2><p> 为了使用类而做的工作实际包含三个步骤: </p>
+<ul>
+<li><p>加载，这是由类加载器执行的。改步骤将查找字节码，并从字节码中创建一个Class对象。 </p>
+</li>
+<li><p>链接。在链接阶段将验证类中的字节码，为静态域分配存储空间，并且如果必需的话，将解析这个类创建的对其他类的所有引用。 </p>
+</li>
+<li><p>初始化。如果该类具有超类，则对其初始化，执行静态初始化器和静态初始化块。<br>初始化被延迟到了静态方法(构造器隐式地是静态的)或者非常数静态域进行首次引用时才执行<br>所以仅适用.class语法来获得对类的引用不会引发初始化，但为了产生class引用，Class.forName()立即就进行了初始化<br>如果一个static域不是final的，那么在对它访问时，总是要求在它被读取之前，要先进行链接（为这个域分配存储空间）和初始化（初始化存储空间）。<br>由于static final值是编译器常量，所以这个值不需要对类进行初始化就可以被读取，但如果只是将一个域设置为static或final的，还不足以确保这种行为。</p>
+</li>
+</ul>
+<p>在javaSE5中，Class&lt;?&gt;由于平凡的Class，Class&lt;?&gt;可以与extends关键字结合创建一个范围</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/19/RTTI-1/" data-id="cioeflje00001usdg5ks07auc" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-The base of java/Override-and-Overload" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/18/The base of java/Override-and-Overload/" class="article-date">
   <time datetime="2016-05-18T14:56:47.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
@@ -78,7 +297,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/Override-and-Overload/">Override and Overload</a>
+      <a class="article-title" href="/2016/05/18/The base of java/Override-and-Overload/">Override and Overload</a>
     </h1>
   
 
@@ -160,7 +379,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/Override-and-Overload/" data-id="ciod03n890001m0dgb5tbykb3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/Override-and-Overload/" data-id="cioefljhr001qusdgsqdl9so2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -172,9 +391,9 @@ public class TestOverriding extends Base
 
 
   
-    <article id="post-String-StringBuffer-StringBuilder-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-The base of java/String-StringBuffer-StringBuilder-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/18/String-StringBuffer-StringBuilder-1/" class="article-date">
+    <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/" class="article-date">
   <time datetime="2016-05-18T14:51:07.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
@@ -186,7 +405,7 @@ public class TestOverriding extends Base
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
+      <a class="article-title" href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
     </h1>
   
 
@@ -199,7 +418,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/String-StringBuffer-StringBuilder-1/" data-id="ciod03n8p0003m0dgm4cw59w0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/" data-id="cioefljhn001ousdgx5le82er" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -211,9 +430,9 @@ public class TestOverriding extends Base
 
 
   
-    <article id="post-String-StringBuffer-StringBuilder" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-The base of java/String-StringBuffer-StringBuilder" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/18/String-StringBuffer-StringBuilder/" class="article-date">
+    <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder/" class="article-date">
   <time datetime="2016-05-18T14:49:31.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
@@ -225,7 +444,7 @@ public class TestOverriding extends Base
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/String-StringBuffer-StringBuilder/">浅析String-StringBuffer-StringBuilder</a>
+      <a class="article-title" href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder/">浅析String-StringBuffer-StringBuilder</a>
     </h1>
   
 
@@ -238,7 +457,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/String-StringBuffer-StringBuilder/" data-id="ciod03n8v0004m0dgtz086xvo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder/" data-id="cioefljhv001tusdgz9skb32n" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -250,9 +469,9 @@ public class TestOverriding extends Base
 
 
   
-    <article id="post-HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-The base of java/HashMap" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/18/HashMap/" class="article-date">
+    <a href="/2016/05/18/The base of java/HashMap/" class="article-date">
   <time datetime="2016-05-18T14:46:54.000Z" itemprop="datePublished">2016-05-18</time>
 </a>
     
@@ -264,7 +483,7 @@ public class TestOverriding extends Base
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/HashMap/">HashMap使用</a>
+      <a class="article-title" href="/2016/05/18/The base of java/HashMap/">HashMap使用</a>
     </h1>
   
 
@@ -276,7 +495,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/HashMap/" data-id="ciod03n7t0000m0dg13uvk50e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/HashMap/" data-id="cioefljhm001lusdgd7z7s1ze" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -314,7 +533,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/ListIterator/" data-id="ciod03ne0001om0dgml58nq6h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/ListIterator/" data-id="cioefljhj001jusdgh8b7t2q6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -354,7 +573,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/Collection-and-map-and-their-son/" data-id="ciod03ndy001mm0dg8pvosu3n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/Collection-and-map-and-their-son/" data-id="cioefljha001eusdg2eh21z9i" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -409,126 +628,10 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/Collections/" data-id="ciod03ndw001jm0dg50jx10p2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/Collections/" data-id="cioefljhh001gusdgksugv4e7" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-The base of java/ArrayList-temp1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/The base of java/ArrayList-temp1/" class="article-date">
-  <time datetime="2016-05-17T16:03:19.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/The base of java/ArrayList-temp1/">ArrayList temp1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> lianxi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">lianxix</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span><br><span class="line">	</span>&#123;</span><br><span class="line">		 ArrayList list1 = <span class="keyword">new</span> ArrayList();</span><br><span class="line">		 list1.add(<span class="string">"one"</span>);  </span><br><span class="line">		 list1.add(<span class="string">"two"</span>);  </span><br><span class="line">		 list1.add(<span class="string">"three"</span>);  </span><br><span class="line">		 list1.add(<span class="string">"four"</span>);  </span><br><span class="line">		 list1.add(<span class="string">"five"</span>);  </span><br><span class="line">		 </span><br><span class="line">		 list1.add(<span class="number">0</span>,<span class="string">"zero"</span>);</span><br><span class="line">		 </span><br><span class="line">		 System.out.println(<span class="string">"&lt;--list1中共有&gt; "</span> + list1.size()+ <span class="string">"个元素"</span>);    </span><br><span class="line">		 System.out.println(<span class="string">"&lt;--list1中的内容:"</span> + list1 + <span class="string">"--&gt;"</span>);  </span><br><span class="line">		 </span><br><span class="line">		 ArrayList list2 = <span class="keyword">new</span> ArrayList(<span class="number">50</span>);</span><br><span class="line">		 list2.add(<span class="string">"Begin"</span>);</span><br><span class="line">		 list2.addAll(list1);</span><br><span class="line">		 list2.add(<span class="string">"End"</span>);</span><br><span class="line">		 </span><br><span class="line">		 System.out.println(<span class="string">"&lt;--list2中共有&gt;"</span> + list2.size()+ <span class="string">"个元素"</span>);    </span><br><span class="line">		 System.out.println(<span class="string">"&lt;--list2中的内容:"</span> + list2 + <span class="string">"--&gt;"</span>);  </span><br><span class="line">		 </span><br><span class="line">		 ArrayList list3 =  <span class="keyword">new</span> ArrayList(list1);  </span><br><span class="line">		 System.out.println(<span class="string">"list3: "</span> + list3);</span><br><span class="line">		 list3.removeAll(list1);  </span><br><span class="line">		 System.out.println(<span class="string">"&lt;--list3中是否存在one: "</span>+ (list3.contains(<span class="string">"one"</span>)? <span class="string">"是"</span>:<span class="string">"否"</span>)+ <span class="string">"--&gt;"</span>);  </span><br><span class="line">		 </span><br><span class="line">		 list3.add(<span class="number">0</span>,<span class="string">"same element"</span>);  </span><br><span class="line">		  list3.add(<span class="number">1</span>,<span class="string">"same element"</span>);  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--list3中共有&gt;"</span> + list3.size()+ <span class="string">"个元素"</span>);    </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--list3中的内容:"</span> + list3 + <span class="string">"--&gt;"</span>);  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--list3中第一次出现same element的索引是"</span> + list3.indexOf(<span class="string">"same element"</span>) + <span class="string">"--&gt;"</span>);  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--list3中最后一次出现same element的索引是"</span> + list3.lastIndexOf(<span class="string">"same element"</span>) + <span class="string">"--&gt;"</span>);  </span><br><span class="line">		  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--使用Iterator接口访问list3-&gt;"</span>);  </span><br><span class="line">		  Iterator it = list3.iterator();  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--list3中的元素: --&gt;"</span>);  </span><br><span class="line">		  <span class="keyword">while</span>(it.hasNext())&#123;  </span><br><span class="line">			  String str = (String)it.next();  <span class="comment">//ArrayList类数组存的是object，所以取出时要转换，除非一开始就ArrayList&lt;String&gt;</span></span><br><span class="line">			  System.out.println(str);</span><br><span class="line">		  &#125;  </span><br><span class="line">		  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--将list3中的same element修改为another element--&gt;"</span>);  </span><br><span class="line">		  list3.set(<span class="number">0</span>,<span class="string">"another element"</span>);  </span><br><span class="line">		  list3.set(<span class="number">1</span>,<span class="string">"another element"</span>);  </span><br><span class="line">		  System.out.println(list3);</span><br><span class="line">		  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;--将list3转为数组--&gt;"</span>);  </span><br><span class="line">		    <span class="comment">// Object []  array =(Object[]) list3.toArray(new   Object[list3.size()] );  </span></span><br><span class="line">		  Object [] array = list3.toArray();  </span><br><span class="line">		  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length ; i ++)&#123;  </span><br><span class="line">		      String str = (String)array[i];  </span><br><span class="line">		      System.out.println(<span class="string">"array["</span> + i + <span class="string">"] = "</span>+ str);        </span><br><span class="line">		  &#125;       </span><br><span class="line">		  </span><br><span class="line">		  System.out.println(<span class="string">"&lt;---清空list3-&gt;"</span>);  </span><br><span class="line">		     list3.clear();  </span><br><span class="line">		     System.out.println(<span class="string">"&lt;--list3中是否为空: "</span> + (list3.isEmpty()?<span class="string">"是"</span>:<span class="string">"否"</span>) + <span class="string">"--&gt;"</span>);  </span><br><span class="line">		     System.out.println(<span class="string">"&lt;--list3中共有&gt;"</span> + list3.size()+ <span class="string">"个元素"</span>);   </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;--list1中共有&gt; <span class="number">6</span>个元素</span><br><span class="line">&lt;--list1中的内容:[zero, one, two, three, four, five]--&gt;</span><br><span class="line">&lt;--list2中共有&gt;<span class="number">8</span>个元素</span><br><span class="line">&lt;--list2中的内容:[Begin, zero, one, two, three, four, five, End]--&gt;</span><br><span class="line">list3: [zero, one, two, three, four, five]</span><br><span class="line">&lt;--list3中是否存在one: 否--&gt;</span><br><span class="line">&lt;--list3中共有&gt;<span class="number">2</span>个元素</span><br><span class="line">&lt;--list3中的内容:[same element, same element]--&gt;</span><br><span class="line">&lt;--list3中第一次出现same element的索引是<span class="number">0</span>--&gt;</span><br><span class="line">&lt;--list3中最后一次出现same element的索引是<span class="number">1</span>--&gt;</span><br><span class="line">&lt;--使用Iterator接口访问list3-&gt;</span><br><span class="line">&lt;--list3中的元素: --&gt;</span><br><span class="line">same element</span><br><span class="line">same element</span><br><span class="line">&lt;--将list3中的same element修改为another element--&gt;</span><br><span class="line">[another element, another element]</span><br><span class="line">&lt;--将list3转为数组--&gt;</span><br><span class="line">array[<span class="number">0</span>] = another element</span><br><span class="line">array[<span class="number">1</span>] = another element</span><br><span class="line">&lt;---清空list3-&gt;</span><br><span class="line">&lt;--list3中是否为空: 是--&gt;</span><br><span class="line">&lt;--list3中共有&gt;<span class="number">0</span>个元素</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/ArrayList-temp1/" data-id="ciod03nds001hm0dgo8vlkrbl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-The base of java/ArrayList-and-LinkedList" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/The base of java/ArrayList-and-LinkedList/" class="article-date">
-  <time datetime="2016-05-17T16:01:26.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/The base of java/ArrayList-and-LinkedList/">ArrayList and LinkedList</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>转：<a href="http://blog.csdn.net/lskyne/article/details/8966653" target="_blank" rel="external">http://blog.csdn.net/lskyne/article/details/8966653</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/ArrayList-and-LinkedList/" data-id="ciod03ndp001fm0dgb3khqghk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-dp/hdu-3555" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/17/dp/hdu-3555/" class="article-date">
-  <time datetime="2016-05-17T15:50:55.000Z" itemprop="datePublished">2016-05-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/17/dp/hdu-3555/">hdu 3555</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>和hdu2089差不多</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dp[<span class="number">25</span>][<span class="number">3</span>];</span><br><span class="line"><span class="comment">//dp[i][0]表示符合的数</span></span><br><span class="line"><span class="comment">//dp[i][1]表示符合的数且最高位为9</span></span><br><span class="line"><span class="comment">//dp[i][2]表示不符合的数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">22</span>; i++)&#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>] * <span class="number">10</span> - dp[i - <span class="number">1</span>][<span class="number">1</span>];<span class="comment">//减去开头为9的情况</span></span><br><span class="line">        dp[i][<span class="number">1</span>] = dp[i - <span class="number">1</span>][<span class="number">0</span>];<span class="comment">//开头为9的数</span></span><br><span class="line">        dp[i][<span class="number">2</span>] = dp[i - <span class="number">1</span>][<span class="number">2</span>] * <span class="number">10</span> + dp[i - <span class="number">1</span>][<span class="number">1</span>];<span class="comment">//后面加的是开头为9的，因为可能补个4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">solve</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> len = <span class="number">0</span>, a[<span class="number">25</span>], flag = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(n)&#123;</span><br><span class="line">        a[++len] = n % <span class="number">10</span>;</span><br><span class="line">        n /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = len; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">        ans += dp[i - <span class="number">1</span>][<span class="number">2</span>] * a[i];</span><br><span class="line">        <span class="keyword">if</span>(flag)</span><br><span class="line">            ans += dp[i - <span class="number">1</span>][<span class="number">0</span>] * a[i];</span><br><span class="line">        <span class="keyword">if</span>(!flag &amp;&amp; a[i] &gt; <span class="number">4</span>)</span><br><span class="line">            ans += dp[i - <span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span>(a[i + <span class="number">1</span>] == <span class="number">4</span> &amp;&amp; a[i] == <span class="number">9</span>)</span><br><span class="line">            flag = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n;</span><br><span class="line">    init();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%I64d"</span>, &amp;n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%I64d\n"</span>, solve(n + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/17/dp/hdu-3555/" data-id="ciod03nfs002ym0dgz6tgy5ou" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li></ul>
 
     </footer>
   </div>
@@ -551,7 +654,7 @@ public class TestOverriding extends Base
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
     </div>
@@ -561,7 +664,7 @@ public class TestOverriding extends Base
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
     </div>
@@ -580,28 +683,28 @@ public class TestOverriding extends Base
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/05/18/Override-and-Overload/">Override and Overload</a>
+            <a href="/2016/05/19/copy/">浅拷贝和深拷贝</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
+            <a href="/2016/05/19/RTTI-2/">RTTI总结</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/String-StringBuffer-StringBuilder/">浅析String-StringBuffer-StringBuilder</a>
+            <a href="/2016/05/19/RTTI-1/">初识RTTI</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/HashMap/">HashMap使用</a>
+            <a href="/2016/05/18/The base of java/Override-and-Overload/">Override and Overload</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/The base of java/ListIterator/">ListIterator</a>
+            <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
           </li>
         
       </ul>
@@ -617,7 +720,7 @@ public class TestOverriding extends Base
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
