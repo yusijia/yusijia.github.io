@@ -64,6 +64,91 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-dictionary tree/dictionary-tree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/05/dictionary tree/dictionary-tree/" class="article-date">
+  <time datetime="2016-05-05T10:13:16.000Z" itemprop="datePublished">2016-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/05/dictionary tree/dictionary-tree/">字典树基本描述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>联想下小时候是怎样翻拼音字典</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">例如：输入</span><br><span class="line">me</span><br><span class="line">watch</span><br><span class="line">me</span><br><span class="line"><span class="keyword">while</span></span><br><span class="line">输出有多少个单词</span><br><span class="line"></span><br><span class="line">主要操作：</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> node&#123;</span><br><span class="line">    <span class="keyword">char</span> a;                   <span class="comment">//存字母</span></span><br><span class="line">    <span class="keyword">struct</span> node *next[<span class="number">26</span>];   <span class="comment">//代表26个字母    这个字母节点下的26个指针代表26个字母，如果 指针为空 说明没有出现这个字母（重点）</span></span><br><span class="line">    <span class="keyword">int</span> flag;                  <span class="comment">//标记这个字母是一个单词的结尾</span></span><br><span class="line">&#125;root;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">char</span> s[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len=<span class="built_in">strlen</span>(s),i;</span><br><span class="line">    <span class="keyword">struct</span> node *p=&amp;root;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len; i++)                <span class="comment">// i = 0时，根root里面不存单词，所以看下一个节点。</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next[s[i]-<span class="string">'a'</span>]==<span class="literal">NULL</span>)         <span class="comment">//没出现过这个字母</span></span><br><span class="line">        &#123;</span><br><span class="line">            p-&gt;next[s[i]-<span class="string">'a'</span>]=(struct node *)<span class="built_in">malloc</span>(sizeof(struct node));   <span class="comment">//插入新的字母，新节点</span></span><br><span class="line">            <span class="built_in">memset</span>(p-&gt;next[s[i]-<span class="string">'a'</span>]-&gt;next,<span class="number">0</span>,<span class="keyword">sizeof</span>(struct node *) * <span class="number">26</span>);    <span class="comment">//这个字母后的新的next数组清零  nxet数组就像26个节点</span></span><br><span class="line">        &#125;</span><br><span class="line">        p=p-&gt;next[s[i]-<span class="string">'a'</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(p-&gt;flag != <span class="number">1</span>)                        <span class="comment">//如果不是结尾    1代表是结尾</span></span><br><span class="line">    &#123;</span><br><span class="line">        count++;                            <span class="comment">//记一次数  说明出现了新单词</span></span><br><span class="line">        p-&gt;flag=<span class="number">1</span>;                          <span class="comment">//把这个单词最后一个字母标记为结尾</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/05/dictionary tree/dictionary-tree/" data-id="cioega3m4002c8cdgch1q9f6n" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-binary tree/poj-1426" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/05/binary tree/poj-1426/" class="article-date">
+  <time datetime="2016-05-05T10:04:14.000Z" itemprop="datePublished">2016-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/05/binary tree/poj-1426/">poj 1426</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://i2.piimg.com/2b60adf82f934192.png" alt="图"></p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><ul>
+<li>二叉树的遍历 + 同余定理</li>
+</ul>
+<p><img src="http://i2.piimg.com/22fc44103f6b37de.png" alt="图"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//版本一：</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 800010</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> mod[MAXN];				<span class="comment">//注意：用数组表示二叉树，则要求下标从1开始</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) == <span class="number">1</span> &amp;&amp; n)&#123;</span><br><span class="line">        mod[<span class="number">1</span>] = <span class="number">1</span>;			<span class="comment">//第一位等于1</span></span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">2</span>; mod[i - <span class="number">1</span>] != <span class="number">0</span>; i++)<span class="comment">//从第二位开始,如果取模后等于0,则说明找到了</span></span><br><span class="line">            mod[i] = (mod[i / <span class="number">2</span>] * <span class="number">10</span> + i % <span class="number">2</span>) % n;<span class="comment">//防止数据过大溢出，用同余定理取模</span></span><br><span class="line">        i--;				<span class="comment">//如果i是偶数则走向左孩子，否则走向右孩子</span></span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i)&#123;			<span class="comment">//找到了余数为0的二叉树的节点位置就逆向输出路径</span></span><br><span class="line">            mod[index++] = i % <span class="number">2</span>;	<span class="comment">//这个节点有对应的下标，取其二进制的最后一位</span></span><br><span class="line">            i /= <span class="number">2</span>;<span class="comment">//往上走一层       	//如果是偶数则说明是0,奇数说明是1</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, mod[i]);	<span class="comment">//逆向输出</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//版本二：用队列去做，其实意思差不多都是为了找到余数为0的节点</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">bool</span> ret[<span class="number">1000</span>];</span><br><span class="line"><span class="keyword">int</span> ansz, retsz;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, t;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) == <span class="number">1</span> &amp;&amp; n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; que;</span><br><span class="line">        retsz = ansz = <span class="number">0</span>;</span><br><span class="line">        que.push(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            t = que.front();</span><br><span class="line">            que.pop();</span><br><span class="line">            ++ansz;</span><br><span class="line">            <span class="keyword">if</span> (t % n == <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="comment">// 这里必须先0后1，因为这样才与奇偶对应</span></span><br><span class="line">            que.push(t * <span class="number">10</span> % n);</span><br><span class="line">            que.push((t * <span class="number">10</span> + <span class="number">1</span>) % n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (ansz)</span><br><span class="line">        &#123;</span><br><span class="line">            ret[retsz++] = ansz &amp; <span class="number">1</span>;<span class="comment">//相当于%2，取二进制的最后一位</span></span><br><span class="line">            ansz &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = retsz - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, <span class="keyword">int</span>(ret[i]));</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/05/binary tree/poj-1426/" data-id="cioega3m4002a8cdgiu6twvh0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-binary sort tree/binary-sort-tree2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/05/binary sort tree/binary-sort-tree2/" class="article-date">
@@ -90,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/05/binary sort tree/binary-sort-tree2/" data-id="cioefljii002fusdg7z72hjmc" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/05/binary sort tree/binary-sort-tree2/" data-id="cioega3m400288cdgt2bzj4u0" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li></ul>
@@ -129,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/05/binary sort tree/binary-sort-tree/" data-id="cioefljig002cusdg0imdx8j7" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/05/binary sort tree/binary-sort-tree/" data-id="cioega3lp00248cdgqum6n6of" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li></ul>
@@ -168,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/The base of java/static/" data-id="cioeflji30020usdg27f80r3w" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/04/The base of java/static/" data-id="cioega3lp001x8cdgwee8zt02" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -265,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/The base of java/The-base-of-java/" data-id="cioefljhx001vusdgflwff2eb" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/04/The base of java/The-base-of-java/" data-id="cioega3l9001s8cdgwi2d23kf" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -306,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/常用/input-and-output/" data-id="cioefljqr00b9usdgjs36l9wk" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/04/常用/input-and-output/" data-id="cioega3t2007w8cdgud16ebak" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li></ul>
@@ -347,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/binary tree/binary-tree/" data-id="cioefljij002husdg2n25dpy9" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/04/binary tree/binary-tree/" data-id="cioega3m400278cdgas16j2dn" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li></ul>
@@ -390,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/queue/hdu-1276/" data-id="cioefljp6009nusdgycbwsxzt" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/04/queue/hdu-1276/" data-id="cioega3rc006k8cdgi3jogfxa" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li></ul>
@@ -439,99 +524,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/queue/queue-2/" data-id="cioefljp4009lusdgmbg1fyj5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/04/queue/queue-2/" data-id="cioega3rc006m8cdg302pion6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-queue/queue-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/04/queue/queue-1/" class="article-date">
-  <time datetime="2016-05-04T01:21:25.000Z" itemprop="datePublished">2016-05-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/04/queue/queue-1/">循环队列实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_SIZE 1000</span></span><br><span class="line"><span class="keyword">int</span> que_length = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> que_rear = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> que_front = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">struct</span> fifo&#123;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">&#125;que[MAX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return que_length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> val)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    que[que_rear].data = val;     <span class="comment">//传过来的是int型</span></span><br><span class="line">    que_length++;</span><br><span class="line">    que_rear = (que_rear + <span class="number">1</span>) % MAX_SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p;</span><br><span class="line">    p = que[que_front].data;</span><br><span class="line">    que_front = (que_front + <span class="number">1</span>) % MAX_SIZE;</span><br><span class="line">    que_length--;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isempty</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return que_length == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isfull</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return que_length == MAX_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/queue/queue-1/" data-id="cioefljp2009iusdg2hjxy1gl" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-euclid/king-s-cake" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/04/euclid/king-s-cake/" class="article-date">
-  <time datetime="2016-05-04T01:06:24.000Z" itemprop="datePublished">2016-05-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/04/euclid/king-s-cake/">king&#39;s cake</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>阅兵式前一天，是国王的生日，大臣们为他准备了一个n×m(1≤n,m≤10000) 的蛋糕。他准备切蛋糕，但他切蛋糕有奇奇怪怪的癖好，他每次只切一刀，切下一个正方形蛋糕。请问它最多能切出多少个正方形蛋糕？</p>
-<h2 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h2><p>第一行一个整数表示测试组数：T (0&lt;T≤1000) 。</p>
-<p>每组数据占一行，每行两个整数 n×m(1≤n,m≤10000)，表示蛋糕的大小。</p>
-<h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述"></a>输出描述</h2><p>共 T 行，每行一个整数表示最多能切出的正方形蛋糕数量。</p>
-<h2 id="输入样例"><a href="#输入样例" class="headerlink" title="输入样例"></a>输入样例</h2><p>2<br>2 3<br>2 5</p>
-<h2 id="输出样例"><a href="#输出样例" class="headerlink" title="输出样例"></a>输出样例</h2><p>3<br>4</p>
-<h2 id="Hint"><a href="#Hint" class="headerlink" title="Hint"></a>Hint</h2><p>对于第一组数据，可切出一个 2×2, 两个1×1，共 3 个。</p>
-<p>对于第一组数据，可切出两个 2×2, 两个1×1，共 4 个。</p>
-<p><img src="http://i2.piimg.com/a70e5c4c90aaef9c.png" alt="tu"></p>
-<ul>
-<li><h2 id="不需要考虑一开始输入的a就一定要大于b，因为如果a-lt-b-a-b-0-r-a-经过一遍循环后会把a和b的值交换"><a href="#不需要考虑一开始输入的a就一定要大于b，因为如果a-lt-b-a-b-0-r-a-经过一遍循环后会把a和b的值交换" class="headerlink" title="不需要考虑一开始输入的a就一定要大于b，因为如果a&lt;b,a/b=0,r=a,经过一遍循环后会把a和b的值交换"></a>不需要考虑一开始输入的a就一定要大于b，因为如果a&lt;b,a/b=0,r=a,经过一遍循环后会把a和b的值交换</h2></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, a, b, ans, r;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)&#123;</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;a, &amp;b);</span><br><span class="line">        <span class="keyword">while</span>(r = a % b)&#123;</span><br><span class="line">            ans += a / b;</span><br><span class="line">            a = b;</span><br><span class="line">            b = r;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans + a / b);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/04/euclid/king-s-cake/" data-id="cioefljjz003susdgyfn8zokn" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li></ul>
 
     </footer>
   </div>
@@ -556,7 +552,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
     </div>
   </div>
 
@@ -566,7 +562,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
+      <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-堆排序/" style="font-size: 10px;">算法-堆排序</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-归并排序/" style="font-size: 10px;">算法-归并排序</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
     </div>
   </div>
 
@@ -588,23 +584,23 @@
       <ul>
         
           <li>
-            <a href="/2016/05/19/copy/">浅拷贝和深拷贝</a>
+            <a href="/2016/05/19/heapSort/heapSort/">堆排序</a>
           </li>
         
           <li>
-            <a href="/2016/05/19/RTTI-2/">RTTI总结</a>
+            <a href="/2016/05/19/mergeSort/mergesort/">归并排序</a>
           </li>
         
           <li>
-            <a href="/2016/05/19/RTTI-1/">初识RTTI</a>
+            <a href="/2016/05/19/The base of java/copy/">浅拷贝和深拷贝</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/The base of java/Override-and-Overload/">Override and Overload</a>
+            <a href="/2016/05/19/The base of java/RTTI-2/">RTTI总结</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
+            <a href="/2016/05/19/The base of java/RTTI-1/">初识RTTI</a>
           </li>
         
       </ul>

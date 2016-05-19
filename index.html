@@ -64,9 +64,89 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-copy" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-heapSort/heapSort" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/19/copy/" class="article-date">
+    <a href="/2016/05/19/heapSort/heapSort/" class="article-date">
+  <time datetime="2016-05-19T15:19:20.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/heapSort/heapSort/">堆排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>可以看下《算法导论》里面给了详细的图解</p>
+<h2 id="这里以大顶堆为例："><a href="#这里以大顶堆为例：" class="headerlink" title="这里以大顶堆为例："></a>这里以大顶堆为例：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapAdjust</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> i, <span class="keyword">int</span> sizeOfheap)</span><span class="comment">//调整堆 (调整范围:i与i下面没超过sizeOfheap的子树)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lchild = <span class="number">2</span> * i;       <span class="comment">//i的左孩子节点序号</span></span><br><span class="line">    <span class="keyword">int</span> rchild = <span class="number">2</span> * i + <span class="number">1</span>;   <span class="comment">//i的右孩子节点序号</span></span><br><span class="line">    <span class="keyword">int</span> maxs = i;             <span class="comment">//先默认第i个是最大的</span></span><br><span class="line">    <span class="keyword">if</span>(i &lt;= sizeOfheap / <span class="number">2</span>)   <span class="comment">//注意：不调整叶子节点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(lchild &lt;= sizeOfheap &amp;&amp; a[lchild] &gt; a[maxs])<span class="comment">//注意：(是lchild &lt;= sizeOfheap,没有除2)如果左孩子在调整的范围内</span></span><br><span class="line">            maxs = lchild;</span><br><span class="line">        <span class="keyword">if</span>(rchild &lt;= sizeOfheap &amp;&amp; a[rchild] &gt; a[maxs])</span><br><span class="line">            maxs = rchild;  <span class="comment">//移动maxs</span></span><br><span class="line">        <span class="keyword">if</span>(maxs != i)</span><br><span class="line">        &#123;</span><br><span class="line">            swap(a[i], a[maxs]);             <span class="comment">//注意maxs下标没换,换的是里面的值</span></span><br><span class="line">            heapAdjust(a, maxs, sizeOfheap); <span class="comment">//避免调整之后以max为父节点的子树不是符合的堆</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BuildHeap</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;                       <span class="comment">//非叶节点最大序号值为size/2</span></span><br><span class="line">    <span class="keyword">for</span>(i = n / <span class="number">2</span>; i &gt;= <span class="number">1</span>; i--)  <span class="comment">//从下面往上面调整</span></span><br><span class="line">        heapAdjust(a, i, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    BuildHeap(a, n);	<span class="comment">//建堆</span></span><br><span class="line">    <span class="keyword">for</span>(i = n; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;<span class="comment">//注意，下面是交换a[1]和a[i]的值，a[1]是最大的值</span></span><br><span class="line">        swap(a[<span class="number">1</span>], a[i]);<span class="comment">//注意：最后面的数和第一个数交换，结果最后一个数变为最大的数了</span></span><br><span class="line">        heapAdjust(a, <span class="number">1</span>, i - <span class="number">1</span>);<span class="comment">//注意：i - 1缩小调整的范围</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sizeOfheap;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">100</span>];</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;sizeOfheap) == <span class="number">1</span> &amp;&amp; sizeOfheap &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> i;</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= sizeOfheap; i++)  <span class="comment">//从下标1开始到n</span></span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">        HeapSort(a, sizeOfheap);</span><br><span class="line">        <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt;= sizeOfheap; i++)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/19/heapSort/heapSort/" data-id="cioega3oa003v8cdgrj198ral" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mergeSort/mergesort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/mergeSort/mergesort/" class="article-date">
+  <time datetime="2016-05-19T15:13:19.000Z" itemprop="datePublished">2016-05-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/19/mergeSort/mergesort/">归并排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="主要就是经典的分治法思想"><a href="#主要就是经典的分治法思想" class="headerlink" title="主要就是经典的分治法思想"></a>主要就是经典的分治法思想</h2><p>可以参考下《算法导论》，里面给了比较详细的图解</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">10000</span>], b[<span class="number">10000</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergearray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> mid, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span><span class="comment">//temp数组用于临时储存另外一组数</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = first, j = mid + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= last)  <span class="comment">//第一组数的最后和第二组数的最后</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &lt;= a[j])</span><br><span class="line">            temp[k++] = a[i++];  </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            temp[k++] = a[j++];  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid)</span><br><span class="line">        temp[k++] = a[i++];    </span><br><span class="line">    <span class="keyword">while</span>(j &lt;= last)</span><br><span class="line">        temp[k++] = a[j++];     </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; k; i++)</span><br><span class="line">        a[first + i] = temp[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> first, <span class="keyword">int</span> last, <span class="keyword">int</span> temp[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first &lt; last)  <span class="comment">//注意这个判断，直到fist==last，把整体分为了最小的单元</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (first + last) / <span class="number">2</span>;   <span class="comment">//注意是向下取整 ,所以后面才是mid+1</span></span><br><span class="line">        mergesort(a, first, mid, temp);  <span class="comment">//左边有序</span></span><br><span class="line">        mergesort(a, mid + <span class="number">1</span>, last, temp); <span class="comment">//右边有序</span></span><br><span class="line">        mergearray(a, first, mid, last, temp); <span class="comment">//再将二个有序数列合并</span></span><br><span class="line">    &#125;<span class="comment">//用递归实现将数组拆分成一个个元素，然后将两个两个的组合起来</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, i;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">    mergesort(a, <span class="number">0</span>, n<span class="number">-1</span>, b);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/19/mergeSort/mergesort/" data-id="cioega3pl005c8cdgi60mr2mn" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-The base of java/copy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/19/The base of java/copy/" class="article-date">
   <time datetime="2016-05-19T14:58:22.000Z" itemprop="datePublished">2016-05-19</time>
 </a>
     
@@ -78,7 +158,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/19/copy/">浅拷贝和深拷贝</a>
+      <a class="article-title" href="/2016/05/19/The base of java/copy/">浅拷贝和深拷贝</a>
     </h1>
   
 
@@ -123,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/copy/" data-id="cioefljep0006usdgowf59z2g" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/19/The base of java/copy/" data-id="cioega3l9001u8cdgp6wl1zjy" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -135,9 +215,9 @@
 
 
   
-    <article id="post-RTTI-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-The base of java/RTTI-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/19/RTTI-2/" class="article-date">
+    <a href="/2016/05/19/The base of java/RTTI-2/" class="article-date">
   <time datetime="2016-05-19T14:50:09.000Z" itemprop="datePublished">2016-05-19</time>
 </a>
     
@@ -149,7 +229,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/19/RTTI-2/">RTTI总结</a>
+      <a class="article-title" href="/2016/05/19/The base of java/RTTI-2/">RTTI总结</a>
     </h1>
   
 
@@ -214,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/RTTI-2/" data-id="cioefljdt0000usdgq7k5tibv" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/19/The base of java/RTTI-2/" data-id="cioega3kt001i8cdgpu4gz0ok" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -226,9 +306,9 @@
 
 
   
-    <article id="post-RTTI-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-The base of java/RTTI-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/05/19/RTTI-1/" class="article-date">
+    <a href="/2016/05/19/The base of java/RTTI-1/" class="article-date">
   <time datetime="2016-05-19T14:40:48.000Z" itemprop="datePublished">2016-05-19</time>
 </a>
     
@@ -240,7 +320,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/19/RTTI-1/">初识RTTI</a>
+      <a class="article-title" href="/2016/05/19/The base of java/RTTI-1/">初识RTTI</a>
     </h1>
   
 
@@ -271,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/RTTI-1/" data-id="cioeflje00001usdg5ks07auc" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/19/The base of java/RTTI-1/" data-id="cioega3kt001k8cdgw3nrjuel" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -379,7 +459,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/Override-and-Overload/" data-id="cioefljhr001qusdgsqdl9so2" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/Override-and-Overload/" data-id="cioega3kt001f8cdg4lbarw0s" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -418,7 +498,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/" data-id="cioefljhn001ousdgx5le82er" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/" data-id="cioega3kt001l8cdgt59gj2iw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -457,7 +537,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder/" data-id="cioefljhv001tusdgz9skb32n" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder/" data-id="cioega3l9001o8cdgteny7s1e" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -495,7 +575,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/HashMap/" data-id="cioefljhm001lusdgd7z7s1ze" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/HashMap/" data-id="cioega3kt001d8cdgg438zn7d" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -533,102 +613,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/ListIterator/" data-id="cioefljhj001jusdgh8b7t2q6" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-The base of java/Collection-and-map-and-their-son" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/The base of java/Collection-and-map-and-their-son/" class="article-date">
-  <time datetime="2016-05-17T16:08:20.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/The base of java/Collection-and-map-and-their-son/">Collection和map及其他们的子类</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="http://blog.csdn.net/lskyne/article/details/8961025" target="_blank" rel="external">http://blog.csdn.net/lskyne/article/details/8961025</a></p>
-<p>collection（集合）是一个根接口，用来描述一组对象的集合。JDK并没有直接提供对个接口的实现，而是提供了对她的子接口的实现例如set和list等。在collection接口中用的最多的两种基本方法是：add和 Iterator。add是把对象添加到相应的数据结构中，如果成功返回true，否则返回false（集合中不能拥有相同的元素）。而Iterator 方法则返回一个Iterator接口的对象。Iterator接口又包括了三种基本操作：next，hasnext，remove。next用来依次访问数据结构中的元素，hasnext用来判断是否还有没有访问的元素，remove用来删除最后一次调用next返回的对象。<br>　　<br>　　Collection　一个允许重复元素的无序集合。<br>　　Set　一个不允许元素重复的无序集合。<br>　　List　有序集合，多数情况下允许元素重复，可按位置访问，扩展自Collection。<br>　　Map　Key-Value映射。<br>　　SortedSet　元素自动排序的集合，既可以使用默认的排序算法，也可以指定其它的排序算法。<br>　　SortedMap　有序的Key-Value映射，既可以使用默认的按Key值排序算法，也可以指定其它的排序算法。<br>　　List是collection的子接口，她是一种有序的集合（队列）。通过他可以精确的控制访问数据结构的顺序和位置。<br>　　set也是collection的子接口，她是一种无序、散列的集合（哈西表）。通过他可以快速查找他的数据结构而不需要知道具体的排列方式。<br>　　map（映射）是一个“键-值”对应的接口。每一个键只能映射唯一的值。<br>　　还有些其他子接口及实现类可以参考 <a href="http://java.sun.com/j2se/1.4/docs/api/" target="_blank" rel="external">http://java.sun.com/j2se/1.4/docs/api/</a><br>　　至于具体选用哪一种方案，以下仅供参考：<br>　　1）大量的随机访问可以用ArrayList类<br>　　2）大量的插入、删除建议用LinkedList类<br>　　3）关于Set，建议都使用HashSet类<br>　　4）映射的最佳策略是创建和填充时用TreeMap日后需要大量检索时再转换成HashMap</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/Collection-and-map-and-their-son/" data-id="cioefljha001eusdg2eh21z9i" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-The base of java/Collections" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/The base of java/Collections/" class="article-date">
-  <time datetime="2016-05-17T16:04:47.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/The base of java/Collections/">Collections</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Collections则是集合类的一个工具类/帮助类，其中提供了一系列静态方法，用于对集合中元素进行排序、搜索以及线程安全等各种操作。</p>
-<ol>
-<li>工具类collections用于操作集合类，如List,Set,常用方法有：<br>1） 排序（Sort）<br>使用sort方法可以根据元素的自然顺序 对指定列表按升序进行排序。列表中的所有元素都必须实现 Comparable 接口。此列表内的所有元素都必须是使用指定比较器可相互比较的</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line">Collections.sort(list);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">System.out.println(li.get(i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：112,111,23,456,231</span></span><br></pre></td></tr></table></figure>
-<p>2） 混排（Shuffling）<br>混排算法所做的正好与 sort 相反： 它打乱在一个 List 中可能有的任何排列的踪迹。也就是说，基于随机源的输入重排该 List，这样的排列具有相同的可能性（假设随机源是公正的）。这个算法在实现一个碰运气的游戏中是非常有用的。例如，它可被用来混排代表一副牌的 Card 对象的一个 List .另外，在生成测试案例时，它也是十分有用的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Collections.Shuffling(list)</span><br><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line">Collections.shuffle(list);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">System.out.println(li.get(i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：112,111,23,456,231</span></span><br></pre></td></tr></table></figure>
-<p>3） 反转（Reverse）<br>使用Reverse方法可以根据元素的自然顺序 对指定列表按降序进行排序。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Collections.reverse(list)</span><br><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line">Collections. reverse (list);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">System.out.println(li.get(i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：231,456,23,111,112</span></span><br></pre></td></tr></table></figure></p>
-<p>4） 替换所有的元素（Fill）<br>使用指定元素替换指定列表中的所有元素。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">String str[] = &#123;<span class="string">"dd"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"ee"</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j</span><br><span class="line">li.add(<span class="keyword">new</span> String(str[j]));</span><br><span class="line">&#125;</span><br><span class="line">Collections.fill(li,<span class="string">"aaa"</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; li.size(); i++) &#123;</span><br><span class="line">System.out.println(<span class="string">"list["</span> + i + <span class="string">"]="</span> + li.get(i));</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：aaa,aaa,aaa,aaa,aaa</span></span><br></pre></td></tr></table></figure></p>
-<p>5） 拷贝（Copy）<br>用两个参数，一个目标 List 和一个源 List， 将源的元素拷贝到目标，并覆盖它的内容。目标 List 至少与源一样长。如果它更长，则在目标 List 中的剩余元素不受影响。<br>Collections.copy（list，li）： 后面一个参数是目标列表 ，前一个是源列表<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">List li = <span class="keyword">new</span> ArrayList();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">double</span> arr[] = &#123;<span class="number">1131</span>,<span class="number">333</span>&#125;;</span><br><span class="line">String str[] = &#123;<span class="string">"dd"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"ee"</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j</span><br><span class="line">li.add(<span class="keyword">new</span> Double(arr[j]));</span><br><span class="line">&#125;</span><br><span class="line">Collections.copy(list,li);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i</span><br><span class="line">System.out.println(<span class="string">"list["</span> + i + <span class="string">"]="</span> + list.get(i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：1131,333,23,456,231</span></span><br></pre></td></tr></table></figure></p>
-<p>6） 返回Collections中最小元素（min）<br>根据指定比较器产生的顺序，返回给定 collection 的最小元素。collection 中的所有元素都必须是通过指定比较器可相互比较的<br>Collections.min(list)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line">Collections.min(list);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i</span><br><span class="line">System.out.println(<span class="string">"list["</span> + i + <span class="string">"]="</span> + list.get(i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：23</span></span><br></pre></td></tr></table></figure></p>
-<p>7） 返回Collections中最大元素（max）<br>根据指定比较器产生的顺序，返回给定 collection 的最大元素。collection 中的所有元素都必须是通过指定比较器可相互比较的<br>Collections.max(list)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line">Collections.max(list);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i</span><br><span class="line">System.out.println(<span class="string">"list["</span> + i + <span class="string">"]="</span> + list.get(i));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果：456</span></span><br></pre></td></tr></table></figure></p>
-<p>8） lastIndexOfSubList<br>返回指定源列表中最后一次出现指定目标列表的起始位置，即按从后到前的顺序返回子List在父List中的索引位置。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = Collections.lastIndexOfSubList(list,li);</span><br><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">List li = <span class="keyword">new</span> ArrayList();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">double</span> arr[] = &#123;<span class="number">111</span>&#125;;</span><br><span class="line">String str[] = &#123;<span class="string">"dd"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"ee"</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j</span><br><span class="line">li.add(<span class="keyword">new</span> Double(arr[j]));</span><br><span class="line">&#125;</span><br><span class="line">Int locations = Collections. lastIndexOfSubList (list,li);</span><br><span class="line">System.out.println(“===”+ locations);</span><br><span class="line"><span class="comment">//结果 3</span></span><br></pre></td></tr></table></figure></p>
-<p>9） IndexOfSubList<br>返回指定源列表中第一次出现指定目标列表的起始位置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = Collections.indexOfSubList(list,li);</span><br><span class="line"><span class="keyword">double</span> array[] = &#123;<span class="number">112</span>, <span class="number">111</span>, <span class="number">23</span>, <span class="number">456</span>, <span class="number">231</span> &#125;;</span><br><span class="line">List list = <span class="keyword">new</span> ArrayList();</span><br><span class="line">List li = <span class="keyword">new</span> ArrayList();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">list.add(<span class="keyword">new</span> Double(array[i]));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">double</span> arr[] = &#123;<span class="number">111</span>&#125;;</span><br><span class="line">String str[] = &#123;<span class="string">"dd"</span>,<span class="string">"aa"</span>,<span class="string">"bb"</span>,<span class="string">"cc"</span>,<span class="string">"ee"</span>&#125;;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j</span><br><span class="line">li.add(<span class="keyword">new</span> Double(arr[j]));</span><br><span class="line">&#125;</span><br><span class="line">Int locations = Collections.indexOfSubList(list,li);</span><br><span class="line">System.out.println(“===”+ locations);</span><br><span class="line"><span class="comment">//结果 1</span></span><br></pre></td></tr></table></figure>
-<p>10） Rotate<br>根据指定的距离循环移动指定列表中的元素<br>Collections.rotate（list，-1）；<br>如果是负数，则正向移动，正数则方向移动<br>double array[] = {112, 111, 23, 456, 231 };<br>List list = new ArrayList();<br>for (int i = 0; i &lt; array.length; i++) {<br>list.add(new Double(array[i]));<br>}<br>Collections.rotate(list,-1);<br>for (int i = 0; i<br>System.out.println(“list[“ + i + “]=” + list.get(i));<br>}<br>//结果：111,23,456,231,112<br>11)static int binarySearch(List list,Object key)<br>   使用二分搜索查找key对象的索引值，因为使用的二分查找，所以前提是必须有序。<br>12)static Object max(Collection coll)<br>   根据元素自然顺序，返回集合中的最大元素<br>13)static Object max(Collection coll,Compare comp)<br>   根据Comparator指定的顺序，返回给定集合中的最小元素<br>14)static Object min(Collection coll)<br>   根据元素自然顺序，返回集合中的最大元素<br>15)static Object min(Collection coll,Compare comp)<br>   根据Comparator指定的顺序，返回给定集合中的最小元素<br>16）static void fill(List list,Object obj)<br>   使用指定元素替换指定集合中的所有元素<br>17）static int frequency(Collection c,Object o)<br>   返回指定元素在集合中出现在次数<br>18）static int indexOfSubList(List source, List target)<br>   返回子List对象在父List对象中第一次出现的位置索引； 如果父List中没有出现这样的子List，则返回-1<br>19）static int lastIndexOfSubList(List source,List target)<br>   返回子List对象在父List对象中最后一次出现的位置索引，如果父List中没有出现这样的子List，刚返回-1<br>20）static boolean replaceAll(List list,Object oldVal,Object newVal)<br>  使用一个新值newVal替换List对象所有旧值oldVal<br>21）synchronizedXXX(new XXX)<br>      Collections类为集合类们提供的同步控制方法</p>
-<p>public class SynchronizedTest<br>{<br>      public static void main(String[] args){<br>            Collection collection = Collections.synchronizedCollections(new ArrayList());<br>            List list = Collections.synchronizedList(new ArrayList());<br>            Set s = Collections.synchronizedSet(new HashSet());<br>            Map s = Collections.synchronizedMap(new HashMap()):<br>      }<br>}<br>22)emptyXXX()<br>   返回一个空的、不可变的集合对象，此处的集合既可以是List，也可以是Set,还可以是Map。<br>23）singletonXXX()<br>   返回一个只包含指定对象（只有一个或一项元素）的、不可变的集合对象，此处集合既可以是List,也可以是Set,还可以是Map。<br>24）unmodificableXXX()<br>   指定返回集合对象的不可变视图，此处的集合既可以是Lsit,也可以是Set,Map</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/Collections/" data-id="cioefljhh001gusdgksugv4e7" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/ListIterator/" data-id="cioega3ke001b8cdgbyag4rmb" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -656,7 +641,7 @@ public class TestOverriding extends Base
   <div class="widget-wrap">
     <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
     </div>
   </div>
 
@@ -666,7 +651,7 @@ public class TestOverriding extends Base
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
+      <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-堆排序/" style="font-size: 10px;">算法-堆排序</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-归并排序/" style="font-size: 10px;">算法-归并排序</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
     </div>
   </div>
 
@@ -688,23 +673,23 @@ public class TestOverriding extends Base
       <ul>
         
           <li>
-            <a href="/2016/05/19/copy/">浅拷贝和深拷贝</a>
+            <a href="/2016/05/19/heapSort/heapSort/">堆排序</a>
           </li>
         
           <li>
-            <a href="/2016/05/19/RTTI-2/">RTTI总结</a>
+            <a href="/2016/05/19/mergeSort/mergesort/">归并排序</a>
           </li>
         
           <li>
-            <a href="/2016/05/19/RTTI-1/">初识RTTI</a>
+            <a href="/2016/05/19/The base of java/copy/">浅拷贝和深拷贝</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/The base of java/Override-and-Overload/">Override and Overload</a>
+            <a href="/2016/05/19/The base of java/RTTI-2/">RTTI总结</a>
           </li>
         
           <li>
-            <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
+            <a href="/2016/05/19/The base of java/RTTI-1/">初识RTTI</a>
           </li>
         
       </ul>
