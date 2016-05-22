@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,89 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-水题/hdu-5641" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/12/水题/hdu-5641/" class="article-date">
+  <time datetime="2016-05-12T10:14:36.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/水题/hdu-5641/">hdu 5641</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://i3.buimg.com/c44866afaba70503.png" alt="tu"></p>
+<p>Hint<br>对于第一组数据，1 到 3 跳过了路径上的点 2，所以不合法。</p>
+<p>对于第二组数据，1 到 3 时点 2 已经被经过了，所以合法。</p>
+<p>对于第三组数据,8→1→6→7 路径均没有中间点，所以合法。</p>
+<ul>
+<li>直接模拟</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">bool</span> mp[<span class="number">10</span>][<span class="number">10</span>] = &#123;<span class="literal">false</span>&#125;, mk[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">9</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t, k;<span class="comment">//下面这个预处理代表这几个键之间有键值，例如mp[1][3],要想13合法，就必须键值访问过mk[(a[i - 1] + a[i]) &gt;&gt; 1] == 1</span></span><br><span class="line">    mp[<span class="number">1</span>][<span class="number">3</span>] = mp[<span class="number">3</span>][<span class="number">1</span>] = mp[<span class="number">1</span>][<span class="number">7</span>] = mp[<span class="number">7</span>][<span class="number">1</span>] = mp[<span class="number">1</span>][<span class="number">9</span>] = mp[<span class="number">9</span>][<span class="number">1</span>] = mp[<span class="number">2</span>][<span class="number">8</span>] = mp[<span class="number">8</span>][<span class="number">2</span>] =</span><br><span class="line">    mp[<span class="number">3</span>][<span class="number">7</span>] = mp[<span class="number">7</span>][<span class="number">3</span>] = mp[<span class="number">3</span>][<span class="number">9</span>] = mp[<span class="number">9</span>][<span class="number">3</span>] = mp[<span class="number">4</span>][<span class="number">6</span>] = mp[<span class="number">6</span>][<span class="number">4</span>] = mp[<span class="number">7</span>][<span class="number">9</span>] = mp[<span class="number">9</span>][<span class="number">7</span>] = <span class="literal">true</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(mk, <span class="literal">false</span>, <span class="keyword">sizeof</span>(mk));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;k, a);       <span class="comment">//吃回车，用到了a数组的第一个元素</span></span><br><span class="line">        <span class="keyword">if</span> (k &lt; <span class="number">4</span> || a[<span class="number">0</span>] &lt; <span class="number">1</span> || a[<span class="number">0</span>] &gt; <span class="number">9</span>)</span><br><span class="line">            mk[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            mk[a[<span class="number">0</span>]] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, a + i);<span class="comment">//第一个数是合法的且在[1,9]中且没访问过,且(a[i-1]和a[i]之间没有键值或有键值且访问过)</span></span><br><span class="line">            <span class="keyword">if</span> (!mk[<span class="number">0</span>] &amp;&amp; a[i] &gt; <span class="number">0</span> &amp;&amp; a[i] &lt;= <span class="number">9</span> &amp;&amp; !mk[a[i]] &amp;&amp; (!mp[a[i - <span class="number">1</span>]][a[i]] || mk[(a[i - <span class="number">1</span>] + a[i]) &gt;&gt; <span class="number">1</span>]))</span><br><span class="line">                mk[a[i]] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                mk[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(mk[<span class="number">0</span>] ? <span class="string">"invalid"</span> : <span class="string">"valid"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/12/水题/hdu-5641/" data-id="cioi3thpu00ab7kdg2xudjm8n" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模拟/">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-水题/ZOJ-3878" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/12/水题/ZOJ-3878/" class="article-date">
+  <time datetime="2016-05-12T09:17:17.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/水题/ZOJ-3878/">ZOJ 3878</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> str1[]= &#123;<span class="string">"-=_+qwertyuiop[]QWERTYUIOP&#123;&#125;asdfghjkl;'ASDFGHJKL:\"zxcvbnm,./ZXCVBNM&lt;&gt;?"</span>&#125;;</span><br><span class="line"><span class="keyword">char</span> str2[]= &#123;<span class="string">"[]&#123;&#125;',.pyfgcrl/=\"&lt;&gt;PYFGCRL?+aoeuidhtns-AOEUIDHTNS_;qjkxbmwvz:QJKXBMWVZ"</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ch;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">char</span>, <span class="keyword">char</span>&gt; mp;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(str1);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</span><br><span class="line">        mp[str1[i]] = str2[i];</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;ch) == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!mp[ch])</span><br><span class="line">            <span class="built_in">putchar</span>(ch);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">putchar</span>(mp[ch]);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3878/" data-id="cioi3thpr00a77kdgrtnq5y2d" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模拟/">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-水题/ZOJ-3876" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -91,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3876/" data-id="cioi2zxw3009zzgdgei5ec4t8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3876/" data-id="cioi3thpm009z7kdghcj6njop" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
@@ -132,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/12/常用/ri-qi-2/" data-id="cioi2zxut009azgdg3grgpctl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/常用/ri-qi-2/" data-id="cioi3thp300987kdg8loh79cc" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
@@ -170,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/12/常用/ri-qi/" data-id="cioi2zxud0096zgdg533ocw47" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/常用/ri-qi/" data-id="cioi3thp6009c7kdgnwn528iq" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
@@ -217,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/12/常用/excel-ji-qiao/" data-id="cioi2zxu0008zzgdgp7i95cpa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/常用/excel-ji-qiao/" data-id="cioi3thoz00937kdg4bwpxypr" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常用/">常用</a></li></ul>
@@ -257,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3875/" data-id="cioi2zxw1009xzgdgt2d411t8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3875/" data-id="cioi3thpo00a27kdg0qit2133" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模拟/">模拟</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
@@ -316,7 +399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3872/" data-id="cioi2zxvu009uzgdglt2jwhep" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/12/水题/ZOJ-3872/" data-id="cioi3thpq00a47kdgl4li9cv5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li></ul>
@@ -356,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/11/水题/shuiti/" data-id="cioi2zxwk00a8zgdg0ogd6ftk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/11/水题/shuiti/" data-id="cioi3thpw00ad7kdgyp345jwx" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
@@ -397,97 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/11/水题/csu-1270/" data-id="cioi2zxw800a4zgdgjinqm3od" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-水题/BJFU-1549" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/11/水题/BJFU-1549/" class="article-date">
-  <time datetime="2016-05-11T15:49:13.000Z" itemprop="datePublished">2016-05-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/11/水题/BJFU-1549/">BJFU 1549</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="描述"><a href="#描述" class="headerlink" title="描述:"></a>描述:</h2><p>There are N children standing in a line. Each child is assigned a rating value.<br>You are giving candies to these children subjected to the following requirements:<br>(1) Each child must have at least one candy.<br>(2) Children with a higher rating get more candies than their neighbors.<br>What is the minimum candies you must give?</p>
-<h2 id="输入："><a href="#输入：" class="headerlink" title="输入："></a>输入：</h2><p>The input consists of multiple test cases.<br>The first line of each test case has a number N, which indicates the number of students.<br>Then there are N students rating values, 1 &lt;= N &lt;= 300, 1 &lt;= values &lt;= 10000.</p>
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出:"></a>输出:</h2><p>The minimum number of candies you must give.</p>
-<h2 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入:"></a>样例输入:</h2><p>[plain] view plain copy print?<br>5<br>1 2 3 4 5<br>5<br>1 3 5 3 6 </p>
-<h2 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出:"></a>样例输出:</h2><p>[plain] view plain copy print?<br>15<br>9  </p>
-<h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>求最少要发多少糖果，一群小孩站成一排，每个小孩手里有一个数，数大的小孩要比相邻<br>的数小的小孩拿的糖果数多些，每个人手里至少一个糖果</p>
-<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>三种情况： 比左边大，比右边大，比左、右都大</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">int</span> b[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(arr, <span class="number">0</span>, <span class="keyword">sizeof</span>(arr));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            b[i] = <span class="number">1</span>;</span><br><span class="line">        b[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;arr[i]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] &gt; arr[i - <span class="number">1</span>])&#123;</span><br><span class="line">                b[i] = b[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] &lt; arr[i - <span class="number">1</span>])&#123;</span><br><span class="line">                b[i - <span class="number">1</span>] = b[i] + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[i] &gt; arr[i + <span class="number">1</span>] &amp;&amp; arr[i] &gt; arr[i - <span class="number">1</span>])</span><br><span class="line">                b[i] = max(b[i + <span class="number">1</span>] + <span class="number">1</span>, b[i - <span class="number">1</span>] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            sum += b[i];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/11/水题/BJFU-1549/" data-id="cioi2zxvm009nzgdgdzo9121t" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-水题/ZOJ-3869" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/11/水题/ZOJ-3869/" class="article-date">
-  <time datetime="2016-05-11T15:23:21.000Z" itemprop="datePublished">2016-05-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/11/水题/ZOJ-3869/">ZOJ 3869</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>　　输出出现次数最多的数如果有两个或两个以上数量相等的，就输出Nobody</p>
-<ul>
-<li>快排</li>
-<li>定义结构体记录下标和出现次数</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Node&#123;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> counts;</span><br><span class="line">&#125;node[<span class="number">1010</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(Node a, Node b)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return a.counts &gt; b.counts;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T, n, tmp;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">memset</span>(node, <span class="number">0</span>, <span class="keyword">sizeof</span>(node));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;tmp);</span><br><span class="line">            node[tmp].id = tmp;</span><br><span class="line">            node[tmp].counts++;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(node, node + <span class="number">1010</span>, cmp);</span><br><span class="line">        <span class="comment">//printf("%d %d\n", node[0].counts, node[1].counts);</span></span><br><span class="line">        <span class="keyword">if</span>(node[<span class="number">0</span>].counts == node[<span class="number">1</span>].counts)</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Nobody\n"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, node[<span class="number">0</span>].id);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/11/水题/ZOJ-3869/" data-id="cioi2zxvo009pzgdgpox8m466" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/11/水题/csu-1270/" data-id="cioi3thpt00a97kdg7oiw2w31" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/水题/">水题</a></li></ul>
@@ -513,7 +506,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-扩展欧几里得/">算法-数论-扩展欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
     </div>
@@ -523,7 +516,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-堆排序/" style="font-size: 10px;">算法-堆排序</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-归并排序/" style="font-size: 10px;">算法-归并排序</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-扩展欧几里得/" style="font-size: 10px;">算法-数论-扩展欧几里得</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
     </div>
@@ -542,9 +535,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/22/Override-hashCode-and-equals/">重写 hashCode() and equals()</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/22/boxing-and-unboxing/">深入探索装箱和拆箱的原理</a>
+          </li>
         
           <li>
             <a href="/2016/05/22/enum-1/">初探枚举类型</a>
@@ -556,14 +557,6 @@
         
           <li>
             <a href="/2016/05/22/iterator/">迭代器</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/22/interface-and-abstract-class/">抽象类和接口</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/22/for-in-java/">java 循环的3种方式</a>
           </li>
         
       </ul>
@@ -579,7 +572,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

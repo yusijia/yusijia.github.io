@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,140 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Override-hashCode-and-equals" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/22/Override-hashCode-and-equals/" class="article-date">
+  <time datetime="2016-05-22T04:43:30.000Z" itemprop="datePublished">2016-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/22/Override-hashCode-and-equals/">重写 hashCode() and equals()</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考： <a href="http://blog.csdn.net/benjaminzhang666/article/details/9468605" target="_blank" rel="external">http://blog.csdn.net/benjaminzhang666/article/details/9468605</a></p>
+<h2 id="1-问题：内容相同但是地址不同的自定义对象如何避免重复的内容添加到HashSet中？"><a href="#1-问题：内容相同但是地址不同的自定义对象如何避免重复的内容添加到HashSet中？" class="headerlink" title="[1]. 问题：内容相同但是地址不同的自定义对象如何避免重复的内容添加到HashSet中？"></a>[1]. 问题：内容相同但是地址不同的自定义对象如何避免重复的内容添加到HashSet中？</h2><h2 id="【解决办法】必须重写hashCode和equals这两个方法"><a href="#【解决办法】必须重写hashCode和equals这两个方法" class="headerlink" title="【解决办法】必须重写hashCode和equals这两个方法"></a>【解决办法】必须重写hashCode和equals这两个方法</h2><h2 id="hashCode-的最重要的是："><a href="#hashCode-的最重要的是：" class="headerlink" title="hashCode()的最重要的是："></a>hashCode()的最重要的是：</h2><p><strong>无论何时，对同一个对象调用hashCode()都应该生成同于的hash值</strong></p>
+<p><strong>hashCode()必须基于对象的内容生成散列码，散列码不必是独一无二的，但是通过hashCode()和equals()必须能够完全确定对象的身份。</strong></p>
+<p>重写equals方法的注意事项</p>
+<h2 id="一。-在重写equals方法时，要注意满足离散数学上的特性"><a href="#一。-在重写equals方法时，要注意满足离散数学上的特性" class="headerlink" title="一。 在重写equals方法时，要注意满足离散数学上的特性"></a>一。 在重写equals方法时，要注意满足离散数学上的特性</h2><ul>
+<li><p><strong>自反性：</strong>对任意引用值X，x.equals(x)的返回值一定为true.</p>
+</li>
+<li><p><strong>对称性：</strong>对于任何引用值x,y,当且仅当y.equals(x)返回值为true时，x.equals(y)的返回值一定为true;</p>
+</li>
+<li><p><strong>传递性：</strong>如果x.equals(y)=true, y.equals(z)=true,则x.equals(z)=true</p>
+</li>
+<li><p><strong>一致性：</strong>如果参与比较的对象没任何改变，则对象比较的结果也不应该有任何改变</p>
+</li>
+<li><p><strong>非空性：</strong>任何非空的引用值X，x.equals(null)的返回值一定为false</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    if (this.getClass() != obj.getClass()) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;*/</span></span><br><span class="line">    <span class="keyword">if</span>(!(obj <span class="keyword">instanceof</span> People))</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     </span><br><span class="line">    People p = (People)obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name.equals(p.name)</span><br><span class="line">        &amp;&amp; <span class="keyword">this</span>.age == p.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二。-在重写equals方法时，还要顺手把-hashCode方法一起重写了。"><a href="#二。-在重写equals方法时，还要顺手把-hashCode方法一起重写了。" class="headerlink" title="二。 在重写equals方法时，还要顺手把 hashCode方法一起重写了。"></a>二。 在重写equals方法时，还要顺手把 hashCode方法一起重写了。</h2><p>　　这一点主要是考虑和集合类协同工作的需要。一般集合为加快存取速度，通常使用类hashtable的方式存取对象，</p>
+<p>　　hashCode() &amp;&amp; equals() 则是判断待查找元素与集合中某个元素相等的依据。 而java中默认的hashCode是由对象的内存地址生成的, 如果重写了equals 而没重写 hashCode， 则会造成“A和B相等，A加入集合后，用B查询集合却查不到”的悖论。</p>
+<h2 id="三。重写equals方法的一般步骤："><a href="#三。重写equals方法的一般步骤：" class="headerlink" title="三。重写equals方法的一般步骤："></a>三。重写equals方法的一般步骤：</h2><ol>
+<li>使用==操作符检查“实参是否为指向对象的一个引用”。 </li>
+<li>使用instanceof操作符检查“实参是否为正确的类型”。 </li>
+<li>把实参转换到正确的类型。 </li>
+<li><p>对于该类中每一个“关键”域，检查实参中的域与当前对象中对应的域值是否匹 配。</p>
+</li>
+<li><p>当你编写完成了equals方法之后，应该问自己三个问题：它是否是对称的、传<br>递的、一致的？(其他两个特性通常会自行满足)如果答案是否定的，那么请找到<br>这些特性未能满足的原因，再修改equals方法的代码。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/22/Override-hashCode-and-equals/" data-id="cioi3thdf00007kdg0yhmxah2" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-boxing-and-unboxing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/22/boxing-and-unboxing/" class="article-date">
+  <time datetime="2016-05-22T04:30:57.000Z" itemprop="datePublished">2016-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/22/boxing-and-unboxing/">深入探索装箱和拆箱的原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转：<a href="http://www.cnblogs.com/dolphin0520/p/3780005.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3780005.html</a></p>
+<h2 id="一-什么是装箱？什么是拆箱？"><a href="#一-什么是装箱？什么是拆箱？" class="headerlink" title="一.什么是装箱？什么是拆箱？"></a>一.什么是装箱？什么是拆箱？</h2><p>　　Java为每种基本数据类型都提供了对应的包装器类型，至于为什么会为每种基本数据类型提供包装器类型在此不进行阐述，有兴趣的朋友可以查阅相关资料。在Java SE5之前，如果要生成一个数值为10的Integer对象，必须这样进行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer i = <span class="keyword">new</span> Integer(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>　　而在从Java SE5开始就提供了自动装箱的特性，如果要生成一个数值为10的Integer对象，只需要这样就可以了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer i = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>　　这个过程中会自动根据数值创建对应的 Integer对象，这就是装箱。<br>　　那什么是拆箱呢？顾名思义，跟装箱对应，就是自动将包装器类型转换为基本数据类型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer i = <span class="number">10</span>;  <span class="comment">//装箱</span></span><br><span class="line"><span class="keyword">int</span> n = i;   <span class="comment">//拆箱</span></span><br></pre></td></tr></table></figure></p>
+<p>　　简单一点说，<strong>装箱就是  自动将基本数据类型转换为包装器类型；拆箱就是  自动将包装器类型转换为基本数据类型。</strong><br>　　下表是基本数据类型对应的包装器类型：</p>
+<p>int（4字节）    Integer<br>byte（1字节）    Byte<br>short（2字节）    Short<br>long（8字节）    Long<br>float（4字节）    Float<br>double（8字节）    Double<br>char（2字节）    Character<br>boolean（未定）    Boolean</p>
+<h2 id="二．装箱和拆箱是如何实现的？"><a href="#二．装箱和拆箱是如何实现的？" class="headerlink" title="二．装箱和拆箱是如何实现的？"></a>二．装箱和拆箱是如何实现的？</h2><p>上一小节了解装箱的基本概念之后，这一小节来了解一下装箱和拆箱是如何实现的。<br>　　我们就以Interger类为例，下面看一段代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        Integer i = <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> n = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="反编译class文件之后得到如下内容："><a href="#反编译class文件之后得到如下内容：" class="headerlink" title="反编译class文件之后得到如下内容："></a>反编译class文件之后得到如下内容：</h2><p><img src="http://i2.buimg.com/02d5369103b3b999.png" alt=""><br>　　<br>　　<strong>从反编译得到的字节码内容可以看出，在装箱的时候自动调用的是Integer的valueOf(int)方法。(返回一个表示指定的 int 值的 Integer 实例。)</strong></p>
+<p>   <strong>而在拆箱的时候自动调用的是Integer的intValue方法(以 int 类型返回该 Integer 的值。</strong></p>
+<p>　　其他的也类似，比如Double、Character，不相信的朋友可以自己手动尝试一下。<br>　　因此可以用一句话总结装箱和拆箱的实现过程：<br>　　装箱过程是通过调用包装器的valueOf方法实现的，而拆箱过程是通过调用包装器的 xxxValue方法实现的。（xxx代表对应的基本数据类型）。</p>
+<h2 id="三．面试中的相关问题"><a href="#三．面试中的相关问题" class="headerlink" title="三．面试中的相关问题"></a>三．面试中的相关问题</h2><p>虽然大多数人对装箱和拆箱的概念都清楚，但是在面试和笔试中遇到了与装箱和拆箱的问题却不一定会答得上来。下面列举一些常见的与装箱/拆箱有关的面试题。<br>1.下面这段代码的输出结果是什么？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	     </span><br><span class="line">	    Integer i1 = <span class="number">100</span>;</span><br><span class="line">	    Integer i2 = <span class="number">100</span>;</span><br><span class="line">	    Integer i3 = <span class="number">200</span>;</span><br><span class="line">	    Integer i4 = <span class="number">200</span>;</span><br><span class="line">	     </span><br><span class="line">	    System.out.println(i1==i2);</span><br><span class="line">	    System.out.println(i3==i4);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　也许有些朋友会说都会输出false，或者也有朋友会说都会输出true。但是事实上输出结果是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br></pre></td></tr></table></figure></p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>　　为什么会出现这样的结果？输出结果表明i1和i2指向的是同一个对象，而i3和i4指向的是不同的对象。此时只需一看源码便知究竟，下面这段代码是Integer的valueOf方法的具体实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= -<span class="number">128</span> &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">            <span class="keyword">return</span> IntegerCache.cache[i + <span class="number">128</span>];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">而其中IntegerCache类的实现为：</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">IntegerCache</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> high;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">final</span> Integer cache[];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">static</span> &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> low = -<span class="number">128</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// high value may be configured by property</span></span><br><span class="line">            <span class="keyword">int</span> h = <span class="number">127</span>;</span><br><span class="line">            <span class="keyword">if</span> (integerCacheHighPropValue != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">// Use Long.decode here to avoid invoking methods that</span></span><br><span class="line">                <span class="comment">// require Integer's autoboxing cache to be initialized</span></span><br><span class="line">                <span class="keyword">int</span> i = Long.decode(integerCacheHighPropValue).intValue();</span><br><span class="line">                i = Math.max(i, <span class="number">127</span>);</span><br><span class="line">                <span class="comment">// Maximum array size is Integer.MAX_VALUE</span></span><br><span class="line">                h = Math.min(i, Integer.MAX_VALUE - -low);</span><br><span class="line">            &#125;</span><br><span class="line">            high = h;</span><br><span class="line"></span><br><span class="line">            cache = <span class="keyword">new</span> Integer[(high - low) + <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">int</span> j = low;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; cache.length; k++)</span><br><span class="line">                cache[k] = <span class="keyword">new</span> Integer(j++);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">IntegerCache</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>　　<strong>从这2段代码可以看出，在通过valueOf方法创建Integer对象的时候，如果数值在[-128,127]之间，便返回指向IntegerCache.cache中已经存在的对象的引用；否则创建一个新的Integer对象。<br>上面的代码中i1和i2的数值为100，因此会直接从cache中取已经存在的对象，所以i1和i2指向的是同一个对象，而i3和i4则是分别指向不同的对象。</strong></p>
+<h2 id="2-下面这段代码的输出结果是什么？"><a href="#2-下面这段代码的输出结果是什么？" class="headerlink" title="2.下面这段代码的输出结果是什么？"></a>2.下面这段代码的输出结果是什么？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        Double i1 = <span class="number">100.0</span>;</span><br><span class="line">        Double i2 = <span class="number">100.0</span>;</span><br><span class="line">        Double i3 = <span class="number">200.0</span>;</span><br><span class="line">        Double i4 = <span class="number">200.0</span>;</span><br><span class="line">         </span><br><span class="line">        System.out.println(i1==i2);</span><br><span class="line">        System.out.println(i3==i4);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　也许有的朋友会认为跟上面一道题目的输出结果相同，但是事实上却不是。实际输出结果为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">false</span><br></pre></td></tr></table></figure></p>
+<h2 id="分析：-1"><a href="#分析：-1" class="headerlink" title="分析："></a>分析：</h2><p>　　至于具体为什么，读者可以去查看Double类的valueOf的实现。<br>　　<strong>在这里只解释一下为什么Double类的valueOf方法会采用与Integer类的valueOf方法不同的实现。很简单：在某个范围内的整型数值的个数是有限的，而浮点数却不是。</strong><br>　　注意，Integer、Short、Byte、Character、Long这几个类的valueOf方法的实现是类似的。<br>　　　　　Double、Float的valueOf方法的实现是类似的。</p>
+<h2 id="3-下面这段代码输出结果是什么："><a href="#3-下面这段代码输出结果是什么：" class="headerlink" title="3.下面这段代码输出结果是什么："></a>3.下面这段代码输出结果是什么：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        Boolean i1 = <span class="keyword">false</span>;</span><br><span class="line">        Boolean i2 = <span class="keyword">false</span>;</span><br><span class="line">        Boolean i3 = <span class="keyword">true</span>;</span><br><span class="line">        Boolean i4 = <span class="keyword">true</span>;</span><br><span class="line">         </span><br><span class="line">        System.out.println(i1==i2);</span><br><span class="line">        System.out.println(i3==i4);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果是：</span><br><span class="line"><span class="keyword">true</span></span><br><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>　　至于为什么是这个结果，同样地，看了Boolean类的源码也会一目了然。<br>下面是Boolean的valueOf方法的具体实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Boolean <span class="title">valueOf</span><span class="params">(<span class="keyword">boolean</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (b ? TRUE : FALSE);</span><br><span class="line">    &#125;</span><br><span class="line">而其中的 TRUE 和FALSE又是什么呢？在Boolean中定义了<span class="number">2</span>个静态成员属性：</span><br><span class="line"> <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Boolean TRUE = <span class="keyword">new</span> Boolean(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** </span><br><span class="line">     * The Boolean object corresponding to the primitive </span><br><span class="line">     * value false. </span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Boolean FALSE = <span class="keyword">new</span> Boolean(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>至此，大家应该明白了为何上面输出的结果都是true了。</p>
+<h2 id="4-谈谈Integer-i-new-Integer-xxx-和Integer-i-xxx-这两种方式的区别。"><a href="#4-谈谈Integer-i-new-Integer-xxx-和Integer-i-xxx-这两种方式的区别。" class="headerlink" title="4.谈谈Integer i = new Integer(xxx)和Integer i =xxx;这两种方式的区别。"></a>4.谈谈Integer i = new Integer(xxx)和Integer i =xxx;这两种方式的区别。</h2><p>　　当然，这个题目属于比较宽泛类型的。但是要点一定要答上，我总结一下主要有以下这两点区别：<br>　　1）第一种方式不会触发自动装箱的过程；而第二种方式会触发；<br>2）在执行效率和资源占用上的区别。第二种方式的执行效率和资源占用在一般性情况下要优于第一种情况（注意这并不是绝对的）。</p>
+<h2 id="5-下面程序的输出结果是什么？"><a href="#5-下面程序的输出结果是什么？" class="headerlink" title="5.下面程序的输出结果是什么？"></a>5.下面程序的输出结果是什么？</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	     </span><br><span class="line">	    Integer a = <span class="number">1</span>;</span><br><span class="line">	    Integer b = <span class="number">2</span>;</span><br><span class="line">	    Integer c = <span class="number">3</span>;</span><br><span class="line">	    Integer d = <span class="number">3</span>;</span><br><span class="line">	    Integer e = <span class="number">321</span>;</span><br><span class="line">	    Integer f = <span class="number">321</span>;</span><br><span class="line">	    Long g = <span class="number">3L</span>;</span><br><span class="line">	    Long h = <span class="number">2L</span>;</span><br><span class="line">	     </span><br><span class="line">	    System.out.println(c==d);</span><br><span class="line">	    System.out.println(e==f);</span><br><span class="line">	    System.out.println(c==(a+b));</span><br><span class="line">	    System.out.println(c.equals(a+b));</span><br><span class="line">	    System.out.println(g==(a+b));</span><br><span class="line">	    System.out.println(g.equals(a+b));</span><br><span class="line">	    System.out.println(g.equals(a+h));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　先别看输出结果，读者自己想一下这段代码的输出结果是什么。这里面需要注意的是：<br><strong>当 “==”运算符的两个操作数都是 包装器类型的引用，则是比较指向的是否是同一个对象，<br>而如果其中有一个操作数是表达式（即包含算术运算）则比较的是数值（即会触发自动拆箱的过程）。</strong></p>
+<p><strong>另外，对于包装器类型，equals方法并不会进行类型转换。</strong></p>
+<p>明白了这2点之后，上面的输出结果便一目了然：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">true</span><br><span class="line">false</span><br><span class="line">true</span><br><span class="line">true</span><br><span class="line">true</span><br><span class="line">false</span><br><span class="line">true</span><br></pre></td></tr></table></figure></p>
+<p>　　第一个和第二个输出结果没有什么疑问。第三句由于  a+b包含了算术运算，因此会触发自动拆箱过程（会调用intValue方法），因此它们比较的是数值是否相等。而对于c.equals(a+b)会先触发自动拆箱过程，再触发自动装箱过程，也就是说a+b，会先各自调用intValue方法，得到了加法运算后的数值之后，便调用Integer.valueOf方法，再进行equals比较。同理对于后面的也是这样，不过要注意倒数第二个和最后一个输出的结果（如果数值是int类型的，装箱过程调用的是Integer.valueOf；如果是long类型的，装箱调用的Long.valueOf方法）。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/22/boxing-and-unboxing/" data-id="cioi3thdl00017kdg4vfot3d4" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-enum-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -92,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/enum-1/" data-id="cioi2zxdd0003zgdgpc3qaoa9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/enum-1/" data-id="cioi3thdu00067kdgzjsil1f7" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -131,7 +265,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/class-and-extends/" data-id="cioi2zxct0000zgdgw441wukn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/class-and-extends/" data-id="cioi3thdr00037kdg484ymst1" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -177,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/iterator/" data-id="cioi2zxew000fzgdgdts109tl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/iterator/" data-id="cioi3theh000j7kdgx0cki8b8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -238,7 +372,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/interface-and-abstract-class/" data-id="cioi2zxea000dzgdgf0d6obxr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/interface-and-abstract-class/" data-id="cioi3thef000h7kdguxreo3at" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -277,7 +411,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/for-in-java/" data-id="cioi2zxdy000bzgdgpp6l7rno" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/for-in-java/" data-id="cioi3thed000f7kdg5g5bm343" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -339,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/access-permission/" data-id="cioi2zxd30001zgdg6hksn8ve" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/access-permission/" data-id="cioi3thds00047kdgzubcxvbt" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -386,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/final-2/" data-id="cioi2zxdr0008zgdga24gpusb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/final-2/" data-id="cioi3thea000d7kdg3cmcz258" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -437,103 +571,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/final-1/" data-id="cioi2zxdl0006zgdg0ihc588l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/22/final-1/" data-id="cioi3the1000b7kdg0j8go2t2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-equals-and" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/22/equals-and/" class="article-date">
-  <time datetime="2016-05-22T03:16:02.000Z" itemprop="datePublished">2016-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/22/equals-and/">equals方法和 ==</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考：<a href="http://www.cnblogs.com/dolphin0520/p/3592500.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3592500.html</a></p>
-<h2 id="浅谈Java中的equals和"><a href="#浅谈Java中的equals和" class="headerlink" title="浅谈Java中的equals和=="></a>浅谈Java中的equals和==</h2><p>　　在初学Java时，可能会经常碰到下面的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span> String str1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line"><span class="number">2</span> String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line"><span class="number">3</span>         </span><br><span class="line"><span class="number">4</span> System.out.println(str1==str2);</span><br><span class="line"><span class="number">5</span> System.out.println(str1.equals(str2));</span><br></pre></td></tr></table></figure></p>
-<p>　　为什么第4行和第5行的输出结果不一样？==和equals方法之间的区别是什么？如果在初学Java的时候这个问题不弄清楚，就会导致自己在以后编写代码时出现一些低级的错误。今天就来一起了解一下==和equals方法的区别之处。</p>
-<h2 id="一-关系操作符“-”到底比较的是什么？"><a href="#一-关系操作符“-”到底比较的是什么？" class="headerlink" title="一.关系操作符“==”到底比较的是什么？"></a>一.关系操作符“==”到底比较的是什么？</h2><p>　　下面这个句话是摘自《Java编程思想》一书中的原话：<br>　　“关系操作符生成的是一个boolean结果，它们计算的是操作数的值之间的关系”。<br>　　这句话看似简单，理解起来还是需要细细体会的。说的简单点，==就是用来比较值是否相等。下面先看几个例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * <span class="doctag">@param</span> args</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> m=<span class="number">3</span>;</span><br><span class="line">        </span><br><span class="line">        System.out.println(n==m);</span><br><span class="line">        </span><br><span class="line">        String str = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        </span><br><span class="line">        System.out.println(str1==str2);</span><br><span class="line">        </span><br><span class="line">        str1 = str;</span><br><span class="line">        str2 = str;</span><br><span class="line">        System.out.println(str1==str2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">输出结果为</span><br><span class="line"> <span class="keyword">true</span></span><br><span class="line"> <span class="keyword">false</span> </span><br><span class="line"> <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-<p>　　n==m结果为true，这个很容易理解，变量n和变量m存储的值都为3，肯定是相等的。而为什么str1和str2两次比较的结果不同？要理解这个其实只需要理解基本数据类型变量和非基本数据类型变量的区别。<br>　　在Java中游8种基本数据类型：<br>　　浮点型：float(4 byte), double(8 byte)<br>　　整型：byte(1 byte), short(2 byte), int(4 byte) , long(8 byte)<br>　　字符型: char(2 byte)<br>　　布尔型: boolean(JVM规范没有明确规定其所占的空间大小，仅规定其只能够取字面值”true”和”false”)<br>　　<strong>对于这8种基本数据类型的变量，变量直接存储的是“值”，因此在用关系操作符==来进行比较时，比较的就是 “值” 本身。</strong>要注意浮点型和整型都是有符号类型的，而char是无符号类型的（char类型取值范围为0~2^16-1).<br>　　也就是说比如：<br>　　int n=3;<br>　　int m=3;　<br>　　变量n和变量m都是直接存储的”3”这个数值，所以用==比较的时候结果是true。<br>　　<strong>而对于非基本数据类型的变量，在一些书籍中称作为 引用类型的变量。比如上面的str1就是引用类型的变量，引用类型的变量存储的并不是 “值”本身，而是于其关联的对象在内存中的地址。</strong>比如下面这行代码：<br>　　String str1;<br>　　这句话声明了一个引用类型的变量，此时它并没有和任何对象关联。<br>　　而 通过new String(“hello”)来产生一个对象（也称作为类String的一个实例），并将这个对象和str1进行绑定：<br>　　str1= new String(“hello”);<br>　　<strong>那么str1指向了一个对象（很多地方也把str1称作为对象的引用），此时变量str1中存储的是它指向的对象在内存中的存储地址，并不是“值”本身，也就是说并不是直接存储的字符串”hello”。这里面的引用和C/C++中的指针很类似。</strong><br>　　因此在用==对str1和str2进行第一次比较时，得到的结果是false。因此它们分别指向的是不同的对象，也就是说它们实际存储的内存地址不同。<br>　　而在第二次比较时，都让str1和str2指向了str指向的对象，那么得到的结果毫无疑问是true。</p>
-<h2 id="二-equals-比较的又是什么？"><a href="#二-equals-比较的又是什么？" class="headerlink" title="二.equals()比较的又是什么？"></a>二.equals()比较的又是什么？</h2><p>　　equals方法是基类Object中的方法，因此对于所有的继承于Object的类都会有该方法。为了更直观地理解equals方法的作用，直接看Object类中equals方法的实现。<br>　　该类的源码路径为：C:\Program Files\Java\jdk1.6.0_14的src.zip 的java.lang路径下的Object.java（视个人jdk安装路径而定）。<br>　　下面是Object类中equals方法的实现：<br>　　<br>　　很显然，在Object类中，equals方法是用来比较两个对象的引用是否相等，即是否指向同一个对象。<br>　　但是有些朋友又会有疑问了，为什么下面一段代码的输出结果是true？</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * <span class="doctag">@param</span> args</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        </span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        </span><br><span class="line">        System.out.println(str1.equals(str2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>　　要知道究竟，可以看一下String类的equals方法的具体实现，同样在该路径下，String.java为String类的实现。<br>　　下面是String类中equals方法的具体实现：</p>
-<p>　　可以看出，String类对equals方法进行了重写，用来比较指向的字符串对象所存储的字符串是否相等。<br>　　其他的一些类诸如Double，Date，Integer等，都对equals方法进行了重写用来比较指向的对象所存储的内容是否相等。</p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结</strong>：</h1><p>　　<strong>1）对于==，如果作用于基本数据类型的变量，则直接比较其存储的 “值”是否相等；<br>　　　　如果作用于引用类型的变量，则比较的是所指向的对象的地址</strong></p>
-<p>　　<strong>2）对于equals()方法，注意：equals方法不能作用于基本数据类型的变量<br>　　　　如果没有对equals方法进行重写，则比较的是引用类型的变量所指向的对象的地址；<br>　　　　诸如String、Date等类对equals方法进行了重写的话，比较的是所指向的对象的内容。</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/22/equals-and/" data-id="cioi2zxdi0004zgdg8w8318mn" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-poj-1061" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/20/poj-1061/" class="article-date">
-  <time datetime="2016-05-20T14:19:36.000Z" itemprop="datePublished">2016-05-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/20/poj-1061/">青蛙约会</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O-∩-∩-O"><a href="#今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O-∩-∩-O" class="headerlink" title="今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O(∩_∩)O~"></a>今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O(∩_∩)O~</h2><h2 id="poj1061"><a href="#poj1061" class="headerlink" title="poj1061:"></a>poj1061:</h2><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>　　两 只青蛙在网上相识了，它们聊得很开心，于是觉得很有必要见一面。它们很高兴地发现它们住在同一条纬度线上，于是它们约定各自朝西跳，直到碰面为止。可是它 们出发之前忘记了一件很重要的事情，既没有问清楚对方的特征，也没有约定见面的具体位置。不过青蛙们都是很乐观的，它们觉得只要一直朝着某个方向跳下去， 总能碰到对方的。但是除非这两只青蛙在同一时间跳到同一点上，不然是永远都不可能碰面的。为了帮助这两只乐观的青蛙，你被要求写一个程序来判断这两只青蛙 是否能够碰面，会在什么时候碰面。<br>我们把这两只青蛙分别叫做青蛙A和青蛙B，并且规定纬度线上东经0度处为原点，由东往西为正方向，单位长度1米，这样我们就得到了一条首尾相接的 数轴。设青蛙A的出发点坐标是x，青蛙B的出发点坐标是y。青蛙A一次能跳m米，青蛙B一次能跳n米，两只青蛙跳一次所花费的时间相同。纬度线总长L米。 现在要你求出它们跳了几次以后才会碰面。</p>
-<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>输入只包括一行5个整数x，y，m，n，L，其中x≠y &lt; 2000000000，0 &lt; m、n &lt; 2000000000，0 &lt; L &lt; 2100000000。<br>Output</p>
-<p>输出碰面所需要的跳跃次数，如果永远不可能碰面则输出一行”Impossible”</p>
-<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>1 2 3 4 5</p>
-<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>4</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">( <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> y )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( y == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line">    return gcd( y, x % y );</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">( <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> a, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> b, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> &amp;x, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> &amp;y )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( b == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd( b, a % b, x, y );</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t- a / b * y;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(  )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x, y, m, n, l;</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">scanf</span>( <span class="string">"%lld %lld %lld %lld %lld"</span>, &amp;x, &amp;y, &amp;m, &amp;n, &amp;l )!= EOF )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> a = n- m, b = l, c = x- y, p, q;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> d = gcd( a, b );</span><br><span class="line">        <span class="keyword">if</span>( c % d )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>( <span class="string">"Impossible"</span> );</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a /= d, b /= d, c /= d;</span><br><span class="line">        exgcd( a, b, p, q );</span><br><span class="line">        p *= c;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> t = p % b;</span><br><span class="line">        <span class="keyword">while</span>( t &lt; <span class="number">0</span> )</span><br><span class="line">        &#123;   </span><br><span class="line">            t += b; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, t );</span><br><span class="line">    &#125;</span><br><span class="line">	return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/20/poj-1061/" data-id="cioi2zxf0000hzgdg5rumjfbg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-数论-扩展欧几里得/">算法-数论-扩展欧几里得</a></li></ul>
 
     </footer>
   </div>
@@ -556,7 +597,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-扩展欧几里得/">算法-数论-扩展欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
     </div>
@@ -566,7 +607,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-堆排序/" style="font-size: 10px;">算法-堆排序</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-归并排序/" style="font-size: 10px;">算法-归并排序</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-扩展欧几里得/" style="font-size: 10px;">算法-数论-扩展欧几里得</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
     </div>
@@ -585,9 +626,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/22/Override-hashCode-and-equals/">重写 hashCode() and equals()</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/22/boxing-and-unboxing/">深入探索装箱和拆箱的原理</a>
+          </li>
         
           <li>
             <a href="/2016/05/22/enum-1/">初探枚举类型</a>
@@ -599,14 +648,6 @@
         
           <li>
             <a href="/2016/05/22/iterator/">迭代器</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/22/interface-and-abstract-class/">抽象类和接口</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/22/for-in-java/">java 循环的3种方式</a>
           </li>
         
       </ul>
@@ -622,7 +663,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

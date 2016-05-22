@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -63,6 +63,99 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-equals-and" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/22/equals-and/" class="article-date">
+  <time datetime="2016-05-22T03:16:02.000Z" itemprop="datePublished">2016-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/22/equals-and/">equals方法和 ==</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考：<a href="http://www.cnblogs.com/dolphin0520/p/3592500.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3592500.html</a></p>
+<h2 id="浅谈Java中的equals和"><a href="#浅谈Java中的equals和" class="headerlink" title="浅谈Java中的equals和=="></a>浅谈Java中的equals和==</h2><p>　　在初学Java时，可能会经常碰到下面的代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span> String str1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line"><span class="number">2</span> String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line"><span class="number">3</span>         </span><br><span class="line"><span class="number">4</span> System.out.println(str1==str2);</span><br><span class="line"><span class="number">5</span> System.out.println(str1.equals(str2));</span><br></pre></td></tr></table></figure></p>
+<p>　　为什么第4行和第5行的输出结果不一样？==和equals方法之间的区别是什么？如果在初学Java的时候这个问题不弄清楚，就会导致自己在以后编写代码时出现一些低级的错误。今天就来一起了解一下==和equals方法的区别之处。</p>
+<h2 id="一-关系操作符“-”到底比较的是什么？"><a href="#一-关系操作符“-”到底比较的是什么？" class="headerlink" title="一.关系操作符“==”到底比较的是什么？"></a>一.关系操作符“==”到底比较的是什么？</h2><p>　　下面这个句话是摘自《Java编程思想》一书中的原话：<br>　　“关系操作符生成的是一个boolean结果，它们计算的是操作数的值之间的关系”。<br>　　这句话看似简单，理解起来还是需要细细体会的。说的简单点，==就是用来比较值是否相等。下面先看几个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * <span class="doctag">@param</span> args</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> n=<span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> m=<span class="number">3</span>;</span><br><span class="line">        </span><br><span class="line">        System.out.println(n==m);</span><br><span class="line">        </span><br><span class="line">        String str = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        </span><br><span class="line">        System.out.println(str1==str2);</span><br><span class="line">        </span><br><span class="line">        str1 = str;</span><br><span class="line">        str2 = str;</span><br><span class="line">        System.out.println(str1==str2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">输出结果为</span><br><span class="line"> <span class="keyword">true</span></span><br><span class="line"> <span class="keyword">false</span> </span><br><span class="line"> <span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+<p>　　n==m结果为true，这个很容易理解，变量n和变量m存储的值都为3，肯定是相等的。而为什么str1和str2两次比较的结果不同？要理解这个其实只需要理解基本数据类型变量和非基本数据类型变量的区别。<br>　　在Java中游8种基本数据类型：<br>　　浮点型：float(4 byte), double(8 byte)<br>　　整型：byte(1 byte), short(2 byte), int(4 byte) , long(8 byte)<br>　　字符型: char(2 byte)<br>　　布尔型: boolean(JVM规范没有明确规定其所占的空间大小，仅规定其只能够取字面值”true”和”false”)<br>　　<strong>对于这8种基本数据类型的变量，变量直接存储的是“值”，因此在用关系操作符==来进行比较时，比较的就是 “值” 本身。</strong>要注意浮点型和整型都是有符号类型的，而char是无符号类型的（char类型取值范围为0~2^16-1).<br>　　也就是说比如：<br>　　int n=3;<br>　　int m=3;　<br>　　变量n和变量m都是直接存储的”3”这个数值，所以用==比较的时候结果是true。<br>　　<strong>而对于非基本数据类型的变量，在一些书籍中称作为 引用类型的变量。比如上面的str1就是引用类型的变量，引用类型的变量存储的并不是 “值”本身，而是于其关联的对象在内存中的地址。</strong>比如下面这行代码：<br>　　String str1;<br>　　这句话声明了一个引用类型的变量，此时它并没有和任何对象关联。<br>　　而 通过new String(“hello”)来产生一个对象（也称作为类String的一个实例），并将这个对象和str1进行绑定：<br>　　str1= new String(“hello”);<br>　　<strong>那么str1指向了一个对象（很多地方也把str1称作为对象的引用），此时变量str1中存储的是它指向的对象在内存中的存储地址，并不是“值”本身，也就是说并不是直接存储的字符串”hello”。这里面的引用和C/C++中的指针很类似。</strong><br>　　因此在用==对str1和str2进行第一次比较时，得到的结果是false。因此它们分别指向的是不同的对象，也就是说它们实际存储的内存地址不同。<br>　　而在第二次比较时，都让str1和str2指向了str指向的对象，那么得到的结果毫无疑问是true。</p>
+<h2 id="二-equals-比较的又是什么？"><a href="#二-equals-比较的又是什么？" class="headerlink" title="二.equals()比较的又是什么？"></a>二.equals()比较的又是什么？</h2><p>　　equals方法是基类Object中的方法，因此对于所有的继承于Object的类都会有该方法。为了更直观地理解equals方法的作用，直接看Object类中equals方法的实现。<br>　　该类的源码路径为：C:\Program Files\Java\jdk1.6.0_14的src.zip 的java.lang路径下的Object.java（视个人jdk安装路径而定）。<br>　　下面是Object类中equals方法的实现：<br>　　<br>　　很显然，在Object类中，equals方法是用来比较两个对象的引用是否相等，即是否指向同一个对象。<br>　　但是有些朋友又会有疑问了，为什么下面一段代码的输出结果是true？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * <span class="doctag">@param</span> args</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        </span><br><span class="line">        String str1 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        String str2 = <span class="keyword">new</span> String(<span class="string">"hello"</span>);</span><br><span class="line">        </span><br><span class="line">        System.out.println(str1.equals(str2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　要知道究竟，可以看一下String类的equals方法的具体实现，同样在该路径下，String.java为String类的实现。<br>　　下面是String类中equals方法的具体实现：</p>
+<p>　　可以看出，String类对equals方法进行了重写，用来比较指向的字符串对象所存储的字符串是否相等。<br>　　其他的一些类诸如Double，Date，Integer等，都对equals方法进行了重写用来比较指向的对象所存储的内容是否相等。</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a><strong>总结</strong>：</h1><p>　　<strong>1）对于==，如果作用于基本数据类型的变量，则直接比较其存储的 “值”是否相等；<br>　　　　如果作用于引用类型的变量，则比较的是所指向的对象的地址</strong></p>
+<p>　　<strong>2）对于equals()方法，注意：equals方法不能作用于基本数据类型的变量<br>　　　　如果没有对equals方法进行重写，则比较的是引用类型的变量所指向的对象的地址；<br>　　　　诸如String、Date等类对equals方法进行了重写的话，比较的是所指向的对象的内容。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/22/equals-and/" data-id="cioi3thdy00087kdgwzd0mn4o" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-poj-1061" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/20/poj-1061/" class="article-date">
+  <time datetime="2016-05-20T14:19:36.000Z" itemprop="datePublished">2016-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/20/poj-1061/">青蛙约会</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O-∩-∩-O"><a href="#今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O-∩-∩-O" class="headerlink" title="今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O(∩_∩)O~"></a>今天是个特殊的日子，5月20日，虽然我没过过这个节日不过还是做两道符合这个日子的题目吧！O(∩_∩)O~</h2><h2 id="poj1061"><a href="#poj1061" class="headerlink" title="poj1061:"></a>poj1061:</h2><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>　　两 只青蛙在网上相识了，它们聊得很开心，于是觉得很有必要见一面。它们很高兴地发现它们住在同一条纬度线上，于是它们约定各自朝西跳，直到碰面为止。可是它 们出发之前忘记了一件很重要的事情，既没有问清楚对方的特征，也没有约定见面的具体位置。不过青蛙们都是很乐观的，它们觉得只要一直朝着某个方向跳下去， 总能碰到对方的。但是除非这两只青蛙在同一时间跳到同一点上，不然是永远都不可能碰面的。为了帮助这两只乐观的青蛙，你被要求写一个程序来判断这两只青蛙 是否能够碰面，会在什么时候碰面。<br>我们把这两只青蛙分别叫做青蛙A和青蛙B，并且规定纬度线上东经0度处为原点，由东往西为正方向，单位长度1米，这样我们就得到了一条首尾相接的 数轴。设青蛙A的出发点坐标是x，青蛙B的出发点坐标是y。青蛙A一次能跳m米，青蛙B一次能跳n米，两只青蛙跳一次所花费的时间相同。纬度线总长L米。 现在要你求出它们跳了几次以后才会碰面。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>输入只包括一行5个整数x，y，m，n，L，其中x≠y &lt; 2000000000，0 &lt; m、n &lt; 2000000000，0 &lt; L &lt; 2100000000。<br>Output</p>
+<p>输出碰面所需要的跳跃次数，如果永远不可能碰面则输出一行”Impossible”</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>1 2 3 4 5</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>4</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">( <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> y )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( y == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        return x;</span><br><span class="line">    &#125;</span><br><span class="line">    return gcd( y, x % y );</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">( <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> a, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> b, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> &amp;x, <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> &amp;y )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( b == <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd( b, a % b, x, y );</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t- a / b * y;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(  )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x, y, m, n, l;</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">scanf</span>( <span class="string">"%lld %lld %lld %lld %lld"</span>, &amp;x, &amp;y, &amp;m, &amp;n, &amp;l )!= EOF )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> a = n- m, b = l, c = x- y, p, q;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> d = gcd( a, b );</span><br><span class="line">        <span class="keyword">if</span>( c % d )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>( <span class="string">"Impossible"</span> );</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a /= d, b /= d, c /= d;</span><br><span class="line">        exgcd( a, b, p, q );</span><br><span class="line">        p *= c;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> t = p % b;</span><br><span class="line">        <span class="keyword">while</span>( t &lt; <span class="number">0</span> )</span><br><span class="line">        &#123;   </span><br><span class="line">            t += b; </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>( <span class="string">"%lld\n"</span>, t );</span><br><span class="line">    &#125;</span><br><span class="line">	return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/20/poj-1061/" data-id="cioi3thf0000p7kdggqxixwpt" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-数论-扩展欧几里得/">算法-数论-扩展欧几里得</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-dp/51nod" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -109,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/20/dp/51nod/" data-id="cioi2zxn1003ozgdgqo4adhsx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/20/dp/51nod/" data-id="cioi3thjy003t7kdgehkgyvgh" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li></ul>
@@ -152,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/20/文章/zhu-zi/" data-id="cioi2zxvj009kzgdgujpvexoa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/20/文章/zhu-zi/" data-id="cioi3thpj009u7kdg3qiqgnfj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文章/">文章</a></li></ul>
@@ -192,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/heapSort/heapSort/" data-id="cioi2zxp2004yzgdgjp9keyvp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/19/heapSort/heapSort/" data-id="cioi3thlj00537kdgdvotwjnz" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li></ul>
@@ -232,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/mergeSort/mergesort/" data-id="cioi2zxqx006dzgdgo9eiunnh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/19/mergeSort/mergesort/" data-id="cioi3thms006i7kdg7irfu4jy" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li></ul>
@@ -303,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/The base of java/copy/" data-id="cioi2zxlk002nzgdgr0wr6y9e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/19/The base of java/copy/" data-id="cioi3thit002n7kdg8jmxu35t" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -394,7 +487,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/The base of java/RTTI-2/" data-id="cioi2zxkx0028zgdgvcqk1ziv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/19/The base of java/RTTI-2/" data-id="cioi3thif002b7kdgpem39zjl" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -451,7 +544,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/19/The base of java/RTTI-1/" data-id="cioi2zxku0026zgdgf397x4wh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/19/The base of java/RTTI-1/" data-id="cioi3thid00287kdg98exgw48" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -559,85 +652,7 @@ public class TestOverriding extends Base
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/Override-and-Overload/" data-id="cioi2zxkn0021zgdgiskwkf19" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-The base of java/String-StringBuffer-StringBuilder-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/" class="article-date">
-  <time datetime="2016-05-18T14:51:07.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/">深度理解String-StringBuffer-StringBuilder</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>转： <a href="http://www.cnblogs.com/dolphin0520/p/3778589.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3778589.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder-1/" data-id="cioi2zxl2002dzgdgj6mh0q1r" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-The base of java/String-StringBuffer-StringBuilder" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder/" class="article-date">
-  <time datetime="2016-05-18T14:49:31.000Z" itemprop="datePublished">2016-05-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/18/The base of java/String-StringBuffer-StringBuilder/">浅析String-StringBuffer-StringBuilder</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考： <a href="http://blog.csdn.net/kingzone_2008/article/details/9220691" target="_blank" rel="external">http://blog.csdn.net/kingzone_2008/article/details/9220691</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/18/The base of java/String-StringBuffer-StringBuilder/" data-id="cioi2zxl0002bzgdgerguzy83" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/18/The base of java/Override-and-Overload/" data-id="cioi3thib00267kdgm1gqpezx" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li></ul>
@@ -663,7 +678,7 @@ public class TestOverriding extends Base
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图床/">图床</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/常用/">常用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉搜索树/">数据结构-二叉搜索树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-二叉树/">数据结构-二叉树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-双向链表/">数据结构-双向链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-图论基础/">数据结构-图论-图论基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-拓扑排序/">数据结构-图论-拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树/">数据结构-图论-最小生成树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-kruskal/">数据结构-图论-最小生成树-kruskal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最小生成树-prime/">数据结构-图论-最小生成树-prime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-Dijsktra/">数据结构-图论-最短路-Dijsktra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-SPFA/">数据结构-图论-最短路-SPFA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-图论-链式前向星/">数据结构-图论-链式前向星</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-字典树/">数据结构-字典树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-循环链表/">数据结构-循环链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-栈/">数据结构-栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-树状数组/">数据结构-树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-链表/">数据结构-链表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构-队列/">数据结构-队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模拟/">模拟</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/水题/">水题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-Insersion-Sort-插入排序/">算法-Insersion Sort(插入排序)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-binary-search-二分查找/">算法-binary search(二分查找)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qmul-快速乘/">算法-qmul(快速乘)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qpow-快速幂/">算法-qpow(快速幂)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-qsort（快速排序）/">算法-qsort（快速排序）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-位向量法/">算法-位向量法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-全排列/">算法-全排列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划/">算法-动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-动态规划-按位dp/">算法-动态规划-按位dp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-回溯法/">算法-回溯法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-差分约束/">算法-图论-差分约束</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-广度优先搜索/">算法-图论-广度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-图论-深度优先搜索/">算法-图论-深度优先搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-堆排序/">算法-堆排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-尺取法/">算法-尺取法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-归并排序/">算法-归并排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-卡特兰数/">算法-数论-卡特兰数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-同余定理/">算法-数论-同余定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-扩展欧几里得/">算法-数论-扩展欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-欧几里得/">算法-数论-欧几里得</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-素数筛选法/">算法-数论-素数筛选法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-数论-费马小定理/">算法-数论-费马小定理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-映射/">算法-映射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-枚举/">算法-枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-标记-查表思想/">算法-标记,查表思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-离散化/">算法-离散化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-贪心/">算法-贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-输入挂和输出挂/">算法-输入挂和输出挂</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法-预处理思想/">算法-预处理思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-C/">语言-C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言-java基础知识/">语言-java基础知识</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆序对/">逆序对</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-并查集/">高级数据结构-并查集</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级数据结构-线段树/">高级数据结构-线段树</a></li></ul>
     </div>
@@ -673,7 +688,7 @@ public class TestOverriding extends Base
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/图床/" style="font-size: 10px;">图床</a> <a href="/tags/常用/" style="font-size: 15px;">常用</a> <a href="/tags/数据结构-二叉搜索树/" style="font-size: 11px;">数据结构-二叉搜索树</a> <a href="/tags/数据结构-二叉树/" style="font-size: 11px;">数据结构-二叉树</a> <a href="/tags/数据结构-双向链表/" style="font-size: 10px;">数据结构-双向链表</a> <a href="/tags/数据结构-图论-图论基础/" style="font-size: 15px;">数据结构-图论-图论基础</a> <a href="/tags/数据结构-图论-拓扑排序/" style="font-size: 11px;">数据结构-图论-拓扑排序</a> <a href="/tags/数据结构-图论-最小生成树/" style="font-size: 10px;">数据结构-图论-最小生成树</a> <a href="/tags/数据结构-图论-最小生成树-kruskal/" style="font-size: 15px;">数据结构-图论-最小生成树-kruskal</a> <a href="/tags/数据结构-图论-最小生成树-prime/" style="font-size: 13px;">数据结构-图论-最小生成树-prime</a> <a href="/tags/数据结构-图论-最短路-Dijsktra/" style="font-size: 10px;">数据结构-图论-最短路-Dijsktra</a> <a href="/tags/数据结构-图论-最短路-SPFA/" style="font-size: 10px;">数据结构-图论-最短路-SPFA</a> <a href="/tags/数据结构-图论-最短路-floyd/" style="font-size: 14px;">数据结构-图论-最短路-floyd</a> <a href="/tags/数据结构-图论-链式前向星/" style="font-size: 12px;">数据结构-图论-链式前向星</a> <a href="/tags/数据结构-字典树/" style="font-size: 14px;">数据结构-字典树</a> <a href="/tags/数据结构-循环链表/" style="font-size: 10px;">数据结构-循环链表</a> <a href="/tags/数据结构-栈/" style="font-size: 16px;">数据结构-栈</a> <a href="/tags/数据结构-树状数组/" style="font-size: 14px;">数据结构-树状数组</a> <a href="/tags/数据结构-链表/" style="font-size: 10px;">数据结构-链表</a> <a href="/tags/数据结构-队列/" style="font-size: 12px;">数据结构-队列</a> <a href="/tags/文章/" style="font-size: 10px;">文章</a> <a href="/tags/模拟/" style="font-size: 12px;">模拟</a> <a href="/tags/水题/" style="font-size: 19px;">水题</a> <a href="/tags/算法-Insersion-Sort-插入排序/" style="font-size: 10px;">算法-Insersion Sort(插入排序)</a> <a href="/tags/算法-binary-search-二分查找/" style="font-size: 12px;">算法-binary search(二分查找)</a> <a href="/tags/算法-qmul-快速乘/" style="font-size: 11px;">算法-qmul(快速乘)</a> <a href="/tags/算法-qpow-快速幂/" style="font-size: 12px;">算法-qpow(快速幂)</a> <a href="/tags/算法-qsort（快速排序）/" style="font-size: 14px;">算法-qsort（快速排序）</a> <a href="/tags/算法-位向量法/" style="font-size: 11px;">算法-位向量法</a> <a href="/tags/算法-全排列/" style="font-size: 15px;">算法-全排列</a> <a href="/tags/算法-动态规划/" style="font-size: 18px;">算法-动态规划</a> <a href="/tags/算法-动态规划-按位dp/" style="font-size: 11px;">算法-动态规划-按位dp</a> <a href="/tags/算法-回溯法/" style="font-size: 18px;">算法-回溯法</a> <a href="/tags/算法-图论-差分约束/" style="font-size: 10px;">算法-图论-差分约束</a> <a href="/tags/算法-图论-广度优先搜索/" style="font-size: 13px;">算法-图论-广度优先搜索</a> <a href="/tags/算法-图论-深度优先搜索/" style="font-size: 12px;">算法-图论-深度优先搜索</a> <a href="/tags/算法-堆排序/" style="font-size: 10px;">算法-堆排序</a> <a href="/tags/算法-尺取法/" style="font-size: 11px;">算法-尺取法</a> <a href="/tags/算法-归并排序/" style="font-size: 10px;">算法-归并排序</a> <a href="/tags/算法-数论-卡特兰数/" style="font-size: 10px;">算法-数论-卡特兰数</a> <a href="/tags/算法-数论-同余定理/" style="font-size: 13px;">算法-数论-同余定理</a> <a href="/tags/算法-数论-扩展欧几里得/" style="font-size: 10px;">算法-数论-扩展欧几里得</a> <a href="/tags/算法-数论-欧几里得/" style="font-size: 11px;">算法-数论-欧几里得</a> <a href="/tags/算法-数论-素数筛选法/" style="font-size: 12px;">算法-数论-素数筛选法</a> <a href="/tags/算法-数论-费马小定理/" style="font-size: 12px;">算法-数论-费马小定理</a> <a href="/tags/算法-映射/" style="font-size: 12px;">算法-映射</a> <a href="/tags/算法-枚举/" style="font-size: 11px;">算法-枚举</a> <a href="/tags/算法-标记-查表思想/" style="font-size: 17px;">算法-标记,查表思想</a> <a href="/tags/算法-离散化/" style="font-size: 13px;">算法-离散化</a> <a href="/tags/算法-贪心/" style="font-size: 11px;">算法-贪心</a> <a href="/tags/算法-输入挂和输出挂/" style="font-size: 10px;">算法-输入挂和输出挂</a> <a href="/tags/算法-预处理思想/" style="font-size: 10px;">算法-预处理思想</a> <a href="/tags/语言-C/" style="font-size: 10px;">语言-C++</a> <a href="/tags/语言-java基础知识/" style="font-size: 20px;">语言-java基础知识</a> <a href="/tags/逆序对/" style="font-size: 13px;">逆序对</a> <a href="/tags/高级数据结构-并查集/" style="font-size: 14px;">高级数据结构-并查集</a> <a href="/tags/高级数据结构-线段树/" style="font-size: 17px;">高级数据结构-线段树</a>
     </div>
@@ -692,9 +707,17 @@ public class TestOverriding extends Base
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/22/Override-hashCode-and-equals/">重写 hashCode() and equals()</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/22/boxing-and-unboxing/">深入探索装箱和拆箱的原理</a>
+          </li>
         
           <li>
             <a href="/2016/05/22/enum-1/">初探枚举类型</a>
@@ -706,14 +729,6 @@ public class TestOverriding extends Base
         
           <li>
             <a href="/2016/05/22/iterator/">迭代器</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/22/interface-and-abstract-class/">抽象类和接口</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/22/for-in-java/">java 循环的3种方式</a>
           </li>
         
       </ul>
@@ -729,7 +744,7 @@ public class TestOverriding extends Base
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
