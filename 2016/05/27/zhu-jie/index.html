@@ -1,0 +1,540 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>java注解的基础知识 | yusijia&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yusijia">
+    
+    <meta name="description" content="参考： http://blog.csdn.net/duo2005duo/article/details/50505884
+http://www.cnblogs.com/peida/archive/2013/04/24/3036689.html
+简介　　注解（annotation）是JDK5之后引进的">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="yusijia&#39;s blog" title="yusijia&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/27/zhu-jie/" title="java注解的基础知识" itemprop="url">java注解的基础知识</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yusijia">yusijia</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-05-27T14:42:23.000Z" itemprop="datePublished">2016-05-27</time>
+    更新日期:<time datetime="2016-05-27T15:01:07.362Z" itemprop="dateModified">2016-05-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java自带的注解"><span class="toc-number">2.</span> <span class="toc-text">使用Java自带的注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Deprecated"><span class="toc-number">2.1.</span> <span class="toc-text">@Deprecated</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Override"><span class="toc-number">2.2.</span> <span class="toc-text">@Override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SuppressWarnings"><span class="toc-number">2.3.</span> <span class="toc-text">@SuppressWarnings</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SuppressWarnings注解的常见参数值的简单说明："><span class="toc-number">2.3.1.</span> <span class="toc-text">SuppressWarnings注解的常见参数值的简单说明：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">2.4.</span> <span class="toc-text">自定义注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单声明"><span class="toc-number">2.4.1.</span> <span class="toc-text">简单声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注解参数的可支持数据类型："><span class="toc-number">2.4.2.</span> <span class="toc-text">注解参数的可支持数据类型：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#元注解"><span class="toc-number">3.</span> <span class="toc-text">元注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Documented"><span class="toc-number">3.1.</span> <span class="toc-text">@Documented</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Retention"><span class="toc-number">3.2.</span> <span class="toc-text">@Retention</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能"><span class="toc-number">3.2.1.</span> <span class="toc-text">按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target"><span class="toc-number">3.3.</span> <span class="toc-text">@Target</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取值-ElementType-有："><span class="toc-number">3.3.1.</span> <span class="toc-text">取值(ElementType)有：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Inherited"><span class="toc-number">3.4.</span> <span class="toc-text">@Inherited</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>参考： <a href="http://blog.csdn.net/duo2005duo/article/details/50505884" target="_blank" rel="external">http://blog.csdn.net/duo2005duo/article/details/50505884</a></p>
+<p><a href="http://www.cnblogs.com/peida/archive/2013/04/24/3036689.html" target="_blank" rel="external">http://www.cnblogs.com/peida/archive/2013/04/24/3036689.html</a></p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>　　注解（annotation）是JDK5之后引进的新特性，是一种特殊的注释，之所以说它特殊是因为不同于普通注释（comment）能存在于源码，而且还能存在编译期跟运行期，会最终编译成一个.class文件，所以注解能有比普通注释更多的功能</p>
+<h1 id="使用Java自带的注解"><a href="#使用Java自带的注解" class="headerlink" title="使用Java自带的注解"></a>使用Java自带的注解</h1><p>这里只讲Java5 自带的3种注解</p>
+<h2 id="Deprecated"><a href="#Deprecated" class="headerlink" title="@Deprecated"></a>@Deprecated</h2><ul>
+<li>@Deprecated 表明当前的元素已经不推荐使用</li>
+</ul>
+<p>　　当一个类型或者类型成员使用@Deprecated修饰的话，编译器将不鼓励使用这个被标注的程序元素。而且这种修饰具有一定的 “延续性”：如果我们在代码中通过继承或者覆盖的方式使用了这个过时的类型或者成员，虽然继承或者覆盖后的类型或者成员并不是被声明为 @Deprecated，但编译器仍然要报警。<br>　　<br>　　值得注意，@Deprecated这个annotation类型和javadoc中的 @deprecated这个tag是有区别的：前者是java编译器识别的，而后者是被javadoc工具所识别用来生成文档（包含程序成员为什么已经过 时、它应当如何被禁止或者替代的描述）。<br>　　<br>  在java5.0，java编译器仍然象其从前版本那样寻找@deprecated这个javadoc tag，并使用它们产生警告信息。但是这种状况将在后续版本中改变，我们应在现在就开始使用@Deprecated来修饰过时的方法而不是 @deprecated javadoc tag。</p>
+<p><strong>@Deprecated注解标示方法过期，同时在方法注释中用@deprecated tag 标示该方法已经过时，</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* 一般来说使用<span class="doctag">@Deprecated</span>注解的方法要加上一下的javadoc文档</span><br><span class="line">* <span class="doctag">@deprecated</span> 这里要写明因为什么原因抛弃了使用该方法，推荐使用什么方法代替</span><br><span class="line">*/</span></span><br><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">badMethod</span><span class="params">()</span></span>&#123; <span class="comment">//已经不推荐使用的方法</span></span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Override"><a href="#Override" class="headerlink" title="@Override"></a>@Override</h2><ul>
+<li>@Override 表明当前方法是覆盖了父类方法，添加@Overrride是一种必须的编程习惯，因为帮助你找到代码中的错误,考虑以下情况</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"水果的名字是：*****"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Orange</span> <span class="keyword">extends</span> <span class="title">Fruit</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span>  <span class="comment">//重写</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">displayName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"水果的名字是：桔子"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SuppressWarnings"><a href="#SuppressWarnings" class="headerlink" title="@SuppressWarnings"></a>@SuppressWarnings</h2><ul>
+<li>@SuppressWarnings 关闭不当的编译器警告信息，如下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">doSth</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//添加说明抑制警告的原因：A的getClass() 必然是Class&lt;A&gt;</span></span><br><span class="line">        <span class="meta">@SuppressWarnings</span>(unchecked)</span><br><span class="line">        Class&lt;A&gt; a=(Class&lt;A&gt;)getClass()  <span class="comment">//有unchecked警告</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　@SuppressWarnings 被用于有选择的关闭编译器对类、方法、成员变量、变量初始化的警告。在java5.0，sun提供的javac编译器为我们提供了-Xlint选项来使编译器对合法的程序代码提出警告，此种警告从某种程度上代表了程序错误。例如当我们使用一个generic collection类而又没有提供它的类型时，编译器将提示出”unchecked warning”的警告。通常当这种情况发生时，我们就需要查找引起警告的代码。如果它真的表示错误，我们就需要纠正它。例如如果警告信息表明我们代码中的switch语句没有覆盖所有可能的case，那么我们就应增加一个默认的case来避免这种警告。<br>　　有时我们无法避免这种警告，例如，我们使用必须和非generic的旧代码交互的generic collection类时，我们不能避免这个unchecked warning。此时@SuppressWarning就要派上用场了，在调用的方法前增加@SuppressWarnings修饰，告诉编译器停止对此方法的警告。<br>　　SuppressWarning不是一个标记注解。它有一个类型为String[]的成员，这个成员的值为被禁止的警告名。对于javac编译器来讲，被-Xlint选项有效的警告 名也同样对@SuppressWarings有效，同时编译器忽略掉无法识别的警告名。<br>　　annotation语法允许在annotation名后跟括号，括号中是使用逗号分割的name=value对用于为annotation的成员赋值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FruitService</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(value=&#123; <span class="string">"rawtypes"</span>, <span class="string">"unchecked"</span> &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  List&lt;Fruit&gt; <span class="title">getFruitList</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;Fruit&gt; fruitList=<span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">return</span> fruitList;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(&#123; <span class="string">"rawtypes"</span>, <span class="string">"unchecked"</span> &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  List&lt;Fruit&gt; <span class="title">getFruit</span><span class="params">()</span></span>&#123;</span><br><span class="line">        List&lt;Fruit&gt; fruitList=<span class="keyword">new</span> ArrayList();</span><br><span class="line">        <span class="keyword">return</span> fruitList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"unused"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        List&lt;String&gt; strList=<span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　在这个例子中SuppressWarnings annotation类型只定义了一个单一的成员，所以只有一个简单的value={…}作为name=value对。又由于成员值是一个数组，故使用大括号来声明数组值。注意：我们可以在下面的情况中缩写annotation：当annotation只有单一成员，并成员命名为”value=”。这时可以省去”value=”。比如将上面方法getFruit()的SuppressWarnings annotation就是缩写的。</p>
+<h3 id="SuppressWarnings注解的常见参数值的简单说明："><a href="#SuppressWarnings注解的常见参数值的简单说明：" class="headerlink" title="SuppressWarnings注解的常见参数值的简单说明："></a>SuppressWarnings注解的常见参数值的简单说明：</h3><p>　　　　<strong>1.deprecation：</strong>使用了不赞成使用的类或方法时的警告；</p>
+<p>　　　　<strong>2.unchecked：</strong>执行了未检查的转换时的警告，例如当使用集合时没有用泛型 (Generics) 来指定集合保存的类型;</p>
+<p>　　　　<strong>3.fallthrough：</strong>当 Switch 程序块直接通往下一种情况而没有 Break 时的警告;</p>
+<p>　　　　<strong>4.path：</strong>在类路径、源文件路径等中有不存在的路径时的警告;</p>
+<p>　　　　<strong>5.serial：</strong>当在可序列化的类上缺少 serialVersionUID 定<br>义时的警告;</p>
+<p>　　　　<strong>6.finally：</strong>任何 finally 子句不能正常完成时的警告;</p>
+<p>　　　　<strong>7.all：</strong>关于以上所有情况的警告。</p>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><h3 id="简单声明"><a href="#简单声明" class="headerlink" title="简单声明"></a>简单声明</h3><ul>
+<li><p>元素不能有不确定的值，即要么有默认值，要么在使用注解的时候提供元素的值。而且元素不能使用null作为默认值。所以我们应该定义一些特殊的值，来表示某个元素不存在</p>
+</li>
+<li><p>注解在只有一个元素且该元素的名称是value的情况下，在使用注解的时候可以省略“value=”，直接写需要的值即可。</p>
+</li>
+<li><p>注解的声明相对简单，有点类似接口的写法<br>其中的每一个方法实际上是声明了一个配置参数。方法的名称就是参数的名称，返回值类型就是参数的类型（返回值类型只能是基本类型、Class、String、enum）。可以通过default来声明参数的默认值。</p>
+</li>
+</ul>
+<h3 id="注解参数的可支持数据类型："><a href="#注解参数的可支持数据类型：" class="headerlink" title="注解参数的可支持数据类型："></a>注解参数的可支持数据类型：</h3><p>　　　　1.所有基本数据类型（int,float,boolean,byte,double,char,long,short)<br>　　　　2.String类型<br>　　　　3.Class类型<br>　　　　4.enum类型<br>　　　　5.Annotation类型<br>　　　　6.以上所有类型的数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Public <span class="meta">@interface</span> Empty&#123;</span><br><span class="line">    <span class="function">String <span class="title">field1</span><span class="params">()</span> <span class="keyword">default</span> "it's empty"</span>; <span class="comment">//default 设置默认值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Empty</span>   <span class="comment">//使用 default默认值"it's empty"</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果没有使用default设置默认值的话，field必须显式传入参数,如下</span></span><br><span class="line"><span class="meta">@Empty</span>(field1=<span class="string">"empty A"</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@interface</span> Value&#123;</span><br><span class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">other</span><span class="params">()</span> <span class="keyword">default</span> "it's great"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Value</span>(<span class="string">"empty B"</span>) <span class="comment">//当注解有一个方法value时，没有其他方法或者其他方法有默认值，不需要指明具体方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　以上是Java自带的一些注解，Java同时提供了另外一类注解，叫元注解。元注解可以用来设置注解，自定义注解一般都会使用到元注解</p>
+<h1 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h1><p>　　‘普通注解’只能用来注解’代码’，而’元注解’只能用来注解 ‘普通注解’。<br>JDK5时支持的元注解有@Documented @Retention @Target @Inherited，接下来分别介绍它们修饰注解的效果</p>
+<h2 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h2><ul>
+<li>@Documented让注解自动加入Javadoc</li>
+</ul>
+<p>　　@Documented用于描述其它类型的annotation应该被作为被标注的程序成员的公共API，因此可以被例如javadoc此类的工具文档化。Documented是一个标记注解，没有成员。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@interface</span> DocumentedAnnotation&#123; </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@interface</span> UnDocumentedAnnotation&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@DocumentedAnnotation</span></span><br><span class="line"><span class="meta">@UnDocumentedAnnotation</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>　　代码中注解DocumentedAnnotation添加了元注解@Documented，而UnDocumentedAnnotation则没有添加，通过’javadoc A.java’命令生成Javadoc如下图。可以看到，在A类的Javadoc中只能看到@DocumentedAnnotation注解，但是无法看到@UnDocumentedAnnotation注解</p>
+<h2 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h2><ul>
+<li>用@Retention设置注解的级别</li>
+</ul>
+<p>　　<strong>作用：</strong>表示需要在什么级别保存该注释信息，用于描述注解的生命周期（即：被描述的注解在什么范围内有效）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//RetentionPolicy是一个枚举类，默认是CLASS，此外还可选择SOURCE,RUNTIME</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.CLASS) </span><br><span class="line"><span class="meta">@interface</span> ClassRetentionAnnotation&#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能"><a href="#按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能" class="headerlink" title="按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能"></a>按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能</h3><ul>
+<li><strong>SOURCE代表源码级别</strong>，注解只存在源码(源文件)中，其功能是与编译器交互，用于代码检测，如@Override,@SuppressWarings，许多框架如Dragger就是使用这个级别的注解，这个级别的框架额外效率损耗发生在编译时</li>
+<li></li>
+<li><strong>CLASS代表字节码级别</strong>，注解存在源码与字节码文件(class文件)中，主要用于编译时生成而外的文件，如XML，Java文件等，这个级别需要添加JVM加载时候的代理（javaagent ），使用代理来动态修改字节码文件（由于Android虚拟机并不支持所以本专题不会再做介绍，在Android中可以使用aspectJ来实现类似这个级别的功能）</li>
+<li></li>
+<li><strong>RUNTIME代表运行时级别</strong>，注解存在源码，字节码与Java虚拟机中，主要用于运行时反射获取相关信息，许多框架如OrmLite就是使用这个级别的注解，这个级别的框架额外的效率损耗发生在程序运行时</li>
+</ul>
+<h2 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h2><ul>
+<li>@Target限制注解的元素种类</li>
+</ul>
+<p>　　不加元注解@Target的情况下，注解可以修饰各种元素，比如可以修饰类，可以修饰变量，可以修饰方法等，但是如果要限制注解的元素种类，比如限制只能修饰方法，则需要加入@Target,一下是@Override的源码</p>
+<h3 id="取值-ElementType-有："><a href="#取值-ElementType-有：" class="headerlink" title="取值(ElementType)有："></a>取值(ElementType)有：</h3><p>　　　　<strong>1.CONSTRUCTOR:</strong>用于描述构造器</p>
+<p>　　　　<strong>2.FIELD:</strong>用于描述域</p>
+<p>　　　　<strong>3.LOCAL_VARIABLE:</strong>用于描述局部变量</p>
+<p>　　　　<strong>4.METHOD:</strong>用于描述方法</p>
+<p>　　　　<strong>5.PACKAGE:</strong>用于描述包</p>
+<p>　　　　<strong>6.PARAMETER:</strong>用于描述参数</p>
+<p>　　　　<strong>7.TYPE:</strong> 用于描述 类、  接口(包括注解类型)  或  enum  声明</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.METHOD) <span class="comment">//限制了注解只能修饰方法，ElementType是一个枚举类</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Override&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到@Override源码中已经限定了只能修饰方法。</p>
+<h2 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h2><ul>
+<li>@Inherited可以让注解类似被继承一样，但是这并不是真的继承。通过使用@Inherited，只可以让子类类对象使用getAnnotations（）反射获取父类被@Inherited修饰的注解。</li>
+</ul>
+<p><strong>注意：</strong>@Inherited annotation类型是被标注过的class的子类所继承。类并不从它所实现的接口继承annotation，方法并不从它所重载的方法继承annotation。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@interface</span> Inheritable&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@interface</span> UnInheritable&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="meta">@UnInheritable</span></span><br><span class="line">    <span class="meta">@Inheritable</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Super</span></span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Sub</span> <span class="keyword">extends</span>  <span class="title">Super</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span></span>&#123;</span><br><span class="line">        Super instance=<span class="keyword">new</span> Sub();</span><br><span class="line">        System.out.println(Arrays.toString(instance.getClass().getAnnotations()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出:[Inheritable]</span><br></pre></td></tr></table></figure>  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/语言-java基础知识/">语言-java基础知识</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/05/27/zhu-jie/" data-title="java注解的基础知识 | yusijia&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/27/zhu-jie-chu-li-qi/" title="java注解处理器">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  java注解处理器</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/23/hexo-pacman/"  title="pacman主题安装时遇到的问题">
+ <strong>NEXT:</strong><br/> 
+ <span>pacman主题安装时遇到的问题
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+
+
+<!-- ��˵���ۿ� start -->
+
+	<div class="ds-thread" data-thread-key="2016/05/27/zhu-jie/" data-title="java注解的基础知识" data-url="undefined"></div>
+
+<!-- ��˵���ۿ� end -->
+
+<!-- ��˵����JS���� start (һ����ҳֻ������һ��) -->
+
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"ysjdb"};
+
+	(function() {
+
+		var ds = document.createElement('script');
+
+		ds.type = 'text/javascript';ds.async = true;
+
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+ 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+
+	</script>
+<!-- ��˵����JS���� end -->
+
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Java自带的注解"><span class="toc-number">2.</span> <span class="toc-text">使用Java自带的注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Deprecated"><span class="toc-number">2.1.</span> <span class="toc-text">@Deprecated</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Override"><span class="toc-number">2.2.</span> <span class="toc-text">@Override</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SuppressWarnings"><span class="toc-number">2.3.</span> <span class="toc-text">@SuppressWarnings</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SuppressWarnings注解的常见参数值的简单说明："><span class="toc-number">2.3.1.</span> <span class="toc-text">SuppressWarnings注解的常见参数值的简单说明：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义注解"><span class="toc-number">2.4.</span> <span class="toc-text">自定义注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单声明"><span class="toc-number">2.4.1.</span> <span class="toc-text">简单声明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注解参数的可支持数据类型："><span class="toc-number">2.4.2.</span> <span class="toc-text">注解参数的可支持数据类型：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#元注解"><span class="toc-number">3.</span> <span class="toc-text">元注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Documented"><span class="toc-number">3.1.</span> <span class="toc-text">@Documented</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Retention"><span class="toc-number">3.2.</span> <span class="toc-text">@Retention</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能"><span class="toc-number">3.2.1.</span> <span class="toc-text">按照Retention的三种枚举类型，注解分为三种级别，每个级别有其特定的功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target"><span class="toc-number">3.3.</span> <span class="toc-text">@Target</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#取值-ElementType-有："><span class="toc-number">3.3.1.</span> <span class="toc-text">取值(ElementType)有：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Inherited"><span class="toc-number">3.4.</span> <span class="toc-text">@Inherited</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/图床/" title="图床">图床<sup>1</sup></a></li>
+		
+			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉搜索树/" title="数据结构-二叉搜索树">数据结构-二叉搜索树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉树/" title="数据结构-二叉树">数据结构-二叉树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-双向链表/" title="数据结构-双向链表">数据结构-双向链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-图论基础/" title="数据结构-图论-图论基础">数据结构-图论-图论基础<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-拓扑排序/" title="数据结构-图论-拓扑排序">数据结构-图论-拓扑排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树/" title="数据结构-图论-最小生成树">数据结构-图论-最小生成树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-kruskal/" title="数据结构-图论-最小生成树-kruskal">数据结构-图论-最小生成树-kruskal<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>4</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-Dijsktra/" title="数据结构-图论-最短路-Dijsktra">数据结构-图论-最短路-Dijsktra<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-SPFA/" title="数据结构-图论-最短路-SPFA">数据结构-图论-最短路-SPFA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-字典树/" title="数据结构-字典树">数据结构-字典树<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-循环链表/" title="数据结构-循环链表">数据结构-循环链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-栈/" title="数据结构-栈">数据结构-栈<sup>7</sup></a></li>
+		
+			<li><a href="/tags/数据结构-树状数组/" title="数据结构-树状数组">数据结构-树状数组<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-链表/" title="数据结构-链表">数据结构-链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-队列/" title="数据结构-队列">数据结构-队列<sup>3</sup></a></li>
+		
+			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+		
+			<li><a href="/tags/模拟/" title="模拟">模拟<sup>3</sup></a></li>
+		
+			<li><a href="/tags/水题/" title="水题">水题<sup>12</sup></a></li>
+		
+			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-binary-search-二分查找/" title="算法-binary search(二分查找)">算法-binary search(二分查找)<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-qmul-快速乘/" title="算法-qmul(快速乘)">算法-qmul(快速乘)<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-qpow-快速幂/" title="算法-qpow(快速幂)">算法-qpow(快速幂)<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-qsort（快速排序）/" title="算法-qsort（快速排序）">算法-qsort（快速排序）<sup>5</sup></a></li>
+		
+			<li><a href="/tags/算法-位向量法/" title="算法-位向量法">算法-位向量法<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-全排列/" title="算法-全排列">算法-全排列<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划/" title="算法-动态规划">算法-动态规划<sup>10</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-差分约束/" title="算法-图论-差分约束">算法-图论-差分约束<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-归并排序/" title="算法-归并排序">算法-归并排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-卡特兰数/" title="算法-数论-卡特兰数">算法-数论-卡特兰数<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-同余定理/" title="算法-数论-同余定理">算法-数论-同余定理<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-扩展欧几里得/" title="算法-数论-扩展欧几里得">算法-数论-扩展欧几里得<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-欧几里得/" title="算法-数论-欧几里得">算法-数论-欧几里得<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-素数筛选法/" title="算法-数论-素数筛选法">算法-数论-素数筛选法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-费马小定理/" title="算法-数论-费马小定理">算法-数论-费马小定理<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-映射/" title="算法-映射">算法-映射<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-枚举/" title="算法-枚举">算法-枚举<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-标记-查表思想/" title="算法-标记,查表思想">算法-标记,查表思想<sup>8</sup></a></li>
+		
+			<li><a href="/tags/算法-离散化/" title="算法-离散化">算法-离散化<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-预处理思想/" title="算法-预处理思想">算法-预处理思想<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-C/" title="语言-C++">语言-C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>32</sup></a></li>
+		
+			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>4</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-并查集/" title="高级数据结构-并查集">高级数据结构-并查集<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-线段树/" title="高级数据结构-线段树">高级数据结构-线段树<sup>8</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2016 
+		
+		<a href="http://yoursite.com" target="_blank" title="yusijia">yusijia</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ysjdb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
