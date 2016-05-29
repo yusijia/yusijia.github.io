@@ -34,7 +34,7 @@
 				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -47,7 +47,7 @@
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -59,6 +59,102 @@
     </header>
     <div id="container">
       <div id="main">
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/03/hui su/fen-shu/" title="分书问题" itemprop="url">
+  
+    <h1 itemprop="name">分书问题</h1>
+    
+     
+           <p itemprop="description" >题目大意：　　有编号分别为1~N的N本书，准备分给N个人，每个人阅读兴趣用一个二维数组表示。
+
+1：喜欢这本书；
+0：不喜欢这本书。
+Like[i][j] = 1，i喜欢书j；
+Like[i][j] = 0，i不喜欢书j。
+问：如何分书才能使得所有人都满意，输出第i个人分得的书的</p>
+        
+    
+    <time datetime="2016-05-03T13:31:51.000Z" itemprop="datePublished">2016-05-03</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/03/hui su/shopping/" title="买商品" itemprop="url">
+  
+    <h1 itemprop="name">买商品</h1>
+    
+     
+           <p itemprop="description" >题目：　　公司发了某商店的购物券1000元，限定只能购买店中的m种商品。每种商品的价格分别为m1,m2,…，要求程序列出所有的正好能消费完该购物券的不同购物方法。
+程序输入：第一行是一个整数m，代表可购买的商品的种类数。
+接下来是m个整数，每个1行，分别代表这m种商品的单价。
+程</p>
+        
+    
+    <time datetime="2016-05-03T13:26:45.000Z" itemprop="datePublished">2016-05-03</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/03/hui su/hanoi/" title="汉诺伊塔问题(经典递归)" itemprop="url">
+  
+    <h1 itemprop="name">汉诺伊塔问题(经典递归)</h1>
+    
+     
+           <p itemprop="description" >汉诺伊塔问题　　这么经典的题目大家应该都了解吧，百度上说明也一堆
+对于n阶Hanoi塔：
+n = 1时只需将编号为1的圆盘从A座移至C座
+
+n &amp;gt; 1时，我们分三个阶段：
+
+1：将A塔座上的n-1个圆盘按照规定移至到B塔座
+
+2：将编号为n的圆盘由A座移至C座
+
+3：利用A</p>
+        
+    
+    <time datetime="2016-05-03T13:17:11.000Z" itemprop="datePublished">2016-05-03</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/02/常用/tu-chuang/" title="图床" itemprop="url">
+  
+    <h1 itemprop="name">图床</h1>
+    
+     
+           <p itemprop="description" >图床　　最近才发现，这百度太**流氓了，我自己做的图片上传到百度图片，然后拿来用，竟然显示图片仅百度用户内部使用，无语了O__O “…  ， 所以在这里就推荐下另外一个不错的图床：极简图床</p>
+        
+    
+    <time datetime="2016-05-02T15:13:08.000Z" itemprop="datePublished">2016-05-02</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/02/BFS/hdu-5652/" title="hdu 5652" itemprop="url">
+  
+    <h1 itemprop="name">hdu 5652</h1>
+    
+     
+           <p itemprop="description" >Sample Input14 601101000001010000100100070 31 51 30 01 22 42 1
+Sample Output4
+分析：
+并查集 + BFS
+设两个特殊点，看他们啥时候连通
+具体还是看代码吧，用代码说话
+
+正解：1234567891011</p>
+        
+    
+    <time datetime="2016-05-02T14:42:13.000Z" itemprop="datePublished">2016-05-02</time>
+  </a>
+</section>
 
   <section class="post" itemscope itemprop="blogPost">
   
@@ -149,98 +245,23 @@
   </a>
 </section>
 
-  <section class="w" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/DFS/deep-search/" title="深度优先搜索" itemprop="url">
-  
-    <h1 itemprop="name">深度优先搜索</h1>
-    
-     
-           <p itemprop="description" >深度优先搜索的基本步骤123456789void dfs(int n)&amp;#123;    if(满足结束条件，即搜索到终点)        处理        return ;    else        dfs(n + 1); //继续往下一层搜        回溯部分;&amp;#</p>
-        
-    
-    <time datetime="2016-05-02T04:58:52.000Z" itemprop="datePublished">2016-05-02</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/stack/juzhen/" title="矩阵连乘" itemprop="url">
-  
-    <h1 itemprop="name">矩阵连乘</h1>
-    
-     
-           <p itemprop="description" >题目：　　输入n个矩阵的维度和一些矩阵链乘表达式，输出乘法的次数，如果乘法无法进行，输出error。假定A是mn矩阵，B是np矩阵，那么AB是mp矩阵，乘法次数为mn*p。如果A的列数不等于B的行数，则乘法无法进行。
-测试用例：3A 50 10B 10 20C 20 5(A(BC</p>
-        
-    
-    <time datetime="2016-05-02T03:41:37.000Z" itemprop="datePublished">2016-05-02</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/stack/hdu-1022/" title="hdu 1022(经典例题)" itemprop="url">
-  
-    <h1 itemprop="name">hdu 1022(经典例题)</h1>
-    
-     
-           <p itemprop="description" >12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747</p>
-        
-    
-    <time datetime="2016-05-02T03:35:45.000Z" itemprop="datePublished">2016-05-02</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/stack/kuohao2/" title="括号匹配问题 2" itemprop="url">
-  
-    <h1 itemprop="name">括号匹配问题 2</h1>
-    
-     
-           <p itemprop="description" >题目大意：输出有多少个括号是符合的，例如：()()()6(()))4()[()4括号为：(,),[,]
-
-补：另一个思路是，记录’(‘,’)’,’[‘,’]’的个数，然后从‘（’和‘）’的数目中选择最小的乘2，[和]类似
-
-1234567891011121314151617181</p>
-        
-    
-    <time datetime="2016-05-02T03:27:27.000Z" itemprop="datePublished">2016-05-02</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/stack/kuohao/" title="括号匹配问题 1" itemprop="url">
-  
-    <h1 itemprop="name">括号匹配问题 1</h1>
-    
-     
-           <p itemprop="description" >1234567891011121314151617181920212223242526272829303132333435#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;stack&amp;gt;#include </p>
-        
-    
-    <time datetime="2016-05-02T03:24:18.000Z" itemprop="datePublished">2016-05-02</time>
-  </a>
-</section>
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/14/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/16/">Next &raquo;</a>
   </nav>
 
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
@@ -353,7 +374,7 @@
 		
 			<li><a href="/tags/语言-C/" title="语言-C++">语言-C++<sup>1</sup></a></li>
 		
-			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>34</sup></a></li>
+			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>39</sup></a></li>
 		
 			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>4</sup></a></li>
 		
@@ -366,7 +387,7 @@
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+	<a href="null" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
