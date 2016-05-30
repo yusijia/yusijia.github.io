@@ -34,7 +34,7 @@
 				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -47,7 +47,7 @@
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -59,6 +59,43 @@
     </header>
     <div id="container">
       <div id="main">
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/06/dp/poj3278/" title="poj3278" itemprop="url">
+  
+    <h1 itemprop="name">poj3278</h1>
+    
+     
+           <p itemprop="description" >题目大意：同一行上有两个点，从n点到k点有两个，求从n点出发到k点要的最小操作数
+
+操作1：到x - 1处
+操作2：到x + 1处
+操作3：到2*x处
+
+分析：首先想到的应该是BFS，找最短路径，但其实也用到了一点差分约束的思想，把数学问题看成图来做，只不过这道题的图是一棵树
+1</p>
+        
+    
+    <time datetime="2016-05-06T13:40:03.000Z" itemprop="datePublished">2016-05-06</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/06/dictionary tree/hdu1075/" title="hdu1075" itemprop="url">
+  
+    <h1 itemprop="name">hdu1075</h1>
+    
+     
+           <p itemprop="description" >题目：　　给定一个映射表的关系，给定每个单词的对应的映射的单词。现在给定一段字符串，要求如果单词能够翻译就进行翻译，否则原样输出，但是注意所有的\n，\r，空格以及所有的标点符号都是不翻译的。
+分析：
+先对映射表的单词建立字典树，每个单词的尾节点标记这个单词所映射的单词的下标，那</p>
+        
+    
+    <time datetime="2016-05-06T05:31:11.000Z" itemprop="datePublished">2016-05-06</time>
+  </a>
+</section>
 
   <section class="post" itemscope itemprop="blogPost">
   
@@ -196,51 +233,23 @@ Problem Description　　C国的死对头A国这段时间正在进行军事演�
   </a>
 </section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/05/binary sort tree/binary-sort-tree2/" title="二叉搜索树基本操作(完整版)" itemprop="url">
-  
-    <h1 itemprop="name">二叉搜索树基本操作(完整版)</h1>
-    
-     
-           <p itemprop="description" >12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747</p>
-        
-    
-    <time datetime="2016-05-05T09:41:23.000Z" itemprop="datePublished">2016-05-05</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/05/binary sort tree/binary-sort-tree/" title="二叉搜索的树的简单实现" itemprop="url">
-  
-    <h1 itemprop="name">二叉搜索的树的简单实现</h1>
-    
-     
-           <p itemprop="description" >12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747</p>
-        
-    
-    <time datetime="2016-05-05T06:06:58.000Z" itemprop="datePublished">2016-05-05</time>
-  </a>
-</section>
-
 
   <nav id="page-nav" class="clearfix">
     <a class="extend prev" rel="prev" href="/page/11/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/">Next &raquo;</a>
   </nav>
 
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
@@ -315,7 +324,7 @@ Problem Description　　C国的死对头A国这段时间正在进行军事演�
 		
 			<li><a href="/tags/算法-图论-差分约束/" title="算法-图论-差分约束">算法-图论-差分约束<sup>1</sup></a></li>
 		
-			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>4</sup></a></li>
+			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
 		
 			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>3</sup></a></li>
 		
@@ -366,7 +375,7 @@ Problem Description　　C国的死对头A国这段时间正在进行军事演�
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
