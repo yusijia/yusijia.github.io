@@ -34,7 +34,7 @@
 				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
 				<h2 class="blog-motto">Keep on going never give up.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -47,7 +47,7 @@
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -59,6 +59,43 @@
     </header>
     <div id="container">
       <div id="main">
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/01/常用/1/" title="1" itemprop="url">
+  
+    <h1 itemprop="name">1</h1>
+    
+     
+           <p itemprop="description" >c语法：char buf[20];gets(buf);   //可以输入带空格的字符串
+ 补：也可以用getchar();吃回车
+
+c++语法：如果用string buf;来保存：getline(cin, buf); //吃回车如果用char buf[255];来保存：cin.g</p>
+        
+    
+    <time datetime="2016-05-01T02:40:41.000Z" itemprop="datePublished">May 01 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/01/常用/range/" title="range" itemprop="url">
+  
+    <h1 itemprop="name">range</h1>
+    
+     
+           <p itemprop="description" >常用范围
+32位机的
+注意：有符号的第一位是符号位
+
+unsigned   int   0～4294967295      (1 &amp;lt;&amp;lt; 32) - 1      (32位)
+
+int   -2147483648～2147483647             (1 &amp;l</p>
+        
+    
+    <time datetime="2016-05-01T02:38:48.000Z" itemprop="datePublished">May 01 2016</time>
+  </a>
+</section>
 
   <section class="post" itemscope itemprop="blogPost">
   
@@ -196,59 +233,23 @@ c++版1234567891011121314151617181920212223</p>
   </a>
 </section>
 
-  <section class="w" itemscope itemprop="blogPost">
-  
-    <a href="/2016/04/30/qsort/The-application-of-qsort-in-C/" title="The application of qsort in C" itemprop="url">
-  
-    <h1 itemprop="name">The application of qsort in C</h1>
-    
-     
-           <p itemprop="description" >快速排序的使用（C 语言）
-注意要包含stdlib.h头文件
-用之前注意针对的数据类型
-写出正确的比较函数
-
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647</p>
-        
-    
-    <time datetime="2016-04-30T15:09:34.000Z" itemprop="datePublished">April 30 2016</time>
-  </a>
-</section>
-
-  <section class="w" itemscope itemprop="blogPost">
-  
-    <a href="/2016/04/30/qsort/qsort/" title="qsort" itemprop="url">
-  
-    <h1 itemprop="name">qsort</h1>
-    
-     
-           <p itemprop="description" >快速排序的基本实现
-话不多说直接上代码
-
-1234567891011121314151617181920212223242526272829303132333435#include &amp;lt;cstdio&amp;gt;#include &amp;lt;cstdlib&amp;gt;void qsort(</p>
-        
-    
-    <time datetime="2016-04-30T15:00:46.000Z" itemprop="datePublished">April 30 2016</time>
-  </a>
-</section>
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/19/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span>
+    <a class="extend prev" rel="prev" href="/page/19/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/21/">Next &raquo;</a>
   </nav>
 
 </div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">标签</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
@@ -281,7 +282,7 @@ c++版1234567891011121314151617181920212223</p>
 		
 			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>5</sup></a></li>
 		
-			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>2</sup></a></li>
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>4</sup></a></li>
 		
 			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
 		
@@ -376,7 +377,7 @@ c++版1234567891011121314151617181920212223</p>
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+	<a href="null" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
