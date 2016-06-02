@@ -62,9 +62,41 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/01/poj-2230/" title="poj 2230" itemprop="url">
+    <a href="/2016/06/02/BST/" title="次小生成树" itemprop="url">
   
-    <h1 itemprop="name">poj 2230</h1>
+    <h1 itemprop="name">次小生成树</h1>
+    
+     
+           <p itemprop="description" >求解次小生成树：step 1.
+先用prim求出最小生成树T.
+在prim的同时，用一个矩阵maxValue[u][v] 记录 在T中连结任意两点u,v的唯一的路中权值最大的那条边的权值. 这里用dp解决123//to是刚加入的点，不过还没进入节点数组，from是已经存在的点//</p>
+        
+    
+    <time datetime="2016-06-02T15:29:27.000Z" itemprop="datePublished">June 02 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/06/02/oula/hdu-1116/" title="hdu 1116(有向图)" itemprop="url">
+  
+    <h1 itemprop="name">hdu 1116(有向图)</h1>
+    
+     
+           <p itemprop="description" >http://acm.hdu.edu.cn/showproblem.php?pid=1116
+题目大意：　　给n个单词，判断能否按要求串成一个长串， 要求，前一个单词的最后一个字母是后一个单词的第一个字母，有点类似成语接龙。
+分析：　　把每个单词的首位字母抽出来，看成一条边，由于</p>
+        
+    
+    <time datetime="2016-06-02T03:21:56.000Z" itemprop="datePublished">June 02 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/06/01/oula/poj-2230/" title="poj 2230(无向图)" itemprop="url">
+  
+    <h1 itemprop="name">poj 2230(无向图)</h1>
     
      
            <p itemprop="description" >http://poj.org/problem?id=2230
@@ -78,9 +110,9 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/01/hdu-3018/" title="hdu 3018" itemprop="url">
+    <a href="/2016/06/01/oula/hdu-3018/" title="hdu 3018(无向图)" itemprop="url">
   
-    <h1 itemprop="name">hdu 3018</h1>
+    <h1 itemprop="name">hdu 3018(无向图)</h1>
     
      
            <p itemprop="description" >Problem DescriptionAnt Country consist of N towns.There are M roads connecting the towns.
@@ -93,9 +125,9 @@ Ant Tony,together with his friends,wants to go thr</p>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/01/oula/uva-10054/" title="uva 10054" itemprop="url">
+    <a href="/2016/06/01/oula/uva-10054/" title="uva 10054(无向图)" itemprop="url">
   
-    <h1 itemprop="name">uva 10054</h1>
+    <h1 itemprop="name">uva 10054(无向图)</h1>
     
      
            <p itemprop="description" >题目链接
@@ -187,35 +219,6 @@ Generator.java:12345package lianxi;public interface Generator&amp;lt;T&amp;gt; &
   </a>
 </section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/29/The base of java/foreach-2/" title="foreach的另一个实例" itemprop="url">
-  
-    <h1 itemprop="name">foreach的另一个实例</h1>
-    
-     
-           <p itemprop="description" >Animal.java:123456789101112131415161718192021222324package lianxi;public class Animal &amp;#123;	String name;		public Animal()&amp;#123; &amp;#125;			pu</p>
-        
-    
-    <time datetime="2016-05-29T03:33:53.000Z" itemprop="datePublished">May 29 2016</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/28/The base of java/foreach/" title="支持foreach访问的自定义集合类" itemprop="url">
-  
-    <h1 itemprop="name">支持foreach访问的自定义集合类</h1>
-    
-     
-           <p itemprop="description" >http://www.cnblogs.com/rollenholt/archive/2011/06/03/2070577.html
-Student.java:1234567891011121314151617181920212223242526272829303132333435</p>
-        
-    
-    <time datetime="2016-05-28T15:24:08.000Z" itemprop="datePublished">May 28 2016</time>
-  </a>
-</section>
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -265,7 +268,9 @@ Student.java:1234567891011121314151617181920212223242526272829303132333435</p>
 		
 			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>5</sup></a></li>
 		
-			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>4</sup></a></li>
+			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>5</sup></a></li>
 		
 			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
 		
@@ -306,8 +311,6 @@ Student.java:1234567891011121314151617181920212223242526272829303132333435</p>
 			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
 		
 			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
-		
-			<li><a href="/tags/算法-图论-差分约束/" title="算法-图论-差分约束">算法-图论-差分约束<sup>1</sup></a></li>
 		
 			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
 		

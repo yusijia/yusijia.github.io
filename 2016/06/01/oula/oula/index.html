@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-01T07:16:04.000Z" itemprop="datePublished">June 01 2016</time>
-    Updated:<time datetime="2016-06-01T13:19:46.498Z" itemprop="dateModified">June 01 2016</time>
+    Updated:<time datetime="2016-06-02T03:45:04.072Z" itemprop="dateModified">June 02 2016</time>
     
   </p>
 </header>
@@ -92,16 +92,16 @@
 <h2 id="欧拉回路："><a href="#欧拉回路：" class="headerlink" title="欧拉回路："></a>欧拉回路：</h2><p>　　就是从图上的一点出发，经过所有的边必须且只能一次，最终回到起点的路径。</p>
 <h3 id="图G是欧拉图要满足两个条件："><a href="#图G是欧拉图要满足两个条件：" class="headerlink" title="图G是欧拉图要满足两个条件："></a>图G是欧拉图要满足两个条件：</h3><ol>
 <li>图是连通的，不能有孤立的点存在。</li>
-<li>对于无向图来说度数为奇数的点的个数为0 .对于有向图来说，每个顶点的入度要等于出度</li>
+<li>对于<strong>无向图</strong>来说度数为奇数的点的个数为0 .对于<strong>有向图</strong>来说，每个顶点的入度要等于出度</li>
 </ol>
 <h2 id="欧拉回路的变形："><a href="#欧拉回路的变形：" class="headerlink" title="欧拉回路的变形："></a>欧拉回路的变形：</h2><p>　　可以不会到原点，但是依然要经过所有的边必须且只能一次，也就是所谓的一笔画问题。</p>
 <h3 id="需满足两个条件："><a href="#需满足两个条件：" class="headerlink" title="需满足两个条件："></a>需满足两个条件：</h3><p>1   图是连通的，不能有孤立的点存在。<br>2    对于无向图来说，度数为奇数的点的个数为2，并且这两个点一定是路径的起点和终点。<br>对于有向图来说，存在两个顶点，其入度不等于出度，其中一点出度比入度大1，为起点，另一点入度比出度大1，为终点。</p>
 <h2 id="欧拉通路"><a href="#欧拉通路" class="headerlink" title="欧拉通路"></a>欧拉通路</h2><ul>
 <li><p>如果欧拉通路的起点与终点重合,那么这条欧拉通路是欧拉回路</p>
 </li>
-<li><p>无向连通图G含有欧拉通路，当且仅当G有零个或两个奇数度的结点；</p>
+<li><p><strong>无向连通图</strong>G含有欧拉通路，当且仅当G有<strong>零个或两个奇数度</strong>的结点；</p>
 </li>
-<li><p>有向连通图D含有欧拉通路，当且仅当D中除两个结点起点s终点t外，其余每个结点的入度＝出度,（起点s的入读=出度+1，终点t的出度=入度+1 或两个点的入读=出度）</p>
+<li><p><strong>有向连通图</strong>D含有欧拉通路，当且仅当D中除两个结点起点s终点t外，其余每个结点的入度＝出度,（起点s的入读=出度+1，终点t的出度=入度+1 或两个点的入读=出度）或者是与欧拉回路的有向图的情况一样</p>
 </li>
 </ul>
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>根据题目的不同，要做相应的一些改动，这里拿链式前向星存的无向图来举例：</p>
@@ -129,10 +129,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/06/01/oula/uva-10054/" title="uva 10054">
+ <a href="/2016/06/01/oula/uva-10054/" title="uva 10054(无向图)">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  uva 10054</span>
+  uva 10054(无向图)</span>
 </a>
 </div>
 
@@ -232,7 +232,9 @@ var duoshuoQuery = {short_name:"ysjdb"};
 		
 			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>5</sup></a></li>
 		
-			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>4</sup></a></li>
+			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>5</sup></a></li>
 		
 			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
 		
@@ -273,8 +275,6 @@ var duoshuoQuery = {short_name:"ysjdb"};
 			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
 		
 			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
-		
-			<li><a href="/tags/算法-图论-差分约束/" title="算法-图论-差分约束">算法-图论-差分约束<sup>1</sup></a></li>
 		
 			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
 		
