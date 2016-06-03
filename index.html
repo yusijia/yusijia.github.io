@@ -62,14 +62,63 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/02/BST/" title="次小生成树" itemprop="url">
+    <a href="/2016/06/03/Hash-2/" title="Hash详解" itemprop="url">
+  
+    <h1 itemprop="name">Hash详解</h1>
+    
+     
+           <p itemprop="description" >转：http://blog.csdn.net/chenguolinblog/article/details/7833782</p>
+        
+    
+    <time datetime="2016-06-03T13:02:45.000Z" itemprop="datePublished">June 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/06/03/Hash/" title="8个常用的字符串哈希函数" itemprop="url">
+  
+    <h1 itemprop="name">8个常用的字符串哈希函数</h1>
+    
+     
+           <p itemprop="description" >转：http://blog.csdn.net/chenguolinblog/article/details/7833794
+最常用的两个123456789101112131415161718unsigned long long hash;   // hash使用unsigned </p>
+        
+    
+    <time datetime="2016-06-03T12:57:27.000Z" itemprop="datePublished">June 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/06/03/BST/poj-1679/" title="poj 1679(模板)" itemprop="url">
+  
+    <h1 itemprop="name">poj 1679(模板)</h1>
+    
+     
+           <p itemprop="description" >题目大意：　　判断最小生成树是否唯一。
+分析：　　就是找他的次小生成树是否权值也等于最小生成树。
+求次小生成树：
+用prime算法求最小生成树的同时，记录每个连通点的父节点，并用dp记录出生成树上u到v 路径上权值最大的边。
+
+1234567//用sta数组(栈)记录生成树连通的</p>
+        
+    
+    <time datetime="2016-06-03T09:37:46.000Z" itemprop="datePublished">June 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/06/02/BST/BST/" title="次小生成树" itemprop="url">
   
     <h1 itemprop="name">次小生成树</h1>
     
      
-           <p itemprop="description" >求解次小生成树：step 1.
-先用prim求出最小生成树T.
-在prim的同时，用一个矩阵maxValue[u][v] 记录 在T中连结任意两点u,v的唯一的路中权值最大的那条边的权值. 这里用dp解决123//to是刚加入的点，不过还没进入节点数组，from是已经存在的点//</p>
+           <p itemprop="description" >参考：http://www.cnblogs.com/hxsyl/p/3290832.html《图论及应用》哈工大出版
+求解次小生成树：step 1.
+先用prim求出最小生成树 T.
+在prim的同时，记录每个连通点的父节点，并用一个矩阵maxValue[u][v] 记录 在T中</p>
         
     
     <time datetime="2016-06-02T15:29:27.000Z" itemprop="datePublished">June 02 2016</time>
@@ -174,51 +223,6 @@ Problem DescriptionA friend of you is doing research on the Traveling K</p>
   </a>
 </section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/30/BFS/hdu-1241/" title="hdu 1241" itemprop="url">
-  
-    <h1 itemprop="name">hdu 1241</h1>
-    
-     
-           <p itemprop="description" >Problem DescriptionThe GeoSurvComp geologic survey company is responsible for detecting underground oil deposits. GeoSurvComp works with one</p>
-        
-    
-    <time datetime="2016-05-30T14:32:25.000Z" itemprop="datePublished">May 30 2016</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/29/The base of java/java-enum/" title="java枚举" itemprop="url">
-  
-    <h1 itemprop="name">java枚举</h1>
-    
-     
-           <p itemprop="description" >参考：http://www.cnblogs.com/hemingwang0902/archive/2011/12/29/2306263.html《Thinking in java》
-语法（定义）　　创建枚举类型要使用 enum 关键字，隐含了所创建的类型都是 java.lang.</p>
-        
-    
-    <time datetime="2016-05-29T13:56:06.000Z" itemprop="datePublished">May 29 2016</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/29/The base of java/Generator/" title="泛型应用 Generator&lt;T&gt;生成器 用于创建对象" itemprop="url">
-  
-    <h1 itemprop="name">泛型应用 Generator&lt;T&gt;生成器 用于创建对象</h1>
-    
-     
-           <p itemprop="description" >泛型应用 Generator生成器 用于创建对象
-Generator.java:12345package lianxi;public interface Generator&amp;lt;T&amp;gt; &amp;#123;	T RandomNext();&amp;#125;
-实例1：Coffee.java</p>
-        
-    
-    <time datetime="2016-05-29T13:47:45.000Z" itemprop="datePublished">May 29 2016</time>
-  </a>
-</section>
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -246,6 +250,8 @@ Generator.java:12345package lianxi;public interface Generator&amp;lt;T&amp;gt; &
 		
 			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
 		
+			<li><a href="/tags/数据结构-Hash/" title="数据结构-Hash">数据结构-Hash<sup>2</sup></a></li>
+		
 			<li><a href="/tags/数据结构-二叉搜索树/" title="数据结构-二叉搜索树">数据结构-二叉搜索树<sup>2</sup></a></li>
 		
 			<li><a href="/tags/数据结构-二叉树/" title="数据结构-二叉树">数据结构-二叉树<sup>2</sup></a></li>
@@ -260,7 +266,7 @@ Generator.java:12345package lianxi;public interface Generator&amp;lt;T&amp;gt; &
 		
 			<li><a href="/tags/数据结构-图论-最小生成树-kruskal/" title="数据结构-图论-最小生成树-kruskal">数据结构-图论-最小生成树-kruskal<sup>6</sup></a></li>
 		
-			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>4</sup></a></li>
+			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>5</sup></a></li>
 		
 			<li><a href="/tags/数据结构-图论-最短路-Dijsktra/" title="数据结构-图论-最短路-Dijsktra">数据结构-图论-最短路-Dijsktra<sup>1</sup></a></li>
 		
@@ -268,7 +274,7 @@ Generator.java:12345package lianxi;public interface Generator&amp;lt;T&amp;gt; &
 		
 			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>5</sup></a></li>
 		
-			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>1</sup></a></li>
+			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>2</sup></a></li>
 		
 			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>5</sup></a></li>
 		
