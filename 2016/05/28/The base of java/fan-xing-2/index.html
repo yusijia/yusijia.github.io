@@ -38,7 +38,7 @@ Java泛型的实现方法：类型擦除　　前面已经说了，Java的泛型
 				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
 				<h2 class="blog-motto">Keep on going never give up.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -51,7 +51,7 @@ Java泛型的实现方法：类型擦除　　前面已经说了，Java的泛型
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -75,7 +75,7 @@ Java泛型的实现方法：类型擦除　　前面已经说了，Java的泛型
     </p>
   <p class="article-time">
     <time datetime="2016-05-28T06:30:02.000Z" itemprop="datePublished">May 28 2016</time>
-    更新日期:<time datetime="2016-05-28T08:08:05.345Z" itemprop="dateModified">May 28 2016</time>
+    Updated:<time datetime="2016-05-28T08:08:05.345Z" itemprop="dateModified">May 28 2016</time>
     
   </p>
 </header>
@@ -83,7 +83,7 @@ Java泛型的实现方法：类型擦除　　前面已经说了，Java的泛型
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
+			<strong class="toc-title">Contents</strong>
 		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java泛型的实现方法：类型擦除"><span class="toc-number">1.</span> <span class="toc-text">Java泛型的实现方法：类型擦除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除后保留的原始类型"><span class="toc-number">2.</span> <span class="toc-text">类型擦除后保留的原始类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要区分原始类型和泛型变量的类型"><span class="toc-number">3.</span> <span class="toc-text">要区分原始类型和泛型变量的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除引起的问题及解决方法"><span class="toc-number">4.</span> <span class="toc-text">类型擦除引起的问题及解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#先检查，在编译，以及检查编译的对象和引用传递的问题"><span class="toc-number">4.1.</span> <span class="toc-text">先检查，在编译，以及检查编译的对象和引用传递的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动类型转换"><span class="toc-number">5.</span> <span class="toc-text">自动类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除与多态的冲突和解决方法"><span class="toc-number">6.</span> <span class="toc-text">类型擦除与多态的冲突和解决方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型类型变量不能是基本数据类型"><span class="toc-number">7.</span> <span class="toc-text">泛型类型变量不能是基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时类型查询"><span class="toc-number">8.</span> <span class="toc-text">运行时类型查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不能再catch子句中使用泛型变量"><span class="toc-number">9.</span> <span class="toc-text">不能再catch子句中使用泛型变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组（这个不属于类型擦除引起的问题）"><span class="toc-number">10.</span> <span class="toc-text">数组（这个不属于类型擦除引起的问题）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除后的冲突"><span class="toc-number">11.</span> <span class="toc-text">类型擦除后的冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型在静态方法和静态类中的问题"><span class="toc-number">12.</span> <span class="toc-text">泛型在静态方法和静态类中的问题</span></a></li></ol>
 		</div>
 		
@@ -276,22 +276,22 @@ var duoshuoQuery = {short_name:"ysjdb"};
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
+  <strong class="toc-title">Contents</strong>
   <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java泛型的实现方法：类型擦除"><span class="toc-number">1.</span> <span class="toc-text">Java泛型的实现方法：类型擦除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除后保留的原始类型"><span class="toc-number">2.</span> <span class="toc-text">类型擦除后保留的原始类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要区分原始类型和泛型变量的类型"><span class="toc-number">3.</span> <span class="toc-text">要区分原始类型和泛型变量的类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除引起的问题及解决方法"><span class="toc-number">4.</span> <span class="toc-text">类型擦除引起的问题及解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#先检查，在编译，以及检查编译的对象和引用传递的问题"><span class="toc-number">4.1.</span> <span class="toc-text">先检查，在编译，以及检查编译的对象和引用传递的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动类型转换"><span class="toc-number">5.</span> <span class="toc-text">自动类型转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除与多态的冲突和解决方法"><span class="toc-number">6.</span> <span class="toc-text">类型擦除与多态的冲突和解决方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型类型变量不能是基本数据类型"><span class="toc-number">7.</span> <span class="toc-text">泛型类型变量不能是基本数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时类型查询"><span class="toc-number">8.</span> <span class="toc-text">运行时类型查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不能再catch子句中使用泛型变量"><span class="toc-number">9.</span> <span class="toc-text">不能再catch子句中使用泛型变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组（这个不属于类型擦除引起的问题）"><span class="toc-number">10.</span> <span class="toc-text">数组（这个不属于类型擦除引起的问题）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型擦除后的冲突"><span class="toc-number">11.</span> <span class="toc-text">类型擦除后的冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型在静态方法和静态类中的问题"><span class="toc-number">12.</span> <span class="toc-text">泛型在静态方法和静态类中的问题</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">標簽</p>
+	<p class="asidetitle">Tags</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
@@ -431,7 +431,7 @@ var duoshuoQuery = {short_name:"ysjdb"};
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="null" target="_blank" title="rss">RSS</a>
 </div>
 
 </aside>
