@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-01T07:16:04.000Z" itemprop="datePublished">June 01 2016</time>
-    Updated:<time datetime="2016-06-02T03:45:04.072Z" itemprop="dateModified">June 02 2016</time>
+    Updated:<time datetime="2016-06-13T15:38:07.842Z" itemprop="dateModified">June 13 2016</time>
     
   </p>
 </header>
@@ -95,13 +95,13 @@
 <li>对于<strong>无向图</strong>来说度数为奇数的点的个数为0 .对于<strong>有向图</strong>来说，每个顶点的入度要等于出度</li>
 </ol>
 <h2 id="欧拉回路的变形："><a href="#欧拉回路的变形：" class="headerlink" title="欧拉回路的变形："></a>欧拉回路的变形：</h2><p>　　可以不会到原点，但是依然要经过所有的边必须且只能一次，也就是所谓的一笔画问题。</p>
-<h3 id="需满足两个条件："><a href="#需满足两个条件：" class="headerlink" title="需满足两个条件："></a>需满足两个条件：</h3><p>1   图是连通的，不能有孤立的点存在。<br>2    对于无向图来说，度数为奇数的点的个数为2，并且这两个点一定是路径的起点和终点。<br>对于有向图来说，存在两个顶点，其入度不等于出度，其中一点出度比入度大1，为起点，另一点入度比出度大1，为终点。</p>
+<h3 id="需满足两个条件："><a href="#需满足两个条件：" class="headerlink" title="需满足两个条件："></a>需满足两个条件：</h3><p>1   图是连通的，不能有孤立的点存在。<br>2    对于无向图来说，度数为奇数的点的个数为2，并且这两个点一定是路径的起点和终点。<br>对于有向图来说，存在两个顶点，其入度不等于出度，<strong>其中一点出度比入度大1，为起点</strong>，<strong>另一点入度比出度大1，为终点</strong>。<strong>(注意起点，终点的条件，不是简单的度数差的绝对值为1)</strong></p>
 <h2 id="欧拉通路"><a href="#欧拉通路" class="headerlink" title="欧拉通路"></a>欧拉通路</h2><ul>
 <li><p>如果欧拉通路的起点与终点重合,那么这条欧拉通路是欧拉回路</p>
 </li>
 <li><p><strong>无向连通图</strong>G含有欧拉通路，当且仅当G有<strong>零个或两个奇数度</strong>的结点；</p>
 </li>
-<li><p><strong>有向连通图</strong>D含有欧拉通路，当且仅当D中除两个结点起点s终点t外，其余每个结点的入度＝出度,（起点s的入读=出度+1，终点t的出度=入度+1 或两个点的入读=出度）或者是与欧拉回路的有向图的情况一样</p>
+<li><p><strong>有向连通图</strong>D含有欧拉通路，当且仅当D中除两个结点起点s终点t外，<strong>其余每个结点的入度＝出度</strong>,（<strong>起点</strong>s的入度=出度+1，<strong>终点</strong>t的出度=入度+1 或两个点的入读=出度）或者是与欧拉回路的有向图的情况一样</p>
 </li>
 </ul>
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><p>根据题目的不同，要做相应的一些改动，这里拿链式前向星存的无向图来举例：</p>
@@ -240,7 +240,7 @@ var duoshuoQuery = {short_name:"ysjdb"};
 		
 			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>2</sup></a></li>
 		
-			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>5</sup></a></li>
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>6</sup></a></li>
 		
 			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
 		
