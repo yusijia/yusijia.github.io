@@ -9,8 +9,9 @@
     
     <meta name="author" content="yusijia">
     
-    <meta name="description" content="求最小费用，最短路问题
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737">
+    <meta name="description" content="题目大意：求最短距离且最少花费，如果路线有几条，就找花费最少的。
+分析：求最短距离dis数组的时候，也把tmpcost数组给求出来，注意要加一个特判，如果路线距离相同，找花费最少的
+12345678910111213141516171819202122232425262728293031323334">
     
     
     
@@ -37,7 +38,7 @@
 				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
 				<h2 class="blog-motto">Keep on going never give up.</h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -50,7 +51,7 @@
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -74,7 +75,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-06-15T15:31:22.000Z" itemprop="datePublished">June 15 2016</time>
-    Updated:<time datetime="2016-06-15T15:32:48.754Z" itemprop="dateModified">June 15 2016</time>
+    更新日期:<time datetime="2016-06-19T00:56:09.609Z" itemprop="dateModified">June 19 2016</time>
     
   </p>
 </header>
@@ -82,11 +83,12 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目大意："><span class="toc-number">1.</span> <span class="toc-text">题目大意：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析："><span class="toc-number">2.</span> <span class="toc-text">分析：</span></a></li></ol>
 		</div>
 		
-		<p>求最小费用，最短路问题</p>
+		<h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>求最短距离且最少花费，如果路线有几条，就找花费最少的。</p>
+<h2 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h2><p>求最短距离dis数组的时候，也把tmpcost数组给求出来，注意要加一个特判，如果路线距离相同，找花费最少的</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//hdu3790</span></span><br><span class="line"><span class="comment">/*#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#define MAXN 1000</span><br><span class="line">#define INF 0x3f3f3f3f   //INF一般设成这个，</span><br><span class="line">//防止dis[MinNumber] + mp[MinNumber][j]溢出</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int cost[MAXN][MAXN];</span><br><span class="line">int tmpcost[MAXN];</span><br><span class="line">int value[MAXN][MAXN];</span><br><span class="line">int dis[MAXN];</span><br><span class="line">int n, m, begins, End;</span><br><span class="line">int vis[MAXN];</span><br><span class="line"></span><br><span class="line">void init()</span><br><span class="line">&#123;</span><br><span class="line">    for(int i = 1; i &lt;= n; i++)&#123;</span><br><span class="line">        for(int j = 1; j &lt;= n; j++)&#123;</span><br><span class="line">            value[i][j] = INF;</span><br><span class="line">            cost[i][j] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void solve(int start)</span><br><span class="line">&#123;</span><br><span class="line">    memset(dis, INF, sizeof(dis));</span><br><span class="line">    memset(vis, 0, sizeof(vis));</span><br><span class="line">    memset(tmpcost, INF, sizeof(tmpcost));</span><br><span class="line">    dis[start] = tmpcost[start] = 0;</span><br><span class="line">    for(int i = 1; i &lt;= n; i++)&#123;</span><br><span class="line">        int Min = INF, MinNumber;</span><br><span class="line">        for(int j = 1; j &lt;= n; j++) if(dis[j] &lt; Min &amp;&amp; !vis[j])&#123;</span><br><span class="line">            Min = dis[j];</span><br><span class="line">            MinNumber = j;</span><br><span class="line">        &#125;</span><br><span class="line">        vis[MinNumber] = 1;</span><br><span class="line">        for(int j = 1; j &lt;= n; j++)&#123;</span><br><span class="line">              if(dis[j] &gt; dis[MinNumber] + value[MinNumber][j])&#123;</span><br><span class="line">                 dis[j] = dis[MinNumber] + value[MinNumber][j];</span><br><span class="line">                 tmpcost[j] = tmpcost[MinNumber] + cost[MinNumber][j];</span><br><span class="line">              &#125;</span><br><span class="line">              else if(dis[j] == dis[MinNumber] + value[MinNumber][j])&#123;</span><br><span class="line">                 if(tmpcost[j] &gt; tmpcost[MinNumber] + cost[MinNumber][j])</span><br><span class="line">                    tmpcost[j] = tmpcost[MinNumber] + cost[MinNumber][j];</span><br><span class="line">              &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    printf("%d %d\n" , dis[End] , tmpcost[End]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a, b, v, c;</span><br><span class="line">    while(scanf("%d%d", &amp;n, &amp;m) != EOF &amp;&amp; n + m)&#123;</span><br><span class="line">        init();</span><br><span class="line">        for(int i = 0; i &lt; m; i++)&#123;</span><br><span class="line">            scanf("%d%d%d%d", &amp;a, &amp;b, &amp;v, &amp;c);</span><br><span class="line">            if(value[a][b] &gt; v)&#123;</span><br><span class="line">                value[a][b] = value[b][a] = v;</span><br><span class="line">                cost[a][b] = cost[b][a] = c;</span><br><span class="line">            &#125;</span><br><span class="line">            else if(value[a][b] == v &amp;&amp; cost[a][b] &gt; c)&#123;</span><br><span class="line">                cost[a][b] = cost[b][a] = c;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        scanf("%d%d", &amp;begins, &amp;End);</span><br><span class="line">        solve(begins);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -166,22 +168,22 @@ var duoshuoQuery = {short_name:"ysjdb"};
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目大意："><span class="toc-number">1.</span> <span class="toc-text">题目大意：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析："><span class="toc-number">2.</span> <span class="toc-text">分析：</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   
 
   
 <div class="tagslist">
-	<p class="asidetitle">Tags</p>
+	<p class="asidetitle">標簽</p>
 		<ul class="clearfix">
 		
 			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
@@ -329,7 +331,7 @@ var duoshuoQuery = {short_name:"ysjdb"};
 
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
 </div>
 
 </aside>
