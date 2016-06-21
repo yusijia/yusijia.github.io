@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>循环队列实现 | yusijia&#39;s blog</title>
+    <title>BigDecimal类 | yusijia&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="yusijia">
     
-    <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940#include&amp;lt;stdio.h&amp;gt;#define MAX_SIZE 1000int que_length = 0;int que_rear = 0">
+    <meta name="description" content="参考：http://blog.csdn.net/jackiehff/article/details/8582449《改善java程序的151个建议》
+引言　　借用《Effactive Java》这本书中的话，float和double类型的主要设计目标是为了科学计算和工程计算。他们执行二进制浮点运算，">
     
     
     
@@ -65,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/04/queue/queue-1/" title="循环队列实现" itemprop="url">循环队列实现</a>
+      <a href="/2016/06/21/BigDecimal/" title="BigDecimal类" itemprop="url">BigDecimal类</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="yusijia">yusijia</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-05-04T01:21:25.000Z" itemprop="datePublished">May 04 2016</time>
-    更新日期:<time datetime="2016-05-04T01:22:32.056Z" itemprop="dateModified">May 04 2016</time>
+    <time datetime="2016-06-21T15:53:34.000Z" itemprop="datePublished">June 21 2016</time>
+    更新日期:<time datetime="2016-06-21T15:59:56.156Z" itemprop="dateModified">June 21 2016</time>
     
   </p>
 </header>
@@ -82,17 +83,27 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BigDecimal简介"><span class="toc-number">2.</span> <span class="toc-text">BigDecimal简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">3.</span> <span class="toc-text">测试代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">3.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK的描述："><span class="toc-number">3.2.</span> <span class="toc-text">JDK的描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。"><span class="toc-number">3.3.</span> <span class="toc-text">通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充："><span class="toc-number">4.</span> <span class="toc-text">补充：</span></a></li></ol>
 		</div>
 		
-		<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_SIZE 1000</span></span><br><span class="line"><span class="keyword">int</span> que_length = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> que_rear = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> que_front = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">struct</span> fifo&#123;</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">&#125;que[MAX_SIZE];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">length</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return que_length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> val)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    que[que_rear].data = val;     <span class="comment">//传过来的是int型</span></span><br><span class="line">    que_length++;</span><br><span class="line">    que_rear = (que_rear + <span class="number">1</span>) % MAX_SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pop</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p;</span><br><span class="line">    p = que[que_front].data;</span><br><span class="line">    que_front = (que_front + <span class="number">1</span>) % MAX_SIZE;</span><br><span class="line">    que_length--;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isempty</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return que_length == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isfull</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    return que_length == MAX_SIZE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+		<p>参考：<br><a href="http://blog.csdn.net/jackiehff/article/details/8582449" target="_blank" rel="external">http://blog.csdn.net/jackiehff/article/details/8582449</a><br>《改善java程序的151个建议》</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>　　借用《Effactive Java》这本书中的话，float和double类型的主要设计目标是为了科学计算和工程计算。他们执行二进制浮点运算，这是为了在广域数值范围上提供较为精确的快速近似计算而精心设计的。然而，它们没有提供完全精确的结果，所以不应该被用于要求精确结果的场合。但是，商业计算往往要求结果精确，这时候BigDecimal就派上大用场啦。</p>
+<h2 id="BigDecimal简介"><a href="#BigDecimal简介" class="headerlink" title="BigDecimal简介"></a>BigDecimal简介</h2><p>　　BigDecimal 由任意精度的整数非标度值 和32 位的整数标度 (scale) 组成。如果为零或正数，则标度是小数点后的位数。如果为负数，则将该数的非标度值乘以 10 的负scale 次幂。因此，BigDecimal表示的数值是(unscaledValue × 10-scale)。</p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><ul>
+<li>（主要测试参数类型为double和String的两个常用构造函数）<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BigDecimal aDouble =<span class="keyword">new</span> BigDecimal(<span class="number">1.22</span>);</span><br><span class="line">System.out.println(<span class="string">"construct with a double value: "</span> + aDouble);</span><br><span class="line">BigDecimal aString = <span class="keyword">new</span> BigDecimal(<span class="string">"1.22"</span>);</span><br><span class="line"> System.out.println(<span class="string">"construct with a String value: "</span> + aString);</span><br><span class="line">	输出结果如下：</span><br><span class="line"> construct with a doublevalue:<span class="number">1.2199999999999999733546474089962430298328399658203125</span></span><br><span class="line"> construct with a String value: <span class="number">1.22</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="JDK的描述："><a href="#JDK的描述：" class="headerlink" title="JDK的描述："></a>JDK的描述：</h3><p>　　1、参数类型为double的构造方法的结果有一定的不可预知性。有人可能认为在Java中写入newBigDecimal(0.1)所创建的BigDecimal正好等于 0.1（非标度值 1，其标度为 1），但是它实际上等于0.1000000000000000055511151231257827021181583404541015625。这是因为0.1无法准确地表示为 double（或者说对于该情况，不能表示为任何有限长度的二进制小数）<strong>(十进制小数转化为二进制的方法是乘二取整)</strong>。这样，传入到构造方法的值不会正好等于 0.1（虽然表面上等于该值）。<br>　　2、另一方面，String 构造方法是完全可预知的：写入 new BigDecimal(“0.1”) 将创建一个 BigDecimal，它正好等于预期的 0.1。因此，比较而言，通常建议优先使用String构造方法。<br>　　3、当double必须用作BigDecimal的源时，请注意，此构造方法提供了一个准确转换；它不提供与以下操作相同的结果：先使用Double.toString(double)方法，然后使用BigDecimal(String)构造方法，将double转换为String。要获取该结果，请使用static valueOf(double)方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> a = <span class="number">1.25</span>;</span><br><span class="line">BigDecimal b = <span class="keyword">new</span> BigDecimal(Double.toString(a));<span class="comment">//常用构造方法</span></span><br><span class="line"><span class="keyword">double</span> c = b.doubleValue();</span><br><span class="line">BigDecimal d = BigDecimal.valueOf(a);<span class="comment">//常用构造方法</span></span><br><span class="line">System.out.println(<span class="string">"b: "</span> + b);</span><br><span class="line">System.out.println(<span class="string">"c: "</span> + c);</span><br><span class="line">System.out.println(<span class="string">"d: "</span> + d);</span><br><span class="line">输出：</span><br><span class="line">b: <span class="number">1.25</span></span><br><span class="line">c: <span class="number">1.25</span></span><br><span class="line">d: <span class="number">1.25</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。"><a href="#通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。" class="headerlink" title="通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。"></a>通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">例如：</span><br><span class="line"><span class="function"><span class="keyword">public</span> BigDecimal <span class="title">add</span><span class="params">(BigDecimal value)</span></span>;<span class="comment">//加法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BigDecimal <span class="title">subtract</span><span class="params">(BigDecimal value)</span></span>; <span class="comment">//减法 </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BigDecimal <span class="title">multiply</span><span class="params">(BigDecimal value)</span></span>; <span class="comment">//乘法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> BigDecimal <span class="title">divide</span><span class="params">(BigDecimal value)</span></span>; <span class="comment">//除法</span></span><br></pre></td></tr></table></figure>
+<p>　　进行相应的计算后，我们可能需要将BigDecimal对象转换成相应的基本数据类型的变量，可以使用floatValue()，doubleValue()等方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] main)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">double</span> a = <span class="number">1.25</span>;</span><br><span class="line">		<span class="keyword">double</span> b = <span class="number">0.4</span>;</span><br><span class="line">		BigDecimal c = <span class="keyword">new</span> BigDecimal(Double.toString(a));</span><br><span class="line">		BigDecimal d = BigDecimal.valueOf(b);</span><br><span class="line">		BigDecimal e = c.add(d);</span><br><span class="line">		System.out.println(e);</span><br><span class="line">&#125;</span><br><span class="line">输出:</span><br><span class="line"><span class="number">1.65</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><p>　　另一种方法是使用整数，把参与运算的值扩大100倍，并转变为整型，然后在展现时再缩小100.0倍，这样处理的好处是简单，准确，一般在非金融行业（如零售业）应用比较多，此方法还会用于某些零售pos机</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/数据结构-队列/">数据结构-队列</a>
+  <span></span> <a href="/tags/语言-java基础知识/">语言-java基础知识</a>
   </div>
 
 
@@ -100,7 +111,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/05/04/queue/queue-1/" data-title="循环队列实现 | yusijia&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2016/06/21/BigDecimal/" data-title="BigDecimal类 | yusijia&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -109,19 +120,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/05/04/queue/queue-2/" title="单项队列">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  单项队列</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/05/04/euclid/king-s-cake/"  title="king&#39;s cake">
+<a href="/2016/06/21/serializable/"  title="java序列化和反序列化">
  <strong>NEXT:</strong><br/> 
- <span>king&#39;s cake
+ <span>java序列化和反序列化
 </span>
 </a>
 </div>
@@ -135,7 +138,7 @@
 
 <!-- ��˵���ۿ� start -->
 
-	<div class="ds-thread" data-thread-key="2016/05/04/queue/queue-1/" data-title="循环队列实现" data-url="undefined"></div>
+	<div class="ds-thread" data-thread-key="2016/06/21/BigDecimal/" data-title="BigDecimal类" data-url="undefined"></div>
 
 <!-- ��˵���ۿ� end -->
 
@@ -169,7 +172,7 @@ var duoshuoQuery = {short_name:"ysjdb"};
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BigDecimal简介"><span class="toc-number">2.</span> <span class="toc-text">BigDecimal简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试代码"><span class="toc-number">3.</span> <span class="toc-text">测试代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造函数"><span class="toc-number">3.1.</span> <span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK的描述："><span class="toc-number">3.2.</span> <span class="toc-text">JDK的描述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。"><span class="toc-number">3.3.</span> <span class="toc-text">通过调用BigDecimal的加，减，乘，除等相应的方法进行算术运算。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充："><span class="toc-number">4.</span> <span class="toc-text">补充：</span></a></li></ol>
   </div>
 
 <div id="asidepart">
