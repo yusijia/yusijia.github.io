@@ -74,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2016-05-22T04:43:30.000Z" itemprop="datePublished">May 22 2016</time>
-    更新日期:<time datetime="2016-05-22T04:48:04.899Z" itemprop="dateModified">May 22 2016</time>
+    更新日期:<time datetime="2016-06-23T09:54:31.764Z" itemprop="dateModified">June 23 2016</time>
     
   </p>
 </header>
@@ -102,12 +102,12 @@
 <li><p><strong>非空性：</strong>任何非空的引用值X，x.equals(null)的返回值一定为false</p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">    if (this.getClass() != obj.getClass()) &#123;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;*/</span></span><br><span class="line">    <span class="keyword">if</span>(!(obj <span class="keyword">instanceof</span> People))</span><br><span class="line">    	<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">     </span><br><span class="line">    People p = (People)obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name.equals(p.name)</span><br><span class="line">        &amp;&amp; <span class="keyword">this</span>.age == p.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">this</span>.getClass() != obj.getClass()) &#123;</span><br><span class="line">	        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//别用下面这个，有隐患</span></span><br><span class="line">    <span class="comment">/*if(!(obj instanceof People))</span><br><span class="line">    	return false;</span><br><span class="line">     */</span></span><br><span class="line"></span><br><span class="line">    People p = (People)obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name.equals(p.name)</span><br><span class="line">        &amp;&amp; <span class="keyword">this</span>.age == p.age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="二。-在重写equals方法时，还要顺手把-hashCode方法一起重写了。"><a href="#二。-在重写equals方法时，还要顺手把-hashCode方法一起重写了。" class="headerlink" title="二。 在重写equals方法时，还要顺手把 hashCode方法一起重写了。"></a>二。 在重写equals方法时，还要顺手把 hashCode方法一起重写了。</h2><p>　　这一点主要是考虑和集合类协同工作的需要。一般集合为加快存取速度，通常使用类hashtable的方式存取对象，</p>
 <p>　　hashCode() &amp;&amp; equals() 则是判断待查找元素与集合中某个元素相等的依据。 而java中默认的hashCode是由对象的内存地址生成的, 如果重写了equals 而没重写 hashCode， 则会造成“A和B相等，A加入集合后，用B查询集合却查不到”的悖论。</p>
 <h2 id="三。重写equals方法的一般步骤："><a href="#三。重写equals方法的一般步骤：" class="headerlink" title="三。重写equals方法的一般步骤："></a>三。重写equals方法的一般步骤：</h2><ol>
 <li>使用==操作符检查“实参是否为指向对象的一个引用”。 </li>
-<li>使用instanceof操作符检查“实参是否为正确的类型”。 </li>
+<li>使用getClass来检查实参是否为正确的类型，不要使用instanceof操作符检查“”。 </li>
 <li>把实参转换到正确的类型。 </li>
 <li><p>对于该类中每一个“关键”域，检查实参中的域与当前对象中对应的域值是否匹 配。</p>
 </li>
@@ -345,7 +345,7 @@ var duoshuoQuery = {short_name:"ysjdb"};
 		
 			<li><a href="/tags/语言-java-开发/" title="语言-java-开发">语言-java-开发<sup>1</sup></a></li>
 		
-			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>58</sup></a></li>
+			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>62</sup></a></li>
 		
 			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>4</sup></a></li>
 		
