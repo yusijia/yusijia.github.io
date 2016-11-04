@@ -62,156 +62,182 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/xie-bian-he-ni-bian/" title="协变和逆变" itemprop="url">
+    <a href="/2016/06/21/The base of java/serializable/" title="java序列化和反序列化" itemprop="url">
   
-    <h1 itemprop="name">协变和逆变</h1>
+    <h1 itemprop="name">java序列化和反序列化</h1>
     
      
-           <p itemprop="description" >参考：https://www.zybuluo.com/zhanjindong/note/34147
-http://www.cnblogs.com/en-heng/p/5041124.html</p>
+           <p itemprop="description" >参考好文：http://www.cnblogs.com/xiohao/p/4234184.htmlhttp://www.blogjava.net/jiangshachina/archive/2012/02/13/369898.html
+《Thinking in java》
+一．什</p>
         
     
-    <time datetime="2016-06-10T09:05:26.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-21T05:22:38.000Z" itemprop="datePublished">June 21 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/hashCode-and-equals/" title="重写hashCode()和equals()详解" itemprop="url">
+    <a href="/2016/06/20/The base of java/instanceof/" title="java中instanceof关键字" itemprop="url">
   
-    <h1 itemprop="name">重写hashCode()和equals()详解</h1>
+    <h1 itemprop="name">java中instanceof关键字</h1>
     
      
-           <p itemprop="description" >参考：《Effective Java》、《Thinking in java》http://www.oschina.net/question/82993_75533http://zhangjunhd.blog.51cto.com/113473/71571/《改善java程序的151</p>
+           <p itemprop="description" >参考：《改善java程序的151个建议》
+
+instanceof是Java的一个二元操作符，和==，&amp;gt;，&amp;lt;类似
+
+它的作用是用于判断一个引用类型变量所指向的对象是否是一个类（或接口、抽象类、父类）的实例。
+
+左右两个操作数有继承或实现关系
+
+Instanceof只能用</p>
         
     
-    <time datetime="2016-06-10T05:07:41.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-20T15:49:17.000Z" itemprop="datePublished">June 20 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/java-IO/" title="java IO详解" itemprop="url">
+    <a href="/2016/06/19/Huffman/" title="哈夫曼树与哈夫曼编码" itemprop="url">
   
-    <h1 itemprop="name">java IO详解</h1>
+    <h1 itemprop="name">哈夫曼树与哈夫曼编码</h1>
     
      
-           <p itemprop="description" >转：http://www.cnblogs.com/dolphin0520/p/3791327.html</p>
+           <p itemprop="description" >//寒假里写的，下学期复习的时候再整理一下
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636</p>
         
     
-    <time datetime="2016-06-10T03:34:30.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-19T02:20:31.000Z" itemprop="datePublished">June 19 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/PrintStream-and-PrintWriter/" title="PrintStream and PrintWriter" itemprop="url">
+    <a href="/2016/06/17/floyd/floyd-mincircle/" title="floyd求最小环(poj 1734)" itemprop="url">
   
-    <h1 itemprop="name">PrintStream and PrintWriter</h1>
+    <h1 itemprop="name">floyd求最小环(poj 1734)</h1>
     
      
-           <p itemprop="description" >转：http://blog.csdn.net/zsw2zkl/article/details/7209734
-PrintStreamPrintStream在OutputStream基础之上提供了增强的功能，即可以方便地输出各种类型的数据（而不仅限于byte型）的格式化表示形式。P</p>
+           <p itemprop="description" >题目大意：要找到一个最短路线，不能只有两个城市，起点和终点要是同一个城市
+分析：
+最小环问题，要求至少有三个点，则最短路线dis[i][j]中，i != j，再加上k就至少3个点了。
+
+12345678910111213141516171819202122232425262728</p>
         
     
-    <time datetime="2016-06-10T03:12:25.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-17T09:40:27.000Z" itemprop="datePublished">June 17 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/BufferedReader/" title="BufferedReader和BufferedWriter" itemprop="url">
+    <a href="/2016/06/15/Dijsktra/hdu-3790/" title="hdu 3790" itemprop="url">
   
-    <h1 itemprop="name">BufferedReader和BufferedWriter</h1>
+    <h1 itemprop="name">hdu 3790</h1>
     
      
-           <p itemprop="description" >BufferedReader类　　用于缓冲读取字符，将字节流封装成BufferedReader对象，然后用readLine()逐行读入字符流，直到遇到换行符为止（相当于反复调用Reader类对象的read()方法读入多个字符）
-
-下面摘抄自Java API文档1234567891</p>
+           <p itemprop="description" >题目大意：求最短距离且最少花费，如果路线有几条，就找花费最少的。
+分析：求最短距离dis数组的时候，也把tmpcost数组给求出来，注意要加一个特判，如果路线距离相同，找花费最少的
+1234567891011121314151617181920212223242526272829</p>
         
     
-    <time datetime="2016-06-10T02:27:05.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-15T15:31:22.000Z" itemprop="datePublished">June 15 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/FileInputStream/" title="FileInputStream和FileOutputStream" itemprop="url">
+    <a href="/2016/06/15/Dijsktra/hdu-2066/" title="hdu 2066" itemprop="url">
   
-    <h1 itemprop="name">FileInputStream和FileOutputStream</h1>
+    <h1 itemprop="name">hdu 2066</h1>
     
      
-           <p itemprop="description" >FileInputStream用于读取本地文件中的字节数据，继承自InputStream类123456789101112131415161718192021222324252627282930构造方法摘要FileInputStream(File file)           通</p>
+           <p itemprop="description" >最短路问题，这里用迪杰斯特拉算法来解
+
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646</p>
         
     
-    <time datetime="2016-06-10T02:16:41.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-15T15:28:59.000Z" itemprop="datePublished">June 15 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/10/The base of java/FileReader/" title="FileReader和FileWriter" itemprop="url">
+    <a href="/2016/06/15/Dijsktra/hdu-1548/" title="hdu 1548" itemprop="url">
   
-    <h1 itemprop="name">FileReader和FileWriter</h1>
+    <h1 itemprop="name">hdu 1548</h1>
     
      
-           <p itemprop="description" >转：http://blog.csdn.net/caixiexin/article/details/6719450
-FileReader用于以字符为单位读取文本文件
-123456789101112131415161718192021构造方法摘要FileReader(File fil</p>
+           <p itemprop="description" >hdu 1548
+
+最短路问题
+
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &amp;lt;ios</p>
         
     
-    <time datetime="2016-06-10T01:59:59.000Z" itemprop="datePublished">June 10 2016</time>
+    <time datetime="2016-06-15T15:26:01.000Z" itemprop="datePublished">June 15 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/09/The base of java/InputStreamReader/" title="InputStreamReader和OutputStreamWriter" itemprop="url">
+    <a href="/2016/06/14/The base of java/java-qu-zheng/" title="java取整和四舍五入" itemprop="url">
   
-    <h1 itemprop="name">InputStreamReader和OutputStreamWriter</h1>
+    <h1 itemprop="name">java取整和四舍五入</h1>
     
      
-           <p itemprop="description" >InputStreamReader　　可封装字节输入流从读取字节数据，然后将之转换为字符转换时所使用的字符编码可以在构造方法中显式指定，也可以使用平台的默认编码。
-　　为了达到最高效率，可要考虑在 BufferedReader 内包装 InputStreamReader。例如：
-</p>
+           <p itemprop="description" >参考：http://www.cnblogs.com/xd502djj/archive/2011/07/21/2112683.htmlhttp://blog.csdn.net/chenssy/article/details/1271981112345Math类里的两个方法：stat</p>
         
     
-    <time datetime="2016-06-09T15:52:38.000Z" itemprop="datePublished">June 09 2016</time>
+    <time datetime="2016-06-14T09:48:34.000Z" itemprop="datePublished">June 14 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/09/The base of java/java-io2/" title="字节流和字符流的区别" itemprop="url">
+    <a href="/2016/06/13/oula/poj-2337/" title="poj 2337(有向图 + 输出路径)" itemprop="url">
   
-    <h1 itemprop="name">字节流和字符流的区别</h1>
+    <h1 itemprop="name">poj 2337(有向图 + 输出路径)</h1>
     
      
-           <p itemprop="description" >转载自：http://blog.csdn.net/cynhafa/article/details/6882061
-java 字节流和字符流的区别字节流与和字符流的使用非常相似，两者除了操作代码上的不同之外，是否还有其他的不同呢？　　实际上字节流在操作时本身不会用到缓冲区（内存），</p>
+           <p itemprop="description" >题目链接
+参考
+题目大意：找欧拉通路，还有个要求是要输出字典序最小的方案
+分析：
+把每个单词的首字母和尾字母抽出来将单词作为一条边，
+
+要输出字典序最小的方案，其实对所有边从小到大排序就ok了，可以参考kruskal是怎样解决最小生成树的问题的
+
+然后用并查集 + set判单连通</p>
         
     
-    <time datetime="2016-06-09T15:03:31.000Z" itemprop="datePublished">June 09 2016</time>
+    <time datetime="2016-06-13T15:43:27.000Z" itemprop="datePublished">June 13 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/06/09/The base of java/java-io1/" title="java io流的常用方式" itemprop="url">
+    <a href="/2016/06/11/math/math-3/" title="求n^n的第一位数(hdu 1060)" itemprop="url">
   
-    <h1 itemprop="name">java io流的常用方式</h1>
+    <h1 itemprop="name">求n^n的第一位数(hdu 1060)</h1>
     
      
-           <p itemprop="description" >一．缓冲输入文件　　如果想要打开一个文件用于字符输入，可以使用以String或File对象作为文件名的FileInputReader。为了提高速度，我们希望对那个文件进行缓冲，那么我么将所产生的引用传给一个BufferedReader构造器，由于BufferedReader也提供</p>
+           <p itemprop="description" >分析：
+N^N = d.xxx * 10^(k-1) ,k 是N^N的位数
+10 ^（log10N^N） = N^N    // Log10(N^N)是double型的
+所以d.xxx = 10^(lgN^N - (k-1)); 
+k = lgN^N的整数部分+1      //</p>
         
     
-    <time datetime="2016-06-09T07:44:39.000Z" itemprop="datePublished">June 09 2016</time>
+    <time datetime="2016-06-11T14:06:34.000Z" itemprop="datePublished">June 11 2016</time>
   </a>
 </section>
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/10/">Next &raquo;</a>
   </nav>
 
 </div>
@@ -238,7 +264,7 @@ java 字节流和字符流的区别字节流与和字符流的使用非常相似
 		
 			<li><a href="/tags/java并发/" title="java并发">java并发<sup>9</sup></a></li>
 		
-			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>9</sup></a></li>
+			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>16</sup></a></li>
 		
 			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
 		
@@ -302,9 +328,9 @@ java 字节流和字符流的区别字节流与和字符流的使用非常相似
 		
 			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
 		
-			<li><a href="/tags/模拟/" title="模拟">模拟<sup>4</sup></a></li>
+			<li><a href="/tags/模拟/" title="模拟">模拟<sup>6</sup></a></li>
 		
-			<li><a href="/tags/水题/" title="水题">水题<sup>16</sup></a></li>
+			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
 		
 			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
 		
@@ -331,6 +357,8 @@ java 字节流和字符流的区别字节流与和字符流的使用非常相似
 			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
 		
 			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>2</sup></a></li>
 		
 			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
 		
@@ -362,7 +390,7 @@ java 字节流和字符流的区别字节流与和字符流的使用非常相似
 		
 			<li><a href="/tags/算法-计数排序/" title="算法-计数排序">算法-计数排序<sup>1</sup></a></li>
 		
-			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>3</sup></a></li>
+			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>4</sup></a></li>
 		
 			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
 		

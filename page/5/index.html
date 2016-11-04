@@ -62,147 +62,165 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/04/MYSQL/mysql10/" title="sql增删查改练习" itemprop="url">
+    <a href="/2016/09/12/水题/UVa11054/" title="UVa11054" itemprop="url">
   
-    <h1 itemprop="name">sql增删查改练习</h1>
+    <h1 itemprop="name">UVa11054</h1>
     
      
-           <p itemprop="description" >1234567891011121314151617181920INSERT INTO t_book VALUES(NULL,&amp;apos;我爱我家&amp;apos;,20,&amp;apos;张三&amp;apos;,1);# 主键用NULL就行了INSERT INTO t_book(id,bookNa</p>
+           <p itemprop="description" >白皮书训练：
+UVa11054，poj2940
+等价转换题目大意：　　一条街上有很多葡萄酒店，正数代表要运走，负数代表要运进。总和是０；然后就是怎么全部运成０，每一个单位的酒运到隔壁要一个单位钱(劳动力)，问钱最少多少。
+分析：　　考虑最左边的村庄，因为最后是平衡的，所以如果需要</p>
         
     
-    <time datetime="2016-09-03T16:04:55.000Z" itemprop="datePublished">September 04 2016</time>
+    <time datetime="2016-09-12T10:00:48.000Z" itemprop="datePublished">September 12 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/04/MYSQL/mysql9/" title="sql索引练习" itemprop="url">
+    <a href="/2016/09/11/水题/UVA1152/" title="UVA1152" itemprop="url">
   
-    <h1 itemprop="name">sql索引练习</h1>
+    <h1 itemprop="name">UVA1152</h1>
     
      
-           <p itemprop="description" >12345678910111213141516171819202122232425262728293031323334CREATE TABLE t_user1(id INT ,                     userName VARCHAR(20),          </p>
+           <p itemprop="description" >题目大意：　　给4组数据，每组数据n个数，求从每组抽一个数和为0的组数
+分析：
+先把a+b存到数组C，c+d存到数组D。
+枚举a+b的值,在c+d的值里二分查找-(a+b)
+
+1234567891011121314151617181920212223242526272829303</p>
         
     
-    <time datetime="2016-09-03T16:04:51.000Z" itemprop="datePublished">September 04 2016</time>
+    <time datetime="2016-09-11T15:00:04.000Z" itemprop="datePublished">September 11 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/04/MYSQL/mysql8/" title="sql视图练习" itemprop="url">
+    <a href="/2016/09/09/qsort/qselect/" title="快速选择" itemprop="url">
   
-    <h1 itemprop="name">sql视图练习</h1>
+    <h1 itemprop="name">快速选择</h1>
     
      
-           <p itemprop="description" >1234567891011121314151617181920212223242526272829303132333435363738394041# 创建视图CREATE VIEW v1 AS SELECT * FROM t_book;CREATE VIEW v2 AS SELE</p>
+           <p itemprop="description" >输入n个整数和一个正整数k(1&amp;lt;=k&amp;lt;=n)，输出这些整数从小到大排序后的第k个。注意n&amp;lt;=10^7
+分析：　　用快速排序的特点，会选出一个中值然后把小于他的放在左边，大于他的放在右边，最后比较k和中值序号来选择接下来是去左边找还是右边
+123456789101</p>
         
     
-    <time datetime="2016-09-03T16:01:57.000Z" itemprop="datePublished">September 04 2016</time>
+    <time datetime="2016-09-09T14:13:43.000Z" itemprop="datePublished">September 09 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/04/MYSQL/mysql7/" title="sql合并去重查询练习" itemprop="url">
+    <a href="/2016/09/09/水题/poj1804/" title="poj 1804(归并排序求解逆序对)" itemprop="url">
   
-    <h1 itemprop="name">sql合并去重查询练习</h1>
+    <h1 itemprop="name">poj 1804(归并排序求解逆序对)</h1>
     
      
-           <p itemprop="description" >123456# 自动去重SELECT id FROM t_book UNION SELECT id FROM t_booktype;# 不去重SELECT id FROM t_book UNION ALL SELECT id FROM t_booktype;</p>
+           <p itemprop="description" >分析　　归并排序是将数列a[left, right]分成两半a[left,mid]和a[mid+1,right]分别进行归并排序，然后再将这两半合并起来。在合并的过程中（设left&amp;lt;=i&amp;lt;=mid，mid+1&amp;lt;=j&amp;lt;=right），当a[i]&amp;lt;=a[</p>
         
     
-    <time datetime="2016-09-03T16:01:54.000Z" itemprop="datePublished">September 04 2016</time>
+    <time datetime="2016-09-09T14:01:03.000Z" itemprop="datePublished">September 09 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/03/MYSQL/mysql6/" title="sql给表和字段取别名" itemprop="url">
+    <a href="/2016/09/09/水题/UVA120/" title="UVA120" itemprop="url">
   
-    <h1 itemprop="name">sql给表和字段取别名</h1>
+    <h1 itemprop="name">UVA120</h1>
     
      
-           <p itemprop="description" >123456# 表名 别名SELECT t.bookName FROM t_book t WHERE t.id=1;# 属性名 AS 别名SELECT t.bookName AS bName FROM t_book t WHERE t.id=1;</p>
+           <p itemprop="description" >The Problem问题Given a stack of pancakes, you are to write a program that indicates how the stack can be sorted so that the largest pancake is</p>
         
     
-    <time datetime="2016-09-03T15:55:18.000Z" itemprop="datePublished">September 03 2016</time>
+    <time datetime="2016-09-09T13:54:40.000Z" itemprop="datePublished">September 09 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/03/MYSQL/mysql5/" title="sql各种连接查询练习" itemprop="url">
+    <a href="/2016/09/04/javaWeb/charset/" title="字符集" itemprop="url">
   
-    <h1 itemprop="name">sql各种连接查询练习</h1>
+    <h1 itemprop="name">字符集</h1>
     
      
-           <p itemprop="description" >1234567891011121314151617181920212223242526SELECT * FROM t_book,t_bookType;# where那里是两个表的内连接条件SELECT * FROM t_book,t_bookType WHERE t_book.b</p>
+           <p itemprop="description" >Latin-1ISO8859-1，通常叫做Latin-1。Latin-1包括了书写所有西方欧洲语言不可缺少的附加字符。
+而gb2312是标准中文字符集。
+unicodeUTF-8 是 UNICODE 的一种变长字符编码，即 RFC 3629。简单的说——大字符集。可以解决多种语言</p>
         
     
-    <time datetime="2016-09-03T15:55:12.000Z" itemprop="datePublished">September 03 2016</time>
+    <time datetime="2016-09-04T03:36:01.000Z" itemprop="datePublished">September 04 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/03/MYSQL/mysql4/" title="sql分组查询配合函数练习" itemprop="url">
+    <a href="/2016/09/04/javaWeb/http/" title="http协议介绍" itemprop="url">
   
-    <h1 itemprop="name">sql分组查询配合函数练习</h1>
+    <h1 itemprop="name">http协议介绍</h1>
     
      
-           <p itemprop="description" >12345678910111213141516171819202122SELECT COUNT(*) FROM t_grade;SELECT COUNT(*) AS total FROM t_grade;SELECT stuName,COUNT(*) FROM t_grade G</p>
+           <p itemprop="description" >什么是HTTP协议　　HTTP是hypertext transfer protocol（超文本传输协议）的简写，它是TCP/IP协议的一个应用层协议，用于定义WEB浏览器与WEB服务器之间交换数据的过程。客户端连上web服务器后，若想获得web服务器中的某个web资源，需遵守一定</p>
         
     
-    <time datetime="2016-09-03T15:55:07.000Z" itemprop="datePublished">September 03 2016</time>
+    <time datetime="2016-09-04T03:32:39.000Z" itemprop="datePublished">September 04 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/03/MYSQL/mysql3/" title="sql单表查询练习" itemprop="url">
+    <a href="/2016/09/04/javaWeb/Chinese-problems/" title="中文乱码问题总结" itemprop="url">
   
-    <h1 itemprop="name">sql单表查询练习</h1>
+    <h1 itemprop="name">中文乱码问题总结</h1>
     
      
-           <p itemprop="description" >123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657SELECT id,stuName,age,sex,gradeName</p>
+           <p itemprop="description" >参考：
+提交数据中文乱码问题总结：1.如果提交方式为post，想不乱码，只需要设置request对象的编码即可。　　注意：客户机数据是以哪种方式提交的，request就应该设成什么编码。之所以会产生乱码，就是因为服务器和客户端沟通的编码不一致造成的，因此解决的办法是：在客户端和服</p>
         
     
-    <time datetime="2016-09-03T15:55:03.000Z" itemprop="datePublished">September 03 2016</time>
+    <time datetime="2016-09-04T03:16:50.000Z" itemprop="datePublished">September 04 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/03/MYSQL/mysql2/" title="sql触发器练习" itemprop="url">
+    <a href="/2016/09/04/javaWeb/path/" title="取绝对路径" itemprop="url">
   
-    <h1 itemprop="name">sql触发器练习</h1>
+    <h1 itemprop="name">取绝对路径</h1>
     
      
-           <p itemprop="description" >1234567891011121314151617181920212223242526272829# 注意使用new和old# 因为是AFTER INSERT，是插入，所以用new代替新插入的那条信息CREATE TRIGGER trig_book AFTER INSERT   </p>
+           <p itemprop="description" >几篇不错的文章：
+http://www.cnblogs.com/xdp-gacl/p/3707243.htmlhttp://www.cnblogs.com/zhangminghui/p/4122821.htmlhttp://jun1986.iteye.com/blog/11947</p>
         
     
-    <time datetime="2016-09-03T15:54:58.000Z" itemprop="datePublished">September 03 2016</time>
+    <time datetime="2016-09-04T03:01:10.000Z" itemprop="datePublished">September 04 2016</time>
   </a>
 </section>
 
   <section class="post" itemscope itemprop="blogPost">
   
-    <a href="/2016/09/03/MYSQL/mysql1/" title="sql表操作练习" itemprop="url">
+    <a href="/2016/09/04/javaWeb/webXml/" title="web.xml的基本配置信息" itemprop="url">
   
-    <h1 itemprop="name">sql表操作练习</h1>
+    <h1 itemprop="name">web.xml的基本配置信息</h1>
     
      
-           <p itemprop="description" >1234567891011121314151617181920212223242526272829303132333435363738394041424344454647CREATE TABLE t_bookType(	id int primary key auto_increm</p>
+           <p itemprop="description" >Servlet配置：
+元素是配置Servlet所用的元素。
+元素在Servlet和URL样式之间定义一个映射，即servlet类提供一个url，在地址栏输入对应的映射路径就可以访问你的servlet。
+
+web.xml 中url-pattern的作用　　他是给外部提供的一个访问S</p>
         
     
-    <time datetime="2016-09-03T15:54:49.000Z" itemprop="datePublished">September 03 2016</time>
+    <time datetime="2016-09-04T02:41:34.000Z" itemprop="datePublished">September 04 2016</time>
   </a>
 </section>
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
   </nav>
 
 </div>
@@ -229,7 +247,7 @@
 		
 			<li><a href="/tags/java并发/" title="java并发">java并发<sup>9</sup></a></li>
 		
-			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>9</sup></a></li>
+			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>16</sup></a></li>
 		
 			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
 		
@@ -293,9 +311,9 @@
 		
 			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
 		
-			<li><a href="/tags/模拟/" title="模拟">模拟<sup>4</sup></a></li>
+			<li><a href="/tags/模拟/" title="模拟">模拟<sup>6</sup></a></li>
 		
-			<li><a href="/tags/水题/" title="水题">水题<sup>16</sup></a></li>
+			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
 		
 			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
 		
@@ -322,6 +340,8 @@
 			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
 		
 			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>2</sup></a></li>
 		
 			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
 		
@@ -353,7 +373,7 @@
 		
 			<li><a href="/tags/算法-计数排序/" title="算法-计数排序">算法-计数排序<sup>1</sup></a></li>
 		
-			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>3</sup></a></li>
+			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>4</sup></a></li>
 		
 			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
 		
