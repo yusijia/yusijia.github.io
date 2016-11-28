@@ -62,6 +62,71 @@
 
   <section class="post" itemscope itemprop="blogPost">
   
+    <a href="/2016/05/03/reflect/swap-things/" title="交换瓶子" itemprop="url">
+  
+    <h1 itemprop="name">交换瓶子</h1>
+    
+     
+           <p itemprop="description" >题目：有N个瓶子，编号 1 ~ N，放在架子上。比如有5个瓶子：2 1 3 5 4要求每次拿起2个瓶子，交换它们的位置。经过若干次后，使得瓶子的序号为：1 2 3 4 5
+对于这么简单的情况，显然，至少需要交换2次就可以复位。
+如果瓶子更多呢？你可以通过编程来解决。
+输入格式为两</p>
+        
+    
+    <time datetime="2016-05-03T14:58:34.000Z" itemprop="datePublished">May 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/03/enum/UVa-10976/" title="UVa 10976" itemprop="url">
+  
+    <h1 itemprop="name">UVa 10976</h1>
+    
+     
+           <p itemprop="description" >题目：输入正整数k，找到所有的正整数 x &amp;gt;= y，输的 1/k = 1/x + 1/y
+分析：
+x &amp;gt;= y, 1/x &amp;lt;= 1/y(x越大，1/x越小) ∴ 1/k &amp;lt;= 2/y ∴ y &amp;lt;= 2*k ∴ 枚举y，范围[k + 1, 2k]
+1/</p>
+        
+    
+    <time datetime="2016-05-03T13:57:35.000Z" itemprop="datePublished">May 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/03/enum/UVa-725/" title="UVa 725" itemprop="url">
+  
+    <h1 itemprop="name">UVa 725</h1>
+    
+     
+           <p itemprop="description" >题目：　　给你一个数n(2 &amp;lt;= n &amp;lt;= 79)，将0-9这十个数字分成两组组成两个5位数a, b（可以包含前导0，如02345也算），使得a / b = n；列出所有的可能答案。
+例如： 6279546 / 01283 = 6294736 / 01528 = 62</p>
+        
+    
+    <time datetime="2016-05-03T13:54:57.000Z" itemprop="datePublished">May 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/05/03/hui su/prime-ring/" title="prime ring" itemprop="url">
+  
+    <h1 itemprop="name">prime ring</h1>
+    
+     
+           <p itemprop="description" >题目来源：《算法竞赛入门经典》 作者：刘汝佳
+题目：　　把1~n，连续的放到一个环里，使相邻的数字和为素数，输出所有结果。
+123456789101112131415161718192021222324252627282930313233343536373839404142434</p>
+        
+    
+    <time datetime="2016-05-03T13:50:03.000Z" itemprop="datePublished">May 03 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
     <a href="/2016/05/03/hui su/count-bos/" title="方块计算" itemprop="url">
   
     <h1 itemprop="name">方块计算</h1>
@@ -178,83 +243,9 @@ n &amp;gt; 1时，我们分三个阶段：
   </a>
 </section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/常用/tu-chuang/" title="图床" itemprop="url">
-  
-    <h1 itemprop="name">图床</h1>
-    
-     
-           <p itemprop="description" >图床　　最近才发现，这百度太**流氓了，我自己做的图片上传到百度图片，然后拿来用，竟然显示图片仅百度用户内部使用，无语了O__O “…  ， 所以在这里就推荐下另外一个不错的图床：极简图床</p>
-        
-    
-    <time datetime="2016-05-02T15:13:08.000Z" itemprop="datePublished">May 02 2016</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/BFS/hdu-5652/" title="hdu 5652" itemprop="url">
-  
-    <h1 itemprop="name">hdu 5652</h1>
-    
-     
-           <p itemprop="description" >Sample Input14 601101000001010000100100070 31 51 30 01 22 42 1
-Sample Output4
-分析：
-并查集 + BFS
-设两个特殊点，看他们啥时候连通
-具体还是看代码吧，用代码说话
-
-正解：1234567891011</p>
-        
-    
-    <time datetime="2016-05-02T14:42:13.000Z" itemprop="datePublished">May 02 2016</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/BFS/bfs-2/" title="迷宫问题" itemprop="url">
-  
-    <h1 itemprop="name">迷宫问题</h1>
-    
-     
-           <p itemprop="description" >注意：对于这种输出迷宫的最短路径考虑用BFS而不是DFS，
-
-题目：定义一个二维数组： 
- int maze[5][5] = {
-0, 1, 0, 0, 0,
-0, 1, 0, 1, 0,
-0, 0, 0, 0, 0,
-0, 1, 1, 1, 0,
-0, 0, 0, 1, 0,
-</p>
-        
-    
-    <time datetime="2016-05-02T14:33:21.000Z" itemprop="datePublished">May 02 2016</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2016/05/02/DFS/dfs-2/" title="剪邮票(dfs)" itemprop="url">
-  
-    <h1 itemprop="name">剪邮票(dfs)</h1>
-    
-     
-           <p itemprop="description" >剪邮票题目：如【图1.jpg】, 有12张连在一起的12生肖的邮票。现在你要从中剪下5张来，要求必须是连着的。（仅仅连接一个角不算相连）比如，【图2.jpg】，【图3.jpg】中，粉红色所示部分就是合格的剪取。
-请你计算，一共有多少种不同的剪取方法。
-请填写表示方案数目的整数。注</p>
-        
-    
-    <time datetime="2016-05-02T13:16:43.000Z" itemprop="datePublished">May 02 2016</time>
-  </a>
-</section>
-
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/27/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/33/">33</a><a class="extend next" rel="next" href="/page/29/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/27/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/26/">26</a><a class="page-number" href="/page/27/">27</a><span class="page-number current">28</span><a class="page-number" href="/page/29/">29</a><a class="page-number" href="/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/29/">Next &raquo;</a>
   </nav>
 
 </div>
@@ -285,9 +276,11 @@ Sample Output4
 		
 			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
 		
+			<li><a href="/tags/二进制技巧/" title="二进制技巧">二进制技巧<sup>2</sup></a></li>
+		
 			<li><a href="/tags/图床/" title="图床">图床<sup>1</sup></a></li>
 		
-			<li><a href="/tags/希尔排序/" title="希尔排序">希尔排序<sup>1</sup></a></li>
+			<li><a href="/tags/基数排序/" title="基数排序">基数排序<sup>1</sup></a></li>
 		
 			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
 		
@@ -347,6 +340,8 @@ Sample Output4
 		
 			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
 		
+			<li><a href="/tags/桶排序/" title="桶排序">桶排序<sup>1</sup></a></li>
+		
 			<li><a href="/tags/模拟/" title="模拟">模拟<sup>7</sup></a></li>
 		
 			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
@@ -375,11 +370,15 @@ Sample Output4
 		
 			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
 		
+			<li><a href="/tags/算法-基数排序/" title="算法-基数排序">算法-基数排序<sup>1</sup></a></li>
+		
 			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
 		
 			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>2</sup></a></li>
 		
 			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-希尔排序/" title="算法-希尔排序">算法-希尔排序<sup>1</sup></a></li>
 		
 			<li><a href="/tags/算法-归并排序/" title="算法-归并排序">算法-归并排序<sup>2</sup></a></li>
 		
