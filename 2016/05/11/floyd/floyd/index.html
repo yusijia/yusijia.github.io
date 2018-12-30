@@ -1,91 +1,331 @@
+<!--
+	作者：Sariay
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
 
- <!DOCTYPE HTML>
-<html >
-<head>
-  <meta charset="UTF-8">
-  
-    <title>(模板)floyd求最短路 | yusijia&#39;s blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
-    
-    <meta name="author" content="yusijia">
-    
-    <meta name="description" content="floyd(权值非负)
-floyd 的思想就是通过枚举n个点利用DP的思想来更新最短距离的，假设当前枚举到第k个点，那么就有任意的两个点i , j ，如果i k 相连 j k 相连 那么就可以知道这个时候dis[i][j] = min(dis[i][j] , dis[i][k] + dis[k][j">
-    
-    
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-  <body>
-    <header>
-      <div>
+	<!DOCTYPE html>
+	<html class="scrollbar">
 		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.svg" alt="yusijia&#39;s blog" title="yusijia&#39;s blog"/></a>
-			</div>
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      (模板)floyd求最短路 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
 			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
-				<h2 class="blog-motto">Keep on going never give up.</h2>
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="/img/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
-			</a></div>
-			<nav class="animated">
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
 				<ul>
 					
-						<li><a href="/">Home</a></li>
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">主页</a>
+						</li>
 					
-						<li><a href="/archives">Archives</a></li>
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">归档</a>
+						</li>
 					
-					<li>
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">分类</a>
+						</li>
 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">标签</a>
+						</li>
 					
-					</li>
-				</ul>
-			</nav>			
-</div>
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">关于</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">相册</a>
+						</li>
+					
 
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/05/11/floyd/floyd/" title="(模板)floyd求最短路" itemprop="url">(模板)floyd求最短路</a>
-  </h1>
-  <p class="article-author">By
-    
-      <a href="http://yoursite.com" title="yusijia">yusijia</a>
-    </p>
-  <p class="article-time">
-    <time datetime="2016-05-11T00:43:06.000Z" itemprop="datePublished">May 11 2016</time>
-    Updated:<time datetime="2016-06-19T01:52:08.292Z" itemprop="dateModified">June 19 2016</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#floyd-权值非负"><span class="toc-number">1.</span> <span class="toc-text">floyd(权值非负)</span></a></li></ol>
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						当前文章&nbsp;:&nbsp;《(模板)floyd求最短路》
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
 		</div>
 		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>切换背景</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="https://github.com/Sariay/hexo-theme-Annie" target="_blank"><i class="fa fa-download"></i>克隆主题</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">主页</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">归档</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">分类</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">标签</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">关于</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">相册</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<div class="layout-post">
+	
+	
+	<div class="article-title">
+		
+	<a href="/2016/05/11/floyd/floyd/" itemprop="url">
+		(模板)floyd求最短路
+	</a>
+
+	</div>
+
+	<div class="article-meta">
+		<span>
+			
+	发布于
+	<a href="/2016/05/11/floyd/floyd/" itemprop="url">
+		<time datetime="2016-05-11T00:43:06.000Z" itemprop="datePublished">
+	  		May 11 2016
+	  </time>
+	</a> 
+
+	/
+	更新于
+	<a href="/2016/05/11/floyd/floyd/" itemprop="url">
+		<time datetime="2016-05-11T00:43:06.000Z" itemprop="dateUpdated">
+	  		June 19 2016
+	  </time>
+	</a> 	
+
+		</span>
+		/
+		<span>
+			<i class="fa fa-tags"></i>
+			
+	
+		<a href="/tags/数据结构-图论-最短路-floyd/" class=" ">
+			数据结构-图论-最短路-floyd
+		</a>
+	
+		
+		</span>
+		/
+		
+
+    <span class="leancloud_visitors" id="/2016/05/11/floyd/floyd/_visitors" data-url="/2016/05/11/floyd/floyd/" data-title="(模板)floyd求最短路">
+        热度
+        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
+    </span>
+    
+    /
+
+
+
+    <span class="leancloud_likes" id="/2016/05/11/floyd/floyd/_likes" data-url="/2016/05/11/floyd/floyd/" data-title="(模板)floyd求最短路" rel="unlike">
+        喜欢
+        <i class="fa fa-heart"></i>
+        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
+    </span>
+
+	</div>
+
+	<div class="article-content" id="article-content">
 		<h2 id="floyd-权值非负"><a href="#floyd-权值非负" class="headerlink" title="floyd(权值非负)"></a>floyd(权值非负)</h2><ul>
 <li><p>floyd 的思想就是通过枚举n个点利用DP的思想来更新最短距离的，假设当前枚举到第k个点，那么就有任意的两个点i , j ，如果i k 相连 j k 相连 那么就可以知道这个时候dis[i][j] = min(dis[i][j] , dis[i][k] + dis[k][j]);，那么只要枚举完n个点，那么就说明已经完全更新完所有两点直间的最短路。</p>
 </li>
@@ -97,430 +337,412 @@ floyd 的思想就是通过枚举n个点利用DP的思想来更新最短距离�
 <li>拓展：求传递闭包，求最小环</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//如果是求最大值的话，初始化为-1 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;  </span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span> ; j &lt;= n ; j++)  </span><br><span class="line">             dis[i][j] = <span class="number">-1</span>；  </span><br><span class="line">     &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> folyd()&#123;  </span><br><span class="line">        <span class="keyword">for</span>(int k = <span class="number">1</span> ; k &lt;= n ; k++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(int i = <span class="number">1</span> ; i &lt;= n ; i++)&#123;  </span><br><span class="line">                <span class="keyword">for</span>(int j = <span class="number">1</span> ; j &lt;= n ; j++)  </span><br><span class="line">                  <span class="keyword">if</span>(dis[i][k] != <span class="number">-1</span> &amp;&amp; dis[j][k] != <span class="number">-1</span>) </span><br><span class="line">                     dis[i][j] = max(dis[i][k]+dis[k][j] , dis[i][j]);   </span><br><span class="line">            &#125;   </span><br><span class="line">       &#125;  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="comment">//这里宏定义INF为0x3f3f3f3f而不是0xfffffff,这样的话在floyd里的if判断就不需要判断</span></span><br><span class="line"><span class="comment">//dis[i][k],dis[k][j]是否INF了因为只要这两个其中有一个INF，则他们的和一定大于dis[j][j]，</span></span><br><span class="line"><span class="comment">//还有注意，如果INF为0xfffffff则相加会溢出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dis[MAXN][MAXN];<span class="comment">//保存权值</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> path[MAXN][MAXN];<span class="comment">//用于打印路径</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line"></span><br><span class="line">            path[i][j] = j;<span class="comment">//i点到j点路径中i后面的节点</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(i == j)</span><br><span class="line">                dis[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dis[i][j] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dis[i][j] &gt; dis[i][k] + dis[k][j])&#123;</span><br><span class="line">                    dis[i][j] = dis[i][k] + dis[k][j];</span><br><span class="line">                    path[i][j] = path[i][k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//printf("%I64d\n", dis[1][n]);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span><span class="comment">//打印出最短路径</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> v, k, w;</span><br><span class="line">    <span class="keyword">for</span>(v = <span class="number">1</span>; v &lt;= n; v++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(w = v + <span class="number">1</span>; w &lt;= n; w++)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"V"</span> &lt;&lt; v &lt;&lt; <span class="string">"--&gt;"</span> &lt;&lt; <span class="string">"v"</span> &lt;&lt; w &lt;&lt; <span class="string">" weight: "</span> &lt;&lt; dis[v][w] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            k = path[v][w];</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"path: V"</span> &lt;&lt; v;</span><br><span class="line">            <span class="keyword">while</span>(k != w)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"--&gt;v"</span> &lt;&lt; k;</span><br><span class="line">                k = path[k][w];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"--&gt;V"</span> &lt;&lt; w &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"input.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"output.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">int</span> a, b, value;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m) != EOF &amp;&amp; n + m)&#123;</span><br><span class="line">        init();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;a, &amp;b, &amp;value);</span><br><span class="line">            dis[a][b] = dis[b][a] = value;</span><br><span class="line">        &#125;</span><br><span class="line">        floyd();</span><br><span class="line">        print();</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输入：</span><br><span class="line"><span class="number">4</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">4</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">V1--&gt;v2 weight: <span class="number">1</span></span><br><span class="line">path: V1--&gt;V2</span><br><span class="line">V1--&gt;v3 weight: <span class="number">3</span></span><br><span class="line">path: V1--&gt;V3</span><br><span class="line">V1--&gt;v4 weight: <span class="number">6</span></span><br><span class="line">path: V1--&gt;v3--&gt;V4</span><br><span class="line">V2--&gt;v3 weight: <span class="number">3</span></span><br><span class="line">path: V2--&gt;V3</span><br><span class="line">V2--&gt;v4 weight: <span class="number">6</span></span><br><span class="line">path: V2--&gt;v3--&gt;V4</span><br><span class="line">V3--&gt;v4 weight: <span class="number">3</span></span><br><span class="line">path: V3--&gt;V4</span><br></pre></td></tr></table></figure>  
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 110</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 0x3f3f3f3f</span></span><br><span class="line"><span class="comment">//这里宏定义INF为0x3f3f3f3f而不是0xfffffff,这样的话在floyd里的if判断就不需要判断</span></span><br><span class="line"><span class="comment">//dis[i][k],dis[k][j]是否INF了因为只要这两个其中有一个INF，则他们的和一定大于dis[j][j]，</span></span><br><span class="line"><span class="comment">//还有注意，如果INF为0xfffffff则相加会溢出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> dis[MAXN][MAXN];<span class="comment">//保存权值</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> path[MAXN][MAXN];<span class="comment">//用于打印路径</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line"></span><br><span class="line">            path[i][j] = j;<span class="comment">//i点到j点路径中i后面的节点</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(i == j)</span><br><span class="line">                dis[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                dis[i][j] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floyd</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(dis[i][j] &gt; dis[i][k] + dis[k][j])&#123;</span><br><span class="line">                    dis[i][j] = dis[i][k] + dis[k][j];</span><br><span class="line">                    path[i][j] = path[i][k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//printf("%I64d\n", dis[1][n]);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span><span class="comment">//打印出最短路径</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> v, k, w;</span><br><span class="line">    <span class="keyword">for</span>(v = <span class="number">1</span>; v &lt;= n; v++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(w = v + <span class="number">1</span>; w &lt;= n; w++)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"V"</span> &lt;&lt; v &lt;&lt; <span class="string">"--&gt;"</span> &lt;&lt; <span class="string">"v"</span> &lt;&lt; w &lt;&lt; <span class="string">" weight: "</span> &lt;&lt; dis[v][w] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            k = path[v][w];</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"path: V"</span> &lt;&lt; v;</span><br><span class="line">            <span class="keyword">while</span>(k != w)&#123;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="string">"--&gt;v"</span> &lt;&lt; k;</span><br><span class="line">                k = path[k][w];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"--&gt;V"</span> &lt;&lt; w &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"input.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"output.txt"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="keyword">int</span> a, b, value;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;m) != EOF &amp;&amp; n + m)&#123;</span><br><span class="line">        init();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;a, &amp;b, &amp;value);</span><br><span class="line">            dis[a][b] = dis[b][a] = value;</span><br><span class="line">        &#125;</span><br><span class="line">        floyd();</span><br><span class="line">        print();</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输入：</span><br><span class="line"><span class="number">4</span> <span class="number">5</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">3</span> <span class="number">4</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">4</span> <span class="number">10</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">V1--&gt;v2 weight: <span class="number">1</span></span><br><span class="line">path: V1--&gt;V2</span><br><span class="line">V1--&gt;v3 weight: <span class="number">3</span></span><br><span class="line">path: V1--&gt;V3</span><br><span class="line">V1--&gt;v4 weight: <span class="number">6</span></span><br><span class="line">path: V1--&gt;v3--&gt;V4</span><br><span class="line">V2--&gt;v3 weight: <span class="number">3</span></span><br><span class="line">path: V2--&gt;V3</span><br><span class="line">V2--&gt;v4 weight: <span class="number">6</span></span><br><span class="line">path: V2--&gt;v3--&gt;V4</span><br><span class="line">V3--&gt;v4 weight: <span class="number">3</span></span><br><span class="line">path: V3--&gt;V4</span><br></pre></td></tr></table></figure>	
 	</div>
-		<footer class="article-footer clearfix">
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/数据结构-图论-最短路-floyd/">数据结构-图论-最短路-floyd</a>
-  </div>
-
-
-
-
-<div class="article-share" id="share">
-
-  <div data-url="http://yoursite.com/2016/05/11/floyd/floyd/" data-title="(模板)floyd求最短路 | yusijia&#39;s blog" data-tsina="null" class="share clearfix">
-  </div>
-
-</div>
-</footer>   	       
-	</article>
 	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/05/11/SPFA/hdu-2544/" title="(模板)SPFA(hdu 2544)">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  (模板)SPFA(hdu 2544)</span>
-</a>
-</div>
+	<div id="current-post-cover" data-scr="/img/cart_cover.jpg"></div>
 
+	<!-- relate post, comment...-->
+	<div class="investment-container">
+		<div class="investment-header">
+			<div class="investment-title-1">
+				<div class="on">相关文章</div>
+				<div>评论</div>
+			</div>
+			<div class="investment-title-2">	            
+				
+	<span>
+		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
+		
+			<a href="/2016/05/11/SPFA/hdu-2544/" title="(模板)SPFA(hdu 2544)" rel="prev">
+				&laquo;上一篇
+			</a>
+		
+		
+			<a href="/2016/05/11/线段树/hdu-2828/" title="线段树解决插队问题" rel="next">
+				下一篇&raquo;
+			</a>
+			
+	</span>
+      		
+			</div>	
+		</div>
+		
+		<div class="investment-content">
+			<div class="investment-content-list">
+				
 
-<div class="next">
-<a href="/2016/05/11/线段树/hdu-2828/"  title="线段树解决插队问题">
- <strong>NEXT:</strong><br/> 
- <span>线段树解决插队问题
-</span>
-</a>
-</div>
+<div class="relate-post">
+	<ul>
+		
+				<li>
+					<div>
+						<a href="/2016/05/11/floyd/hdu-1217/" title="hdu 1217">
+							hdu 1217
+						</a>
+						<p>
+							转：http://blog.csdn.net/chenguolinblog/article/details/8056444
+1234567891011121314151617181920212223242526272829303132...
+						</p>
+					</div>
 
-</nav>
+					<a href="/2016/05/11/floyd/hdu-1217/" title="hdu 1217">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="hdu 1217">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/05/11/floyd/hdu-2544-floyd/" title="hdu 2544">
+							hdu 2544
+						</a>
+						<p>
+							12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include &lt;cst...
+						</p>
+					</div>
+
+					<a href="/2016/05/11/floyd/hdu-2544-floyd/" title="hdu 2544">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="hdu 2544">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/29/leetCode040/" title="CombinationSumII">
+							CombinationSumII
+						</a>
+						<p>
+							/*
+
+Given a collection of candidate numbers (C) and a target number (T), find all 
+unique combinations in 
+C where th...
+						</p>
+					</div>
+
+					<a href="/2016/11/29/leetCode040/" title="CombinationSumII">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="CombinationSumII">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/29/leetCode041/" title="First-Missing-Positive">
+							First-Missing-Positive
+						</a>
+						<p>
+							1234567Given an unsorted integer array, find the first missing positive integer.For example,Given [1,2,0] return 3,an...
+						</p>
+					</div>
+
+					<a href="/2016/11/29/leetCode041/" title="First-Missing-Positive">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="First-Missing-Positive">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/29/leetCode043/" title="Multiply Strings">
+							Multiply Strings
+						</a>
+						<p>
+							大数相乘
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include &lt;cstdio&gt;...
+						</p>
+					</div>
+
+					<a href="/2016/11/29/leetCode043/" title="Multiply Strings">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="Multiply Strings">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/29/leetCode045/" title="Jump Game II">
+							Jump Game II
+						</a>
+						<p>
+							12345678910Given an array of non-negative integers, you are initially positioned at the first index of the array.Each...
+						</p>
+					</div>
+
+					<a href="/2016/11/29/leetCode045/" title="Jump Game II">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="Jump Game II">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/29/SDUT1401/" title="SDUT1401">
+							SDUT1401
+						</a>
+						<p>
+							Problem Description一个k（1&lt;=k&lt;=80）位的十进制正整数n，我们称其为大整数。
+现在的问题是，请你设计一个程序，对于给出的某一个大整数n，找到满足条件p^3+p^2+3*p&lt;=n的最大值。
+I...
+						</p>
+					</div>
+
+					<a href="/2016/11/29/SDUT1401/" title="SDUT1401">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="SDUT1401">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/28/radixSorting/" title="基数排序的简单实现">
+							基数排序的简单实现
+						</a>
+						<p>
+							123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263...
+						</p>
+					</div>
+
+					<a href="/2016/11/28/radixSorting/" title="基数排序的简单实现">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="基数排序的简单实现">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/28/binary/findNumber2/" title="数组中只出现一次的两个数(其他数出现两次)">
+							数组中只出现一次的两个数(其他数出现两次)
+						</a>
+						<p>
+							在一个数组中除两个数字只出现1次外，其它数字都出现了2次， 要求尽快找出这两个数字。
+
+两个相同的数异或结果为0，
+任何一个数与0异或结果还是那个数,
+异或-1相当于取反
+  设题目中这两个只出现1次的数字分别为A和B，如果能将A，B...
+						</p>
+					</div>
+
+					<a href="/2016/11/28/binary/findNumber2/" title="数组中只出现一次的两个数(其他数出现两次)">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="数组中只出现一次的两个数(其他数出现两次)">
+					</a>
+				</li>											
+		
+		
+				<li>
+					<div>
+						<a href="/2016/11/28/binary/findNumber/" title="数组中只出现一次的数(其他数出现n次)">
+							数组中只出现一次的数(其他数出现n次)
+						</a>
+						<p>
+							参考：http://blog.csdn.net/morewindows/article/details/12684497
+题目：数组A中，除了某一个数字x之外，其他数字都出现了三次，而x出现了一次。请给出最快的方法找到x。
+分析：如果...
+						</p>
+					</div>
+
+					<a href="/2016/11/28/binary/findNumber/" title="数组中只出现一次的数(其他数出现n次)">				
+						<img src="/img/cart_cover.jpg" class="relateImg" alt="数组中只出现一次的数(其他数出现n次)">
+					</a>
+				</li>											
+		
+		
+	</ul>
+</div>	
+			</div>
+			<div class="investment-content-list">
+				<div class="layout-comment">
 
 	
-<section class="comment">
-	<div class="ds-thread"></div>
+
+		
+
+			<!-- I don't know 【表情】-->
+			
+		
+		
+	
+
+</div>
+			</div>
+		</div>	
+	</div>
+</div>
 
 
-<!-- ��˵���ۿ� start -->
 
-	<div class="ds-thread" data-thread-key="2016/05/11/floyd/floyd/" data-title="(模板)floyd求最短路" data-url="undefined"></div>
+	<!-- leancloud -->
+	<!--
+	时间：2018-11-27
+	描述：
+		文章访问量：visitors
+		文章喜欢量：likes	
+		文章排行榜：topNPost
+		其他得说明：
+			01-Cookie相关的函数 
+				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
+			02-visitors相关的函数 
+				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
+				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
+			03-topNPost相关的函数
+				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
+			04-likes相关的函数，
+				参考了01 & 02进行简单的设计与实现
+-->
 
-<!-- ��˵���ۿ� end -->
 
-<!-- ��˵����JS���� start (һ����ҳֻ������һ��) -->
 
-<script type="text/javascript">
-
-var duoshuoQuery = {short_name:"ysjdb"};
-
-	(function() {
-
-		var ds = document.createElement('script');
-
-		ds.type = 'text/javascript';ds.async = true;
-
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
- 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-
+	<script>
+		var appid = 'dX--',
+            appkey = 'dx--';	  
+        AnnieLeancloud(appid, appkey);         
 	</script>
-<!-- ��˵����JS���� end -->
-
-</section>
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#floyd-权值非负"><span class="toc-number">1.</span> <span class="toc-text">floyd(权值非负)</span></a></li></ol>
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
-<aside class="clearfix">
-
-  
-
-  
-<div class="tagslist">
-	<p class="asidetitle">Tags</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/Ajax-JSON/" title="Ajax&amp;JSON">Ajax&amp;JSON<sup>1</sup></a></li>
-		
-			<li><a href="/tags/MYSQL/" title="MYSQL">MYSQL<sup>12</sup></a></li>
-		
-			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
-		
-			<li><a href="/tags/javaWeb基础/" title="javaWeb基础">javaWeb基础<sup>8</sup></a></li>
-		
-			<li><a href="/tags/java并发/" title="java并发">java并发<sup>9</sup></a></li>
-		
-			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>26</sup></a></li>
-		
-			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
-		
-			<li><a href="/tags/二进制技巧/" title="二进制技巧">二进制技巧<sup>2</sup></a></li>
-		
-			<li><a href="/tags/图床/" title="图床">图床<sup>1</sup></a></li>
-		
-			<li><a href="/tags/基数排序/" title="基数排序">基数排序<sup>1</sup></a></li>
-		
-			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
-		
-			<li><a href="/tags/数据结构-Hash/" title="数据结构-Hash">数据结构-Hash<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-二叉搜索树/" title="数据结构-二叉搜索树">数据结构-二叉搜索树<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-二叉树/" title="数据结构-二叉树">数据结构-二叉树<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-双向链表/" title="数据结构-双向链表">数据结构-双向链表<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-哈夫曼树/" title="数据结构-哈夫曼树">数据结构-哈夫曼树<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-LCA/" title="数据结构-图论-LCA">数据结构-图论-LCA<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-Tarjan/" title="数据结构-图论-Tarjan">数据结构-图论-Tarjan<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-图论基础/" title="数据结构-图论-图论基础">数据结构-图论-图论基础<sup>6</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-拓扑排序/" title="数据结构-图论-拓扑排序">数据结构-图论-拓扑排序<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最小生成树/" title="数据结构-图论-最小生成树">数据结构-图论-最小生成树<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最小生成树-kruskal/" title="数据结构-图论-最小生成树-kruskal">数据结构-图论-最小生成树-kruskal<sup>6</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>5</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最短路-Dijsktra/" title="数据结构-图论-最短路-Dijsktra">数据结构-图论-最短路-Dijsktra<sup>4</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最短路-SPFA/" title="数据结构-图论-最短路-SPFA">数据结构-图论-最短路-SPFA<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>3</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最短路-floyd-传递闭包/" title="数据结构-图论-最短路-floyd-传递闭包">数据结构-图论-最短路-floyd-传递闭包<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-最短路-floyd-求最小环/" title="数据结构-图论-最短路-floyd-求最小环">数据结构-图论-最短路-floyd-求最小环<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>2</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>6</sup></a></li>
-		
-			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
-		
-			<li><a href="/tags/数据结构-字典树/" title="数据结构-字典树">数据结构-字典树<sup>5</sup></a></li>
-		
-			<li><a href="/tags/数据结构-平衡二叉树/" title="数据结构-平衡二叉树">数据结构-平衡二叉树<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-循环链表/" title="数据结构-循环链表">数据结构-循环链表<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-栈/" title="数据结构-栈">数据结构-栈<sup>7</sup></a></li>
-		
-			<li><a href="/tags/数据结构-树状数组/" title="数据结构-树状数组">数据结构-树状数组<sup>5</sup></a></li>
-		
-			<li><a href="/tags/数据结构-链表/" title="数据结构-链表">数据结构-链表<sup>1</sup></a></li>
-		
-			<li><a href="/tags/数据结构-队列/" title="数据结构-队列">数据结构-队列<sup>3</sup></a></li>
-		
-			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
-		
-			<li><a href="/tags/桶排序/" title="桶排序">桶排序<sup>1</sup></a></li>
-		
-			<li><a href="/tags/模拟/" title="模拟">模拟<sup>7</sup></a></li>
-		
-			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
-		
-			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-binary-search-二分查找/" title="算法-binary search(二分查找)">算法-binary search(二分查找)<sup>4</sup></a></li>
-		
-			<li><a href="/tags/算法-qmul-快速乘/" title="算法-qmul(快速乘)">算法-qmul(快速乘)<sup>2</sup></a></li>
-		
-			<li><a href="/tags/算法-qpow-快速幂/" title="算法-qpow(快速幂)">算法-qpow(快速幂)<sup>3</sup></a></li>
-		
-			<li><a href="/tags/算法-qsort（快速排序）/" title="算法-qsort（快速排序）">算法-qsort（快速排序）<sup>5</sup></a></li>
-		
-			<li><a href="/tags/算法-位向量法/" title="算法-位向量法">算法-位向量法<sup>2</sup></a></li>
-		
-			<li><a href="/tags/算法-全排列/" title="算法-全排列">算法-全排列<sup>6</sup></a></li>
-		
-			<li><a href="/tags/算法-动态规划/" title="算法-动态规划">算法-动态规划<sup>16</sup></a></li>
-		
-			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
-		
-			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
-		
-			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
-		
-			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
-		
-			<li><a href="/tags/算法-基数排序/" title="算法-基数排序">算法-基数排序<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>3</sup></a></li>
-		
-			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
-		
-			<li><a href="/tags/算法-希尔排序/" title="算法-希尔排序">算法-希尔排序<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-归并排序/" title="算法-归并排序">算法-归并排序<sup>2</sup></a></li>
-		
-			<li><a href="/tags/算法-快速选择/" title="算法-快速选择">算法-快速选择<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-数学题/" title="算法-数学题">算法-数学题<sup>3</sup></a></li>
-		
-			<li><a href="/tags/算法-数论-卡特兰数/" title="算法-数论-卡特兰数">算法-数论-卡特兰数<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-数论-同余定理/" title="算法-数论-同余定理">算法-数论-同余定理<sup>4</sup></a></li>
-		
-			<li><a href="/tags/算法-数论-扩展欧几里得/" title="算法-数论-扩展欧几里得">算法-数论-扩展欧几里得<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-数论-欧几里得/" title="算法-数论-欧几里得">算法-数论-欧几里得<sup>2</sup></a></li>
-		
-			<li><a href="/tags/算法-数论-素数筛选法/" title="算法-数论-素数筛选法">算法-数论-素数筛选法<sup>4</sup></a></li>
-		
-			<li><a href="/tags/算法-数论-费马小定理/" title="算法-数论-费马小定理">算法-数论-费马小定理<sup>3</sup></a></li>
-		
-			<li><a href="/tags/算法-映射/" title="算法-映射">算法-映射<sup>2</sup></a></li>
-		
-			<li><a href="/tags/算法-枚举/" title="算法-枚举">算法-枚举<sup>3</sup></a></li>
-		
-			<li><a href="/tags/算法-标记-查表思想/" title="算法-标记,查表思想">算法-标记,查表思想<sup>8</sup></a></li>
-		
-			<li><a href="/tags/算法-离散化/" title="算法-离散化">算法-离散化<sup>4</sup></a></li>
-		
-			<li><a href="/tags/算法-计数排序/" title="算法-计数排序">算法-计数排序<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>4</sup></a></li>
-		
-			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
-		
-			<li><a href="/tags/算法-预处理思想/" title="算法-预处理思想">算法-预处理思想<sup>1</sup></a></li>
-		
-			<li><a href="/tags/语言-C/" title="语言-C++">语言-C++<sup>1</sup></a></li>
-		
-			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>74</sup></a></li>
-		
-			<li><a href="/tags/贪心/" title="贪心">贪心<sup>1</sup></a></li>
-		
-			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>5</sup></a></li>
-		
-			<li><a href="/tags/高级数据结构-并查集/" title="高级数据结构-并查集">高级数据结构-并查集<sup>5</sup></a></li>
-		
-			<li><a href="/tags/高级数据结构-线段树/" title="高级数据结构-线段树">高级数据结构-线段树<sup>8</sup></a></li>
-		
-		</ul>
-</div>
+    
 
 
-  <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
-</div>
+ 
 
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
+<!-- show math formula -->
+
+
+
+
+<!-- TODO: There seems to be a bug when you close the post gallery! -->
+<link rel="stylesheet" href="/plugin/lightgallery/css/lightgallery.css">
+<script src="/plugin/lightgallery/js/jquery-1.11.0.min.js"></script>
+<script src="/plugin/lightgallery/js/lightgallery-all.min.js"></script>
+
+<script type="text/javascript">
+	var postTitle = $('.article-title a').text() ? $('.article-title a').text() : "No post title!";
+	$('.article-content img').each(function() {
+		var imgPath = $(this).attr('src'),
+			imgTitle = $(this).attr('alt') ? $(this).attr('alt') : "No image description!";
+		$(this).wrap('<div class="img-responsive" data-src="' + imgPath + '" data-responsive="' + imgPath + '" data-sub-html="<p>图片 ' + imgTitle + '</p><h4>文章' + postTitle + '</h4>"></div>');
+	});
+
+	$('.article-content').lightGallery({
+		mode: 'lg-slide',
+		selector: '.img-responsive',
+		share: false,
+		zoom: false,
+		download: false
+	});
+	//TODO：支持video
+</script>
+
+
+		</main>
+		
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
 	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> I am a slow walker, but I never walk backwards. <br/>
-			</p>
-	</section>
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
 	 
-	<div class="social-font clearfix">
-		
-		
-		
-		
-		
+</ul>
 	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
 		
-		<a href="http://yoursite.com" target="_blank" title="yusijia">yusijia</a>
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2018, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
 		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		<span id="busuanzi_container_page_pv">
+	  		本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+		</span>
+
+	
+
+
+
+
 		</p>
-</div>
+		<p>
+			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="external">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="external">Annie</a> by Sariay. 					
+		</p>
+	</div>		
 </footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
-</script>
+		
+    <!-- set '1' to show motto in all pages! -->
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      h  = $('article h2')
-      ah = $('article h2'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  if(ah.length==0){
-    t.css('display','none');
-  }else{
-    c.click(function(){
-      ta.css('display', 'block').addClass('fadeIn');
-    });
-    o.click(function(){
-      ta.css('display', 'none');
-    });
-    $(window).scroll(function(){
-      ta.css("top",Math.max(140,320-$(this).scrollTop()));
-    });
-  };
-});
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
-  var html = [
-  '<a href="#" class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-});     
-</script>
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"ysjdb"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
 
 
 
 
 
-  </body>
-</html>
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>
