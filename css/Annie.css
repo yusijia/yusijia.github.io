@@ -112,7 +112,7 @@ ul {
 }
 
 #img,
-video,
+#video,
 audio {
 	display: block;
 	opacity: 1;
