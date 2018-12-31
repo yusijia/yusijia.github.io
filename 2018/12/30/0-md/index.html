@@ -14,7 +14,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>
     
-      一个问题.md | yusijia&#39;s blog
+      一个问题 | yusijia&#39;s blog
     
   </title>
   <meta name="author" content="yusijia">
@@ -110,7 +110,7 @@
 				<!-- Page title -->
 				<p>
 					
-						当前文章&nbsp;:&nbsp;《一个问题.md》
+						当前文章&nbsp;:&nbsp;《一个问题》
 					
 				</p>
 				<!-- Progress bar -->
@@ -270,7 +270,7 @@
 	<div class="article-title">
 		
 	<a href="/2018/12/30/0-md/" itemprop="url">
-		一个问题.md
+		一个问题
 	</a>
 
 	</div>
@@ -289,7 +289,7 @@
 	更新于
 	<a href="/2018/12/30/0-md/" itemprop="url">
 		<time datetime="2018-12-30T07:01:09.000Z" itemprop="dateUpdated">
-	  		December 30 2018
+	  		December 31 2018
 	  </time>
 	</a> 	
 
@@ -302,7 +302,7 @@
 		/
 		
 
-    <span class="leancloud_visitors" id="/2018/12/30/0-md/_visitors" data-url="/2018/12/30/0-md/" data-title="一个问题.md">
+    <span class="leancloud_visitors" id="/2018/12/30/0-md/_visitors" data-url="/2018/12/30/0-md/" data-title="一个问题">
         热度
         <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
     </span>
@@ -311,7 +311,7 @@
 
 
 
-    <span class="leancloud_likes" id="/2018/12/30/0-md/_likes" data-url="/2018/12/30/0-md/" data-title="一个问题.md" rel="unlike">
+    <span class="leancloud_likes" id="/2018/12/30/0-md/_likes" data-url="/2018/12/30/0-md/" data-title="一个问题" rel="unlike">
         喜欢
         <i class="fa fa-heart"></i>
         <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
@@ -320,15 +320,13 @@
 	</div>
 
 	<div class="article-content" id="article-content">
-		<h1 id="title"><a href="#title" class="headerlink" title="title"></a>title</h1><ul>
-<li>asds ad asdas</li>
-</ul>
-<ul>
-<li>dsa da s</li>
-</ul>
+		<h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>小余来到一个神奇的世界里，小余为了探明前方的路，独身一人进入了一个迷宫里，但由于地理没学好，分不清东南西北，而且这里没有GPS，也没有北斗七星，Smartisan系统无法发挥作用，即使是曾经的ACMer在这里也迷了路。这里走的每一步都需要消耗能量，而他自身所携带的能量又不是特别充足。现在，小余被困在这个迷宫里，需要用最少的步数离开这个迷宫，你是否能带他走出这个迷宫？<br>迷宫中的路由一条条边构成，并且每条边需要的能量不一定相同，每一个位置都是一个坐标点并且带有少许信息，目前你所知道的是这个迷宫的矩阵图和坐标点所携带的信息，能否找出一条最短的路径带小余走出迷宫？</p>
 <blockquote>
-<p>das das das</p>
+<p>提示： 先通过矩阵把图画出来，然后找最短路径(参考算法：Dijkstra算法)，找到最短路径后对应上面的点-&gt;信息进行映射，得出最终答案</p>
 </blockquote>
+<p>点-&gt;信息:<br>0 -&gt; 2<br>1 -&gt; 0<br>2 -&gt; 1<br>3 -&gt; 8<br>4 -&gt; 1<br>5 -&gt; 2<br>6 -&gt; 3<br>7 -&gt; 2<br>8 -&gt; 1<br>9 -&gt; 1<br>10 -&gt; 2<br>11 -&gt; 3</p>
+<p><img src="https://s1.ax1x.com/2018/12/31/F4i2yn.png" alt="pic"></p>
+<p>上面图片上的内容如下：<br>矩阵如下：(∞表示没有边，就是无穷的意思)<br>|    | 0 | 1 | 2  | 3  | 4  | 5  | 6  | 7  | 8  | 9  | 10 | 11 |<br>|  0 | 0 | 7 | 8  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  |<br>|  1 | 7 | 0 | 5  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  |<br>|  2 | 8 | 5 | 0  | 5  | 30 | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  |<br>|  3 | ∞ | ∞ | 5  | 0  | 10 | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  |<br>|  4 | ∞ | ∞ | 30 | 10 | 0  | 8  | 20 | ∞  | ∞  | ∞  | ∞  | ∞  |<br>|  5 | ∞ | ∞ | ∞  | ∞  | 8  | 0  | ∞  | 21 | ∞  | ∞  | ∞  | 15 |<br>|  6 | ∞ | ∞ | ∞  | ∞  | 20 | ∞  | 0  | 31 | ∞  | 16 | ∞  | ∞  |<br>|  7 | ∞ | ∞ | ∞  | ∞  | ∞  | 21 | 31 | 0  | 2  | 70 | ∞  | ∞  |<br>|  8 | ∞ | ∞ | ∞  | ∞  | ∞  | ∞  | ∞  | 2  | 0  | 45 | ∞  | 21 |<br>|  9 | ∞ | ∞ | ∞  | ∞  | ∞  | ∞  | 16 | 70 | 45 | 0  | 35 | ∞  |<br>| 10 | ∞ | ∞ | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | ∞  | 35 | 0  | ∞  |<br>| 11 | ∞ | ∞ | ∞  | ∞  | ∞  | 15 | ∞  | ∞  | 21 | ∞  | ∞  | 0  |</p>
 	
 	</div>
 	
@@ -347,7 +345,7 @@
 		<a href="javascript: window.scrollTo(0, 0);">返回顶部</a>
 		
 		
-			<a href="/2018/12/30/1-md/" title="问题回答后再看这个(^_^).md" rel="next">
+			<a href="/2018/12/30/1-md/" title="问题回答后再看这个(^_^)" rel="next">
 				下一篇&raquo;
 			</a>
 			
@@ -365,19 +363,19 @@
 		
 				<li>
 					<div>
-						<a href="/2018/12/30/1-md/" title="问题回答后再看这个(^_^).md">
-							问题回答后再看这个(^_^).md
+						<a href="/2018/12/30/1-md/" title="问题回答后再看这个(^_^)">
+							问题回答后再看这个(^_^)
 						</a>
 						<p>
-							百度网盘：
-链接
+							给你的压缩包密码：
+上一篇文章求出的答案 + 你的名字 + 76a （后缀字符，已进行加密，防止你暴力破解出来）
 
 
 						</p>
 					</div>
 
-					<a href="/2018/12/30/1-md/" title="问题回答后再看这个(^_^).md">				
-						<img src="/img/post-cover/3.jpg" class="relateImg" alt="问题回答后再看这个(^_^).md">
+					<a href="/2018/12/30/1-md/" title="问题回答后再看这个(^_^)">				
+						<img src="/img/post-cover/3.jpg" class="relateImg" alt="问题回答后再看这个(^_^)">
 					</a>
 				</li>											
 		
@@ -539,7 +537,7 @@
 
 		</p>
 		<p>
-			<a href="http://hexo.io/" title="Hexo" target="_blank" rel="external">Hexo</a> Theme <a href="https://github.com/Sariay/hexo-theme-Annie" title="Annie" target="_blank" rel="external">Annie</a> by Sariay. 					
+			根正苗红的社会主义接班人
 		</p>
 	</div>		
 </footer>
