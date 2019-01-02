@@ -1,0 +1,406 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      hdu 1134 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						hdu 1134
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		hdu 1134
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>卡特兰数很大，所以考虑大数处理。</p>
+<p>卡特兰数的前几项为：h(0)=1;h(1)=1;h(2)=2;h(3)=5……</p>
+<p>卡特兰数的递推公式为：h(n)=h(n-1)<em>(4</em>n-2)/(n+1);</p>
+<p>非递推公式为C(2n,n)/(n+1);</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 9999</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DLEN 4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> BigNum</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">500</span>];    <span class="comment">//可以控制大数的位数</span></span><br><span class="line">    <span class="keyword">int</span> len;       <span class="comment">//大数长度</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    BigNum()&#123; len = <span class="number">1</span>;<span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a)); &#125;   <span class="comment">//构造函数</span></span><br><span class="line">    BigNum(<span class="keyword">const</span> <span class="keyword">int</span>);       <span class="comment">//将一个int类型的变量转化为大数</span></span><br><span class="line">    BigNum(<span class="keyword">const</span> <span class="keyword">char</span>*);     <span class="comment">//将一个字符串类型的变量转化为大数</span></span><br><span class="line">    BigNum(<span class="keyword">const</span> BigNum &amp;);  <span class="comment">//拷贝构造函数</span></span><br><span class="line">    BigNum &amp;<span class="keyword">operator</span>=(const BigNum &amp;);   <span class="comment">//重载赋值运算符，大数之间进行赋值运算</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> istream&amp; <span class="keyword">operator</span>&gt;&gt;(istream&amp;,  BigNum&amp;);   <span class="comment">//重载输入运算符</span></span><br><span class="line">    <span class="keyword">friend</span> ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp;,  BigNum&amp;);   <span class="comment">//重载输出运算符</span></span><br><span class="line"></span><br><span class="line">    BigNum <span class="keyword">operator</span>+(<span class="keyword">const</span> BigNum &amp;) <span class="keyword">const</span>;   <span class="comment">//重载加法运算符，两个大数之间的相加运算</span></span><br><span class="line">    BigNum <span class="keyword">operator</span>-(<span class="keyword">const</span> BigNum &amp;) <span class="keyword">const</span>;   <span class="comment">//重载减法运算符，两个大数之间的相减运算</span></span><br><span class="line">    BigNum <span class="keyword">operator</span>*(<span class="keyword">const</span> BigNum &amp;) <span class="keyword">const</span>;   <span class="comment">//重载乘法运算符，两个大数之间的相乘运算</span></span><br><span class="line">    BigNum <span class="keyword">operator</span>/(<span class="keyword">const</span> <span class="keyword">int</span>   &amp;) <span class="keyword">const</span>;    <span class="comment">//重载除法运算符，大数对一个整数进行相除运算</span></span><br><span class="line"></span><br><span class="line">    BigNum <span class="keyword">operator</span>^(<span class="keyword">const</span> <span class="keyword">int</span>  &amp;) <span class="keyword">const</span>;    <span class="comment">//大数的n次方运算</span></span><br><span class="line">    <span class="keyword">int</span>    <span class="keyword">operator</span>%(<span class="keyword">const</span> <span class="keyword">int</span>  &amp;) <span class="keyword">const</span>;    <span class="comment">//大数对一个int类型的变量进行取模运算</span></span><br><span class="line">    <span class="keyword">bool</span>   <span class="keyword">operator</span>&gt;(<span class="keyword">const</span> BigNum &amp; T)<span class="keyword">const</span>;   <span class="comment">//大数和另一个大数的大小比较</span></span><br><span class="line">    <span class="keyword">bool</span>   <span class="keyword">operator</span>&gt;(<span class="keyword">const</span> <span class="keyword">int</span> &amp; t)<span class="keyword">const</span>;      <span class="comment">//大数和一个int类型的变量的大小比较</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>;       <span class="comment">//输出大数</span></span><br><span class="line">&#125;;</span><br><span class="line">BigNum::BigNum(<span class="keyword">const</span> <span class="keyword">int</span> b)     <span class="comment">//将一个int类型的变量转化为大数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> c,d = b;</span><br><span class="line">    len = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">while</span>(d &gt; MAXN)</span><br><span class="line">    &#123;</span><br><span class="line">        c = d - (d / (MAXN + <span class="number">1</span>)) * (MAXN + <span class="number">1</span>);</span><br><span class="line">        d = d / (MAXN + <span class="number">1</span>);</span><br><span class="line">        a[len++] = c;</span><br><span class="line">    &#125;</span><br><span class="line">    a[len++] = d;</span><br><span class="line">&#125;</span><br><span class="line">BigNum::BigNum(<span class="keyword">const</span> <span class="keyword">char</span>*s)     <span class="comment">//将一个字符串类型的变量转化为大数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> t,k,index,l,i;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    l=<span class="built_in">strlen</span>(s);</span><br><span class="line">    len=l/DLEN;</span><br><span class="line">    <span class="keyword">if</span>(l%DLEN)</span><br><span class="line">        len++;</span><br><span class="line">    index=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=l<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i-=DLEN)</span><br><span class="line">    &#123;</span><br><span class="line">        t=<span class="number">0</span>;</span><br><span class="line">        k=i-DLEN+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(k&lt;<span class="number">0</span>)</span><br><span class="line">            k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=k;j&lt;=i;j++)</span><br><span class="line">            t=t*<span class="number">10</span>+s[j]-<span class="string">'0'</span>;</span><br><span class="line">        a[index++]=t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">BigNum::BigNum(<span class="keyword">const</span> BigNum &amp; T) : len(T.len)  <span class="comment">//拷贝构造函数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; len ; i++)</span><br><span class="line">        a[i] = T.a[i];</span><br><span class="line">&#125;</span><br><span class="line">BigNum &amp; BigNum::<span class="keyword">operator</span>=(const BigNum &amp; n)   <span class="comment">//重载赋值运算符，大数之间进行赋值运算</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    len = n.len;</span><br><span class="line">    <span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; len ; i++)</span><br><span class="line">        a[i] = n.a[i];</span><br><span class="line">    return *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line">istream&amp; <span class="keyword">operator</span>&gt;&gt;(istream &amp; in,  BigNum &amp; b)   <span class="comment">//重载输入运算符</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> ch[MAXSIZE*<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">-1</span>;</span><br><span class="line">    in&gt;&gt;ch;</span><br><span class="line">    <span class="keyword">int</span> l=<span class="built_in">strlen</span>(ch);</span><br><span class="line">    <span class="keyword">int</span> count=<span class="number">0</span>,sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=l<span class="number">-1</span>;i&gt;=<span class="number">0</span>;)</span><br><span class="line">    &#123;</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> t=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">4</span>&amp;&amp;i&gt;=<span class="number">0</span>;j++,i--,t*=<span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            sum+=(ch[i]-<span class="string">'0'</span>)*t;</span><br><span class="line">        &#125;</span><br><span class="line">        b.a[count]=sum;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    b.len =count++;</span><br><span class="line">    return in;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">ostream&amp; <span class="keyword">operator</span>&lt;&lt;(ostream&amp; out,  BigNum&amp; b)   <span class="comment">//重载输出运算符</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; b.a[b.len - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(i = b.len - <span class="number">2</span> ; i &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>.width(DLEN);</span><br><span class="line">        <span class="built_in">cout</span>.fill(<span class="string">'0'</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; b.a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BigNum BigNum::<span class="keyword">operator</span>+(<span class="keyword">const</span> BigNum &amp; T) <span class="keyword">const</span>   <span class="comment">//两个大数之间的相加运算</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">BigNum <span class="title">t</span><span class="params">(*<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    <span class="keyword">int</span> i,big;      <span class="comment">//位数</span></span><br><span class="line">    big = T.len &gt; len ? T.len : len;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; big ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        t.a[i] +=T.a[i];</span><br><span class="line">        <span class="keyword">if</span>(t.a[i] &gt; MAXN)</span><br><span class="line">        &#123;</span><br><span class="line">            t.a[i + <span class="number">1</span>]++;</span><br><span class="line">            t.a[i] -=MAXN+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(t.a[big] != <span class="number">0</span>)</span><br><span class="line">        t.len = big + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        t.len = big;</span><br><span class="line">    return t;</span><br><span class="line">&#125;</span><br><span class="line">BigNum BigNum::<span class="keyword">operator</span>-(<span class="keyword">const</span> BigNum &amp; T) <span class="keyword">const</span>   <span class="comment">//两个大数之间的相减运算</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,big;</span><br><span class="line">    <span class="keyword">bool</span> flag;</span><br><span class="line">    BigNum t1,t2;</span><br><span class="line">    <span class="keyword">if</span>(*<span class="keyword">this</span>&gt;T)</span><br><span class="line">    &#123;</span><br><span class="line">        t1=*<span class="keyword">this</span>;</span><br><span class="line">        t2=T;</span><br><span class="line">        flag=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        t1=T;</span><br><span class="line">        t2=*<span class="keyword">this</span>;</span><br><span class="line">        flag=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    big=t1.len;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; big ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(t1.a[i] &lt; t2.a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            j = i + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(t1.a[j] == <span class="number">0</span>)</span><br><span class="line">                j++;</span><br><span class="line">            t1.a[j--]--;</span><br><span class="line">            <span class="keyword">while</span>(j &gt; i)</span><br><span class="line">                t1.a[j--] += MAXN;</span><br><span class="line">            t1.a[i] += MAXN + <span class="number">1</span> - t2.a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            t1.a[i] -= t2.a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    t1.len = big;</span><br><span class="line">    <span class="keyword">while</span>(t1.a[t1.len - <span class="number">1</span>] == <span class="number">0</span> &amp;&amp; t1.len &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t1.len--;</span><br><span class="line">        big--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(flag)</span><br><span class="line">        t1.a[big<span class="number">-1</span>]=<span class="number">0</span>-t1.a[big<span class="number">-1</span>];</span><br><span class="line">    return t1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BigNum BigNum::<span class="keyword">operator</span>*(<span class="keyword">const</span> BigNum &amp; T) <span class="keyword">const</span>   <span class="comment">//两个大数之间的相乘运算</span></span><br><span class="line">&#123;</span><br><span class="line">    BigNum ret;</span><br><span class="line">    <span class="keyword">int</span> i,j,up;</span><br><span class="line">    <span class="keyword">int</span> temp,temp1;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; len ; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        up = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">0</span> ; j &lt; T.len ; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = a[i] * T.a[j] + ret.a[i + j] + up;</span><br><span class="line">            <span class="keyword">if</span>(temp &gt; MAXN)</span><br><span class="line">            &#123;</span><br><span class="line">                temp1 = temp - temp / (MAXN + <span class="number">1</span>) * (MAXN + <span class="number">1</span>);</span><br><span class="line">                up = temp / (MAXN + <span class="number">1</span>);</span><br><span class="line">                ret.a[i + j] = temp1;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                up = <span class="number">0</span>;</span><br><span class="line">                ret.a[i + j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(up != <span class="number">0</span>)</span><br><span class="line">            ret.a[i + j] = up;</span><br><span class="line">    &#125;</span><br><span class="line">    ret.len = i + j;</span><br><span class="line">    <span class="keyword">while</span>(ret.a[ret.len - <span class="number">1</span>] == <span class="number">0</span> &amp;&amp; ret.len &gt; <span class="number">1</span>)</span><br><span class="line">        ret.len--;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line">BigNum BigNum::<span class="keyword">operator</span>/(<span class="keyword">const</span> <span class="keyword">int</span> &amp; b) <span class="keyword">const</span>   <span class="comment">//大数对一个整数进行相除运算</span></span><br><span class="line">&#123;</span><br><span class="line">    BigNum ret;</span><br><span class="line">    <span class="keyword">int</span> i,down = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = len - <span class="number">1</span> ; i &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        ret.a[i] = (a[i] + down * (MAXN + <span class="number">1</span>)) / b;</span><br><span class="line">        down = a[i] + down * (MAXN + <span class="number">1</span>) - ret.a[i] * b;</span><br><span class="line">    &#125;</span><br><span class="line">    ret.len = len;</span><br><span class="line">    <span class="keyword">while</span>(ret.a[ret.len - <span class="number">1</span>] == <span class="number">0</span> &amp;&amp; ret.len &gt; <span class="number">1</span>)</span><br><span class="line">        ret.len--;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> BigNum::<span class="keyword">operator</span> %(<span class="keyword">const</span> <span class="keyword">int</span> &amp; b) <span class="keyword">const</span>    <span class="comment">//大数对一个int类型的变量进行取模运算</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i,d=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = len<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        d = ((d * (MAXN+<span class="number">1</span>))% b + a[i])% b;</span><br><span class="line">    &#125;</span><br><span class="line">    return d;</span><br><span class="line">&#125;</span><br><span class="line">BigNum BigNum::<span class="keyword">operator</span>^(<span class="keyword">const</span> <span class="keyword">int</span> &amp; n) <span class="keyword">const</span>    <span class="comment">//大数的n次方运算</span></span><br><span class="line">&#123;</span><br><span class="line">    BigNum t,ret(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">0</span>)</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        return <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">        return *<span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">int</span> m=n;</span><br><span class="line">    <span class="keyword">while</span>(m&gt;<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        t=*<span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>( i=<span class="number">1</span>;i&lt;&lt;<span class="number">1</span>&lt;=m;i&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            t=t*t;</span><br><span class="line">        &#125;</span><br><span class="line">        m-=i;</span><br><span class="line">        ret=ret*t;</span><br><span class="line">        <span class="keyword">if</span>(m==<span class="number">1</span>)</span><br><span class="line">            ret=ret*(*this);</span><br><span class="line">    &#125;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">bool</span> BigNum::<span class="keyword">operator</span>&gt;(<span class="keyword">const</span> BigNum &amp; T) <span class="keyword">const</span>   <span class="comment">//大数和另一个大数的大小比较</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> ln;</span><br><span class="line">    <span class="keyword">if</span>(len &gt; T.len)</span><br><span class="line">        return <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(len == T.len)</span><br><span class="line">    &#123;</span><br><span class="line">        ln = len - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(a[ln] == T.a[ln] &amp;&amp; ln &gt;= <span class="number">0</span>)</span><br><span class="line">            ln--;</span><br><span class="line">        <span class="keyword">if</span>(ln &gt;= <span class="number">0</span> &amp;&amp; a[ln] &gt; T.a[ln])</span><br><span class="line">            return <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            return <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        return <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">bool</span> BigNum::<span class="keyword">operator</span> &gt;(<span class="keyword">const</span> <span class="keyword">int</span> &amp; t) <span class="keyword">const</span>    <span class="comment">//大数和一个int类型的变量的大小比较</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">BigNum <span class="title">b</span><span class="params">(t)</span></span>;</span><br><span class="line">    return *<span class="keyword">this</span>&gt;b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> BigNum::print()    <span class="comment">//输出大数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; a[len - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(i = len - <span class="number">2</span> ; i &gt;= <span class="number">0</span> ; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>.width(DLEN);</span><br><span class="line">        <span class="built_in">cout</span>.fill(<span class="string">'0'</span>);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,n;</span><br><span class="line">    BigNum x[<span class="number">101</span>];      <span class="comment">//定义大数的对象数组</span></span><br><span class="line">    x[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; <span class="number">101</span>; i++)</span><br><span class="line">        x[i] = x[i - <span class="number">1</span>] * (<span class="number">4</span> * i - <span class="number">2</span>) / (i + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) == <span class="number">1</span> &amp;&amp; n != <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x[n].print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

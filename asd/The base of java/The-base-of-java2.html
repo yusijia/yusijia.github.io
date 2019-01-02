@@ -1,0 +1,425 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      java学习笔记2 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						java学习笔记2
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		java学习笔记2
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>35.<strong>只有  默认访问权限  和public能够用来修饰类。修饰类的变量和方法四种权限都可以。（本处所说的类针对的是外部类，不包括内部类）。如果不希望其他任何人对该类拥有访问权限，可以把所有的构造器都指定为private，从而阻止任何人创建该类的对象，但有一个例外，就是你在该类的static成员内可以创建。<br>例如：System.out.println()，out是静态对象，println是out对象的方法</strong></p>
+<p>36.<strong>当创建一个导出类的对象时，该对象包含了一个基类的子对象。这个子对象与你用基类直接创建的对象是一样的。二者区别在于，后者来自于外部，而基类的子对象被包装在导出类的对象内部。 对基类子对象的正确初始化也是至关重要的：在共早期中调用基类构造器来执行初始化，java会自动在导出类的默认构造器中插入对基类构造器的调用，如果没有基类默认构造器，或者想用一个带参数的基类构造器，就必须用关键字super显式地编写调用基类构造器的语句。</strong></p>
+<p>37.尽量将“域”保持为private，你应当一直保留更改底层实现的权利。然后通过protected方法来控制类的继承者的访问权限。</p>
+<p>38.对于基本类型，final使数值恒定不变，而对于对象引用，final使引用恒定不变(只能引用这个对象)，但引用的对象是可以变的。相当于c++中的 const Person *p = p1;// p里的地址不能变，而地址对应的内容可以变。</p>
+<p>39.常用的方法： public static final int VALUE_ONE = 1; 具体的了解还是参考final关键字的详解吧。注意static变量在类中只会保存一份，初始化一次</p>
+<p>40.静态方法是与类，而并非与单个的对象相关联的。所以静态的方法不具有多态性。</p>
+<p>41.在导出类的构造器主体中，如果没有明确指定调用某个基类构造器，它就会调用默认构造器(如果有的话)，否则报错。</p>
+<p>42.构造器是用来初始化对象的。用尽可能简单的方法使对象进入正常状态，如果可以的话，要避免调用其他方法。在构造器内唯一能够安全调用的那些方法是基类中的final方法(也适用于private方法，它们自动属于final方法)。</p>
+<p>43.<strong>协变返回类型</strong>： 它表示在导出类中的被重写(覆盖)( @Override)的方法可以返回基类方法的返回类型的某种导出类型</p>
+<p>44.包含抽象方法的类叫做抽象类，如果一个类包含一个或多个抽象方法，该类必须被限定为抽象的。</p>
+<p>45.如果从一个抽象类继承，并想创建该新类的对象，那么久必须为基类中的所有抽象方法提供方法定义。如果不这样做，那么导出类便也是抽象类，且编译器将会强制我们用abstract关键字来限定这个类。</p>
+<p>46.既然某个类成为抽象类并不需要所有的方法都是抽象的，所以仅需将某些方法声明为抽象的即可。</p>
+<p>47.interface关键字产生一个完全抽象的了，它根本就没有提供任何具体实现，它允许创建者确定方法名，参数列表，返回类型，但是没有任何方法体。接口只提供了形式，而未提供任何具体实现。</p>
+<p>48.可以选择在接口中显式地将方法声明为public的，但即使你不这么做，他们也是public的。因此，当要实现一个接口时，在接口中被定义的方法必须被定义为是public。</p>
+<p>49.每个内部类都能独立地继承自一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类都没有影响。</p>
+<p>50.java的Iterator只能单向移动，这个Iterator只能用来：</p>
+<ul>
+<li>使用方法iterator()要求容器返回一个Iterator。这个Iterator将准备好返回序列的第一个元素</li>
+<li>使用next()获得序列中的下一个元素</li>
+<li>使用hasNext()检查序列中是否还有元素</li>
+<li>使用remove()将迭代器新近返回的元素删除</li>
+</ul>
+<p>Iterator可以移除有next产生的最后一个元素，这意味着在调用remove()之前必须先调用next()<br>51.</p>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

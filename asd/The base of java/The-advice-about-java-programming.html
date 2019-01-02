@@ -1,0 +1,445 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      改善java程序的建议 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						改善java程序的建议
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		改善java程序的建议
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>参考：《改善java程序的151个建议》</p>
+<p>1.三元操作符的类型尽量保持一致，如果不一致会发生类型转换。</p>
+<p>2.避免带有变长参数的方法重载。</p>
+<ol>
+<li>如果重载了带有变长参数的方法，不要隐藏实参类型。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">(String str, Integer...is)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">(String str, String...strs)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123; </span><br><span class="line">		Client client = <span class="keyword">new</span> Client();</span><br><span class="line">		client.methodA(“China”, <span class="number">0</span>);</span><br><span class="line">		client.methodA(“China”, “People”);</span><br><span class="line">		client.methodA(“China”, <span class="keyword">null</span>);<span class="comment">//这样就不知道调用哪个方法了</span></span><br><span class="line"></span><br><span class="line">		String[] strs = <span class="keyword">null</span>;</span><br><span class="line">		client.methodA(<span class="string">"China"</span>, strs);<span class="comment">//没有隐藏实参，且这样就能知道调用哪个方法了</span></span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>4.子类重写父类含变长参数(例如int…)的方法时，加@Override，并且子类方法不要用int[]来代替父类的变长参数，老老实实写一样的参数列表<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> price, <span class="keyword">int</span>...bs)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Base...fun"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sub</span> <span class="keyword">extends</span> <span class="title">Base</span></span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> price, <span class="keyword">int</span>...ss)</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Sub...fun"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">lian</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123; </span><br><span class="line">		</span><br><span class="line">		Base base = <span class="keyword">new</span> Sub();</span><br><span class="line">		base.fun(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line">输出：</span><br><span class="line">Sub...fun</span><br></pre></td></tr></table></figure></p>
+<p>Base对象把子类对象Sub做了向上转型，再由子类调用fun方法</p>
+<p>5.注意couns++就等效于 count = count + 1;  不要写成了count = count++;</p>
+<p>6.尽量少用静态导入<br>静态导入遵循两个规则：<br>   不使用*，除非是导入静态常量类(只包含常量的类或接口)<br>   方法名是具有明确、清晰表象意义的工具类</p>
+<p>7.尽量在case语句后面都加break，这里已经有无数人犯过错了，即使为了一些方便可能几种情况都对于相同的处理而省略掉个别break，但也尽量别偷懒，把break写上吧。</p>
+<p>一种更简单的方法是：在Eclipse中 Perfermaces-&gt;java-&gt;Compiler-&gt;Errors/Warnings-&gt;Potential Programming problems 中修改’switch’ case fall-through为Error级别，只要case语句后面没有break，直接报错</p>
+<p>8.易变业务使用脚本语言编写</p>
+<p>9.序列化类中，不要使用构造函数为final变量赋值。因为反序列化的时候不会执行构造函数。</p>
+<p>10.反序列化时final变量在以下情况下不会被重新赋值：<br>通过构造函数为final变量赋值，反序列化时不会执行构造函数<br>通过方法返回值为final变量赋值<br>Final修饰的属性不是基本属性。</p>
+<p>11.用偶判断，不用奇判断： i % 2 == 0 ? “偶数” : “奇数”</p>
+<p>　　个人理解：用位运算更干脆，即(i &amp; 1) == 0? “偶数” : “奇数”;<br>对于正数，零，在计算机里是二进制存储，偶数最后一位一定为0，奇数最后一位一定为1<br>对于负数，在计算机里是存补码，即反码+1，奇数最后一位为1，反码后为0，再+1，一定为1，所以无影响，还是可以用i&amp;1判断，偶数也是一样的 </p>
+<p>12.不要让类型默默转换 , 基本类型转换时，使用主动声明方式减少不必要的Bug<br>例如：long a = 30 <em> 10000 </em> 1000 <em> 60 </em> 8; //3亿<em> 60 </em> 8<br>输出： -2028888064<br>因为java是先运算然后再进行类型转换的。<br>解决方法： long a = 1L *…;</p>
+<p>13.注意边界<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">例如: <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> LIMIT = <span class="number">2000</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] main)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">int</span> cur = <span class="number">1000</span>;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		System.out.println(<span class="string">"请输入需要预定的数量： "</span>);</span><br><span class="line">		<span class="keyword">while</span>(sc.hasNext())&#123;</span><br><span class="line">			<span class="keyword">int</span> order = sc.nextInt();</span><br><span class="line">			<span class="keyword">if</span>(order &gt; <span class="number">0</span> &amp;&amp; order + cur &lt;= LIMIT)&#123;</span><br><span class="line">				System.out.println(<span class="string">"你已经成功预定了 "</span> + order + <span class="string">"个产品"</span>);			</span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				System.out.println(<span class="string">"超界了，预定失败"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>分析： 因为2147483647 + 1000 = -2147482649 &lt; 2000,所以边界测试很有必要。<br>　　如果一个方法接受的是int类型的参数，那一下三个值是必测的：0，最大正数，最小负数。<br>改：if(order &gt; 0 &amp;&amp; order &lt;= 1000 &amp;&amp; order + cur &lt;= LIMIT)</p>
+<p>14.包装类型参与运算时，要做null值校验。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">list.add(<span class="number">1</span>);</span><br><span class="line">list.add(<span class="number">2</span>);</span><br><span class="line">list.add(<span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(Integer i : list)&#123;</span><br><span class="line">	count += i;</span><br><span class="line">&#125;</span><br><span class="line">System.out.println(count);</span><br><span class="line">报错：Exception in thread <span class="string">"main"</span> java.lang.NullPointerException</span><br><span class="line">	at yu.Lian4.main(Lian4.java:<span class="number">19</span>)</span><br></pre></td></tr></table></figure></p>
+<p>分析: 拆箱时通过intValue()方法来实现，结果到null时报空了,null无法转换为基本类型<br>解决方法：count += (i != null ) ? i : 0;</p>
+<p>15.包装类型比较大小问题：<br>Java中 == 对于基本类型则判断值是否相等，如果是对象则判断地址是否相等， &gt;,&lt;只能是数字类型的判断，对于Integer包装类型，可以用intValue()返回值进行比较，其实还可以利用实例的compareTo()方法</p>
+<p>16.优先使用整型池：<br>　　装箱过程是通过调用包装器的valueOf方法实现的，而拆箱过程是通过调用包装器的 xxxValue方法实现的。（xxx代表对应的基本数据类型）。<br>valueOf()方法返回的是对象，而xxxValue返回的是对应的基本类型。<br>    对于Integer优先使用valueOf来生成包装对象，因为这里有优化，整型池。</p>
+<p>17.接口中不要放实现代码。</p>
+<p>18.静态变量一定要先声明后赋值。下面来看一段代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Lian4</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		i = <span class="number">100</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] main)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		System.out.println(i);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">输出:</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>分析：<br>　　静态变量是类加载时被分配到数据区的，他在内存中只有一个拷贝，不会被分配多次，其后的所有赋值操作都是值改变，地址则保持不变。 我们知道JVM初始化变量时先声明空间，然后赋值的，也就是说：在JVM中是分开执行，等价于：<br>int i ;//分配地址空间<br>i = 100; // 赋值<br>静态变量是类初始化时首先被加载的，JVM会去查找类中所有的静态声明，然后分配空间，注意这时候只是完成了地址空间的分配，还没有赋值，之后JVM会根据类中静态赋值（包括静态类赋值和静态块赋值）的先后顺序来执行。<br>对于这个程序来说，就是先声明了int类型的地址空间，并把地址传递给了i，然后按照类中的先后顺序执行赋值动作，首先执行静态块中的i=100，然后执行i=1，那最后的结果当然就是1了<br>所以遵循java通用的开发规范“变量先声明后使用”是一个良好的编码风格。</p>
+<p>19.构造函数尽量简化，尽量不要对其他的类有依赖性 ，例如父类是抽象类，构造函数里有一个变量赋值却依赖于一个抽象方法，而抽象方法由子类的实现，这样容易出错。</p>
+<p>20.避免在构造函数中初始化其他类。</p>
+<p>21.如果一个类不允许实例化，就要保证“平常”渠道都不能实例化他。<br>例如:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Math</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样就无法“平常”的实例化他了，但如果通过反射来生成Math实例就无法保证Math实例的正确性了，可以像下面这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">Math</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> Error(“不要实例化我！”);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如此才能保证一个工具类不会实例化，并且保证所有的访问都是通过类名来访问的，不过如果像上面这样做了，此工具类就不要做继承的打算了，因为子类实例化要调用父类的构造函数，那么问题就出现了。</p>
+<p>22.在重写equals()中使用getClass进行类型判断，别用instanceof</p>
+<p>23.推荐覆写toString()方法，默认的toString()方法不友好，如果是自己的类，则打印出的是类名+@+hashCode，不是给人看的，是给机器看的。<br>例如可以这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function">Public String <span class="title">toString</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line"><span class="keyword">return</span> String.format(“%s.name=%s”, <span class="keyword">this</span>.getClass(), <span class="keyword">this</span>.paraes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>补：当Bean的属性较多时，自己实现就不可取了，不过可以使用apache的commons工具包中的ToStringBuilder类，简洁，实用又方便</p>
+<ol>
+<li>推荐使用String直接量赋值</li>
+</ol>
+<p>对于String类，不建议使用new String(“a”)的方法来赋值，而是类似String str = “asd”来直接赋值。原因是java为了避免在一个系统中大量产生String对象(因为String是经常使用的类型)，于是设计了字符串常量池。在其中容纳的都是String对象，他的创建机制是：<br>创建一个字符串时，首先检查池中是否有字面值相等的字符串，如果有，则不再创建，直接返回池中该对象的引用，若没有则创建String对象，然后放到池中，并返回新建对象的引用。<br>而直接声明一个String对象(new String(“a”))是不检查字符串常量池的，也不会把对象放到池中。<br>请记住String对象是不可变的。任何对他的change都会产生新的对象返回，而原对象不变。</p>
+<p>25.注意String的两个方法的参数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function">String</span><br><span class="line"><span class="title">replace</span><span class="params">(CharSequence target, CharSequence replacement)</span> </span><br><span class="line">          使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串。</span><br><span class="line"> String</span><br><span class="line"><span class="title">replaceAll</span><span class="params">(String regex, String replacement)</span> </span><br><span class="line">          使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。</span></span><br></pre></td></tr></table></figure></p>
+<p>Replace的第一个参数是要被换的字符，第二个参数是替换他的字符<br>replaceAll的第一个参数是正则表达式，第二个参数是待匹配的字符串</p>
+<p>26.使用String类的场景：<br>    在字符串不经常变化的场景中可以使用String类，例如常量的声明，少了的变量运算<br>使用StringBuffer类的场景：<br>    在频繁进行字符串的运算，并且运行在多线程的环境中，则可以考虑使用StringBuffer，例如：XML解析、HTTP参数解析和封装等。<br>使用StringBuilder类的场景：<br>    在频繁进行字符串的运算，并且运行在单线程的环境中，则可以考虑使用StringBuilder,如SQL语句的拼装、JSON封装等。</p>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

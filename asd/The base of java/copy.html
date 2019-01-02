@@ -1,0 +1,439 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      浅拷贝和深拷贝 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						浅拷贝和深拷贝
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		浅拷贝和深拷贝
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p><a href="http://blog.csdn.net/tounaobun/article/details/8491392" target="_blank" rel="external">http://blog.csdn.net/tounaobun/article/details/8491392</a></p>
+<p>假如说你想复制一个简单变量。很简单：</p>
+<ol>
+<li>int apples = 5; </li>
+<li>int pears = apples; </li>
+<li>不仅仅是int类型，其它七种原始数据类型(boolean,char,byte,short,float,double.long)同样适用于该类情况。<br>但是如果你复制的是一个对象，情况就有些复杂了。<br>假设说我是一个beginner，我会这样写：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123; </span><br><span class="line"><span class="number">2</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">3</span>.	 </span><br><span class="line"><span class="number">4</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">5</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">6</span>.	    &#125; </span><br><span class="line"><span class="number">7</span>.	 </span><br><span class="line"><span class="number">8</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">9</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">10</span>.	    &#125; </span><br><span class="line"><span class="number">11</span>.	     </span><br><span class="line"><span class="number">12</span>.	&#125; </span><br><span class="line"><span class="number">13</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">14</span>.	     </span><br><span class="line"><span class="number">15</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">16</span>.	         </span><br><span class="line"><span class="number">17</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">18</span>.	        stu1.setNumber(<span class="number">12345</span>); </span><br><span class="line"><span class="number">19</span>.	        Student stu2 = stu1; </span><br><span class="line"><span class="number">20</span>.	         </span><br><span class="line"><span class="number">21</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">22</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line"><span class="number">23</span>.	    &#125; </span><br><span class="line"><span class="number">24</span>.	&#125; </span><br><span class="line">打印结果：</span><br><span class="line"> </span><br><span class="line"><span class="number">1</span>.	学生<span class="number">1</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">2</span>.	学生<span class="number">2</span>:<span class="number">12345</span></span><br></pre></td></tr></table></figure>
+<p>这里我们自定义了一个学生类，该类只有一个number字段。<br>我们新建了一个学生实例，然后将该值赋值给stu2实例。(Student stu2 = stu1;)<br>再看看打印结果，作为一个新手，拍了拍胸腹，对象复制不过如此，<br>难道真的是这样吗？</p>
+<p>我们试着改变stu2实例的number字段，再打印结果看看：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	stu2.setNumber(<span class="number">54321</span>); </span><br><span class="line"><span class="number">2</span>.	 </span><br><span class="line"><span class="number">3</span>.	System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">4</span>.	System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line">打印结果:</span><br><span class="line"><span class="number">1</span>.	学生<span class="number">1</span>:<span class="number">54321</span> </span><br><span class="line"><span class="number">2</span>.	学生<span class="number">2</span>:<span class="number">54321</span></span><br></pre></td></tr></table></figure>
+<p>这就怪了，为什么改变学生2的学号，学生1的学号也发生了变化呢？<br>原因出在(stu2 = stu1) 这一句。该语句的作用是将stu1的引用赋值给stu2，<br>这样，stu1和stu2指向内存堆中同一个对象。<br>那么，怎样才能达到复制一个对象呢？<br>是否记得万类之王Object。它有11个方法，有两个protected的方法，其中一个为clone方法。<br>该方法的签名是：<br>protected native Object clone() throws CloneNotSupportedException;<br>因为每个类直接或间接的父类都是Object，因此它们都含有clone()方法，但是因为该方法是protected，所以都不能在类外进行访问。<br>要想对一个对象进行复制，就需要对clone方法覆盖。</p>
+<h2 id="一般步骤是（浅复制）："><a href="#一般步骤是（浅复制）：" class="headerlink" title="一般步骤是（浅复制）："></a>一般步骤是（浅复制）：</h2><ol>
+<li><p><strong>被复制的类需要实现Clonenable接口（不实现的话在调用clone方法会抛出CloneNotSupportedException异常) 该接口为标记接口(不含任何方法)</strong></p>
+</li>
+<li><p>覆盖clone()方法，访问修饰符设为public。方法中调用super.clone()方法得到需要的复制对象，（native为本地方法)<br>下面对上面那个方法进行改造：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123; </span><br><span class="line"><span class="number">2</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">3</span>.	 </span><br><span class="line"><span class="number">4</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">5</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">6</span>.	    &#125; </span><br><span class="line"><span class="number">7</span>.	 </span><br><span class="line"><span class="number">8</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">9</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">10</span>.	    &#125; </span><br><span class="line"><span class="number">11</span>.	     </span><br><span class="line"><span class="number">12</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">13</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">14</span>.	        Student stu = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">15</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">16</span>.	            stu = (Student)<span class="keyword">super</span>.clone(); </span><br><span class="line"><span class="number">17</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">18</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">19</span>.	        &#125; </span><br><span class="line"><span class="number">20</span>.	        <span class="keyword">return</span> stu; </span><br><span class="line"><span class="number">21</span>.	    &#125; </span><br><span class="line"><span class="number">22</span>.	&#125; </span><br><span class="line"><span class="number">23</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">24</span>.	     </span><br><span class="line"><span class="number">25</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">26</span>.	         </span><br><span class="line"><span class="number">27</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">28</span>.	        stu1.setNumber(<span class="number">12345</span>); </span><br><span class="line"><span class="number">29</span>.	        Student stu2 = (Student)stu1.clone(); </span><br><span class="line"><span class="number">30</span>.	         </span><br><span class="line"><span class="number">31</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">32</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line"><span class="number">33</span>.	         </span><br><span class="line"><span class="number">34</span>.	        stu2.setNumber(<span class="number">54321</span>); </span><br><span class="line"><span class="number">35</span>.	     </span><br><span class="line"><span class="number">36</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber()); </span><br><span class="line"><span class="number">37</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber()); </span><br><span class="line"><span class="number">38</span>.	    &#125; </span><br><span class="line"><span class="number">39</span>.	&#125; </span><br><span class="line"><span class="number">40</span>.	学生<span class="number">1</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">41</span>.	学生<span class="number">2</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">42</span>.	学生<span class="number">1</span>:<span class="number">12345</span> </span><br><span class="line"><span class="number">43</span>.	学生<span class="number">2</span>:<span class="number">54321</span></span><br></pre></td></tr></table></figure>
+<p>上面的复制被称为浅复制(Shallow Copy)，还有一种稍微复杂的深度复制(deep copy)：<br>我们在学生类里再加一个Address类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Address</span>  </span>&#123; </span><br><span class="line"><span class="number">2</span>.	    <span class="keyword">private</span> String add; </span><br><span class="line"><span class="number">3</span>.	 </span><br><span class="line"><span class="number">4</span>.	    <span class="function"><span class="keyword">public</span> String <span class="title">getAdd</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">5</span>.	        <span class="keyword">return</span> add; </span><br><span class="line"><span class="number">6</span>.	    &#125; </span><br><span class="line"><span class="number">7</span>.	 </span><br><span class="line"><span class="number">8</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdd</span><span class="params">(String add)</span> </span>&#123; </span><br><span class="line"><span class="number">9</span>.	        <span class="keyword">this</span>.add = add; </span><br><span class="line"><span class="number">10</span>.	    &#125; </span><br><span class="line"><span class="number">11</span>.	     </span><br><span class="line"><span class="number">12</span>.	&#125; </span><br><span class="line"><span class="number">13</span>.	 </span><br><span class="line"><span class="number">14</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123; </span><br><span class="line"><span class="number">15</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">16</span>.	 </span><br><span class="line"><span class="number">17</span>.	    <span class="keyword">private</span> Address addr; </span><br><span class="line"><span class="number">18</span>.	     </span><br><span class="line"><span class="number">19</span>.	    <span class="function"><span class="keyword">public</span> Address <span class="title">getAddr</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">20</span>.	        <span class="keyword">return</span> addr; </span><br><span class="line"><span class="number">21</span>.	    &#125; </span><br><span class="line"><span class="number">22</span>.	 </span><br><span class="line"><span class="number">23</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAddr</span><span class="params">(Address addr)</span> </span>&#123; </span><br><span class="line"><span class="number">24</span>.	        <span class="keyword">this</span>.addr = addr; </span><br><span class="line"><span class="number">25</span>.	    &#125; </span><br><span class="line"><span class="number">26</span>.	 </span><br><span class="line"><span class="number">27</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">28</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">29</span>.	    &#125; </span><br><span class="line"><span class="number">30</span>.	 </span><br><span class="line"><span class="number">31</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">32</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">33</span>.	    &#125; </span><br><span class="line"><span class="number">34</span>.	     </span><br><span class="line"><span class="number">35</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">36</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">37</span>.	        Student stu = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">38</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">39</span>.	            stu = (Student)<span class="keyword">super</span>.clone(); </span><br><span class="line"><span class="number">40</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">41</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">42</span>.	        &#125; </span><br><span class="line"><span class="number">43</span>.	        <span class="keyword">return</span> stu; </span><br><span class="line"><span class="number">44</span>.	    &#125; </span><br><span class="line"><span class="number">45</span>.	&#125; </span><br><span class="line"><span class="number">46</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">47</span>.	     </span><br><span class="line"><span class="number">48</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">49</span>.	         </span><br><span class="line"><span class="number">50</span>.	        Address addr = <span class="keyword">new</span> Address(); </span><br><span class="line"><span class="number">51</span>.	        addr.setAdd(<span class="string">"杭州市"</span>); </span><br><span class="line"><span class="number">52</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">53</span>.	        stu1.setNumber(<span class="number">123</span>); </span><br><span class="line"><span class="number">54</span>.	        stu1.setAddr(addr); </span><br><span class="line"><span class="number">55</span>.	         </span><br><span class="line"><span class="number">56</span>.	        Student stu2 = (Student)stu1.clone(); </span><br><span class="line"><span class="number">57</span>.	         </span><br><span class="line"><span class="number">58</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">59</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">60</span>.	    &#125; </span><br><span class="line"><span class="number">61</span>.	&#125; </span><br><span class="line"><span class="number">62</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">63</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市</span><br></pre></td></tr></table></figure>
+<p>乍一看没什么问题，真的是这样吗？</p>
+<p>我们在main方法中试着改变addr实例的地址。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	addr.setAdd(<span class="string">"西湖区"</span>); </span><br><span class="line"><span class="number">2</span>.	 </span><br><span class="line"><span class="number">3</span>.	System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">4</span>.	System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">5</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">6</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">7</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:西湖区 </span><br><span class="line"><span class="number">8</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:西湖区</span><br></pre></td></tr></table></figure>
+<p>这就奇怪了，怎么两个学生的地址都改变了？<br>原因是浅复制只是复制了addr变量的引用，并没有真正的开辟另一块空间，将值复制后再将引用返回给新对象。<br>所以，为了达到真正的复制对象，而不是纯粹引用复制。我们需要将Address类可复制化，并且修改clone方法，完整代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.	<span class="keyword">package</span> abc; </span><br><span class="line"><span class="number">2</span>.	 </span><br><span class="line"><span class="number">3</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Address</span> <span class="keyword">implements</span> <span class="title">Cloneable</span> </span>&#123; </span><br><span class="line"><span class="number">4</span>.	    <span class="keyword">private</span> String add; </span><br><span class="line"><span class="number">5</span>.	 </span><br><span class="line"><span class="number">6</span>.	    <span class="function"><span class="keyword">public</span> String <span class="title">getAdd</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">7</span>.	        <span class="keyword">return</span> add; </span><br><span class="line"><span class="number">8</span>.	    &#125; </span><br><span class="line"><span class="number">9</span>.	 </span><br><span class="line"><span class="number">10</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdd</span><span class="params">(String add)</span> </span>&#123; </span><br><span class="line"><span class="number">11</span>.	        <span class="keyword">this</span>.add = add; </span><br><span class="line"><span class="number">12</span>.	    &#125; </span><br><span class="line"><span class="number">13</span>.	     </span><br><span class="line"><span class="number">14</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">15</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">16</span>.	        Address addr = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">17</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">18</span>.	            addr = (Address)<span class="keyword">super</span>.clone(); </span><br><span class="line"><span class="number">19</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">20</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">21</span>.	        &#125; </span><br><span class="line"><span class="number">22</span>.	        <span class="keyword">return</span> addr; </span><br><span class="line"><span class="number">23</span>.	    &#125; </span><br><span class="line"><span class="number">24</span>.	&#125; </span><br><span class="line"><span class="number">25</span>.	 </span><br><span class="line"><span class="number">26</span>.	<span class="class"><span class="keyword">class</span> <span class="title">Student</span> <span class="keyword">implements</span> <span class="title">Cloneable</span></span>&#123; </span><br><span class="line"><span class="number">27</span>.	    <span class="keyword">private</span> <span class="keyword">int</span> number; </span><br><span class="line"><span class="number">28</span>.	 </span><br><span class="line"><span class="number">29</span>.	    <span class="keyword">private</span> Address addr; </span><br><span class="line"><span class="number">30</span>.	     </span><br><span class="line"><span class="number">31</span>.	    <span class="function"><span class="keyword">public</span> Address <span class="title">getAddr</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">32</span>.	        <span class="keyword">return</span> addr; </span><br><span class="line"><span class="number">33</span>.	    &#125; </span><br><span class="line"><span class="number">34</span>.	 </span><br><span class="line"><span class="number">35</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAddr</span><span class="params">(Address addr)</span> </span>&#123; </span><br><span class="line"><span class="number">36</span>.	        <span class="keyword">this</span>.addr = addr; </span><br><span class="line"><span class="number">37</span>.	    &#125; </span><br><span class="line"><span class="number">38</span>.	 </span><br><span class="line"><span class="number">39</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumber</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">40</span>.	        <span class="keyword">return</span> number; </span><br><span class="line"><span class="number">41</span>.	    &#125; </span><br><span class="line"><span class="number">42</span>.	 </span><br><span class="line"><span class="number">43</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123; </span><br><span class="line"><span class="number">44</span>.	        <span class="keyword">this</span>.number = number; </span><br><span class="line"><span class="number">45</span>.	    &#125; </span><br><span class="line"><span class="number">46</span>.	     </span><br><span class="line"><span class="number">47</span>.	    <span class="meta">@Override</span> </span><br><span class="line"><span class="number">48</span>.	    <span class="function"><span class="keyword">public</span> Object <span class="title">clone</span><span class="params">()</span> </span>&#123; </span><br><span class="line"><span class="number">49</span>.	        Student stu = <span class="keyword">null</span>; </span><br><span class="line"><span class="number">50</span>.	        <span class="keyword">try</span>&#123; </span><br><span class="line"><span class="number">51</span>.	            stu = (Student)<span class="keyword">super</span>.clone();   <span class="comment">//浅复制  </span></span><br><span class="line"><span class="number">52</span>.	        &#125;<span class="keyword">catch</span>(CloneNotSupportedException e) &#123; </span><br><span class="line"><span class="number">53</span>.	            e.printStackTrace(); </span><br><span class="line"><span class="number">54</span>.	        &#125; </span><br><span class="line"><span class="number">55</span>.	        stu.addr = (Address)addr.clone();   <span class="comment">//深度复制  </span></span><br><span class="line"><span class="number">56</span>.	        <span class="keyword">return</span> stu; </span><br><span class="line"><span class="number">57</span>.	    &#125; </span><br><span class="line"><span class="number">58</span>.	&#125; </span><br><span class="line"><span class="number">59</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123; </span><br><span class="line"><span class="number">60</span>.	     </span><br><span class="line"><span class="number">61</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123; </span><br><span class="line"><span class="number">62</span>.	         </span><br><span class="line"><span class="number">63</span>.	        Address addr = <span class="keyword">new</span> Address(); </span><br><span class="line"><span class="number">64</span>.	        addr.setAdd(<span class="string">"杭州市"</span>); </span><br><span class="line"><span class="number">65</span>.	        Student stu1 = <span class="keyword">new</span> Student(); </span><br><span class="line"><span class="number">66</span>.	        stu1.setNumber(<span class="number">123</span>); </span><br><span class="line"><span class="number">67</span>.	        stu1.setAddr(addr); </span><br><span class="line"><span class="number">68</span>.	         </span><br><span class="line"><span class="number">69</span>.	        Student stu2 = (Student)stu1.clone(); </span><br><span class="line"><span class="number">70</span>.	         </span><br><span class="line"><span class="number">71</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">72</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">73</span>.	         </span><br><span class="line"><span class="number">74</span>.	        addr.setAdd(<span class="string">"西湖区"</span>); </span><br><span class="line"><span class="number">75</span>.	         </span><br><span class="line"><span class="number">76</span>.	        System.out.println(<span class="string">"学生1:"</span> + stu1.getNumber() + <span class="string">",地址:"</span> + stu1.getAddr().getAdd()); </span><br><span class="line"><span class="number">77</span>.	        System.out.println(<span class="string">"学生2:"</span> + stu2.getNumber() + <span class="string">",地址:"</span> + stu2.getAddr().getAdd()); </span><br><span class="line"><span class="number">78</span>.	    &#125; </span><br><span class="line"><span class="number">79</span>.	&#125; </span><br><span class="line"><span class="number">80</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">81</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市 </span><br><span class="line"><span class="number">82</span>.	学生<span class="number">1</span>:<span class="number">123</span>,地址:西湖区 </span><br><span class="line"><span class="number">83</span>.	学生<span class="number">2</span>:<span class="number">123</span>,地址:杭州市</span><br></pre></td></tr></table></figure>
+<p>这样结果就符合我们的想法了。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ul>
+<li><p>浅拷贝是指在拷贝对象时，对于基本数据类型的变量会重新复制一份，而对于引用类型的变量只是对引用进行拷贝，没有对引用指向的对象进行拷贝。</p>
+</li>
+<li><p>但对于String类有的特殊，拷贝的也是一个地址，是个引用，但在修改时，他会从<br>字符串池中重写生成新的字符串，原有的字符串对象保持不变，所以在浅拷贝时可以认为String是一个基本类型。</p>
+</li>
+<li><p>而深拷贝是指在拷贝对象时，同时会对引用指向的对象进行拷贝。<br>区别就在于是否对  对象中的引用变量所指向的对象进行拷贝。</p>
+</li>
+</ul>
+<h2 id="但还有个问题："><a href="#但还有个问题：" class="headerlink" title="但还有个问题："></a>但还有个问题：</h2><p>　　要是类0里有类1，类1里面又有类2 .，类2里又有类3，如此类推。。这里的深层复制就显然会很麻烦，还有没有别的方法？    </p>
+<h2 id="答："><a href="#答：" class="headerlink" title="答："></a>答：</h2><p>　　有一个很简单的方法，就是先把对象序列化，然后再反序列化成对象，该对象保证每个引用都是崭新的。（如果类里有单例需要特殊处理）。</p>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

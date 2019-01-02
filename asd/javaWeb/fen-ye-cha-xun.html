@@ -1,0 +1,405 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      分页查询 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						分页查询
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		分页查询
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>刚学jsp和servlet时做的，jsp里加了java代码，这只是展示一下思路用</p>
+<h2 id="BookBean-java"><a href="#BookBean-java" class="headerlink" title="BookBean.java"></a>BookBean.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.mybooks;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookBean</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;<span class="comment">// 编号</span></span><br><span class="line">	<span class="keyword">private</span> String name;<span class="comment">// 图书名称</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">double</span> price;<span class="comment">// 定价</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> bookCount;<span class="comment">// 数量</span></span><br><span class="line">	<span class="keyword">private</span> String author;<span class="comment">// 作者</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getPrice</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> price;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPrice</span><span class="params">(<span class="keyword">double</span> price)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.price = price;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getBookCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> bookCount;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBookCount</span><span class="params">(<span class="keyword">int</span> bookCount)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.bookCount = bookCount;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getAuthor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> author;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAuthor</span><span class="params">(String author)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.author = author;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="bookListForward-java"><a href="#bookListForward-java" class="headerlink" title="bookListForward.java"></a>bookListForward.java</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> com.mybooks;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.message.MyTools;</span><br><span class="line"><span class="keyword">import</span> com.mysql.jdbc.Connection;</span><br><span class="line"><span class="keyword">import</span> com.mysql.jdbc.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookListForward</span> </span>&#123;</span><br><span class="line">	<span class="comment">//总行数</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> recordCount;</span><br><span class="line">	<span class="comment">//最后一行的行数</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> lastRow;</span><br><span class="line">	<span class="comment">//分页数</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> pageCount;</span><br><span class="line">	<span class="comment">//默认一页显示4条记录</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> pageSize = <span class="number">4</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPageSize</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> pageSize;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPageSize</span><span class="params">(<span class="keyword">int</span> pageSize)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.pageSize = pageSize;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获取数据库连接</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">return</span> MyTools.getConn();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//获取表的总行数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findDataRowCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//创建数据库连接</span></span><br><span class="line">		Connection conn = getConnection();</span><br><span class="line">		String sql = <span class="string">"select count(*) as totalCount from bookdatabase"</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="comment">// 创建Statement对象</span></span><br><span class="line">			Statement sta = (Statement) conn.createStatement();</span><br><span class="line">			<span class="comment">// 查询并获取ResultSet</span></span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			<span class="keyword">if</span>(rs.next())&#123;</span><br><span class="line">				recordCount = rs.getInt(<span class="string">"totalCount"</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			rs.close();</span><br><span class="line">			conn.close();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> recordCount;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//获取最后一行的行号</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findLastRow</span><span class="params">()</span></span>&#123;</span><br><span class="line">		lastRow = findDataRowCount();</span><br><span class="line">		<span class="keyword">return</span> lastRow;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//获取分页数</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findPageCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">//增加或删除会使总行数的变化</span></span><br><span class="line">		recordCount = findDataRowCount();</span><br><span class="line">		pageCount = (recordCount % pageSize == <span class="number">0</span>)?(recordCount/pageSize):(recordCount/pageSize+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">return</span> pageCount;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//获取第pageNumber页的数据</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;BookBean&gt; <span class="title">getPage</span><span class="params">(<span class="keyword">int</span> pageNumber)</span></span>&#123;</span><br><span class="line">		<span class="comment">//获取数据库连接</span></span><br><span class="line">		Connection conn = getConnection();</span><br><span class="line">		<span class="comment">//把表存在这个list的中</span></span><br><span class="line">		List&lt;BookBean&gt; list = <span class="keyword">new</span> ArrayList&lt;BookBean&gt;();</span><br><span class="line">		<span class="comment">//list = null;</span></span><br><span class="line">		<span class="comment">//计算pageNumber的第一行数据所在的位置</span></span><br><span class="line">		<span class="keyword">int</span> postion = (pageNumber - <span class="number">1</span>) * pageSize + <span class="number">1</span>;</span><br><span class="line">		<span class="comment">//sql语句</span></span><br><span class="line">		String sql = <span class="string">"select * from bookdatabase"</span>;</span><br><span class="line">		<span class="keyword">try</span>&#123;</span><br><span class="line">			<span class="comment">// 创建Statement对象</span></span><br><span class="line">			Statement sta = (Statement) conn.createStatement();</span><br><span class="line">			<span class="comment">// 查询并获取ResultSet</span></span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			<span class="comment">//设置游标的位置 </span></span><br><span class="line">			<span class="comment">//后面的next方法会将光标从当前位置向前移一行。所以先-1</span></span><br><span class="line">			rs.absolute(postion - <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pageSize &amp;&amp; rs.next(); i++)&#123;</span><br><span class="line">				BookBean book = <span class="keyword">new</span> BookBean();</span><br><span class="line">				book.setId(rs.getInt(<span class="string">"id"</span>));</span><br><span class="line">				book.setName(rs.getString(<span class="string">"name"</span>));</span><br><span class="line">				book.setPrice(rs.getDouble(<span class="string">"price"</span>));</span><br><span class="line">				book.setBookCount(rs.getInt(<span class="string">"bookCount"</span>));</span><br><span class="line">				book.setAuthor(rs.getString(<span class="string">"author"</span>));</span><br><span class="line">				list.add(book);</span><br><span class="line">			&#125;</span><br><span class="line">			rs.close();</span><br><span class="line">			sta.close();</span><br><span class="line">			conn.close();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="findbook2-jsp"><a href="#findbook2-jsp" class="headerlink" title="findbook2.jsp"></a>findbook2.jsp</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;%@ page language="java" contentType="text/html; charset=UTF-8"</span><br><span class="line">    pageEncoding="UTF-8"%&gt;</span><br><span class="line">&lt;%@ page import="java.util.List" %&gt;</span><br><span class="line">&lt;%@ page import="java.util.ArrayList" %&gt;</span><br><span class="line">&lt;%@ page import="com.mybooks.BookBean" %&gt;</span><br><span class="line">&lt;jsp:useBean id="blf" class="com.mybooks.BookListForward"&gt;&lt;/jsp:useBean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;</span><br><span class="line">&lt;title&gt;分页显示图书列表&lt;/title&gt;</span><br><span class="line">&lt;style type="text/css"&gt;</span><br><span class="line">td,th &#123;</span><br><span class="line">	padding: 5px;</span><br><span class="line">&#125;</span><br><span class="line">.footerFloat&#123;</span><br><span class="line">	float: right;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script type="text/javascript"&gt;</span><br><span class="line">	</span><br><span class="line">	//判断用户是否选择了要删除的记录，如果是，则提示“是否删除”；否则提示“请选择要删除的记录”</span><br><span class="line">	function checkdel(delid, formname) &#123;</span><br><span class="line">		var flag = false;</span><br><span class="line">		for (i = 0; i &lt; delid.length; i++) &#123;</span><br><span class="line">			if (delid[i].checked) &#123;</span><br><span class="line">				flag = true;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (!flag) &#123;</span><br><span class="line">			alert("请选择要删除的记录！");</span><br><span class="line">			return false;</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			if (confirm("确定要删除吗？")) &#123;</span><br><span class="line">				formname.submit();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div width="98%" align="center"&gt;</span><br><span class="line">		&lt;h2&gt;分页显示图书列表&lt;/h2&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;form action="DelServlet" method="post" name="frm"&gt;</span><br><span class="line">	&lt;div id="div1"&gt;</span><br><span class="line">	&lt;table width="98%" border="0" align="center" cellpadding="0"</span><br><span class="line">		cellspacing="1" bgcolor="#666666"&gt;</span><br><span class="line">		&lt;tr&gt;</span><br><span class="line">			&lt;th bgcolor="#FFFFFF"&gt;ID&lt;/th&gt;</span><br><span class="line">			&lt;th bgcolor="#FFFFFF"&gt;图书名称&lt;/th&gt;</span><br><span class="line">			&lt;th bgcolor="#FFFFFF"&gt;价格&lt;/th&gt;</span><br><span class="line">			&lt;th bgcolor="#FFFFFF"&gt;数量&lt;/th&gt;</span><br><span class="line">			&lt;th bgcolor="#FFFFFF"&gt;作者&lt;/th&gt;</span><br><span class="line">			&lt;th bgcolor="#FFFFFF"&gt;删除&lt;/th&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">		&lt;%! </span><br><span class="line">			int curPage = 1;</span><br><span class="line">		%&gt;</span><br><span class="line">		&lt;%	</span><br><span class="line">			String tmp = request.getParameter("curPage");  </span><br><span class="line">	        if(tmp==null)&#123;  </span><br><span class="line">	            tmp="1";  </span><br><span class="line">	        &#125;</span><br><span class="line">	        curPage = Integer.parseInt(tmp);</span><br><span class="line">	        </span><br><span class="line">			// 获取图书信息集合 </span><br><span class="line">			List&lt;BookBean&gt; list = blf.getPage(curPage);</span><br><span class="line">			// 判断集合是否有效</span><br><span class="line">			if(list == null || list.size() &lt; 1)&#123;</span><br><span class="line">				out.println("&lt;tr&gt;&lt;td bgcolor='#FFFFFF' colspan='5'&gt;没有任何图书信息！&lt;/td&gt;&lt;/tr&gt;");</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				for(int i = 0; i &lt; list.size(); i++)&#123;</span><br><span class="line">					</span><br><span class="line">		%&gt;</span><br><span class="line">		&lt;tr align="center"&gt;</span><br><span class="line">			&lt;td bgcolor="#FFFFFF" &gt;&lt;%=list.get(i).getId()%&gt;&lt;/td&gt;</span><br><span class="line">			&lt;td bgcolor="#FFFFFF"&gt;&lt;%=list.get(i).getName()%&gt;&lt;/td&gt;</span><br><span class="line">			&lt;td bgcolor="#FFFFFF"&gt;&lt;%=list.get(i).getPrice()%&gt;&lt;/td&gt;</span><br><span class="line">			&lt;td bgcolor="#FFFFFF"&gt;&lt;%=list.get(i).getBookCount()%&gt;&lt;/td&gt;</span><br><span class="line">			&lt;td bgcolor="#FFFFFF"&gt;&lt;%=list.get(i).getAuthor()%&gt;&lt;/td&gt;</span><br><span class="line">			&lt;td bgcolor="#FFFFFF"&gt;&lt;input name="delid" type="checkbox"</span><br><span class="line">					class="noborder" value="&lt;%=list.get(i).getId()%&gt;"&gt;&lt;/td&gt;</span><br><span class="line">		&lt;/tr&gt;</span><br><span class="line">		&lt;%</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		%&gt;</span><br><span class="line">	&lt;/table&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;br&gt;</span><br><span class="line">	&lt;footer class="footerFloat"&gt;</span><br><span class="line">		&lt;input type="button" value="全选" onclick="CheckAll()"/&gt;</span><br><span class="line">		&lt;input type="button" value="不选" onclick="UnCheck()"/&gt;</span><br><span class="line">		&lt;input type="button" value="反选" onclick="othercheck()"/&gt;</span><br><span class="line">		[&lt;a style="color:red;cursor:pointer;" onClick="checkdel(frm.delid,frm)"&gt;删除&lt;/a&gt;]		</span><br><span class="line">		&lt;div id="ch" style="display: none"&gt;</span><br><span class="line">				&lt;input name="delid" type="checkbox" value="0"&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;!--层ch用于放置隐藏的checkbox控件，因为当表单中只是一个checkbox控件时，应用javascript获得其length属性值为undefine--&gt;</span><br><span class="line">	&lt;/footer&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">	&lt;!-- 注意：下面的script代码放在head标签里则无效 --&gt;</span><br><span class="line">	&lt;script&gt;</span><br><span class="line">        var CheckBox=document.getElementById('div1').getElementsByTagName('input');</span><br><span class="line">         </span><br><span class="line">        //全选</span><br><span class="line">        function CheckAll()&#123;</span><br><span class="line">            for(i=0;i&lt;CheckBox.length;i++)&#123;CheckBox[i].checked=true;&#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">      	//不选</span><br><span class="line">        function UnCheck()&#123;</span><br><span class="line">            for(i=0;i&lt;CheckBox.length;i++)&#123;CheckBox[i].checked=false;&#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">          //反选</span><br><span class="line">        function othercheck()&#123;</span><br><span class="line">            for(i=0;i&lt;CheckBox.length;i++)&#123;</span><br><span class="line">                if(CheckBox[i].checked==true)&#123;</span><br><span class="line">                	CheckBox[i].checked=false;</span><br><span class="line">                &#125;else&#123; </span><br><span class="line">                	CheckBox[i].checked=true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">                </span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;br&gt;</span><br><span class="line">	第&lt;%=curPage %&gt;页（共&lt;%=blf.findPageCount() %&gt;页）</span><br><span class="line">	&lt;br&gt;</span><br><span class="line">	&lt;a href="findbook2.jsp?curPage=1"&gt;首页&lt;/a&gt;</span><br><span class="line">	&lt;a href="findbook2.jsp?curPage=&lt;%=curPage-1%&gt;"&gt;上一页&lt;/a&gt;</span><br><span class="line">	&lt;% </span><br><span class="line">		int pageCount = 3;</span><br><span class="line">		//根据pageCount的值显示每一页的数字并附加上相应的超链接</span><br><span class="line">  		for(int i=1; i &lt;= pageCount; i++)&#123;</span><br><span class="line"> 	%&gt;</span><br><span class="line"> 	&lt;a href="findbook2.jsp?curPage=&lt;%=i%&gt;"&gt;&lt;%=i%&gt;&lt;/a&gt;</span><br><span class="line"> 	&lt;%</span><br><span class="line"> 		&#125; </span><br><span class="line"> 	%&gt;</span><br><span class="line">	&lt;a href="findbook2.jsp?curPage=&lt;%=curPage+1%&gt;"&gt;下一页&lt;/a&gt;</span><br><span class="line">	&lt;a href="findbook2.jsp?curPage=&lt;%=blf.findPageCount()%&gt;"&gt;末页&lt;/a&gt;</span><br><span class="line">	&lt;!-- 通过表单提交用户想要显示的页数 --&gt;</span><br><span class="line">	&lt;form action="findbook2.jsp" method="get"&gt;</span><br><span class="line">  		跳转到第&lt;input type="text" name="curPage" size="4"&gt;页</span><br><span class="line">  		&lt;input type="submit" name="submit" value="跳转"&gt;</span><br><span class="line"> 	&lt;/form&gt; </span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

@@ -1,0 +1,416 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      使用元数据获取相关信息 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						使用元数据获取相关信息
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		使用元数据获取相关信息
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>转：<a href="http://www.cnblogs.com/xdp-gacl/p/4006830.html" target="_blank" rel="external">http://www.cnblogs.com/xdp-gacl/p/4006830.html</a></p>
+<h2 id="一、元数据介绍"><a href="#一、元数据介绍" class="headerlink" title="一、元数据介绍"></a>一、元数据介绍</h2><p>　　元数据指的是”数据库”、”表”、”列”的定义信息。</p>
+<h3 id="1-1、DataBaseMetaData元数据"><a href="#1-1、DataBaseMetaData元数据" class="headerlink" title="1.1、DataBaseMetaData元数据"></a>1.1、DataBaseMetaData元数据</h3><blockquote>
+<p>Connection.getDatabaseMetaData()获得代表DatabaseMetaData元数据的DatabaseMetaData对象。<br>　　DataBaseMetaData对象的常用方法：<br>•    getURL()：返回一个String类对象，代表数据库的URL。<br>•    getUserName()：返回连接当前数据库管理系统的用户名。<br>•    getDatabaseProductName()：返回数据库的产品名称。<br>•    getDatabaseProductVersion()：返回数据库的版本号。<br>•    getDriverName()：返回驱动驱动程序的名称。<br>•    getDriverVersion()：返回驱动程序的版本号。<br>•    isReadOnly()：返回一个boolean值，指示数据库是否只允许读操作。</p>
+</blockquote>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* <span class="doctag">@Method</span>: testDataBaseMetaData</span><br><span class="line">* <span class="doctag">@Description</span>: 获取数据库的元信息</span><br><span class="line">* <span class="doctag">@throws</span> SQLException</span><br><span class="line">*/</span> </span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDataBaseMetaData</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Connection conn = JdbcUtils.getConnection();</span><br><span class="line">    DatabaseMetaData metadata = conn.getMetaData();</span><br><span class="line">    <span class="comment">//getURL()：返回一个String类对象，代表数据库的URL</span></span><br><span class="line">    System.out.println(metadata.getURL());</span><br><span class="line">    <span class="comment">//getUserName()：返回连接当前数据库管理系统的用户名</span></span><br><span class="line">    System.out.println(metadata.getUserName());</span><br><span class="line">    <span class="comment">//getDatabaseProductName()：返回数据库的产品名称</span></span><br><span class="line">    System.out.println(metadata.getDatabaseProductName());</span><br><span class="line">    <span class="comment">//getDatabaseProductVersion()：返回数据库的版本号</span></span><br><span class="line">    System.out.println(metadata.getDatabaseProductVersion());</span><br><span class="line">    <span class="comment">//getDriverName()：返回驱动驱动程序的名称</span></span><br><span class="line">    System.out.println(metadata.getDriverName());</span><br><span class="line">    <span class="comment">//getDriverVersion()：返回驱动程序的版本号</span></span><br><span class="line">    System.out.println(metadata.getDriverVersion());</span><br><span class="line">    <span class="comment">//isReadOnly()：返回一个boolean值，指示数据库是否只允许读操作</span></span><br><span class="line">    System.out.println(metadata.isReadOnly());</span><br><span class="line">    JdbcUtils.release(conn, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2、ParameterMetaData元数据"><a href="#1-2、ParameterMetaData元数据" class="headerlink" title="1.2、ParameterMetaData元数据"></a>1.2、ParameterMetaData元数据</h3><blockquote>
+<p>　　PreparedStatement.getParameterMetaData() 获得代表PreparedStatement元数据的ParameterMetaData对象。<br>　　Select * from user where name=? And password=?<br>　　ParameterMetaData对象的常用方法：<br>•    getParameterCount()： 获得指定参数的个数<br>•    getParameterType(int param)：获得指定参数的sql类型，MySQL数据库驱动不支持</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">* <span class="doctag">@Method</span>: testParameterMetaData</span><br><span class="line">* <span class="doctag">@Description</span>: 获取参数元信息</span><br><span class="line">* <span class="doctag">@throws</span> SQLException</span><br><span class="line">*/</span> </span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testParameterMetaData</span><span class="params">()</span> <span class="keyword">throws</span> SQLException </span>&#123;</span><br><span class="line">    Connection conn = JdbcUtils.getConnection();</span><br><span class="line">    String sql = <span class="string">"select * from user wherer name=? and password=?"</span>;</span><br><span class="line">    <span class="comment">//将SQL预编译一下</span></span><br><span class="line">    PreparedStatement st = conn.prepareStatement(sql);</span><br><span class="line">    ParameterMetaData pm = st.getParameterMetaData();</span><br><span class="line">    <span class="comment">//getParameterCount() 获得指定参数的个数</span></span><br><span class="line">    System.out.println(pm.getParameterCount());</span><br><span class="line">    <span class="comment">//getParameterType(int param)：获得指定参数的sql类型，MySQL数据库驱动不支持</span></span><br><span class="line">    System.out.println(pm.getParameterType(<span class="number">1</span>));</span><br><span class="line">    JdbcUtils.release(conn, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-3、ResultSetMetaData元数据"><a href="#1-3、ResultSetMetaData元数据" class="headerlink" title="1.3、ResultSetMetaData元数据"></a>1.3、ResultSetMetaData元数据</h3><blockquote>
+<p>　　ResultSet. getMetaData() 获得代表ResultSet对象元数据的ResultSetMetaData对象。<br>　　ResultSetMetaData对象的常用方法：<br>•    getColumnCount() 返回resultset对象的列数<br>•    getColumnName(int column) 获得指定列的名称<br>•    getColumnTypeName(int column)获得指定列的类型</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/**</span><br><span class="line">* <span class="doctag">@Method</span>: testResultSetMetaData</span><br><span class="line">* <span class="doctag">@Description</span>: 结果集的元数据</span><br><span class="line">* <span class="doctag">@throws</span> Exception</span><br><span class="line">*/</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testResultSetMetaData</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    Connection conn = JdbcUtils.getConnection();</span><br><span class="line">    String sql = <span class="string">"select * from account"</span>;</span><br><span class="line">    PreparedStatement st  = conn.prepareStatement(sql);</span><br><span class="line">    ResultSet rs = st.executeQuery();</span><br><span class="line">    <span class="comment">//ResultSet.getMetaData()获得代表ResultSet对象元数据的ResultSetMetaData对象</span></span><br><span class="line">    ResultSetMetaData metadata = rs.getMetaData();</span><br><span class="line">    <span class="comment">//getColumnCount() 返回resultset对象的列数</span></span><br><span class="line">    System.out.println(metadata.getColumnCount());</span><br><span class="line">    <span class="comment">//getColumnName(int column) 获得指定列的名称</span></span><br><span class="line">    System.out.println(metadata.getColumnName(<span class="number">1</span>));</span><br><span class="line">    <span class="comment">//getColumnTypeName(int column)获得指定列的类型</span></span><br><span class="line">    System.out.println(metadata.getColumnTypeName(<span class="number">1</span>));</span><br><span class="line">    JdbcUtils.release(conn, st, rs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

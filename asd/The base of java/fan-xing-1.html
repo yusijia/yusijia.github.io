@@ -1,0 +1,446 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      Java泛型(一) | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						Java泛型(一)
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		Java泛型(一)
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>参考：<a href="http://blog.csdn.net/lonelyroamer/article/details/7864531" target="_blank" rel="external">http://blog.csdn.net/lonelyroamer/article/details/7864531</a></p>
+<h2 id="一、泛型的基本概念"><a href="#一、泛型的基本概念" class="headerlink" title="一、泛型的基本概念"></a>一、泛型的基本概念</h2><h3 id="泛型的定义："><a href="#泛型的定义：" class="headerlink" title="泛型的定义："></a>泛型的定义：</h3><p>　　泛型是JDK 1.5的一项新特性，它的本质是参数化类型（Parameterized Type）的应用，也就是说所操作的数据类型被指定为一个参数，在用到的时候在指定具体的类型。这种参数类型可以用在类、接口和方法的创建中，分别称为泛型类、泛型接口和泛型方法。<br>　　泛型思想早在C++语言的模板（Templates）中就开始生根发芽，在Java语言处于还没有出现泛型的版本时，只能通过Object是所有类型的父类和类型强制转换两个特点的配合来实现类型泛化。例如在哈希表的存取中，JDK 1.5之前使用HashMap的get()方法，返回值就是一个Object对象，由于Java语言里面所有的类型都继承于java.lang.Object，那Object转型为任何对象成都是有可能的。但是也因为有无限的可能性，就只有程序员和运行期的虚拟机才知道这个Object到底是个什么类型的对象。在编译期间，编译器无法检查这个Object的强制转型是否成功，如果仅仅依赖程序员去保障这项操作的正确性，许多ClassCastException的风险就会被转嫁到程序运行期之中。<br>　　泛型技术在C#和Java之中的使用方式看似相同，但实现上却有着根本性的分歧，C#里面泛型无论在程序源码中、编译后的IL中（Intermediate Language，中间语言，这时候泛型是一个占位符）或是运行期的CLR中都是切实存在的，List<int>与List<string>就是两个不同的类型，它们在系统运行期生成，有自己的虚方法表和类型数据，这种实现称为类型膨胀，基于这种方法实现的泛型被称为真实泛型。<br>　　Java语言中的泛型则不一样，它只在程序源码中存在，在编译后的字节码文件中，就已经被替换为原来的原始类型（Raw Type，也称为裸类型）了，并且在相应的地方插入了强制转型代码，因此对于运行期的Java语言来说，ArrayList<int>与ArrayList<string>就是同一个类。所以说泛型技术实际上是Java语言的一颗语法糖，Java语言中的泛型实现方法称为类型擦除，基于这种方法实现的泛型被称为伪泛型。（类型擦除在后面在学习）<br>  使用泛型机制编写的程序代码要比那些杂乱的使用Object变量，然后再进行强制类型转换的代码具有更好的安全性和可读性。泛型对于集合类来说尤其有用。<br>  泛型程序设计（Generic Programming）意味着编写的代码可以被很多不同类型的对象所重用。</string></int></string></int></p>
+<h3 id="实例分析："><a href="#实例分析：" class="headerlink" title="实例分析："></a>实例分析：</h3><p>　　在JDK1.5之前，Java泛型程序设计是用继承来实现的。因为Object类是所用类的基类，所以只需要维持一个Object类型的引用即可。就比如ArrayList只维护一个Object引用的数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayList</span>//<span class="title">JDK1</span>.5之前的  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;......&#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(Object o)</span></span>&#123;......&#125;  </span><br><span class="line">    ......  </span><br><span class="line">    <span class="keyword">private</span> Object[] elementData;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这样会有两个问题：</strong></p>
+<p>1、没有错误检查，可以向数组列表中添加类的对象</p>
+<p>2、在取元素的时候，需要进行强制类型转换</p>
+<p>这样，很容易发生错误，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**jdk1.5之前的写法，容易出问题*/</span>  </span><br><span class="line">ArrayList arrayList1 = <span class="keyword">new</span> ArrayList();  </span><br><span class="line">arrayList1.add(<span class="number">1</span>);  </span><br><span class="line">arrayList1.add(<span class="number">1L</span>);  </span><br><span class="line">arrayList1.add(<span class="string">"asa"</span>);  </span><br><span class="line"><span class="keyword">int</span> i=(Integer) arrayList1.get(<span class="number">1</span>);<span class="comment">//因为不知道取出来的值的类型，类型转换的时候容易出错  </span></span><br><span class="line">这里的第二个个元素是一个长整型，而你以为是整形，所以在强转的时候发生了错误。</span><br></pre></td></tr></table></figure>
+<p>所以。在JDK1.5之后，加入了泛型来解决类似的问题。例如在ArrayList中使用泛型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** jdk1.5之后加入泛型*/</span>  </span><br><span class="line">ArrayList&lt;String&gt; arrayList2=<span class="keyword">new</span> ArrayList&lt;String&gt;();  <span class="comment">//限定数组列表中的类型  </span></span><br><span class="line"><span class="comment">//      arrayList2.add(1); //因为限定了类型，所以不能添加整形  </span></span><br><span class="line"><span class="comment">//      arrayList2.add(1L);//因为限定了类型，所以不能添加整长形  </span></span><br><span class="line">arrayList2.add(<span class="string">"asa"</span>);<span class="comment">//只能添加字符串  </span></span><br><span class="line">String str=arrayList2.get(<span class="number">0</span>);<span class="comment">//因为知道取出来的值的类型，所以不需要进行强制类型转换</span></span><br></pre></td></tr></table></figure>
+<p>　　还要明白的是，泛型特性是向前兼容的。尽管 JDK 5.0 的标准类库中的许多类，比如集合框架，都已经泛型化了，但是使用集合类（比如 HashMap 和 ArrayList）的现有代码可以继续不加修改地在 JDK 1.5 中工作。当然，没有利用泛型的现有代码将不会赢得泛型的类型安全的好处。</p>
+<h2 id="二、泛型的使用"><a href="#二、泛型的使用" class="headerlink" title="二、泛型的使用"></a>二、泛型的使用</h2><p>　　泛型的参数类型可以用在类、接口和方法的创建中，分别称为泛型类、泛型接口和泛型方法。下面看看具体是如何定义的。</p>
+<h3 id="泛型类的定义和使用"><a href="#泛型类的定义和使用" class="headerlink" title="泛型类的定义和使用"></a>泛型类的定义和使用</h3><p>　　一个泛型类（generic class）就是具有一个或多个类型变量的类。定义一个泛型类十分简单，只需要在类名后面加上&lt;&gt;，再在里面加上类型参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">T</span>&gt; </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> T value;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(T value)</span> </span>&#123;  </span><br><span class="line">                <span class="keyword">this</span>.value=value;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="function"><span class="keyword">public</span> T <span class="title">getValue</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> value;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(T value)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.value = value;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;  </span><br><span class="line">        Pair&lt;String&gt; pair=<span class="keyword">new</span> Pair&lt;String&gt;(<span class="string">"Hello"</span>);  </span><br><span class="line">        String str=pair.getValue();  </span><br><span class="line">        System.out.println(str);  </span><br><span class="line">        pair.setValue(<span class="string">"World"</span>);  </span><br><span class="line">        str=pair.getValue();  </span><br><span class="line">        System.out.println(str);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>　　Pair类引入了一个类型变量T，用尖括号&lt;&gt;括起来，并放在类名的后面。泛型类可以有多个类型变量。例如，可以定义Pair类，其中第一个域和第二个域使用不同的类型：<br>public class Pair<t,u>{……}<br><strong>注意：</strong>类型变量使用大写形式，且比较短，这是很常见的。在Java库中，使用变量E表示集合的元素类型，K和V分别表示关键字与值的类型。（需要时还可以用临近的字母U和S）表示“任意类型”。</t,u></p>
+<h3 id="泛型接口的定义和使用"><a href="#泛型接口的定义和使用" class="headerlink" title="泛型接口的定义和使用"></a>泛型接口的定义和使用</h3><p>定义泛型接口和泛型类差不多，看下面简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">	<span class="class"><span class="keyword">interface</span> <span class="title">Show</span>&lt;<span class="title">T</span>,<span class="title">U</span>&gt;</span>&#123;  </span><br><span class="line">	    <span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">(T t,U u)</span></span>;  </span><br><span class="line">	&#125;  </span><br><span class="line">	  </span><br><span class="line">	<span class="class"><span class="keyword">class</span> <span class="title">ShowTest</span> <span class="keyword">implements</span> <span class="title">Show</span>&lt;<span class="title">String</span>,<span class="title">Date</span>&gt;</span>&#123;  </span><br><span class="line">	    <span class="meta">@Override</span>  </span><br><span class="line">	    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String str,Date date)</span> </span>&#123;  </span><br><span class="line">	        System.out.println(str);  </span><br><span class="line">	        System.out.println(date);  </span><br><span class="line">	    &#125;  </span><br><span class="line">	&#125;  </span><br><span class="line"></span><br><span class="line">测试一下：</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;  </span><br><span class="line">	        ShowTest showTest=<span class="keyword">new</span> ShowTest();  </span><br><span class="line">	        showTest.show(<span class="string">"Hello"</span>,<span class="keyword">new</span> Date());  </span><br><span class="line">	    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="泛型方法的定义和使用"><a href="#泛型方法的定义和使用" class="headerlink" title="泛型方法的定义和使用"></a>泛型方法的定义和使用</h3><p>　　泛型类在多个方法签名间实施类型约束。在 List<v> 中，类型参数 V 出现在 get()、add()、contains() 等方法的签名中。当创建一个 Map<k, v=""> 类型的变量时，您就在方法之间宣称一个类型约束。您传递给 add() 的值将与 get() 返回的值的类型相同。</k,></v></p>
+<p>　　类似地，之所以声明泛型方法，一般是因为您想要在该方法的多个参数之间宣称一个类型约束。<br>举个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> ClassNotFoundException </span>&#123;  </span><br><span class="line">        String str=get(<span class="string">"Hello"</span>, <span class="string">"World"</span>);  </span><br><span class="line">        System.out.println(str);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T, U&gt; <span class="function">T <span class="title">get</span><span class="params">(T t, U u)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (u != <span class="keyword">null</span>)  </span><br><span class="line">            <span class="keyword">return</span> t;  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>补：</strong></p>
+<ul>
+<li>是否拥有泛型方法，与其所在的类是否是泛型没有关系。</li>
+<li>对于一个static的方法而言，无法访问泛型类的类型参数，所以，如果static方法需要使用泛型能力，就必须使其成为泛型方法。</li>
+</ul>
+<h3 id="泛型变量的类型限定"><a href="#泛型变量的类型限定" class="headerlink" title="泛型变量的类型限定"></a>泛型变量的类型限定</h3><p>　　在上面，我们简单的学习了泛型类、泛型接口和泛型方法。我们都是直接使用<t>这样的形式来完成泛型类型的声明。<br>有的时候，类、接口或方法需要对类型变量加以约束。看下面的例子：<br>有这样一个简单的泛型方法：</t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">get</span><span class="params">(T t1,T t2)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span>(t1.compareTo(t2)&gt;=<span class="number">0</span>);<span class="comment">//编译错误  </span></span><br><span class="line">        <span class="keyword">return</span> t1;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>因为，在编译之前，也就是我们还在定义这个泛型方法的时候，我们并不知道这个泛型类型T，到底是什么类型，所以，只能默认T为原始类型Object。所以它只能调用来自于Object的那几个方法，而不能调用compareTo方法。</strong></p>
+<p>　　可我的本意就是要比较t1和t2，怎么办呢？这个时候，就要使用类型限定，对类型变量T设置限定（bound）来做到这一点。<br>我们知道，所有实现Comparable接口的方法，都会有compareTo方法。所以，可以对<t>做如下限定：</t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&gt; <span class="function">T <span class="title">get</span><span class="params">(T t1,T t2)</span> </span>&#123; <span class="comment">//添加类型限定  </span></span><br><span class="line">        <span class="keyword">if</span>(t1.compareTo(t2)&gt;=<span class="number">0</span>);  </span><br><span class="line">        <span class="keyword">return</span> t1;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>类型限定在泛型类、泛型接口和泛型方法中都可以使用，不过要注意下面几点：</strong></p>
+<ul>
+<li><strong>不管该限定是类还是接口，统一都使用关键字 extends</strong></li>
+<li><strong>可以使用&amp;符号给出多个限定，</strong>比如</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable &amp; Serializable&gt; <span class="function">T <span class="title">get</span><span class="params">(T t1,T t2)</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>如果限定既有接口也有类，那么类必须只有一个，并且放在首位置</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Object &amp; Comparable &amp; Serializable&gt; <span class="function">T <span class="title">get</span><span class="params">(T t1,T t2)</span></span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>当没有指定泛型继承的类型或接口时，默认使用T extends Object，所以默认情况下任何类型都可以作为参数传入。</strong></li>
+</ul>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

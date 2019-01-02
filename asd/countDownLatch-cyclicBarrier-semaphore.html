@@ -1,0 +1,448 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      CountDownLatch、CyclicBarrier和Semaphore介绍 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						CountDownLatch、CyclicBarrier和Semaphore介绍
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		CountDownLatch、CyclicBarrier和Semaphore介绍
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>参考资料：<br>    <a href="http://www.cnblogs.com/dolphin0520/p/3920397.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3920397.html</a><br>　　《Java编程思想》<br>　　<a href="http://www.itzhai.com/the-introduction-and-use-of-a-countdownlatch.html" target="_blank" rel="external">http://www.itzhai.com/the-introduction-and-use-of-a-countdownlatch.html</a><br>　　<a href="http://leaver.me/archives/3220.html" target="_blank" rel="external">http://leaver.me/archives/3220.html</a><br>　　<a href="http://developer.51cto.com/art/201403/432095.htm" target="_blank" rel="external">http://developer.51cto.com/art/201403/432095.htm</a><br>　　<a href="http://blog.csdn.net/yanhandle/article/details/9016329" target="_blank" rel="external">http://blog.csdn.net/yanhandle/article/details/9016329</a><br>　　<a href="http://blog.csdn.net/cutesource/article/details/5780740" target="_blank" rel="external">http://blog.csdn.net/cutesource/article/details/5780740</a><br>　　<a href="http://www.cnblogs.com/whgw/archive/2011/09/29/2195555.html" target="_blank" rel="external">http://www.cnblogs.com/whgw/archive/2011/09/29/2195555.html</a></p>
+<h2 id="一-CountDownLatch用法"><a href="#一-CountDownLatch用法" class="headerlink" title="一.CountDownLatch用法"></a>一.CountDownLatch用法</h2><p>　　CountDownLatch类位于java.util.concurrent包下，利用它可以实现类似计数器的功能。比如有一个任务A，它要等待其他4个任务执行完毕之后才能执行，此时就可以利用CountDownLatch来实现这种功能了。<strong> CountDownLatch不可以重用，而CyclicBarrier可以重用</strong></p>
+<p>CountDownLatch类只提供了一个构造器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CountDownLatch</span><span class="params">(<span class="keyword">int</span> count)</span> </span>&#123;  &#125;;  <span class="comment">//参数count为计数值</span></span><br></pre></td></tr></table></figure>
+<p>然后下面这3个方法是CountDownLatch类中最重要的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123; &#125;;   <span class="comment">//调用await()方法的线程会被挂起，它会等待直到count值为0才继续执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">await</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException </span>&#123; &#125;;  <span class="comment">//和await()类似，只不过等待一定的时间后count值还没变为0的话就会继续执行</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">countDown</span><span class="params">()</span> </span>&#123; &#125;;  <span class="comment">//将count值减1</span></span><br></pre></td></tr></table></figure>
+<p>下面看一个例子大家就清楚CountDownLatch的用法了：</p>
+<p><img src="http://p1.bqimg.com/567571/7d9323829d65020b.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">执行结果：</span><br><span class="line"></span><br><span class="line">线程Thread-0正在执行</span><br><span class="line">线程Thread-1正在执行</span><br><span class="line">等待2个子线程执行完毕...</span><br><span class="line">线程Thread-0执行完毕</span><br><span class="line">线程Thread-1执行完毕</span><br><span class="line">2个子线程已经执行完毕</span><br><span class="line">继续执行主线程</span><br></pre></td></tr></table></figure>
+<h2 id="二-CyclicBarrier用法"><a href="#二-CyclicBarrier用法" class="headerlink" title="二.CyclicBarrier用法"></a>二.CyclicBarrier用法</h2><p>　　<strong>字面意思回环栅栏，通过它可以实现让一组线程等待至某个状态之后再全部同时执行。叫做回环是因为当所有等待线程都被释放以后，CyclicBarrier可以被重用。</strong>我们暂且把这个状态就叫做barrier，当调用await()方法之后，线程就处于barrier了。</p>
+<p>CyclicBarrier类位于java.util.concurrent包下，CyclicBarrier提供2个构造器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CyclicBarrier</span><span class="params">(<span class="keyword">int</span> parties, Runnable barrierAction)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">CyclicBarrier</span><span class="params">(<span class="keyword">int</span> parties)</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line">参数parties指让多少个线程或者任务等待至barrier状态；</span><br><span class="line">参数barrierAction为当这些线程都达到barrier状态时会执行的内容。</span><br></pre></td></tr></table></figure>
+<p>然后CyclicBarrier中最重要的方法就是await方法，它有2个重载版本：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">await</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException, BrokenBarrierException </span>&#123; &#125;;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">await</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span><span class="keyword">throws</span> InterruptedException,BrokenBarrierException,TimeoutException </span>&#123; &#125;;</span><br></pre></td></tr></table></figure>
+<p> 　　第一个版本比较常用，用来挂起当前线程，直至所有线程都到达barrier状态再同时执行后续任务；</p>
+<p>　　第二个版本是让这些线程等待至一定的时间，如果还有线程没有到达barrier状态就直接让到达barrier的线程执行后续任务。</p>
+<p>　　下面举几个例子就明白了：</p>
+<p>　　假若有若干个线程都要进行写数据操作，并且只有所有线程都完成写数据操作之后，这些线程才能继续做后面的事情，此时就可以利用CyclicBarrier了：</p>
+<p><img src="http://p1.bqimg.com/567571/30d463d40a70d655.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">线程Thread-<span class="number">0</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">3</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">2</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">1</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">2</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">0</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">3</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">1</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">所有线程写入完毕，继续处理其他任务...</span><br><span class="line">所有线程写入完毕，继续处理其他任务...</span><br><span class="line">所有线程写入完毕，继续处理其他任务...</span><br><span class="line">所有线程写入完毕，继续处理其他任务...</span><br></pre></td></tr></table></figure>
+<p>　　从上面输出结果可以看出，每个写入线程执行完写数据操作之后，就在等待其他线程写入操作完毕。</p>
+<p>　　当所有线程线程写入操作完毕之后，所有线程就继续进行后续的操作了。</p>
+<p>　　如果说想在所有线程写入操作完之后，进行额外的其他操作可以为CyclicBarrier提供Runnable参数：</p>
+<p><img src="http://p1.bqimg.com/567571/0f395f60569018f8.png" alt=""></p>
+<p>　　从结果可以看出，当四个线程都到达barrier状态后，会从四个线程中选择一个线程去执行Runnable。</p>
+<p> 　　下面看一下为await指定时间的效果：</p>
+<p><img src="http://p1.bqimg.com/567571/f50702134ab57f06.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">线程Thread-<span class="number">0</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">2</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">1</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">2</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">0</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">1</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">3</span>正在写入数据...</span><br><span class="line">java.util.concurrent.TimeoutException</span><br><span class="line">Thread-<span class="number">1</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">0</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.dowait(Unknown Source)</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.await(Unknown Source)</span><br><span class="line">    at com.cxh.test1.Test$Writer.run(Test.java:<span class="number">58</span>)</span><br><span class="line">java.util.concurrent.BrokenBarrierException</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.dowait(Unknown Source)</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.await(Unknown Source)</span><br><span class="line">    at com.cxh.test1.Test$Writer.run(Test.java:<span class="number">58</span>)</span><br><span class="line">java.util.concurrent.BrokenBarrierException</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.dowait(Unknown Source)</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.await(Unknown Source)</span><br><span class="line">    at com.cxh.test1.Test$Writer.run(Test.java:<span class="number">58</span>)</span><br><span class="line">Thread-<span class="number">2</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">java.util.concurrent.BrokenBarrierException</span><br><span class="line">线程Thread-<span class="number">3</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.dowait(Unknown Source)</span><br><span class="line">    at java.util.concurrent.CyclicBarrier.await(Unknown Source)</span><br><span class="line">    at com.cxh.test1.Test$Writer.run(Test.java:<span class="number">58</span>)</span><br><span class="line">Thread-<span class="number">3</span>所有线程写入完毕，继续处理其他任务...</span><br></pre></td></tr></table></figure>
+<p>　　上面的代码在main方法的for循环中，故意让最后一个线程启动延迟，因为在前面三个线程都达到barrier之后，等待了指定的时间发现第四个线程还没有达到barrier，就抛出异常并继续执行后面的任务。</p>
+<p>　　另外CyclicBarrier是可以重用的，看下面这个例子：</p>
+<p><img src="http://p1.bqimg.com/567571/cb783c15d47600ee.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">线程Thread-<span class="number">0</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">1</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">3</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">2</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">1</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">3</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">2</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">0</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">Thread-<span class="number">0</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">3</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">1</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">2</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">CyclicBarrier重用</span><br><span class="line">线程Thread-<span class="number">4</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">5</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">6</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">7</span>正在写入数据...</span><br><span class="line">线程Thread-<span class="number">7</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">5</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">6</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">线程Thread-<span class="number">4</span>写入数据完毕，等待其他线程写入完毕</span><br><span class="line">Thread-<span class="number">4</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">5</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">6</span>所有线程写入完毕，继续处理其他任务...</span><br><span class="line">Thread-<span class="number">7</span>所有线程写入完毕，继续处理其他任务...</span><br></pre></td></tr></table></figure>
+<p>　　从执行结果可以看出，在初次的4个线程越过barrier状态后，又可以用来进行新一轮的使用。而CountDownLatch无法进行重复使用。</p>
+<h2 id="三-Semaphore用法"><a href="#三-Semaphore用法" class="headerlink" title="三.Semaphore用法"></a>三.Semaphore用法</h2><p>　　Semaphore翻译成字面意思为 <strong>信号量，Semaphore可以控同时访问的线程个数，通过 acquire() 获取一个许可，如果没有就等待，而 release() 释放一个许可。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Semaphore类位于java.util.concurrent包下，它提供了<span class="number">2</span>个构造器：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits)</span> </span>&#123; <span class="comment">//参数permits表示许可数目，即同时可以允许多少线程进行访问</span></span><br><span class="line">    sync = <span class="keyword">new</span> NonfairSync(permits);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Semaphore</span><span class="params">(<span class="keyword">int</span> permits, <span class="keyword">boolean</span> fair)</span> </span>&#123; <span class="comment">//这个多了一个参数fair表示是否是公平的，即等待时间越久的越先获取许可</span></span><br><span class="line">    sync = (fair)? <span class="keyword">new</span> FairSync(permits) : <span class="keyword">new</span> NonfairSync(permits);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面说一下Semaphore类中比较重要的几个方法，首先是acquire()、release()方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;  &#125;<span class="comment">//获取一个许可</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">acquire</span><span class="params">(<span class="keyword">int</span> permits)</span> <span class="keyword">throws</span> InterruptedException </span>&#123; &#125;<span class="comment">//获取permits个许可</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span> </span>&#123; &#125;<span class="comment">//释放一个许可</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">(<span class="keyword">int</span> permits)</span> </span>&#123; &#125;<span class="comment">//释放permits个许可</span></span><br><span class="line"></span><br><span class="line">　　acquire()用来获取一个许可，若无许可能够获得，则会一直等待，直到获得许可。</span><br><span class="line">　　release()用来释放许可。注意，在释放许可之前，必须先获获得许可。</span><br><span class="line"></span><br><span class="line">　　这<span class="number">4</span>个方法都会被阻塞，如果想立即得到执行结果，可以使用下面几个方法：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">()</span> </span>&#123; &#125;;<span class="comment">//尝试获取一个许可，若获取成功，则立即返回true，若获取失败，则立即返回false</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException </span>&#123; &#125;;  <span class="comment">//尝试获取一个许可，若在指定的时间内获取成功，则立即返回true，否则则立即返回false</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> permits)</span> </span>&#123; &#125;;<span class="comment">//尝试获取permits个许可，若获取成功，则立即返回true，若获取失败，则立即返回false</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> permits, <span class="keyword">long</span> timeout, TimeUnit unit)</span> <span class="keyword">throws</span> InterruptedException </span>&#123; &#125;; 	<span class="comment">//尝试获取permits个许可，若在指定的时间内获取成功，则立即返回true，否则则立即返回false</span></span><br></pre></td></tr></table></figure>
+<p>　另外还可以通过availablePermits()方法得到可用的许可数目。</p>
+<p>　　下面通过一个例子来看一下Semaphore的具体使用：</p>
+<p>　　假若一个工厂有5台机器，但是有8个工人，一台机器同时只能被一个工人使用，只有使用完了，其他工人才能继续使用。那么我们就可以通过Semaphore来实现：</p>
+<p><img src="http://p1.bqimg.com/567571/65e2a0343cb59f9f.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">工人<span class="number">0</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">1</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">2</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">4</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">5</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">0</span>释放出机器</span><br><span class="line">工人<span class="number">2</span>释放出机器</span><br><span class="line">工人<span class="number">3</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">7</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">4</span>释放出机器</span><br><span class="line">工人<span class="number">5</span>释放出机器</span><br><span class="line">工人<span class="number">1</span>释放出机器</span><br><span class="line">工人<span class="number">6</span>占用一个机器在生产...</span><br><span class="line">工人<span class="number">3</span>释放出机器</span><br><span class="line">工人<span class="number">7</span>释放出机器</span><br><span class="line">工人<span class="number">6</span>释放出机器</span><br></pre></td></tr></table></figure>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>　　<strong>1）</strong> <strong>CountDownLatch和CyclicBarrier都能够实现线程之间的等待，只不过它们侧重点不同：</strong></p>
+<p>　　　　<strong>CountDownLatch一般用于某个线程A等待若干个其他线程执行完任务之后，它才执行；<br>　　　　而CyclicBarrier一般用于一组线程互相等待至某个状态，然后这一组线程再同时执行；</strong></p>
+<p>　　　　<strong>另外，CountDownLatch是不能够重用的，而CyclicBarrier是可以重用的。</strong></p>
+<p>　　<strong>2）</strong> <strong>Semaphore其实和锁有点类似，它一般用于控制对某组资源的访问权限。</strong></p>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

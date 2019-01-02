@@ -1,0 +1,404 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      Java中基本类型的取值范围 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						Java中基本类型的取值范围
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		Java中基本类型的取值范围
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<p>参考：<a href="http://chenliang1234576.iteye.com/blog/1141453" target="_blank" rel="external">http://chenliang1234576.iteye.com/blog/1141453</a></p>
+<p>Java中基本类型的取值范围<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">基本类型	字节数	位数	最大值	最小值</span><br><span class="line"><span class="keyword">byte</span>	<span class="number">1</span><span class="keyword">byte</span>	<span class="number">8</span>bit	<span class="number">2</span>^<span class="number">7</span> - <span class="number">1</span>	-<span class="number">2</span>^<span class="number">7</span></span><br><span class="line"><span class="keyword">short</span>	<span class="number">2</span><span class="keyword">byte</span>	<span class="number">16</span>bit	<span class="number">2</span>^<span class="number">15</span> - <span class="number">1</span>	-<span class="number">2</span>^<span class="number">15</span></span><br><span class="line"><span class="keyword">int</span>	<span class="number">4</span><span class="keyword">byte</span>	<span class="number">32</span>bit	<span class="number">2</span>^<span class="number">31</span> - <span class="number">1</span>	-<span class="number">2</span>^<span class="number">31</span></span><br><span class="line"><span class="keyword">long</span>	<span class="number">8</span><span class="keyword">byte</span>	<span class="number">64</span>bit	<span class="number">2</span>^<span class="number">63</span> - <span class="number">1</span>	-<span class="number">2</span>^<span class="number">63</span></span><br><span class="line"><span class="keyword">float</span>	<span class="number">4</span><span class="keyword">byte</span>	<span class="number">32</span>bit	<span class="number">3.4028235E38</span>	<span class="number">1.4</span>E - <span class="number">45</span></span><br><span class="line"><span class="keyword">double</span>	<span class="number">8</span><span class="keyword">byte</span>	<span class="number">64</span>bit	<span class="number">1.7976931348623157E308</span>	<span class="number">4.9</span>E - <span class="number">324</span></span><br><span class="line"><span class="keyword">char</span>	<span class="number">2</span><span class="keyword">byte</span>	<span class="number">16</span>bit	<span class="number">2</span>^<span class="number">16</span> - <span class="number">1</span>	<span class="number">0</span></span><br><span class="line"><span class="keyword">byte</span>的情况：</span><br><span class="line"><span class="keyword">byte</span>占<span class="number">8</span>位，而且有正有负。最大值当然就是<span class="number">01111111</span> = <span class="number">2</span>^<span class="number">7</span> - <span class="number">1</span>。因为负的二进制有个按位取反再加<span class="number">1</span>的操作，所以最小值是<span class="number">10000000</span>，按位取反后为<span class="number">11111111</span>，再加<span class="number">1</span>后为<span class="number">110000000</span> = -<span class="number">2</span>^<span class="number">7</span></span><br><span class="line"><span class="keyword">char</span>的情况：</span><br><span class="line"><span class="keyword">char</span>占<span class="number">16</span>位，而且没有负值。所以最小值是<span class="number">0</span>。最大值是<span class="number">1111111111111111</span> = <span class="number">2</span>^<span class="number">16</span> - <span class="number">1</span></span><br><span class="line">``` </span><br><span class="line">```java</span><br><span class="line">例<span class="number">1</span>：</span><br><span class="line"><span class="number">1</span>.	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrimitiveTypeTest</span> </span>&#123;   </span><br><span class="line"><span class="number">2</span>.	    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;   </span><br><span class="line"><span class="number">3</span>.	        <span class="comment">// byte   </span></span><br><span class="line"><span class="number">4</span>.	        System.out.println(<span class="string">"基本类型：byte 二进制位数："</span> + Byte.SIZE);   </span><br><span class="line"><span class="number">5</span>.	        System.out.println(<span class="string">"包装类：java.lang.Byte"</span>);   </span><br><span class="line"><span class="number">6</span>.	        System.out.println(<span class="string">"最小值：Byte.MIN_VALUE="</span> + Byte.MIN_VALUE);   </span><br><span class="line"><span class="number">7</span>.	        System.out.println(<span class="string">"最大值：Byte.MAX_VALUE="</span> + Byte.MAX_VALUE);   </span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line"><span class="number">1</span>.	基本类型：<span class="keyword">byte</span> 二进制位数：<span class="number">8</span></span><br><span class="line"><span class="number">2</span>.	包装类：java.lang.Byte</span><br><span class="line"><span class="number">3</span>.	最小值：Byte.MIN_VALUE=-<span class="number">128</span></span><br><span class="line"><span class="number">4</span>.	最大值：Byte.MAX_VALUE=<span class="number">127</span></span><br><span class="line"><span class="number">5</span>.	（补充）基本类型：<span class="keyword">short</span> 二进制位数：<span class="number">16</span></span><br><span class="line"><span class="number">6</span>.	包装类：java.lang.Short</span><br><span class="line"><span class="number">7</span>.	最小值：Short.MIN_VALUE=-<span class="number">32768</span></span><br><span class="line"><span class="number">8</span>.	最大值：Short.MAX_VALUE=<span class="number">32767</span></span><br><span class="line"><span class="number">9</span>.	基本类型：<span class="keyword">int</span> 二进制位数：<span class="number">32</span></span><br><span class="line"><span class="number">10</span>.	包装类：java.lang.Integer</span><br><span class="line"><span class="number">11</span>.	最小值：Integer.MIN_VALUE=-<span class="number">2147483648</span></span><br><span class="line"><span class="number">12</span>.	最大值：Integer.MAX_VALUE=<span class="number">2147483647</span></span><br><span class="line"><span class="number">13</span>.	基本类型：<span class="keyword">long</span> 二进制位数：<span class="number">64</span></span><br><span class="line"><span class="number">14</span>.	包装类：java.lang.Long</span><br><span class="line"><span class="number">15</span>.	最小值：Long.MIN_VALUE=-<span class="number">9223372036854775808</span></span><br><span class="line"><span class="number">16</span>.	最大值：Long.MAX_VALUE=<span class="number">9223372036854775807</span></span><br><span class="line"><span class="number">17</span>.	基本类型：<span class="keyword">float</span> 二进制位数：<span class="number">32</span></span><br><span class="line"><span class="number">18</span>.	包装类：java.lang.Float</span><br><span class="line"><span class="number">19</span>.	最小值：Float.MIN_VALUE=<span class="number">1.4E-45</span></span><br><span class="line"><span class="number">20</span>.	最大值：Float.MAX_VALUE=<span class="number">3.4028235E38</span></span><br><span class="line"><span class="number">21</span>.	基本类型：<span class="keyword">double</span> 二进制位数：<span class="number">64</span></span><br><span class="line"><span class="number">22</span>.	包装类：java.lang.Double</span><br><span class="line"><span class="number">23</span>.	最小值：Double.MIN_VALUE=<span class="number">4.9E-324</span></span><br><span class="line"><span class="number">24</span>.	最大值：Double.MAX_VALUE=<span class="number">1.7976931348623157E308</span></span><br><span class="line"><span class="number">25</span>.	基本类型：<span class="keyword">char</span> 二进制位数：<span class="number">16</span></span><br><span class="line"><span class="number">26</span>.	包装类：java.lang.Character</span><br><span class="line"><span class="number">27</span>.	最小值：Character.MIN_VALUE=<span class="number">0</span></span><br><span class="line"><span class="number">28</span>.	最大值：Character.MAX_VALUE=<span class="number">65535</span></span><br></pre></td></tr></table></figure></p>
+
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

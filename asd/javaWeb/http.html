@@ -1,0 +1,412 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      http协议介绍 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						http协议介绍
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		http协议介绍
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<h2 id="什么是HTTP协议"><a href="#什么是HTTP协议" class="headerlink" title="什么是HTTP协议"></a>什么是HTTP协议</h2><p>　　HTTP是hypertext transfer protocol（超文本传输协议）的简写，它是TCP/IP协议的一个应用层协议，用于定义WEB浏览器与WEB服务器之间交换数据的过程。客户端连上web服务器后，若想获得web服务器中的某个web资源，需遵守一定的通讯格式，HTTP协议用于定义客户端与web服务器通迅的格式。</p>
+<h2 id="HTTP协议的版本"><a href="#HTTP协议的版本" class="headerlink" title="HTTP协议的版本"></a>HTTP协议的版本</h2><p>　　HTTP协议的版本：HTTP/1.0、HTTP/1.1</p>
+<h2 id="HTTP1-0和HTTP1-1的区别"><a href="#HTTP1-0和HTTP1-1的区别" class="headerlink" title="HTTP1.0和HTTP1.1的区别"></a>HTTP1.0和HTTP1.1的区别</h2><p>　　在HTTP1.0协议中，客户端与web服务器建立连接后，只能获得一个web资源。<br>　　在HTTP1.1协议，允许客户端与web服务器建立连接后，在一个连接上获取多个web资源。</p>
+<h2 id="HTTP请求"><a href="#HTTP请求" class="headerlink" title="HTTP请求"></a>HTTP请求</h2><h3 id="HTTP请求包括的内容"><a href="#HTTP请求包括的内容" class="headerlink" title="HTTP请求包括的内容"></a>HTTP请求包括的内容</h3><p>　　客户端连上服务器后，向服务器请求某个web资源，称之为客户端向服务器发送了一个HTTP请求。<br>一个完整的HTTP请求包括如下内容：一个请求行、若干消息头、以及实体内容<br>范例：
+　　 </p>
+<h3 id="HTTP请求的细节——请求行"><a href="#HTTP请求的细节——请求行" class="headerlink" title="HTTP请求的细节——请求行"></a>HTTP请求的细节——请求行</h3><p>请求行中的GET称之为请求方式，请求方式有：POST、GET、HEAD、OPTIONS、DELETE、TRACE、PUT，常用的有： GET、 POST<br>　　用户如果没有设置，默认情况下浏览器向服务器发送的都是get请求，例如在浏览器直接输地址访问，点超链接访问等都是get，用户如想把请求方式改为post，可通过更改表单的提交方式实现。<br>　　不管POST或GET，都用于向服务器请求某个WEB资源，这两种方式的区别主要表现在数据传递上：如果请求方式为GET方式，则可以在请求的URL地址后以?的形式带上交给服务器的数据，多个数据之间以&amp;进行分隔，例如：GET /mail/1.html?name=abc&amp;password=xyz HTTP/1.1<br>　　GET方式的特点：在URL地址后附带的参数是有限制的，其数据容量通常不能超过1K。<br>　　如果请求方式为POST方式，则可以在请求的实体内容中向服务器发送数据，<br>Post方式的特点：传送的数据量无限制。</p>
+<h3 id="HTTP请求的细节——消息头"><a href="#HTTP请求的细节——消息头" class="headerlink" title="HTTP请求的细节——消息头"></a>HTTP请求的细节——消息头</h3><p>　　HTTP请求中的常用消息头<br>　　accept:浏览器通过这个头告诉服务器，它所支持的数据类型<br>　　Accept-Charset: 浏览器通过这个头告诉服务器，它支持哪种字符集<br>　　Accept-Encoding：浏览器通过这个头告诉服务器，支持的压缩格式<br>　　Accept-Language：浏览器通过这个头告诉服务器，它的语言环境<br>　　Host：浏览器通过这个头告诉服务器，想访问哪台主机<br>　　If-Modified-Since: 浏览器通过这个头告诉服务器，缓存数据的时间<br>　　Referer：浏览器通过这个头告诉服务器，客户机是哪个页面来的  防盗链<br>　　Connection：浏览器通过这个头告诉服务器，请求完后是断开链接还是何持链接<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 Accept: application/x-ms-application, image/jpeg, application/xaml+xml, image/gif, image/pjpeg, </span><br><span class="line">2     application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*</span><br><span class="line">3 Referer: http://localhost:8080/JavaWebDemoProject/Web/2.jsp</span><br><span class="line">4 Accept-Language: zh-CN</span><br><span class="line">5 User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; InfoPath.3)</span><br><span class="line">6 Accept-Encoding: gzip, deflate</span><br><span class="line">7 Host: localhost:8080</span><br><span class="line">8 Connection: Keep-Alive</span><br></pre></td></tr></table></figure></p>
+<h2 id="HTTP响应"><a href="#HTTP响应" class="headerlink" title="HTTP响应"></a>HTTP响应</h2><h3 id="HTTP响应包括的内容"><a href="#HTTP响应包括的内容" class="headerlink" title="HTTP响应包括的内容"></a>HTTP响应包括的内容</h3><p>　　一个HTTP响应代表服务器向客户端回送的数据，它包括： 一个状态行、若干消息头、以及实体内容 。<br>　　<br>范例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> 1 HTTP/1.1 200 OK</span><br><span class="line"> 2 Server: Apache-Coyote/1.1</span><br><span class="line"> 3 Content-Type: text/html;charset=ISO-8859-1</span><br><span class="line"> 4 Content-Length: 105</span><br><span class="line"> 5 Date: Tue, 27 May 2014 16:23:28 GMT</span><br><span class="line"> 6 </span><br><span class="line"> 7 &lt;html&gt;</span><br><span class="line"> 8     &lt;head&gt;</span><br><span class="line"> 9         &lt;title&gt;Hello World JSP&lt;/title&gt;</span><br><span class="line">10     &lt;/head&gt;</span><br><span class="line">11     &lt;body&gt;</span><br><span class="line">12         Hello World!</span><br><span class="line">13 </span><br><span class="line">14     &lt;/body&gt;</span><br><span class="line">15 &lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="HTTP响应的细节——状态行"><a href="#HTTP响应的细节——状态行" class="headerlink" title="HTTP响应的细节——状态行"></a>HTTP响应的细节——状态行</h3><p>　   状态行格式： HTTP版本号　状态码　原因叙述<crlf><br>      举例：HTTP/1.1 200 OK<br>　　状态码用于表示服务器对请求的处理结果，它是一个三位的十进制数。响应状态码分为5类，如下所示：
+　　 </crlf></p>
+<h3 id="HTTP响应细节——常用响应头"><a href="#HTTP响应细节——常用响应头" class="headerlink" title="HTTP响应细节——常用响应头"></a>HTTP响应细节——常用响应头</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">　　HTTP响应中的常用响应头(消息头)</span><br><span class="line">　　Location: 服务器通过这个头，来告诉浏览器跳到哪里</span><br><span class="line">　　Server：服务器通过这个头，告诉浏览器服务器的型号</span><br><span class="line">　　Content-Encoding：服务器通过这个头，告诉浏览器，数据的压缩格式</span><br><span class="line">　　Content-Length: 服务器通过这个头，告诉浏览器回送数据的长度</span><br><span class="line">　　Content-Language: 服务器通过这个头，告诉浏览器语言环境</span><br><span class="line">　　Content-Type：服务器通过这个头，告诉浏览器回送数据的类型</span><br><span class="line">　　Refresh：服务器通过这个头，告诉浏览器定时刷新</span><br><span class="line">　　Content-Disposition: 服务器通过这个头，告诉浏览器以下载方式打数据</span><br><span class="line">　　Transfer-Encoding：服务器通过这个头，告诉浏览器数据是以分块方式回送的</span><br><span class="line">　　Expires: -1  控制浏览器不要缓存</span><br><span class="line">　　Cache-Control: no-cache  </span><br><span class="line">　　Pragma: no-cache</span><br></pre></td></tr></table></figure>
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>

@@ -1,0 +1,405 @@
+<!--
+	时间：2018-09-25
+	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
+-->
+
+	<!DOCTYPE html>
+	<html class="scrollbar">
+		
+
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>
+    
+      二叉树的基本操作 | yusijia&#39;s blog
+    
+  </title>
+  <meta name="author" content="yusijia">
+  <meta name="keywords" content="" />
+  <meta name="description" content="Keep on going never give up." />
+	<!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico">
+
+  <!-- css -->
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+<link rel="stylesheet" href="css/calendar.css">
+
+    <!-- jquery -->
+	<script src="/js/jquery-2.1.1.min.js"></script>
+
+  <!-- leancloud -->
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script src="/js/leancloud.js"></script>
+</head>
+	<body>
+		<!-- Preloader -->
+
+	<div id="preloader">
+		<div class="pre-container">
+			
+				<div class="transition">
+					<div class="three-bounce1"></div>
+					<div class="three-bounce2"></div>
+					<div class="three-bounce3"></div>
+				</div>
+						
+		</div>
+	</div>
+
+
+<!-- header -->
+<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
+	<div class="mask">
+		<div class="h-header">
+			<div id="logo-S">
+				
+					<a href="/">
+						<img src="/img/logo.png" alt="Logo">
+					</a>
+				
+			</div>
+			<!-- Navigation in header(id="navigation-S") -->
+			<div id="navigation-S">
+				<ul>
+					
+						<li class="menu-home">
+							<a href="/" class="menu-item-home">Home</a>
+						</li>
+					
+						<li class="menu-archive">
+							<a href="/archives" class="menu-item-archive">Archive</a>
+						</li>
+					
+						<li class="menu-categories">
+							<a href="/categories" class="menu-item-categories">Category</a>
+						</li>
+					
+						<li class="menu-tags">
+							<a href="/tags" class="menu-item-tags">Tag</a>
+						</li>
+					
+						<li class="menu-about">
+							<a href="/about" class="menu-item-about">About</a>
+						</li>
+					
+						<li class="menu-gallery">
+							<a href="/gallery" class="menu-item-gallery">Gallery</a>
+						</li>
+					
+
+					
+				</ul>			
+			</div>				
+		</div>
+
+		<div class="h-body">	
+			<!-- motto -->
+			
+				<div id="page-motto">
+					<p class="motto">
+						
+					</p>
+				</div>
+			
+
+			<div id="navigation-H">
+				<!-- Page title -->
+				<p>
+					
+						二叉树的基本操作
+					
+				</p>
+				<!-- Progress bar -->
+				<div id="progress-bar"></div>
+
+				<!-- Progress percent -->
+				<div id="progress-percentage">
+					<h1>0.0%</h1>
+				</div>
+			</div>
+		</div>
+		
+		<!-- others: such as time... -->			
+		<div class="h-footer">
+			<ul>
+				<li>
+					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
+				</li>
+				<li>
+					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
+				</li>
+				<li>
+					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
+<style type="text/css">
+	.header-date {
+		position: absolute;
+		left: 40px;
+		bottom: 30px;
+		writing-mode: tb-rl;
+		font-size: 36px;
+	}	
+	.header-date a {
+		border-bottom: none;
+	}
+	@media only screen and (max-width: 768 ) {
+		.header-date {
+			position: absolute;
+			left: 40px;
+			bottom: 30px;
+			writing-mode: tb-rl;
+			font-size: 20px;
+		}			
+	}
+</style>
+<div class="header-date">
+	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
+	<span id="Beijing_z43d"></span>
+</div>
+<script src="//widget.time.is/zh.js"></script>
+<script>
+	time_is_widget.init({
+		Beijing_z43d:{
+			template:"DATE", 
+			date_format:"year年 monthname dnum日"
+		}
+	});
+</script>
+</header>
+
+<!-- Navigation in div(id="navigation-H") -->
+<a class="nav-trigger">
+	<span></span>
+</a>
+
+<nav class="nav-container" id="cd-nav">
+	<div class="nav-header">
+		<h3>Navigation</h3>
+		<a href="javascript:;" class="nav-close"></a>
+	</div>
+	<div class="nav-body">
+		<ul>
+			
+				<li class="menu-home">
+					<a href="/" class="menu-item-home">Home</a>
+				</li>
+			
+				<li class="menu-archive">
+					<a href="/archives" class="menu-item-archive">Archive</a>
+				</li>
+			
+				<li class="menu-categories">
+					<a href="/categories" class="menu-item-categories">Category</a>
+				</li>
+			
+				<li class="menu-tags">
+					<a href="/tags" class="menu-item-tags">Tag</a>
+				</li>
+			
+				<li class="menu-about">
+					<a href="/about" class="menu-item-about">About</a>
+				</li>
+			
+				<li class="menu-gallery">
+					<a href="/gallery" class="menu-item-gallery">Gallery</a>
+				</li>
+			
+
+			
+		</ul>
+	</div>
+
+	<div class="nav-footer">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+</nav>
+
+		
+		<!--main-->
+		<main>
+			<!--content start-->
+<div class="layout-page">	
+	<div class="layout-page-container">
+
+		<div class="layout-page-header">
+
+	
+
+		二叉树的基本操作
+
+	
+	
+</div>
+
+		
+
+			<div class="about">
+				<ul>
+<li>话不多说，直接上代码，解释都在代码里</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">## 测试用例：</span></span><br><span class="line">A B C <span class="meta"># # D E # G # # F # # # </span></span><br><span class="line"></span><br><span class="line">                A</span><br><span class="line">              /</span><br><span class="line">            B</span><br><span class="line">          /   \</span><br><span class="line">        C       D</span><br><span class="line">              /   \</span><br><span class="line">            E       F</span><br><span class="line">              \</span><br><span class="line">                G</span><br><span class="line"></span><br><span class="line"><span class="meta">## 测试结果：</span></span><br><span class="line">xianxu: </span><br><span class="line">A B C D E G F </span><br><span class="line">zhongxu:</span><br><span class="line">C B E G D F A </span><br><span class="line">houxu:</span><br><span class="line">C G E F D B A </span><br><span class="line"><span class="comment">/////////////</span></span><br><span class="line">ceng ci:</span><br><span class="line">A <span class="number">5</span></span><br><span class="line">B <span class="number">4</span></span><br><span class="line">C <span class="number">1</span></span><br><span class="line">D <span class="number">3</span></span><br><span class="line">E <span class="number">2</span></span><br><span class="line">F <span class="number">1</span></span><br><span class="line">G <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> build_node&#123;                      <span class="comment">//二叉树节点</span></span><br><span class="line">    <span class="keyword">char</span> data;                          <span class="comment">//用户数据</span></span><br><span class="line">    build_node *lchild, *rchild;        <span class="comment">//左孩子和右孩子</span></span><br><span class="line">    <span class="keyword">int</span> level;                          <span class="comment">//高度</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">creat_tree</span><span class="params">(build_node **T)</span></span>&#123;         <span class="comment">//要修改一级指针指向值，所以用二级指针</span></span><br><span class="line">    <span class="keyword">char</span> data;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%c"</span>, &amp;data);</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="string">'#'</span>)&#123;</span><br><span class="line">        (*T) = <span class="literal">NULL</span>;                    <span class="comment">//注意这里是二级指针里的值为NULL</span></span><br><span class="line">        return <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        (*T) = (build_node *)<span class="built_in">malloc</span>(sizeof(build_node));</span><br><span class="line">        (*T)-&gt;data = data;</span><br><span class="line">        creat_tree(&amp;(*T)-&gt;lchild);</span><br><span class="line">        creat_tree(&amp;(*T)-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">(build_node *T)</span>               <span class="comment">//不修改里面的值，直接值传递</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T-&gt;data != <span class="string">'#'</span>)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c "</span>, T-&gt;data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////////////////////////////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//1先序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">preorder</span><span class="params">(build_node *T)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        visit(T);</span><br><span class="line">        preorder(T-&gt;lchild);</span><br><span class="line">        preorder(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//2中序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(build_node *T)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        inorder(T-&gt;lchild);</span><br><span class="line">        visit(T);</span><br><span class="line">        inorder(T-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3后序遍历</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">postorder</span><span class="params">(build_node *T)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        postorder(T-&gt;lchild);</span><br><span class="line">        postorder(T-&gt;rchild);</span><br><span class="line">        visit(T);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4层次遍历,其实就是广度优先搜索</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">levelorder</span><span class="params">(build_node *T)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="built_in">queue</span> &lt;build_node *&gt; que;</span><br><span class="line">    que.push(T);                        <span class="comment">//根节点入队</span></span><br><span class="line">    build_node *p = T;</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())&#123;                <span class="comment">//如果队列不空</span></span><br><span class="line">        p = que.front();                <span class="comment">//对头元素出队</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c %d\n"</span>, p-&gt;data, p-&gt;level);         <span class="comment">//访问内容</span></span><br><span class="line">        que.pop();                      <span class="comment">//退出队列</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;lchild != <span class="literal">NULL</span>)           <span class="comment">//左子树不空，将左子树入队</span></span><br><span class="line">            que.push(p-&gt;lchild);</span><br><span class="line">        <span class="keyword">if</span>(p-&gt;rchild != <span class="literal">NULL</span>)           <span class="comment">//右子树不空，将右子树入队</span></span><br><span class="line">            que.push(p-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//5二叉树节点的计数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">tree_node_size</span><span class="params">(build_node *T)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">NULL</span>)</span><br><span class="line">        return <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        return <span class="number">1</span> + tree_node_size(T-&gt;lchild) + tree_node_size(T-&gt;rchild);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//6计算二叉树的高度</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">high</span><span class="params">(build_node **T)</span>                <span class="comment">//(如果二叉树为空那么高度为0，否则高度就是取左右子树中高的那个+根节点)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>((*T) == <span class="literal">NULL</span>)</span><br><span class="line">        return <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> left = high(&amp;(*T)-&gt;lchild);</span><br><span class="line">        <span class="keyword">int</span> right = high(&amp;(*T)-&gt;rchild);</span><br><span class="line">        return (*T)-&gt;level = left &lt; right ? right + <span class="number">1</span> : left + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//7二叉树的复制，返回复制后的根节点</span></span><br><span class="line"><span class="function">build_node *<span class="title">Copy</span><span class="params">(build_node *T)</span>         <span class="comment">//不修改原树的数据，所以一级指针</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">NULL</span>)</span><br><span class="line">      return <span class="literal">NULL</span>;</span><br><span class="line">   build_node *tmp = (build_node *)<span class="built_in">malloc</span>(sizeof(build_node));</span><br><span class="line">   tmp-&gt;data = T-&gt;data;</span><br><span class="line">   tmp-&gt;lchild = Copy(T-&gt;lchild);</span><br><span class="line">   tmp-&gt;rchild = Copy(T-&gt;rchild);</span><br><span class="line">   return tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//6判断两棵二叉树是否相等</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isEqual</span><span class="params">(build_node *root1, build_node *root2)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root1 == <span class="literal">NULL</span> &amp;&amp; root2 == <span class="literal">NULL</span>)</span><br><span class="line">        return <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(root1 != <span class="literal">NULL</span> &amp;&amp; root2 != <span class="literal">NULL</span> &amp;&amp; root1-&gt;data == root2-&gt;data</span><br><span class="line">       &amp;&amp; isEqual(root1-&gt;lchild, root2-&gt;lchild)</span><br><span class="line">       &amp;&amp; isEqual(root2-&gt;rchild, root2-&gt;rchild)</span><br><span class="line">       )</span><br><span class="line">        return <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        return <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//7二叉树的重建(节点编号从1~n)</span></span><br><span class="line"><span class="comment">//由先序序列和中序序列可以确定唯一二叉树</span></span><br><span class="line"><span class="comment">//由先序序列和中序序列构造二叉树（len是序列的长度，pre为先序序列 mid为中序序列，返回根节点）</span></span><br><span class="line">                           <span class="comment">//index  mid的index左边是左子树,右边是右子树,pre的index左边是左子树,跳过index距离后右边是右子树</span></span><br><span class="line"><span class="comment">// 中： C B E G D F A (左子树, 根, 右子树)</span></span><br><span class="line"><span class="comment">// 先： A B C D E G F (根, 左子树, 右子树)</span></span><br><span class="line"></span><br><span class="line"><span class="function">build_node *<span class="title">rebuildtree_1</span><span class="params">(<span class="keyword">char</span> *pre, <span class="keyword">char</span> *mid, <span class="keyword">int</span> len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!len)</span><br><span class="line">        return <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(mid[index] !=  pre[<span class="number">0</span>])        <span class="comment">//在中序序列找根节点,先序序列第一个就是根</span></span><br><span class="line">        index++;                        <span class="comment">//index记录在中序序列里经过了几个元素才找到的,重建左子树时就要在先序序列里跳过这几个元素再找</span></span><br><span class="line">    build_node *root = (build_node *)<span class="built_in">malloc</span>(sizeof(build_node));</span><br><span class="line">    root-&gt;data = pre[<span class="number">0</span>];</span><br><span class="line">    root-&gt;lchild = rebuildtree_1(pre, mid, index);</span><br><span class="line">    root-&gt;rchild = rebuildtree_1(pre+index+<span class="number">1</span>, mid+index+<span class="number">1</span>, len-index<span class="number">-1</span>);<span class="comment">//右边len-index-1个元素是右子树的,扣除根节点</span></span><br><span class="line">    return root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//8由后序序列和中序序列可以确定唯一二叉树</span></span><br><span class="line"><span class="comment">//由中序和后序建立二叉树(len是序列的长度，mid是中序序列，post是后序序列，返回根节点)</span></span><br><span class="line"><span class="comment">//重点是利用好 中序序列</span></span><br><span class="line">                           <span class="comment">//index  mid的index左边是左子树，右边是右子树,post的index左边是左子树,index后面是右子树</span></span><br><span class="line"><span class="comment">// 中： C B E G D F A (左子树, 根, 右子树)</span></span><br><span class="line"><span class="comment">// 后： C G E F D B A (左子树，右子树，根)</span></span><br><span class="line"><span class="function">build_node *<span class="title">rebuildtree_2</span><span class="params">(<span class="keyword">char</span> *mid, <span class="keyword">char</span> *post, <span class="keyword">int</span> len)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>)</span><br><span class="line">        return <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;                      <span class="comment">//在中序序列中进行查找根节点，并用index记录在中序序列的索引</span></span><br><span class="line">    <span class="keyword">while</span>(mid[index] != post[len - <span class="number">1</span>])  <span class="comment">//在中序序列中找根节点,后序序列的最后一个是根</span></span><br><span class="line">        index++;</span><br><span class="line">    build_node *root = (build_node *)<span class="built_in">malloc</span>(sizeof(build_node));</span><br><span class="line">    root-&gt;data = post[len - <span class="number">1</span>];</span><br><span class="line">    root-&gt;lchild = rebuildtree_2(mid, post, index);</span><br><span class="line">    <span class="comment">//index在中序序列中左边是左子树,index在后序序列中,左边也是左子树,</span></span><br><span class="line">    <span class="comment">//index-1就是左子后右再根中的根,最后传过去index成len,len-1就是左子树的根</span></span><br><span class="line">    root-&gt;rchild = rebuildtree_2(mid+index+<span class="number">1</span>, post+index, len-index<span class="number">-1</span>);</span><br><span class="line">    <span class="comment">//根序号的右边是右子树,所以是从这mid+index+1开始找右子树的根,</span></span><br><span class="line">    <span class="comment">//index在中序序列中的右边是右子树,后序序列是先左子树再右子树最后根节点,</span></span><br><span class="line">    <span class="comment">//所以index在后序序列中左边也是左子树，右边是右子树和根，而index不一定是根的</span></span><br><span class="line">    <span class="comment">//位置了,所以从post[index]开始找右子树的根</span></span><br><span class="line">    return root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    freopen(<span class="string">"input.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen("output.txt", "w", stdout);</span></span><br><span class="line">    build_node *T = <span class="literal">NULL</span>;</span><br><span class="line">    creat_tree(&amp;T);</span><br><span class="line">    <span class="comment">//////////////</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"preorder: \n"</span>);</span><br><span class="line">    preorder(T);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"inorder:\n"</span>);</span><br><span class="line">    inorder(T);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"postorder:\n"</span>);</span><br><span class="line">    postorder(T);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n/////////////\n"</span>);</span><br><span class="line"></span><br><span class="line">    high(&amp;T);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"levelorder:\n"</span>);</span><br><span class="line">    levelorder(T);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"tmp Copy of T:\n"</span>);</span><br><span class="line">    build_node *tmp = Copy(T);</span><br><span class="line">    inorder(tmp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n\\\\\\\\\\\\\\\\\\\\\\\ \n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"tmp == T ?\n"</span>);</span><br><span class="line">    <span class="keyword">if</span>(isEqual(tmp, T))</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line"></span><br><span class="line">    return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+			</div>
+
+		
+	</div>
+
+	
+</div>
+
+		</main>
+
+		<!--footer-->
+		<footer>
+	<div class="social">
+		<ul>
+	
+		
+			<li>
+				<a href="http://github.com/" title="Github" target="_blank">
+					<i class="fa fa-github"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Weibo" target="_blank">
+					<i class="fa fa-weibo"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="mailto:http://github.com/" title="Email" target="_blank">
+					<i class="fa fa-envelope-o"></i>
+				</a>
+			</li>
+		
+
+		
+			<li>
+				<a href="http://github.com/" title="QQ" target="_blank">
+					<i class="fa fa-qq"></i>
+				</a>
+			</li>
+		
+		
+			<li>
+				<a href="http://github.com/" title="Twitter" target="_blank">
+					<i class="fa fa-twitter"></i>
+				</a>
+			</li>
+		
+	 
+</ul>
+	</div>
+		
+	<div class="copyright">
+		<p>
+			 
+				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
+			
+			
+			
+
+	<!-- busuanzi -->
+	<!-- busuanzi -->
+
+		
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+
+		
+	
+
+
+
+
+		</p>
+		<p>
+			根正苗红的社会主义接班人
+		</p>
+	</div>		
+</footer>
+		
+    <!-- set '1' to show motto in all pages! -->
+
+	<script src="/js/motto.js"></script>
+	<script type="text/javascript">
+		$(".motto").html( getMingYanContent() );
+	</script>	
+
+
+
+
+
+
+    <script src="/js/love.js"></script>
+
+
+<!--back to top-->
+
+    
+	<div id="totop">
+  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
+	</div>
+	<div id="tobuttom">
+		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
+	</div>
+ 
+
+
+ 
+
+<script src="/js/vibrant.js"></script>
+<script src="/js/chinese.js"></script>
+<script src="/js/main.js"></script>
+	</body>
+	</html>
