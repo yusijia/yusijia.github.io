@@ -1,0 +1,539 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>java访问修饰符 | yusijia&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yusijia">
+    
+    <meta name="description" content="1、Class类的访问权限public：　　可以供所有的类访问。  
+默认：　　默认可以称为friendly，但是，java语言中是没有friendly这个修饰符的，这样称呼应该是来源于c++。默认的访问权限是包级访问权限。即如果写了一个类没有写访问权限修饰符，那么就是默认的访问权限，同一个包下的类">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="yusijia&#39;s blog" title="yusijia&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
+				<h2 class="blog-motto">Keep on going never give up.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/22/The base of java/access-permission/" title="java访问修饰符" itemprop="url">java访问修饰符</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yusijia">yusijia</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-05-22T03:41:44.000Z" itemprop="datePublished">May 22 2016</time>
+    Updated:<time datetime="2016-05-22T03:51:27.103Z" itemprop="dateModified">May 22 2016</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Class类的访问权限"><span class="toc-number">1.</span> <span class="toc-text">1、Class类的访问权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说明："><span class="toc-number">2.</span> <span class="toc-text">说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、类成员变量的访问权限（类成员变量和实例成员变量）"><span class="toc-number">3.</span> <span class="toc-text">2、类成员变量的访问权限（类成员变量和实例成员变量）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、类的成员方法的访问权限"><span class="toc-number">4.</span> <span class="toc-text">3、类的成员方法的访问权限</span></a></li></ol>
+		</div>
+		
+		<h2 id="1、Class类的访问权限"><a href="#1、Class类的访问权限" class="headerlink" title="1、Class类的访问权限"></a>1、Class类的访问权限</h2><p><strong>public：</strong><br>　　可以供所有的类访问。  </p>
+<p><strong>默认：</strong><br>　　默认可以称为friendly，但是，java语言中是没有friendly这个修饰符的，这样称呼应该是来源于c++。默认的访问权限是包级访问权限。即如果写了一个类没有写访问权限修饰符，那么就是默认的访问权限，同一个包下的类都可以访问到，即可以实例化该类（当然如果这个类不具有实例化的能力除外，比如该类没有提供public的构造函数）。  </p>
+<h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><p>  1、每个编译单元（类文件）都仅能有一个public class  </p>
+<p>  2、public class的名称（包含大小写）必须和其类文件同名。  </p>
+<p>  3、一个类文件(*.java)中可以不存在public class。此时，文件名可以任意取，这样容易造成混乱。<br>  这种形式的存在的场景：如果我们在某个包内撰写一个class，仅仅是为了配合同包内的其他类工作，而且我们不想再为了撰写说明文档给客户（不一定是现实意义的客户，可能是调用这个类的类）看而伤脑筋，而且有可能过一段时间之后有可能会彻底改变原有的做法，并完全舍弃旧版本，以全新的版本代替。  </p>
+<p>  4、class不可以是private和protected。  </p>
+<p>  5、如果不希望产生某个class的对象，可以将该类得所有构造函数设置成private。但是即使这样也可以生成该类的对象，就是通过class的static的成员（属性和方法）可以办到。（注：貌似有点像单例模式）通过反射也可以。</p>
+<h2 id="2、类成员变量的访问权限（类成员变量和实例成员变量）"><a href="#2、类成员变量的访问权限（类成员变量和实例成员变量）" class="headerlink" title="2、类成员变量的访问权限（类成员变量和实例成员变量）"></a>2、类成员变量的访问权限（类成员变量和实例成员变量）</h2><p><strong>public：</strong></p>
+<p>　　紧接public的属性任何类都可以访问到。可以直接使用ClassName.propertyName。但是从类的封装性上来考虑将一个类的属性定义成public一般很少使用，在定义静态常量的时候通常会这样定义。如：public static final int PAGE_SIZE=10;</p>
+<p><strong>private：</strong></p>
+<p>　　只有类本身内部的方法可以访问类的private属性，当然内部类也可以访问其外部类的private成员的。（属性和方法）</p>
+<p><strong>默认（friendly）：</strong><br>　　包级可见，同一个包内的类可以访问到这个属性，可以直接使用className.propertyName来访问，但是从类的封装性特性来说很少这样使用类的属性的。  </p>
+<p><strong>protected：</strong></p>
+<p>　　关键字所处理的是所谓“继承”的观念。对于同一包的其他类，protected＝默认，对于不同包的类，如果存在继承关系，而baseClass存在protected属性，则可以被其自继承，而不同包的其他类则不能访问类的protected属性。  </p>
+<p><strong>因而，权限的排序如下：public&gt;protected&gt;默认&gt;private</strong></p>
+<h2 id="3、类的成员方法的访问权限"><a href="#3、类的成员方法的访问权限" class="headerlink" title="3、类的成员方法的访问权限"></a>3、类的成员方法的访问权限</h2><p>　　其从语法角度来讲，这些访问权限控制符作用于类的方法和作用于类的属性上的效果是一样的。  </p>
+<p><strong>public：</strong></p>
+<p>所有类可见。</p>
+<p><strong>pirvate：</strong></p>
+<p>只有同一类内部的方法可见，在有就是内部类也可以访问到。</p>
+<p><strong>默认（friendly）：</strong></p>
+<p>包内可见。</p>
+<p><strong>protected:</strong></p>
+<p>继承可见。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/语言-java基础知识/">语言-java基础知识</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/05/22/The base of java/access-permission/" data-title="java访问修饰符 | yusijia&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/22/The base of java/for-in-java/" title="java 循环的3种方式">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  java 循环的3种方式</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/05/22/The base of java/final-2/"  title="final关键字 2">
+ <strong>NEXT:</strong><br/> 
+ <span>final关键字 2
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+
+
+<!-- ��˵���ۿ� start -->
+
+	<div class="ds-thread" data-thread-key="2016/05/22/The base of java/access-permission/" data-title="java访问修饰符" data-url="undefined"></div>
+
+<!-- ��˵���ۿ� end -->
+
+<!-- ��˵����JS���� start (һ����ҳֻ������һ��) -->
+
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"ysjdb"};
+
+	(function() {
+
+		var ds = document.createElement('script');
+
+		ds.type = 'text/javascript';ds.async = true;
+
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+ 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+
+	</script>
+<!-- ��˵����JS���� end -->
+
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、Class类的访问权限"><span class="toc-number">1.</span> <span class="toc-text">1、Class类的访问权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说明："><span class="toc-number">2.</span> <span class="toc-text">说明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、类成员变量的访问权限（类成员变量和实例成员变量）"><span class="toc-number">3.</span> <span class="toc-text">2、类成员变量的访问权限（类成员变量和实例成员变量）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、类的成员方法的访问权限"><span class="toc-number">4.</span> <span class="toc-text">3、类的成员方法的访问权限</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Ajax-JSON/" title="Ajax&amp;JSON">Ajax&amp;JSON<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MYSQL/" title="MYSQL">MYSQL<sup>12</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/javaWeb基础/" title="javaWeb基础">javaWeb基础<sup>8</sup></a></li>
+		
+			<li><a href="/tags/java并发/" title="java并发">java并发<sup>9</sup></a></li>
+		
+			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>26</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/二进制技巧/" title="二进制技巧">二进制技巧<sup>2</sup></a></li>
+		
+			<li><a href="/tags/图床/" title="图床">图床<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基数排序/" title="基数排序">基数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-Hash/" title="数据结构-Hash">数据结构-Hash<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉搜索树/" title="数据结构-二叉搜索树">数据结构-二叉搜索树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉树/" title="数据结构-二叉树">数据结构-二叉树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-双向链表/" title="数据结构-双向链表">数据结构-双向链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-哈夫曼树/" title="数据结构-哈夫曼树">数据结构-哈夫曼树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-LCA/" title="数据结构-图论-LCA">数据结构-图论-LCA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-Tarjan/" title="数据结构-图论-Tarjan">数据结构-图论-Tarjan<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-图论基础/" title="数据结构-图论-图论基础">数据结构-图论-图论基础<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-拓扑排序/" title="数据结构-图论-拓扑排序">数据结构-图论-拓扑排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树/" title="数据结构-图论-最小生成树">数据结构-图论-最小生成树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-kruskal/" title="数据结构-图论-最小生成树-kruskal">数据结构-图论-最小生成树-kruskal<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-Dijsktra/" title="数据结构-图论-最短路-Dijsktra">数据结构-图论-最短路-Dijsktra<sup>4</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-SPFA/" title="数据结构-图论-最短路-SPFA">数据结构-图论-最短路-SPFA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd-传递闭包/" title="数据结构-图论-最短路-floyd-传递闭包">数据结构-图论-最短路-floyd-传递闭包<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd-求最小环/" title="数据结构-图论-最短路-floyd-求最小环">数据结构-图论-最短路-floyd-求最小环<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-字典树/" title="数据结构-字典树">数据结构-字典树<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-平衡二叉树/" title="数据结构-平衡二叉树">数据结构-平衡二叉树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-循环链表/" title="数据结构-循环链表">数据结构-循环链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-栈/" title="数据结构-栈">数据结构-栈<sup>7</sup></a></li>
+		
+			<li><a href="/tags/数据结构-树状数组/" title="数据结构-树状数组">数据结构-树状数组<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-链表/" title="数据结构-链表">数据结构-链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-队列/" title="数据结构-队列">数据结构-队列<sup>3</sup></a></li>
+		
+			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+		
+			<li><a href="/tags/桶排序/" title="桶排序">桶排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/模拟/" title="模拟">模拟<sup>7</sup></a></li>
+		
+			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
+		
+			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-binary-search-二分查找/" title="算法-binary search(二分查找)">算法-binary search(二分查找)<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-qmul-快速乘/" title="算法-qmul(快速乘)">算法-qmul(快速乘)<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-qpow-快速幂/" title="算法-qpow(快速幂)">算法-qpow(快速幂)<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-qsort（快速排序）/" title="算法-qsort（快速排序）">算法-qsort（快速排序）<sup>5</sup></a></li>
+		
+			<li><a href="/tags/算法-位向量法/" title="算法-位向量法">算法-位向量法<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-全排列/" title="算法-全排列">算法-全排列<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划/" title="算法-动态规划">算法-动态规划<sup>16</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-基数排序/" title="算法-基数排序">算法-基数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-希尔排序/" title="算法-希尔排序">算法-希尔排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-归并排序/" title="算法-归并排序">算法-归并排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-快速选择/" title="算法-快速选择">算法-快速选择<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数学题/" title="算法-数学题">算法-数学题<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-卡特兰数/" title="算法-数论-卡特兰数">算法-数论-卡特兰数<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-同余定理/" title="算法-数论-同余定理">算法-数论-同余定理<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-扩展欧几里得/" title="算法-数论-扩展欧几里得">算法-数论-扩展欧几里得<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-欧几里得/" title="算法-数论-欧几里得">算法-数论-欧几里得<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-素数筛选法/" title="算法-数论-素数筛选法">算法-数论-素数筛选法<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-费马小定理/" title="算法-数论-费马小定理">算法-数论-费马小定理<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-映射/" title="算法-映射">算法-映射<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-枚举/" title="算法-枚举">算法-枚举<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-标记-查表思想/" title="算法-标记,查表思想">算法-标记,查表思想<sup>8</sup></a></li>
+		
+			<li><a href="/tags/算法-离散化/" title="算法-离散化">算法-离散化<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-计数排序/" title="算法-计数排序">算法-计数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-预处理思想/" title="算法-预处理思想">算法-预处理思想<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-C/" title="语言-C++">语言-C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>74</sup></a></li>
+		
+			<li><a href="/tags/贪心/" title="贪心">贪心<sup>1</sup></a></li>
+		
+			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-并查集/" title="高级数据结构-并查集">高级数据结构-并查集<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-线段树/" title="高级数据结构-线段树">高级数据结构-线段树<sup>8</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> I am a slow walker, but I never walk backwards. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yusijia">yusijia</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ysjdb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

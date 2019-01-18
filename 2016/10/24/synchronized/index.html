@@ -1,0 +1,570 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>synchronized介绍 | yusijia&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yusijia">
+    
+    <meta name="description" content="参考：http://www.cnblogs.com/dolphin0520/p/
+一.什么时候会出现线程安全问题？　　在单线程中不会出现线程安全问题，而在多线程编程中，有可能会出现同时访问同一个资源的情况，这种资源可以是各种类型的的资源：一个变量、一个对象、一个文件、一个数据库表等，而当多个线程同时">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="yusijia&#39;s blog" title="yusijia&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
+				<h2 class="blog-motto">Keep on going never give up.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/10/24/synchronized/" title="synchronized介绍" itemprop="url">synchronized介绍</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="yusijia">yusijia</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2016-10-24T10:32:02.000Z" itemprop="datePublished">October 24 2016</time>
+    Updated:<time datetime="2016-10-24T10:56:13.273Z" itemprop="dateModified">October 24 2016</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-什么时候会出现线程安全问题？"><span class="toc-number">1.</span> <span class="toc-text">一.什么时候会出现线程安全问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-如何解决线程安全问题？"><span class="toc-number">2.</span> <span class="toc-text">二.如何解决线程安全问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-synchronized同步方法或者同步块"><span class="toc-number">3.</span> <span class="toc-text">三.synchronized同步方法或者同步块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-synchronized方法"><span class="toc-number">3.1.</span> <span class="toc-text">1.synchronized方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不过有几点需要注意："><span class="toc-number">3.1.1.</span> <span class="toc-text">不过有几点需要注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-synchronized代码块"><span class="toc-number">3.2.</span> <span class="toc-text">2.synchronized代码块</span></a></li></ol></li></ol>
+		</div>
+		
+		<p>参考：<a href="http://www.cnblogs.com/dolphin0520/p/" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/</a></p>
+<h2 id="一-什么时候会出现线程安全问题？"><a href="#一-什么时候会出现线程安全问题？" class="headerlink" title="一.什么时候会出现线程安全问题？"></a>一.什么时候会出现线程安全问题？</h2><p>　　在单线程中不会出现线程安全问题，而在多线程编程中，有可能会出现同时访问同一个资源的情况，这种资源可以是各种类型的的资源：一个变量、一个对象、一个文件、一个数据库表等，而当多个线程同时访问同一个资源的时候，就会存在一个问题：</p>
+<p>　　由于每个线程执行的过程是不可控的，所以很可能导致最终的结果与实际上的愿望相违背或者直接导致程序出错。</p>
+<p>　　举个简单的例子：</p>
+<p>　　现在有两个线程分别从网络上读取数据，然后插入一张数据库表中，要求不能插入重复的数据。</p>
+<p>　　那么必然在插入数据的过程中存在两个操作：</p>
+<p>　　1）检查数据库中是否存在该条数据；</p>
+<p>　　2）如果存在，则不插入；如果不存在，则插入到数据库中。</p>
+<p>　　假如两个线程分别用thread-1和thread-2表示，某一时刻，thread-1和thread-2都读取到了数据X，那么可能会发生这种情况：</p>
+<p>　　thread-1去检查数据库中是否存在数据X，然后thread-2也接着去检查数据库中是否存在数据X。</p>
+<p>　　结果两个线程检查的结果都是数据库中不存在数据X，那么两个线程都分别将数据X插入数据库表当中。</p>
+<p>　　这个就是线程安全问题，即多个线程同时访问一个资源时，会导致程序运行结果并不是想看到的结果。</p>
+<p>　　这里面，这个资源被称为：<strong>临界资源</strong>（也有称为共享资源）。</p>
+<p>　　也就是说，当多个线程同时访问临界资源（一个对象，对象中的属性，一个文件，一个数据库等）时，就可能会产生线程安全问题。</p>
+<p><strong>不过，当多个线程执行一个方法，方法内部的局部变量并不是临界资源，因为方法是在栈上执行的，而Java栈是线程私有的，因此不会产生线程安全问题。</strong></p>
+<h2 id="二-如何解决线程安全问题？"><a href="#二-如何解决线程安全问题？" class="headerlink" title="二.如何解决线程安全问题？"></a>二.如何解决线程安全问题？</h2><p>　　那么一般来说，是如何解决线程安全问题的呢？</p>
+<p>　　基本上所有的并发模式在解决线程安全问题时，都采用“序列化访问临界资源”的方案，即在同一时刻，只能有一个线程访问临界资源，也称作同步互斥访问。</p>
+<p>　　<strong>通常来说，是在访问临界资源的代码前面加上一个锁，当访问完临界资源后释放锁，让其他线程继续访问。</strong></p>
+<p>　　<strong>在Java中，提供了两种方式来实现同步互斥访问：synchronized和Lock。</strong></p>
+<h2 id="三-synchronized同步方法或者同步块"><a href="#三-synchronized同步方法或者同步块" class="headerlink" title="三.synchronized同步方法或者同步块"></a>三.synchronized同步方法或者同步块</h2><p>　　在了解synchronized关键字的使用方法之前，我们先来看一个概念：互斥锁，顾名思义：能到达到互斥访问目的的锁。</p>
+<p>　　举个简单的例子：<strong>如果对临界资源加上互斥锁，当一个线程在访问该临界资源时，其他线程便只能等待。</strong></p>
+<blockquote>
+<p>在Java中，<strong>每一个对象都拥有一个锁标记（monitor），也称为监视器</strong>，多线程同时访问某个对象时，线程只有获取了该对象的锁才能访问(<strong>锁是依赖于对象而存在。</strong>)。</p>
+</blockquote>
+<p>　　<strong>在Java中，可以使用synchronized关键字来标记一个方法或者代码块，当某个线程调用该对象的synchronized方法或者访问synchronized代码块时，这个线程便获得了该对象的锁，其他线程暂时无法访问这个方法，只有等待这个方法执行完毕或者代码块执行完毕，这个线程才会释放该对象的锁，其他线程才能执行这个方法或者代码块。</strong></p>
+<p>　　下面通过几个简单的例子来说明synchronized关键字的使用：</p>
+<h3 id="1-synchronized方法"><a href="#1-synchronized方法" class="headerlink" title="1.synchronized方法"></a>1.synchronized方法</h3><p>　　下面这段代码中两个线程分别调用insertData对象插入数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InsertData insertData = <span class="keyword">new</span> InsertData();</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                insertData.insert(Thread.currentThread());</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;.start();</span><br><span class="line">         </span><br><span class="line">         </span><br><span class="line">        <span class="keyword">new</span> Thread() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                insertData.insert(Thread.currentThread());</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InsertData</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Thread thread)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">            System.out.println(thread.getName()+<span class="string">"在插入数据"</span>+i);</span><br><span class="line">            arrayList.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时程序的输出结果为：</p>
+<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-24/37067730.jpg" alt=""></p>
+<p>　　说明两个线程在同时执行insert方法。<br>　　而如果在insert方法前面加上关键字synchronized的话，运行结果为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InsertData</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Integer&gt; arrayList = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Thread thread)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">            System.out.println(thread.getName()+<span class="string">"在插入数据"</span>+i);</span><br><span class="line">            arrayList.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-24/39640841.jpg" alt=""></p>
+<p>　　从上输出结果说明，Thread-1插入数据是等Thread-0插入完数据之后才进行的。说明Thread-0和Thread-1是顺序执行insert方法的。</p>
+<h4 id="不过有几点需要注意："><a href="#不过有几点需要注意：" class="headerlink" title="不过有几点需要注意："></a>不过有几点需要注意：</h4><p>　　<strong>1）</strong> <strong>当一个线程正在访问一个对象的synchronized方法，那么其他线程不能访问该对象的其他synchronized方法（和该synchronized方法）。</strong>这个原因很简单，因为一个对象只有一把锁，当一个线程获取了该对象的锁之后，其他线程无法获取该对象的锁，所以无法访问该对象的其他synchronized方法。</p>
+<p>　　<strong>2）</strong> <strong>当一个线程正在访问一个对象的synchronized方法，那么其他线程能访问该对象的非synchronized方法。</strong>这个原因很简单，<strong>访问非synchronized方法不需要获得该对象的锁，</strong>假如一个方法没用synchronized关键字修饰，说明它不会使用到临界资源，那么其他线程是可以访问这个方法的，</p>
+<p>　　<strong>3）</strong> <strong>如果一个线程A需要访问对象object1的synchronized方法fun1，另外一个线程B需要访问对象object2的synchronized方法fun1，即使object1和object2是同一类型），也不会产生线程安全问题，因为他们访问的是不同的对象，所以不存在互斥问题。</strong></p>
+<h3 id="2-synchronized代码块"><a href="#2-synchronized代码块" class="headerlink" title="2.synchronized代码块"></a>2.synchronized代码块</h3><p>synchronized代码块类似于以下这种形式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(synObject) &#123;</span><br><span class="line">         </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　当在某个线程中执行这段代码块，该线程会获取对象synObject的锁，从而使得其他线程无法同时访问该代码块。</p>
+<p>　　<strong>synObject可以是this，代表获取当前对象的锁，也可以是类中的一个属性，代表获取该属性的锁。</strong></p>
+<p>　　比如上面的insert方法可以改成以下两种形式：</p>
+<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-24/77691069.jpg" alt=""></p>
+<p>　　从上面可以看出，<strong>synchronized代码块使用起来比synchronized方法要灵活得多。</strong>因为也许一个方法中只有一部分代码只需要同步，如果此时对整个方法用synchronized进行同步，会影响程序执行效率。而使用synchronized代码块就可以避免这个问题，<strong>synchronized代码块可以实现只对需要同步的地方进行同步。</strong></p>
+<blockquote>
+<p>另外，<strong>每个类也会有一个锁，它可以用来控制对static数据成员的并发访问。</strong></p>
+</blockquote>
+<p>　　并且如果一个线程执行一个对象的非static synchronized方法，另外一个线程需要执行这个对象所属类的static synchronized方法，此时不会发生互斥现象，因为访问static synchronized方法占用的是类锁<strong>(全局锁)</strong>，而访问非static synchronized方法占用的是对象锁<strong>(实例锁)</strong>，所以不存在互斥现象。</p>
+<p>看下面这段代码就明白了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> InsertData insertData = <span class="keyword">new</span> InsertData();</span><br><span class="line">        <span class="keyword">new</span> Thread()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                insertData.insert();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start(); </span><br><span class="line">        <span class="keyword">new</span> Thread()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                insertData.insert1();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InsertData</span> </span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行insert"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">5000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"执行insert完毕"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"执行insert1"</span>);</span><br><span class="line">        System.out.println(<span class="string">"执行insert1完毕"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-24/99413206.jpg" alt=""></p>
+<p>第一个线程里面执行的是insert方法，不会导致第二个线程执行insert1方法发生阻塞现象。<br>下面我们看一下synchronized关键字到底做了什么事情，我们来反编译它的字节码看一下，下面这段代码反编译后的字节码为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InsertData</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object object = <span class="keyword">new</span> Object();</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Thread thread)</span></span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (object) &#123;</span><br><span class="line">         </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">insert1</span><span class="params">(Thread thread)</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert2</span><span class="params">(Thread thread)</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://7xrn7f.com1.z0.glb.clouddn.com/16-10-24/65835167.jpg" alt=""></p>
+<p>　从反编译获得的字节码可以看出，synchronized代码块实际上多了monitorenter和monitorexit两条指令。monitorenter指令执行时会让对象的锁计数加1，而monitorexit指令执行时会让对象的锁计数减1，其实这个与操作系统里面的PV操作很像，操作系统里面的PV操作就是用来控制多个线程对临界资源的访问。对于synchronized方法，执行中的线程识别该方法的 method_info 结构是否有 ACC_SYNCHRONIZED 标记设置，然后它自动获取对象的锁，调用方法，最后释放锁。<strong>如果有异常发生，线程自动释放锁。</strong></p>
+<p>　　有一点要注意：<strong>对于synchronized方法或者synchronized代码块，当出现异常时，JVM会自动释放当前线程占用的锁，因此不会由于异常导致出现死锁现象。</strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/java并发/">java并发</a>
+  </div>
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2016/10/24/synchronized/" data-title="synchronized介绍 | yusijia&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/10/24/volatile/" title="volatile介绍">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  volatile介绍</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/10/24/java并发/Thread/"  title="Thread类介绍">
+ <strong>NEXT:</strong><br/> 
+ <span>Thread类介绍
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+
+
+<!-- ��˵���ۿ� start -->
+
+	<div class="ds-thread" data-thread-key="2016/10/24/synchronized/" data-title="synchronized介绍" data-url="undefined"></div>
+
+<!-- ��˵���ۿ� end -->
+
+<!-- ��˵����JS���� start (һ����ҳֻ������һ��) -->
+
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"ysjdb"};
+
+	(function() {
+
+		var ds = document.createElement('script');
+
+		ds.type = 'text/javascript';ds.async = true;
+
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+ 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+
+	</script>
+<!-- ��˵����JS���� end -->
+
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一-什么时候会出现线程安全问题？"><span class="toc-number">1.</span> <span class="toc-text">一.什么时候会出现线程安全问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二-如何解决线程安全问题？"><span class="toc-number">2.</span> <span class="toc-text">二.如何解决线程安全问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三-synchronized同步方法或者同步块"><span class="toc-number">3.</span> <span class="toc-text">三.synchronized同步方法或者同步块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-synchronized方法"><span class="toc-number">3.1.</span> <span class="toc-text">1.synchronized方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#不过有几点需要注意："><span class="toc-number">3.1.1.</span> <span class="toc-text">不过有几点需要注意：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-synchronized代码块"><span class="toc-number">3.2.</span> <span class="toc-text">2.synchronized代码块</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Ajax-JSON/" title="Ajax&amp;JSON">Ajax&amp;JSON<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MYSQL/" title="MYSQL">MYSQL<sup>12</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/javaWeb基础/" title="javaWeb基础">javaWeb基础<sup>8</sup></a></li>
+		
+			<li><a href="/tags/java并发/" title="java并发">java并发<sup>9</sup></a></li>
+		
+			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>26</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/二进制技巧/" title="二进制技巧">二进制技巧<sup>2</sup></a></li>
+		
+			<li><a href="/tags/图床/" title="图床">图床<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基数排序/" title="基数排序">基数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-Hash/" title="数据结构-Hash">数据结构-Hash<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉搜索树/" title="数据结构-二叉搜索树">数据结构-二叉搜索树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉树/" title="数据结构-二叉树">数据结构-二叉树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-双向链表/" title="数据结构-双向链表">数据结构-双向链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-哈夫曼树/" title="数据结构-哈夫曼树">数据结构-哈夫曼树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-LCA/" title="数据结构-图论-LCA">数据结构-图论-LCA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-Tarjan/" title="数据结构-图论-Tarjan">数据结构-图论-Tarjan<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-图论基础/" title="数据结构-图论-图论基础">数据结构-图论-图论基础<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-拓扑排序/" title="数据结构-图论-拓扑排序">数据结构-图论-拓扑排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树/" title="数据结构-图论-最小生成树">数据结构-图论-最小生成树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-kruskal/" title="数据结构-图论-最小生成树-kruskal">数据结构-图论-最小生成树-kruskal<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-Dijsktra/" title="数据结构-图论-最短路-Dijsktra">数据结构-图论-最短路-Dijsktra<sup>4</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-SPFA/" title="数据结构-图论-最短路-SPFA">数据结构-图论-最短路-SPFA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd-传递闭包/" title="数据结构-图论-最短路-floyd-传递闭包">数据结构-图论-最短路-floyd-传递闭包<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd-求最小环/" title="数据结构-图论-最短路-floyd-求最小环">数据结构-图论-最短路-floyd-求最小环<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-字典树/" title="数据结构-字典树">数据结构-字典树<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-平衡二叉树/" title="数据结构-平衡二叉树">数据结构-平衡二叉树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-循环链表/" title="数据结构-循环链表">数据结构-循环链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-栈/" title="数据结构-栈">数据结构-栈<sup>7</sup></a></li>
+		
+			<li><a href="/tags/数据结构-树状数组/" title="数据结构-树状数组">数据结构-树状数组<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-链表/" title="数据结构-链表">数据结构-链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-队列/" title="数据结构-队列">数据结构-队列<sup>3</sup></a></li>
+		
+			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+		
+			<li><a href="/tags/桶排序/" title="桶排序">桶排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/模拟/" title="模拟">模拟<sup>7</sup></a></li>
+		
+			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
+		
+			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-binary-search-二分查找/" title="算法-binary search(二分查找)">算法-binary search(二分查找)<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-qmul-快速乘/" title="算法-qmul(快速乘)">算法-qmul(快速乘)<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-qpow-快速幂/" title="算法-qpow(快速幂)">算法-qpow(快速幂)<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-qsort（快速排序）/" title="算法-qsort（快速排序）">算法-qsort（快速排序）<sup>5</sup></a></li>
+		
+			<li><a href="/tags/算法-位向量法/" title="算法-位向量法">算法-位向量法<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-全排列/" title="算法-全排列">算法-全排列<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划/" title="算法-动态规划">算法-动态规划<sup>16</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-基数排序/" title="算法-基数排序">算法-基数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-希尔排序/" title="算法-希尔排序">算法-希尔排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-归并排序/" title="算法-归并排序">算法-归并排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-快速选择/" title="算法-快速选择">算法-快速选择<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数学题/" title="算法-数学题">算法-数学题<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-卡特兰数/" title="算法-数论-卡特兰数">算法-数论-卡特兰数<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-同余定理/" title="算法-数论-同余定理">算法-数论-同余定理<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-扩展欧几里得/" title="算法-数论-扩展欧几里得">算法-数论-扩展欧几里得<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-欧几里得/" title="算法-数论-欧几里得">算法-数论-欧几里得<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-素数筛选法/" title="算法-数论-素数筛选法">算法-数论-素数筛选法<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-费马小定理/" title="算法-数论-费马小定理">算法-数论-费马小定理<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-映射/" title="算法-映射">算法-映射<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-枚举/" title="算法-枚举">算法-枚举<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-标记-查表思想/" title="算法-标记,查表思想">算法-标记,查表思想<sup>8</sup></a></li>
+		
+			<li><a href="/tags/算法-离散化/" title="算法-离散化">算法-离散化<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-计数排序/" title="算法-计数排序">算法-计数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-预处理思想/" title="算法-预处理思想">算法-预处理思想<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-C/" title="语言-C++">语言-C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>74</sup></a></li>
+		
+			<li><a href="/tags/贪心/" title="贪心">贪心<sup>1</sup></a></li>
+		
+			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-并查集/" title="高级数据结构-并查集">高级数据结构-并查集<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-线段树/" title="高级数据结构-线段树">高级数据结构-线段树<sup>8</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> I am a slow walker, but I never walk backwards. <br/>
+			</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
+		
+		<a href="http://yoursite.com" target="_blank" title="yusijia">yusijia</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"ysjdb"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

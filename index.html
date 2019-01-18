@@ -1,564 +1,493 @@
-<!--
-	时间：2018-09-25
-	描述：There may be a bug, but don't worry, QiLing(器灵) says that it can work normally!
--->
 
-	<!DOCTYPE html>
-	<html class="scrollbar">
-		
-
+ <!DOCTYPE HTML>
+<html >
 <head>
-	<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <title>
-    
-      yusijia&#39;s blog
-    
-  </title>
-  <meta name="author" content="yusijia">
-  <meta name="keywords" content="" />
-  <meta name="description" content="Keep on going never give up." />
-	<!-- favicon -->
-  <link rel="shortcut icon" href="/img/favicon.ico">
-
-  <!-- css -->
-  <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
   
-
-<link rel="stylesheet" href="css/calendar.css">
-
-    <!-- jquery -->
-	<script src="/js/jquery-2.1.1.min.js"></script>
-
-  <!-- leancloud -->
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-<script src="/js/leancloud.js"></script>
+    <title>yusijia&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="yusijia">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-	<body>
-		<!-- Preloader -->
 
-	<div id="preloader">
-		<div class="pre-container">
-			
-				<div class="transition">
-					<div class="three-bounce1"></div>
-					<div class="three-bounce2"></div>
-					<div class="three-bounce3"></div>
-				</div>
-						
-		</div>
-	</div>
-
-
-<!-- header -->
-<header class="fixbackground" data-img-mode="random" data-normal-src="/img/1.jpg" data-random-max="110" data-random-src="https://sariay.github.io/Random-img/">
-	<div class="mask">
-		<div class="h-header">
-			<div id="logo-S">
-				
-					<a href="/">
-						<img src="/img/logo.png" alt="Logo">
-					</a>
-				
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="yusijia&#39;s blog" title="yusijia&#39;s blog"/></a>
 			</div>
-			<!-- Navigation in header(id="navigation-S") -->
-			<div id="navigation-S">
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="yusijia&#39;s blog">yusijia&#39;s blog</a></h1>
+				<h2 class="blog-motto">Keep on going never give up.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
 				<ul>
 					
-						<li class="menu-home">
-							<a href="/" class="menu-item-home">Home</a>
-						</li>
+						<li><a href="/">Home</a></li>
 					
-						<li class="menu-archive">
-							<a href="/archives" class="menu-item-archive">Archive</a>
-						</li>
+						<li><a href="/archives">Archives</a></li>
 					
-						<li class="menu-categories">
-							<a href="/categories" class="menu-item-categories">Category</a>
-						</li>
+					<li>
 					
-						<li class="menu-tags">
-							<a href="/tags" class="menu-item-tags">Tag</a>
-						</li>
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
 					
-						<li class="menu-about">
-							<a href="/about" class="menu-item-about">About</a>
-						</li>
-					
-						<li class="menu-gallery">
-							<a href="/gallery" class="menu-item-gallery">Gallery</a>
-						</li>
-					
-
-					
-				</ul>			
-			</div>				
-		</div>
-
-		<div class="h-body">	
-			<!-- motto -->
-			
-				<div id="page-motto">
-					<p class="motto">
-						
-					</p>
-				</div>
-			
-
-			<div id="navigation-H">
-				<!-- Page title -->
-				<p>
-					
-						Home
-					
-				</p>
-				<!-- Progress bar -->
-				<div id="progress-bar"></div>
-
-				<!-- Progress percent -->
-				<div id="progress-percentage">
-					<h1>0.0%</h1>
-				</div>
-			</div>
-		</div>
-		
-		<!-- others: such as time... -->			
-		<div class="h-footer">
-			<ul>
-				<li>
-					<a><i class="fa fa-camera-retro" onclick="changeHeaderBg()"></i>按钮</a>
-				</li>
-				<li>
-					<a href="javascript:;" id="read-more"><i class="fa fa-angle-double-down"></i>继续阅读</a>
-				</li>
-				<li>
-					<a href="" target="_blank"><i class="fa fa-download"></i>扩展</a>
-				</li>
-			</ul>
-		</div>
-		
-		<!-- This is only a demo, please go to "https://time.is" to set your city time! -->
-<style type="text/css">
-	.header-date {
-		position: absolute;
-		left: 40px;
-		bottom: 30px;
-		writing-mode: tb-rl;
-		font-size: 36px;
-	}	
-	.header-date a {
-		border-bottom: none;
-	}
-	@media only screen and (max-width: 768 ) {
-		.header-date {
-			position: absolute;
-			left: 40px;
-			bottom: 30px;
-			writing-mode: tb-rl;
-			font-size: 20px;
-		}			
-	}
-</style>
-<div class="header-date">
-	<a href="https://time.is/Beijing" id="time_is_link" rel="nofollow" ></a>
-	<span id="Beijing_z43d"></span>
+					</li>
+				</ul>
+			</nav>			
 </div>
-<script src="//widget.time.is/zh.js"></script>
-<script>
-	time_is_widget.init({
-		Beijing_z43d:{
-			template:"DATE", 
-			date_format:"year年 monthname dnum日"
-		}
-	});
-</script>
-</header>
 
-<!-- Navigation in div(id="navigation-H") -->
-<a class="nav-trigger">
-	<span></span>
-</a>
+    </header>
+    <div id="container">
+      <div id="main">
 
-<nav class="nav-container" id="cd-nav">
-	<div class="nav-header">
-		<h3>Navigation</h3>
-		<a href="javascript:;" class="nav-close"></a>
-	</div>
-	<div class="nav-body">
-		<ul>
-			
-				<li class="menu-home">
-					<a href="/" class="menu-item-home">Home</a>
-				</li>
-			
-				<li class="menu-archive">
-					<a href="/archives" class="menu-item-archive">Archive</a>
-				</li>
-			
-				<li class="menu-categories">
-					<a href="/categories" class="menu-item-categories">Category</a>
-				</li>
-			
-				<li class="menu-tags">
-					<a href="/tags" class="menu-item-tags">Tag</a>
-				</li>
-			
-				<li class="menu-about">
-					<a href="/about" class="menu-item-about">About</a>
-				</li>
-			
-				<li class="menu-gallery">
-					<a href="/gallery" class="menu-item-gallery">Gallery</a>
-				</li>
-			
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/29/leetCode040/" title="CombinationSumII" itemprop="url">
+  
+    <h1 itemprop="name">CombinationSumII</h1>
+    
+     
+           <p itemprop="description" >/*
 
-			
+Given a collection of candidate numbers (C) and a target number (T), find all 
+unique combinations in 
+C where the candidate numbers sum</p>
+        
+    
+    <time datetime="2016-11-29T12:46:50.000Z" itemprop="datePublished">November 29 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/29/leetCode041/" title="First-Missing-Positive" itemprop="url">
+  
+    <h1 itemprop="name">First-Missing-Positive</h1>
+    
+     
+           <p itemprop="description" >1234567Given an unsorted integer array, find the first missing positive integer.For example,Given [1,2,0] return 3,and [3,4,-1,1] return 2.Y</p>
+        
+    
+    <time datetime="2016-11-29T12:43:46.000Z" itemprop="datePublished">November 29 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/29/leetCode043/" title="Multiply Strings" itemprop="url">
+  
+    <h1 itemprop="name">Multiply Strings</h1>
+    
+     
+           <p itemprop="description" >大数相乘
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849#include &amp;lt;cstdio&amp;gt;#include &amp;lt;iostream&amp;g</p>
+        
+    
+    <time datetime="2016-11-29T12:42:08.000Z" itemprop="datePublished">November 29 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/29/leetCode045/" title="Jump Game II" itemprop="url">
+  
+    <h1 itemprop="name">Jump Game II</h1>
+    
+     
+           <p itemprop="description" >12345678910Given an array of non-negative integers, you are initially positioned at the first index of the array.Each element in the array r</p>
+        
+    
+    <time datetime="2016-11-29T12:41:25.000Z" itemprop="datePublished">November 29 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/29/SDUT1401/" title="SDUT1401" itemprop="url">
+  
+    <h1 itemprop="name">SDUT1401</h1>
+    
+     
+           <p itemprop="description" >Problem Description一个k（1&amp;lt;=k&amp;lt;=80）位的十进制正整数n，我们称其为大整数。
+现在的问题是，请你设计一个程序，对于给出的某一个大整数n，找到满足条件p^3+p^2+3*p&amp;lt;=n的最大值。
+Input输入数据只有一行，是一个k位的大整数n</p>
+        
+    
+    <time datetime="2016-11-29T12:38:35.000Z" itemprop="datePublished">November 29 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/28/radixSorting/" title="基数排序的简单实现" itemprop="url">
+  
+    <h1 itemprop="name">基数排序的简单实现</h1>
+    
+     
+           <p itemprop="description" >12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747</p>
+        
+    
+    <time datetime="2016-11-28T15:09:44.000Z" itemprop="datePublished">November 28 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/28/binary/findNumber2/" title="数组中只出现一次的两个数(其他数出现两次)" itemprop="url">
+  
+    <h1 itemprop="name">数组中只出现一次的两个数(其他数出现两次)</h1>
+    
+     
+           <p itemprop="description" >在一个数组中除两个数字只出现1次外，其它数字都出现了2次， 要求尽快找出这两个数字。
+
+两个相同的数异或结果为0，
+任何一个数与0异或结果还是那个数,
+异或-1相当于取反
+  设题目中这两个只出现1次的数字分别为A和B，如果能将A，B分开到二个数组中，那显然符合“异或”解法的关键</p>
+        
+    
+    <time datetime="2016-11-28T15:02:10.000Z" itemprop="datePublished">November 28 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/28/binary/findNumber/" title="数组中只出现一次的数(其他数出现n次)" itemprop="url">
+  
+    <h1 itemprop="name">数组中只出现一次的数(其他数出现n次)</h1>
+    
+     
+           <p itemprop="description" >参考：http://blog.csdn.net/morewindows/article/details/12684497
+题目：数组A中，除了某一个数字x之外，其他数字都出现了三次，而x出现了一次。请给出最快的方法找到x。
+分析：如果数组中没有x，那么数组中所有的数字都出现了3次</p>
+        
+    
+    <time datetime="2016-11-28T14:57:03.000Z" itemprop="datePublished">November 28 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/28/repeatNumber/" title="找出重复的数" itemprop="url">
+  
+    <h1 itemprop="name">找出重复的数</h1>
+    
+     
+           <p itemprop="description" >一个大小为n的数组，里面的数都属于范围[0, n-1]，有不确定的重复元素，找到至少一个重复元素，要求O(1)空间和O(n)时间。
+参考基数排序或桶排序
+123456789101112131415161718192021222324252627282930313233343536</p>
+        
+    
+    <time datetime="2016-11-28T14:53:13.000Z" itemprop="datePublished">November 28 2016</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/11/27/calculate/" title="简单表达式计算器实现" itemprop="url">
+  
+    <h1 itemprop="name">简单表达式计算器实现</h1>
+    
+     
+           <p itemprop="description" >v1.01234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727</p>
+        
+    
+    <time datetime="2016-11-27T04:24:18.000Z" itemprop="datePublished">November 27 2016</time>
+  </a>
+</section>
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/34/">34</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/Ajax-JSON/" title="Ajax&amp;JSON">Ajax&amp;JSON<sup>1</sup></a></li>
+		
+			<li><a href="/tags/MYSQL/" title="MYSQL">MYSQL<sup>12</sup></a></li>
+		
+			<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		
+			<li><a href="/tags/javaWeb基础/" title="javaWeb基础">javaWeb基础<sup>8</sup></a></li>
+		
+			<li><a href="/tags/java并发/" title="java并发">java并发<sup>9</sup></a></li>
+		
+			<li><a href="/tags/leetCode/" title="leetCode">leetCode<sup>26</sup></a></li>
+		
+			<li><a href="/tags/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		
+			<li><a href="/tags/二进制技巧/" title="二进制技巧">二进制技巧<sup>2</sup></a></li>
+		
+			<li><a href="/tags/图床/" title="图床">图床<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基数排序/" title="基数排序">基数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/常用/" title="常用">常用<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-Hash/" title="数据结构-Hash">数据结构-Hash<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉搜索树/" title="数据结构-二叉搜索树">数据结构-二叉搜索树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-二叉树/" title="数据结构-二叉树">数据结构-二叉树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-双向链表/" title="数据结构-双向链表">数据结构-双向链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-哈夫曼树/" title="数据结构-哈夫曼树">数据结构-哈夫曼树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-LCA/" title="数据结构-图论-LCA">数据结构-图论-LCA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-Tarjan/" title="数据结构-图论-Tarjan">数据结构-图论-Tarjan<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-图论基础/" title="数据结构-图论-图论基础">数据结构-图论-图论基础<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-拓扑排序/" title="数据结构-图论-拓扑排序">数据结构-图论-拓扑排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树/" title="数据结构-图论-最小生成树">数据结构-图论-最小生成树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-kruskal/" title="数据结构-图论-最小生成树-kruskal">数据结构-图论-最小生成树-kruskal<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最小生成树-prime/" title="数据结构-图论-最小生成树-prime">数据结构-图论-最小生成树-prime<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-Dijsktra/" title="数据结构-图论-最短路-Dijsktra">数据结构-图论-最短路-Dijsktra<sup>4</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-SPFA/" title="数据结构-图论-最短路-SPFA">数据结构-图论-最短路-SPFA<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd/" title="数据结构-图论-最短路-floyd">数据结构-图论-最短路-floyd<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd-传递闭包/" title="数据结构-图论-最短路-floyd-传递闭包">数据结构-图论-最短路-floyd-传递闭包<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-最短路-floyd-求最小环/" title="数据结构-图论-最短路-floyd-求最小环">数据结构-图论-最短路-floyd-求最小环<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-次小生成树/" title="数据结构-图论-次小生成树">数据结构-图论-次小生成树<sup>2</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-欧拉回路/" title="数据结构-图论-欧拉回路">数据结构-图论-欧拉回路<sup>6</sup></a></li>
+		
+			<li><a href="/tags/数据结构-图论-链式前向星/" title="数据结构-图论-链式前向星">数据结构-图论-链式前向星<sup>3</sup></a></li>
+		
+			<li><a href="/tags/数据结构-字典树/" title="数据结构-字典树">数据结构-字典树<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-平衡二叉树/" title="数据结构-平衡二叉树">数据结构-平衡二叉树<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-循环链表/" title="数据结构-循环链表">数据结构-循环链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-栈/" title="数据结构-栈">数据结构-栈<sup>7</sup></a></li>
+		
+			<li><a href="/tags/数据结构-树状数组/" title="数据结构-树状数组">数据结构-树状数组<sup>5</sup></a></li>
+		
+			<li><a href="/tags/数据结构-链表/" title="数据结构-链表">数据结构-链表<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据结构-队列/" title="数据结构-队列">数据结构-队列<sup>3</sup></a></li>
+		
+			<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+		
+			<li><a href="/tags/桶排序/" title="桶排序">桶排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/模拟/" title="模拟">模拟<sup>7</sup></a></li>
+		
+			<li><a href="/tags/水题/" title="水题">水题<sup>17</sup></a></li>
+		
+			<li><a href="/tags/算法-Insersion-Sort-插入排序/" title="算法-Insersion Sort(插入排序)">算法-Insersion Sort(插入排序)<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-binary-search-二分查找/" title="算法-binary search(二分查找)">算法-binary search(二分查找)<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-qmul-快速乘/" title="算法-qmul(快速乘)">算法-qmul(快速乘)<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-qpow-快速幂/" title="算法-qpow(快速幂)">算法-qpow(快速幂)<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-qsort（快速排序）/" title="算法-qsort（快速排序）">算法-qsort（快速排序）<sup>5</sup></a></li>
+		
+			<li><a href="/tags/算法-位向量法/" title="算法-位向量法">算法-位向量法<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-全排列/" title="算法-全排列">算法-全排列<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划/" title="算法-动态规划">算法-动态规划<sup>16</sup></a></li>
+		
+			<li><a href="/tags/算法-动态规划-按位dp/" title="算法-动态规划-按位dp">算法-动态规划-按位dp<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-回溯法/" title="算法-回溯法">算法-回溯法<sup>10</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-广度优先搜索/" title="算法-图论-广度优先搜索">算法-图论-广度优先搜索<sup>6</sup></a></li>
+		
+			<li><a href="/tags/算法-图论-深度优先搜索/" title="算法-图论-深度优先搜索">算法-图论-深度优先搜索<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-基数排序/" title="算法-基数排序">算法-基数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-堆排序/" title="算法-堆排序">算法-堆排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-大数算法/" title="算法-大数算法">算法-大数算法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-尺取法/" title="算法-尺取法">算法-尺取法<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-希尔排序/" title="算法-希尔排序">算法-希尔排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-归并排序/" title="算法-归并排序">算法-归并排序<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-快速选择/" title="算法-快速选择">算法-快速选择<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数学题/" title="算法-数学题">算法-数学题<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-卡特兰数/" title="算法-数论-卡特兰数">算法-数论-卡特兰数<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-同余定理/" title="算法-数论-同余定理">算法-数论-同余定理<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-扩展欧几里得/" title="算法-数论-扩展欧几里得">算法-数论-扩展欧几里得<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-欧几里得/" title="算法-数论-欧几里得">算法-数论-欧几里得<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-素数筛选法/" title="算法-数论-素数筛选法">算法-数论-素数筛选法<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-数论-费马小定理/" title="算法-数论-费马小定理">算法-数论-费马小定理<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-映射/" title="算法-映射">算法-映射<sup>2</sup></a></li>
+		
+			<li><a href="/tags/算法-枚举/" title="算法-枚举">算法-枚举<sup>3</sup></a></li>
+		
+			<li><a href="/tags/算法-标记-查表思想/" title="算法-标记,查表思想">算法-标记,查表思想<sup>8</sup></a></li>
+		
+			<li><a href="/tags/算法-离散化/" title="算法-离散化">算法-离散化<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-计数排序/" title="算法-计数排序">算法-计数排序<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-贪心/" title="算法-贪心">算法-贪心<sup>4</sup></a></li>
+		
+			<li><a href="/tags/算法-输入挂和输出挂/" title="算法-输入挂和输出挂">算法-输入挂和输出挂<sup>1</sup></a></li>
+		
+			<li><a href="/tags/算法-预处理思想/" title="算法-预处理思想">算法-预处理思想<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-C/" title="语言-C++">语言-C++<sup>1</sup></a></li>
+		
+			<li><a href="/tags/语言-java基础知识/" title="语言-java基础知识">语言-java基础知识<sup>74</sup></a></li>
+		
+			<li><a href="/tags/贪心/" title="贪心">贪心<sup>1</sup></a></li>
+		
+			<li><a href="/tags/逆序对/" title="逆序对">逆序对<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-并查集/" title="高级数据结构-并查集">高级数据结构-并查集<sup>5</sup></a></li>
+		
+			<li><a href="/tags/高级数据结构-线段树/" title="高级数据结构-线段树">高级数据结构-线段树<sup>8</sup></a></li>
+		
 		</ul>
-	</div>
-
-	<div class="nav-footer">
-		<ul>
-	
-		
-			<li>
-				<a href="http://github.com/" title="Github" target="_blank">
-					<i class="fa fa-github"></i>
-				</a>
-			</li>
-		
-		
-			<li>
-				<a href="http://github.com/" title="Weibo" target="_blank">
-					<i class="fa fa-weibo"></i>
-				</a>
-			</li>
-		
-		
-			<li>
-				<a href="mailto:http://github.com/" title="Email" target="_blank">
-					<i class="fa fa-envelope-o"></i>
-				</a>
-			</li>
-		
-
-		
-			<li>
-				<a href="http://github.com/" title="QQ" target="_blank">
-					<i class="fa fa-qq"></i>
-				</a>
-			</li>
-		
-		
-			<li>
-				<a href="http://github.com/" title="Twitter" target="_blank">
-					<i class="fa fa-twitter"></i>
-				</a>
-			</li>
-		
-	 
-</ul>
-	</div>
-</nav>
-
-		
-		<!--main-->
-		<main>
-			
-
-
-
-	<!--cart style-->
-	<div class="layout-cart">
-	<div id="layout-cart">
-		
-		<div class="post" id="post">
-			<a class="post-cover" href="/2018/12/30/0-md/" title=" 一个问题 ">
-				<img src="/img/post-cover/0.jpg">
-			</a>
-
-			<div class="post-text">
-				<p class="post-time">
-					十二月 30日, 2018
-				</p>	
-				<h3 class="post-title" id="post-title-index">
-					<a href="/2018/12/30/0-md/" title="一个问题">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-						
-	<a href="/2018/12/30/0-md/" itemprop="url">
-		一个问题
-	</a>
-
-					</a>
-				</h3>
-				<p class="post-content">
-					
-						
-							Problem Description小余来到一个神奇的世界里，为了探明前方的路，独身一人进入了一个迷宫里，但由于地理没学好，分不清东南西北，而且这里没有...
-						
-					
-				</p>
-				<p class="post-meta">
-					
-
-    <span class="leancloud_visitors" id="/2018/12/30/0-md/_visitors" data-url="/2018/12/30/0-md/" data-title="一个问题">
-        Hits
-        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
-    </span>
-    
-    /
-
-
-
-    <span class="leancloud_likes" id="/2018/12/30/0-md/_likes" data-url="/2018/12/30/0-md/" data-title="一个问题" rel="unlike">
-        Likes
-        <i class="fa fa-heart"></i>
-        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
-    </span>
-
-					
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
-
-
-
-	<script>
-		var appid = 'dX--',
-            appkey = 'dx--';	  
-        AnnieLeancloud(appid, appkey);         
-	</script>
-    
-
-
- 
-				</p>
-			</div>
-		</div>
-		
-		<div class="post" id="post">
-			<a class="post-cover" href="/2018/12/30/2-md/" title=" 问题回答后再看这个(^_^) ">
-				<img src="/img/post-cover/3.jpg">
-			</a>
-
-			<div class="post-text">
-				<p class="post-time">
-					十二月 30日, 2018
-				</p>	
-				<h3 class="post-title" id="post-title-index">
-					<a href="/2018/12/30/2-md/" title="问题回答后再看这个(^_^)">
-						<i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-						
-	<a href="/2018/12/30/2-md/" itemprop="url">
-		问题回答后再看这个(^_^)
-	</a>
-
-					</a>
-				</h3>
-				<p class="post-content">
-					
-						
-							压缩包视频密码：20181231wlxwoaini加密后：20181231wlx76a
-上一篇文章求出的答案 + 你的名字(缩写首字母) + 加密后缀字符...
-						
-					
-				</p>
-				<p class="post-meta">
-					
-
-    <span class="leancloud_visitors" id="/2018/12/30/2-md/_visitors" data-url="/2018/12/30/2-md/" data-title="问题回答后再看这个(^_^)">
-        Hits
-        <i class="leancloud_visitors_count" id="leancloud_visitors_count">0</i>
-    </span>
-    
-    /
-
-
-
-    <span class="leancloud_likes" id="/2018/12/30/2-md/_likes" data-url="/2018/12/30/2-md/" data-title="问题回答后再看这个(^_^)" rel="unlike">
-        Likes
-        <i class="fa fa-heart"></i>
-        <i class="leancloud_likes_count" id="leancloud_likes_count">0</i>
-    </span>
-
-					
-
-	<!-- leancloud -->
-	<!--
-	时间：2018-11-27
-	描述：
-		文章访问量：visitors
-		文章喜欢量：likes	
-		文章排行榜：topNPost
-		其他得说明：
-			01-Cookie相关的函数 
-				https://blog.csdn.net/somehow1002/article/details/78511541（Author：somehow1002）
-			02-visitors相关的函数 
-				https://blog.csdn.net/u013553529/article/details/63357382（Author：爱博客大伯）
-				https://notes.doublemine.me/2015-10-21-为NexT主题添加文章阅读量统计功能.html（Author：夏末）
-			03-topNPost相关的函数
-				https://hoxis.github.io/hexo-next-read-rank.html（Author：hoxis）
-			04-likes相关的函数，
-				参考了01 & 02进行简单的设计与实现
--->
-
-
-
-	<script>
-		var appid = 'dX--',
-            appkey = 'dx--';	  
-        AnnieLeancloud(appid, appkey);         
-	</script>
-    
-
-
- 
-				</p>
-			</div>
-		</div>
-		
-	</div>
-	
-	
-	<div id="pagination">
-		
-		
-		<img src="https://s1.ax1x.com/2018/12/31/F4ZFd1.png" width="30%" />
-
-		<video controls="" autoplay="" name="media"><source src="http://music.163.com/song/media/outer/url?id=334898.mp3" type="audio/mpeg"></video>
-	</div>
-
-	<div style="">
-		<a href="/htm/love.html" target="_blank" >小秘密</a>
-	</div>
-
-
 </div>
+
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
 	
-
-		</main>
-
-		<!--footer-->
-		<footer>
-	<div class="social">
-		<ul>
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
 	
-		
-			<li>
-				<a href="http://github.com/" title="Github" target="_blank">
-					<i class="fa fa-github"></i>
-				</a>
-			</li>
-		
-		
-			<li>
-				<a href="http://github.com/" title="Weibo" target="_blank">
-					<i class="fa fa-weibo"></i>
-				</a>
-			</li>
-		
-		
-			<li>
-				<a href="mailto:http://github.com/" title="Email" target="_blank">
-					<i class="fa fa-envelope-o"></i>
-				</a>
-			</li>
-		
-
-		
-			<li>
-				<a href="http://github.com/" title="QQ" target="_blank">
-					<i class="fa fa-qq"></i>
-				</a>
-			</li>
-		
-		
-			<li>
-				<a href="http://github.com/" title="Twitter" target="_blank">
-					<i class="fa fa-twitter"></i>
-				</a>
-			</li>
-		
+	
+	<section class="info">
+		<p> I am a slow walker, but I never walk backwards. <br/>
+			</p>
+	</section>
 	 
-</ul>
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
 	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2019 
 		
-	<div class="copyright">
-		<p>
-			 
-				&copy;2017 - 2019, content by yusijia. All Rights Reserved.
-			
-			
-			
-
-	<!-- busuanzi -->
-	<!-- busuanzi -->
-
+		<a href="http://yoursite.com" target="_blank" title="yusijia">yusijia</a>
 		
-	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-
-		
-	
-
-
-
-
 		</p>
-		<p>
-			根正苗红的社会主义接班人
-		</p>
-	</div>		
+</div>
 </footer>
-		
-    <!-- set '1' to show motto in all pages! -->
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
 
-	<script src="/js/motto.js"></script>
-	<script type="text/javascript">
-		$(".motto").html( getMingYanContent() );
-	</script>	
 
 
 
 
 
 
-    <script src="/js/love.js"></script>
-
-
-<!--back to top-->
-
-    
-	<div id="totop">
-  		<a href="javascript:;"  name="TOTOP" class="fa fa-arrow-up" ></a>
-	</div>
-	<div id="tobuttom">
-		<a href="javascript:;"  name="TOBUTTOM" class="fa fa-arrow-down" ></a>
-	</div>
- 
-
-
- 
-
-<script src="/js/vibrant.js"></script>
-<script src="/js/chinese.js"></script>
-<script src="/js/main.js"></script>
-	</body>
-	</html>
+  </body>
+ </html>
